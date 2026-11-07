@@ -85,15 +85,87 @@ def openssl(*args):
     return subprocess.run(["openssl", *args], capture_output=True)
 
 
+def java_verify(data, signature, key):
+    try:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            (tmp / "data").write_bytes(data)
+            (tmp / "sig").write_bytes(signature)
+            (tmp / "key.der").write_bytes(key)
+            script = (
+                "import java.nio.file.*; import java.security.*; import java.security.spec.*;\n"
+                "public class V {\n"
+                "    public static void main(String[] a) throws Exception {\n"
+                "        byte[] d = Files.readAllBytes(Paths.get(a[0]));\n"
+                "        byte[] s = Files.readAllBytes(Paths.get(a[1]));\n"
+                "        byte[] k = Files.readAllBytes(Paths.get(a[2]));\n"
+                "        PublicKey pub = KeyFactory.getInstance(\"EC\").generatePublic(new X509EncodedKeySpec(k));\n"
+                "        Signature v = Signature.getInstance(\"SHA256withECDSA\");\n"
+                "        v.initVerify(pub);\n"
+                "        v.update(d);\n"
+                "        System.exit(v.verify(s) ? 0 : 1);\n"
+                "    }\n"
+                "}\n"
+            )
+            v_java = tmp / "V.java"
+            v_java.write_text(script, encoding="utf-8")
+            res = subprocess.run(["java", str(v_java), str(tmp / "data"), str(tmp / "sig"), str(tmp / "key.der")],
+                                 capture_output=True)
+            return res.returncode == 0
+    except Exception:
+        return False
+
+
+def java_sign(key_path, data):
+    try:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            (tmp / "data").write_bytes(data)
+            script = (
+                "import java.io.*; import java.nio.file.*; import java.security.*; import java.security.spec.*; import java.util.Base64;\n"
+                "public class S {\n"
+                "    public static void main(String[] a) throws Exception {\n"
+                "        byte[] keyBytes = Files.readAllBytes(Paths.get(a[0]));\n"
+                "        byte[] data = Files.readAllBytes(Paths.get(a[1]));\n"
+                "        String kStr = new String(keyBytes);\n"
+                "        if (kStr.contains(\"-----\")) {\n"
+                "            kStr = kStr.replaceAll(\"-----[^-]+-----\", \"\").replaceAll(\"\\\\s+\", \"\");\n"
+                "            keyBytes = Base64.getDecoder().decode(kStr);\n"
+                "        }\n"
+                "        PrivateKey priv = KeyFactory.getInstance(\"EC\").generatePrivate(new PKCS8EncodedKeySpec(keyBytes));\n"
+                "        Signature s = Signature.getInstance(\"SHA256withECDSA\");\n"
+                "        s.initSign(priv);\n"
+                "        s.update(data);\n"
+                "        System.out.write(s.sign());\n"
+                "    }\n"
+                "}\n"
+            )
+            s_java = tmp / "S.java"
+            s_java.write_text(script, encoding="utf-8")
+            res = subprocess.run(["java", str(s_java), str(key_path), str(tmp / "data")],
+                                 capture_output=True)
+            if res.returncode == 0:
+                return res.stdout
+    except Exception:
+        pass
+    return None
+
+
 def verifies(data, signature, key):
     """True if signature (DER ECDSA) is over data with key (SPKI DER), SHA-256."""
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp = Path(tmp)
-        (tmp / "data").write_bytes(data)
-        (tmp / "sig").write_bytes(signature)
-        (tmp / "key.der").write_bytes(key)
-        return openssl("dgst", "-sha256", "-keyform", "DER", "-verify", str(tmp / "key.der"),
-                       "-signature", str(tmp / "sig"), str(tmp / "data")).returncode == 0
+    try:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            (tmp / "data").write_bytes(data)
+            (tmp / "sig").write_bytes(signature)
+            (tmp / "key.der").write_bytes(key)
+            res = openssl("dgst", "-sha256", "-keyform", "DER", "-verify", str(tmp / "key.der"),
+                          "-signature", str(tmp / "sig"), str(tmp / "data"))
+            if res.returncode == 0:
+                return True
+    except (FileNotFoundError, PermissionError):
+        pass
+    return java_verify(data, signature, key)
 
 
 def split(raw):
@@ -152,15 +224,23 @@ def sign(keys):
     with tempfile.TemporaryDirectory() as tmp:
         (Path(tmp) / "data").write_bytes(unsigned)
         for key in keys:
-            run = openssl("dgst", "-sha256", "-sign", str(key), str(Path(tmp) / "data"))
-            if run.returncode != 0:
-                print(run.stderr.decode(errors="replace"), file=sys.stderr)
+            sig_bytes = None
+            try:
+                run = openssl("dgst", "-sha256", "-sign", str(key), str(Path(tmp) / "data"))
+                if run.returncode == 0:
+                    sig_bytes = run.stdout
+            except (FileNotFoundError, PermissionError):
+                pass
+            if sig_bytes is None:
+                sig_bytes = java_sign(key, unsigned)
+            if sig_bytes is None:
+                print(f"{key}: failed to sign data/index.json", file=sys.stderr)
                 return 1
-            if errors or not any(verifies(unsigned, run.stdout, k) for k in public):
+            if errors or not any(verifies(unsigned, sig_bytes, k) for k in public):
                 print(*errors, f"{key}: the signature doesn't verify against any key in tools/data-keys/: "
                       "wrong key?", sep="\n", file=sys.stderr)
                 return 1
-            entries.append("p256:" + base64.b64encode(run.stdout).decode())
+            entries.append("p256:" + base64.b64encode(sig_bytes).decode())
     first = unsigned.find(b"\n") + 1
     path.write_bytes(unsigned[:first] + SIGS + json.dumps(entries).encode() + b",\n" + unsigned[first:])
     return 0

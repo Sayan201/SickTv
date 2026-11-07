@@ -54,6 +54,9 @@
     <string name="copy_change_home_text">Install another from Editor\'s choice, or switch to one that\'s already on the TV.</string>
     <string name="copy_home_settings">Home screen settings</string>
     <string name="copy_make_home_title">Make %1$s the home screen?</string>
+    <string name="copy_restore_stock_home">Restore Stock Home</string>
+    <string name="copy_restore_stock_title">Original TV Launcher</string>
+    <string name="copy_restore_stock_desc">Restore the original factory home screen that came with your TV.</string>
 
     <!-- explainReplace paragraphs; %1$s the new launcher, %2$s the TV's built-in one -->
     <string name="copy_explain_replace_opens">Home opens %1$s. To stop the TV switching back by itself, SickTv turns off %2$s, the TV\'s built-in launcher.</string>

@@ -17,12 +17,10 @@ import java.util.Base64
  * fetched: a `data/` index signed by one of them is the one SickTv published.
  */
 val DATA_KEYS = listOf(
-    // CleanYourTv SickTv primary data key
-    "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEBNvhcQcqYivsXyf5UhuYeOmwjZhJobFgHCVN94k5WW1OW9Q83uQc1QlcqcThIVFh08N+FhVFcfjejwhl5sq0iw==",
-    // tools/data-keys/primary.pub (upstream)
-    "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEBNvhcQcqYivsXyf5UhuYeOmwjZhJobFgHCVN94k5WW1OW9Q83uQc1QlcqcThIVFh08N+FhVFcfjejwhl5sq0iw==",
+    // SickTv primary data key (tools/data-keys/primary.pub)
+    "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEogKNQ8Gp5/LhMlGmYWnzhEJQE+IYSINBelT1RzgqCGOE7kmW2n2jbAifK0PdQFVzT7R7+7Ca/o9x7prhec4caA==",
     // tools/data-keys/backup.pub, kept offline for a rotation or a leak
-    "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEBNvhcQcqYivsXyf5UhuYeOmwjZhJobFgHCVN94k5WW1OW9Q83uQc1QlcqcThIVFh08N+FhVFcfjejwhl5sq0iw==",
+    "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEXaezXF+/UiXq/fGZOL8NYllUzxPyMbBO46pueSEjOIY+KNX19fSDZ0yEqKK+C4eC3YLwan7KlRQSLdziOrFC7g==",
 )
 
 /**

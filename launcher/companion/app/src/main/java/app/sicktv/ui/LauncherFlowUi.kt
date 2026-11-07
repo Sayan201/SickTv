@@ -292,7 +292,7 @@ fun LauncherScreen(
                     LauncherFlow.Step.Pick -> if (fire != null && (fire.step != null || installedLauncher(apps, flow.pkg) == null)) {
                         FireButtons(fire, flow.pkg, actions, play, Modifier.weight(1f))
                     } else {
-                        val have = installedLauncher(apps, chosen)
+                        val have = apps.firstOrNull { it.packageName == chosen && (it.enabled || it.builtInLauncher) }
                         when {
                             have == null -> Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                                 val both = direct && downloadable(chosen)
@@ -307,6 +307,12 @@ fun LauncherScreen(
                                 if (both) {
                                     OutlinedButton(onClick = { actions.fireCheck(chosen) }, enabled = flow.fire == null, modifier = Modifier.fillMaxWidth()) { Text(Copy.DOWNLOAD_DIRECTLY.resolve()) }
                                 }
+                            }
+                            have.builtInLauncher && !have.home -> {
+                                if (have.enabled) {
+                                    TextButton(onClick = { actions.open(chosen) }) { Text(Copy.OPEN.resolve()) }
+                                }
+                                IconButtonText(Icons.Outlined.Home, Copy.RESTORE_STOCK_HOME.resolve()) { switch(false) }
                             }
                             // Current, or a TV that can't take it as Home: only Open.
                             !have.home && current != null -> {
@@ -404,6 +410,7 @@ private fun IconButtonText(icon: ImageVector, text: String, modifier: Modifier =
 private fun Picker(chosen: String, apps: List<AppInfo>, direct: Boolean, onChoose: (String) -> Unit) {
     val c = MaterialTheme.colorScheme
     val others = otherLaunchers(apps)
+    val stock = apps.filter { it.builtInLauncher }
     val canDownload = direct && RECOMMENDED.any { downloadable(it.pkg) && installedLauncher(apps, it.pkg) == null }
     Text(
         if (canDownload) Copy.CHOOSE_HOME_TEXT.resolve() + " " + Copy.CAN_DOWNLOAD.resolve() else Copy.CHOOSE_HOME_TEXT.resolve(),
@@ -422,6 +429,14 @@ private fun Picker(chosen: String, apps: List<AppInfo>, direct: Boolean, onChoos
         Column(Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             RECOMMENDED.forEachIndexed { i, l ->
                 RecommendedRow(l, segment(i, RECOMMENDED.lastIndex), l.pkg == chosen, installedLauncher(apps, l.pkg)) { onChoose(l.pkg) }
+            }
+        }
+        if (stock.isNotEmpty()) {
+            Text(Copy.RESTORE_STOCK_TITLE.resolve(), style = MaterialTheme.typography.labelLarge, color = c.primary, modifier = Modifier.padding(top = 16.dp, bottom = 8.dp))
+            Column(Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                stock.forEachIndexed { i, s ->
+                    StockRow(s, segment(i, stock.lastIndex), s.packageName == chosen) { onChoose(s.packageName) }
+                }
             }
         }
         Text(Copy.OTHER_LAUNCHER.resolve(), style = MaterialTheme.typography.bodyMedium, color = c.onSurfaceVariant, modifier = Modifier.padding(top = 12.dp))
@@ -913,6 +928,26 @@ private fun RecommendedRow(l: Recommended, shape: RoundedCornerShape, on: Boolea
                         modifier = Modifier.padding(start = 4.dp, top = 4.dp, end = 4.dp))
                 }
             }
+        },
+    )
+}
+
+@Composable
+private fun StockRow(s: AppInfo, shape: RoundedCornerShape, on: Boolean, onClick: () -> Unit) {
+    val c = MaterialTheme.colorScheme
+    PickRow(
+        shape = shape,
+        on = on,
+        name = s.label,
+        have = s,
+        onClick = onClick,
+        leading = {
+            Box(Modifier.size(40.dp).clip(RoundedCornerShape(10.dp)).background(if (s.home) c.primary else c.surfaceContainerHighest), contentAlignment = Alignment.Center) {
+                Icon(DeviceIcons.Tv, null, Modifier.size(24.dp), tint = if (s.home) c.onPrimary else c.onSurfaceVariant)
+            }
+        },
+        footer = {
+            Text(Copy.RESTORE_STOCK_DESC.resolve(), style = MaterialTheme.typography.bodyMedium, color = c.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp))
         },
     )
 }

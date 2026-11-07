@@ -1262,7 +1262,12 @@ class SickTvViewModel(
         val id = _state.value.selectedId ?: return
         launcherJob?.cancel()
         updateDevice(id) { it.copy(launcher = null) }
-        run(pkg, Action.Home, id = id) { source.makeHome(it, pkg, service) }
+        val isStock = _state.value.device.apps.any { it.packageName == pkg && it.builtInLauncher }
+        if (isStock) {
+            run(pkg, Action.HomeBack, id = id)
+        } else {
+            run(pkg, Action.Home, id = id) { source.makeHome(it, pkg, service) }
+        }
     }
 
     /** Open in the picker: shows the launcher [pkg] on the TV. The picker stays. */

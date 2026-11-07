@@ -38,7 +38,7 @@ android {
         // for an alpha, so a data/ change reaches alpha before prod, and main/data/ for a release.
         // -Psicktv.data=<raw folder URL ending in /> overrides both, e.g. to try a branch.
         val dataBranch = if (providers.gradleProperty("sicktv.alpha").isPresent) "dev" else "main"
-        val data = providers.gradleProperty("sicktv.data").orNull ?: "https://raw.githubusercontent.com/Sayan201/CleanYourTv/$dataBranch/launcher/companion/data/"
+        val data = providers.gradleProperty("sicktv.data").orNull ?: "https://raw.githubusercontent.com/Sayan201/SickTv/$dataBranch/launcher/companion/data/"
         buildConfigField("String", "DATA_BASE", "\"$data\"")
     }
 

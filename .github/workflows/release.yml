@@ -85,11 +85,11 @@ jobs:
             echo "No custom secrets provided, using deterministic repository keystore."
           fi
 
-      - name: Build SickTv launcher APK
+      - name: Build SickTv and CleanYourTv launcher APKs
         working-directory: launcher
         run: |
           chmod +x gradlew
-          ./gradlew --no-daemon :app:assembleRelease --stacktrace
+          ./gradlew --no-daemon :app:assembleRelease :standalone:assembleRelease --stacktrace
 
       - name: Build SickTv companion APK
         working-directory: launcher/companion
@@ -101,6 +101,7 @@ jobs:
         run: |
           mkdir -p release-assets
           cp launcher/app/build/outputs/apk/release/app-release.apk release-assets/launcher.apk
+          cp launcher/standalone/build/outputs/apk/release/standalone-release.apk release-assets/cleanyourtv.apk
           cp launcher/companion/app/build/outputs/apk/github/release/app-github-release.apk release-assets/sicktv-companion.apk
           ls -la release-assets
 
@@ -124,15 +125,17 @@ jobs:
           generate_release_notes: ${{ github.ref_type == 'tag' }}
           files: |
             release-assets/launcher.apk
+            release-assets/cleanyourtv.apk
             release-assets/sicktv-companion.apk
           body: |
             ## SickTv
 
             Official signed Android APK packages for your Android TV and Android phone.
 
-            ### Downloads (2 Apps)
+            ### Downloads (3 Apps)
             - **`launcher.apk`**: SickTv Launcher for Android TV (`com.sayan.tvhome`).
-            - **`sicktv-companion.apk`**: SickTv Companion app for Android phones (`app.sicktv`). Features wireless ADB TV connection, 1-click debloating with device-specific profiles, and seamless launcher setup.
+            - **`cleanyourtv.apk`**: CleanYourTv Standalone Launcher (`com.sayan.cleanyourtv`).
+            - **`sicktv-companion.apk`**: SickTv Companion app for Android phones (`app.sicktv`). Features wireless ADB TV connection, 1-click debloating with device-specific profiles, launcher catalog, and stock launcher restore.
 
             ---
             *Signed with project release key for persistent sideloading and verified updates.*

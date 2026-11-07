@@ -16,8 +16,8 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.security.MessageDigest
 
-/** Where the per-TV debloat lists, the extra protected apps and the Remote's logos live: the CleanYourTv repo. */
-const val LISTS_BASE = "https://raw.githubusercontent.com/Sayan201/CleanYourTv/main/launcher/companion/devices/"
+/** Where the per-TV debloat lists, the extra protected apps and the Remote's logos live: the SickTv repo. */
+const val LISTS_BASE = "https://raw.githubusercontent.com/Sayan201/SickTv/main/launcher/companion/devices/"
 
 /**
  * Where the launcher, app name and streaming lists live: `data/` in this app's own repo, on `main`.

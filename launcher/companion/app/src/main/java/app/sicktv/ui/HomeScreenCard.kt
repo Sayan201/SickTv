@@ -167,7 +167,9 @@ private fun LauncherRow(app: AppInfo, move: Action?, locked: Boolean, onMove: (A
         val serviceOn = app.home && app.homeServiceOff
         if (move != null || serviceOn || app.removable) {
             Row(Modifier.padding(start = 52.dp, top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                if (move != null) FilledTonalButton(onClick = { onMove(move) }, enabled = !locked) { Text(Copy.MAKE_HOME.resolve()) }
+                if (move != null) FilledTonalButton(onClick = { onMove(move) }, enabled = !locked) {
+                    Text((if (move == Action.HomeBack) Copy.RESTORE_STOCK_HOME else Copy.MAKE_HOME).resolve())
+                }
                 if (serviceOn) FilledTonalButton(onClick = { turningOn = true }, enabled = !locked) { Text(Copy.TURN_ON.resolve()) }
                 if (app.removable) TextButton(onClick = onUninstall, enabled = !locked) { Text(Copy.button(Action.Uninstall).resolve()) }
             }

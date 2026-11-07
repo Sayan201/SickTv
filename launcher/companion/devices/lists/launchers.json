@@ -1,6 +1,8 @@
 {
   "schema": 1,
   "launchers": [
+    { "package": "com.sayan.tvhome", "name": "SickTv Launcher", "about": "Minimal, fast TV launcher with fluid dock navigation and customizable widgets." },
+    { "package": "com.sayan.cleanyourtv", "name": "CleanYourTv Launcher", "about": "Original classic TV launcher edition with fluid navigation." },
     { "package": "com.spocky.projengmenu", "name": "Projectivy Launcher", "about": "The most popular. Rows, wallpapers and icons you can change." },
     { "package": "me.efesser.flauncher", "name": "FLauncher", "about": "Simple: your apps in rows, nothing else." }
   ]

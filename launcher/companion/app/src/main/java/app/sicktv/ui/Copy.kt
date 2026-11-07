@@ -106,6 +106,10 @@ object Copy {
 
     fun makeHomeTitle(app: String) = UiText(R.string.copy_make_home_title, app)
 
+    val RESTORE_STOCK_HOME = UiText(R.string.copy_restore_stock_home)
+    val RESTORE_STOCK_TITLE = UiText(R.string.copy_restore_stock_title)
+    val RESTORE_STOCK_DESC = UiText(R.string.copy_restore_stock_desc)
+
     /** A launcher the user added in place of the TV's own, which is turned off: otherwise many TVs switch back by themselves. */
     fun explainReplace(app: String, current: String, currentPkg: String, service: Boolean): UiText = UiText.Join(
         listOfNotNull(
