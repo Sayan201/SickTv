@@ -4,7 +4,6 @@ __pycache__/
 launcher/.gradle/
 launcher/build/
 launcher/app/build/
-launcher/standalone/build/
 launcher/local.properties
 launcher/companion/.gradle/
 launcher/companion/.kotlin/

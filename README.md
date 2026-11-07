@@ -23,22 +23,7 @@ This repository provides the launcher app, mobile companion installer, package m
 - **Standby mode & Ambient Screensaver.** Fixed direct-to-sleep issues with official Android TV `dream_info` metadata, `FLAG_KEEP_SCREEN_ON`, and an in-app idle timeout fallback that displays yesterday's Bing daily photo with bottom-left clock and soft contrast scrim.
 - **Remote navigation.** Seamless directional navigation across dock and app rows with focus preservation.
 
-The original customized launcher is the native Android app in the `launcher` folder, with application ID `com.sayan.tvhome`.
-
-## Standalone SickTv application
-
-The `launcher/standalone` Gradle module builds a second, independently installable application with application ID `com.sayan.cleanyourtv`. It reuses the maintained launcher implementation and resources, so the separate package can offer the same home-screen features without replacing the existing customized app. The manifest displays it as **SickTv Standalone**.
-
-Build the standalone APK from the repository root:
-
-```sh
-cd launcher
-./gradlew --no-daemon :standalone:assembleRelease
-```
-
-The APK is written to `launcher/standalone/build/outputs/apk/release/standalone-release.apk`. GitHub Actions builds and uploads it as the `SickTv-Standalone-APK` workflow artifact on pull requests and pushes covered by CI. The artifact is retained for 14 days. The release build is signed with Gradle's debug signing configuration for sideloading, consistent with the existing customized launcher; it is not a Play Store release.
-
-The standalone module shares the existing source and resource directories rather than maintaining a forked copy of the launcher code. Feature fixes made to the shared implementation therefore apply to both packages. The original installation and its package identity remain unchanged.
+The launcher is the native Android app in the `launcher` folder, with application ID `com.sayan.tvhome`.
 
 ## Device debloat and package profiles
 
@@ -50,18 +35,26 @@ Device-specific debloat lists and package records are documented in [examples/](
 
 ## Install on the TV with SickTv Companion
 
-The companion mobile app **SickTv** (`app.sicktv`) runs directly on your Android phone to discover your TV, debloat it, and install the SickTv launcher over wireless ADB without needing a computer or command-line scripts.
+The companion mobile app **SickTv** (`app.sicktv`) runs directly on your Android phone to discover your TV, debloat it, and manage launchers over wireless ADB without needing a computer or command-line scripts.
+
+### Features of SickTv Companion:
+- **Wireless ADB Discovery & Pairing:** Automatically finds Android TVs on your local Wi-Fi network and connects seamlessly.
+- **1-Click Curated Debloating:** Safely disables manufacturer bloatware, telemetry, and background services for over 90+ TV models.
+- **Launcher Manager & Catalog:**
+  - **SickTv Launcher** (`com.sayan.tvhome`) as the primary recommended launcher with direct 1-tap install and updates.
+  - Catalog of popular third-party launchers (CleanYourTv, Projectivy Launcher, FLauncher, AT4K Launcher, Monet Launcher).
+  - **Restore Stock Home:** 1-tap restore option to safely re-enable the factory default home screen that came with your TV at any time.
 
 ### How to use SickTv:
 1. Ensure your phone and Android TV are connected to the same Wi-Fi network.
 2. Enable **Network Debugging** (or **Wireless Debugging** on Android 11+) in your TV's Developer options.
 3. Open **SickTv** on your phone. It automatically scans your local network and discovers your TV.
 4. Select your TV, review the debloat list for your model, and tap to disable bloatware.
-5. Select **SickTv** from the launcher list to automatically download and install `com.sayan.tvhome` as your default home screen.
+5. In the launcher tab, select **SickTv Launcher** to automatically install and set it as your default home screen (or choose **Restore Stock Home** if you ever wish to return to the factory launcher).
 
 ## Downloads & GitHub Releases
 
-Every push to `main` automatically builds, signs, and publishes the 2 official APK packages to the repository's [GitHub Releases](https://github.com/Sayan201/SickTv/releases):
+Every push to `main` and release tag automatically builds, signs, and publishes the 2 official APK packages to the repository's [GitHub Releases](https://github.com/Sayan201/SickTv/releases):
 
 - **`launcher.apk`**: SickTv Launcher for Android TV (`com.sayan.tvhome`).
 - **`sicktv-companion.apk`**: SickTv Companion app for Android phones (`app.sicktv`).
@@ -72,11 +65,10 @@ Every push to `main` automatically builds, signs, and publishes the 2 official A
 |---|---|
 | [launcher/](launcher/) | Android TV launcher source and build scripts |
 | [launcher/companion/](launcher/companion/) | SickTv mobile companion source and device catalog |
-| [launcher/standalone/](launcher/standalone/) | Separate app ID and manifest for the standalone build |
 | [tools/](tools/) | ADB connection and package disable/restore utilities |
 | [Device profiles](examples/) | Curated package debloat inventories and device notes |
 | [Wallpaper credits](docs/wallpaper-sources.md) | Credits for the bundled wallpaper photos |
-| [config.xml](launcher/app/src/main/res/values/config.xml) | Launcher defaults and settings shared by both apps |
+| [config.xml](launcher/app/src/main/res/values/config.xml) | Launcher defaults and settings |
 
 ## Privacy and safety
 
