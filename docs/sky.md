@@ -10,11 +10,7 @@ launcher built from this repository behaves exactly like before until a theme tu
 
 ![The backdrop at dusk, a few minutes before eight](sky-sunset.jpg)
 
-Push that as a theme's `config.json` and restart Home:
-
-```bash
-TV_HOST=192.168.1.50 tools/theme.sh themes/your-theme
-```
+Enable it via `config.xml` (`sky_intensity`) or place in `config.json`:
 
 ## What it draws
 

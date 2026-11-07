@@ -73,7 +73,7 @@ Every push to `main` automatically builds, signs, and publishes the 2 official A
 | [launcher/](launcher/) | Android TV launcher source and build scripts |
 | [launcher/companion/](launcher/companion/) | SickTv mobile companion source and device catalog |
 | [launcher/standalone/](launcher/standalone/) | Separate app ID and manifest for the standalone build |
-| [tools/](tools/) | ADB connection, package disable/restore, and theme utilities |
+| [tools/](tools/) | ADB connection and package disable/restore utilities |
 | [Device profiles](examples/) | Curated package debloat inventories and device notes |
 | [Wallpaper credits](docs/wallpaper-sources.md) | Credits for the bundled wallpaper photos |
 | [config.xml](launcher/app/src/main/res/values/config.xml) | Launcher defaults and settings shared by both apps |
