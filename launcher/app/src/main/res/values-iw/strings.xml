@@ -26,7 +26,7 @@
     <string name="vpn">VPN</string>
     <string name="vpn_off">ה־VPN כבוי</string>
     <string name="home_settings">מסך הבית המוגדר כברירת מחדל</string>
-    <string name="home_settings_help">כדי להפסיק להשתמש ב־CleanYourTV כמסך הבית, יש לבחור במסך הבית המקורי. כדי לחזור, יש לבחור ב־CleanYourTV. מפעיל מסך הבית המקורי חייב להיות פעיל, והטלוויזיה צריכה לתמוך בבחירת מסך בית. אם הוא הושבת, יש להפעיל תחילה את סקריפט השחזור.</string>
+    <string name="home_settings_help">כדי להפסיק להשתמש ב־SickTv כמסך הבית, יש לבחור במסך הבית המקורי. כדי לחזור, יש לבחור ב־SickTv. מפעיל מסך הבית המקורי חייב להיות פעיל, והטלוויזיה צריכה לתמוך בבחירת מסך בית. אם הוא הושבת, יש להפעיל תחילה את סקריפט השחזור.</string>
     <string name="launcher_settings">הגדרות מסך הבית</string>
     <string name="columns_label">אפליקציות בשורה</string>
     <string name="animations_state">הנפשות: %1$s</string>
@@ -86,7 +86,7 @@
     </plurals>
     <string name="greeting_with_name">%1$s, %2$s</string>
     <string name="wifi_name_permission_title">הצגת שם רשת Wi-Fi</string>
-    <string name="wifi_name_permission_message">Android דורש הרשאת מיקום מדויקת כדי להציג את שם רשת ה-Wi-Fi המחוברת. CleanYourTV משתמשת בהרשאה רק כדי להציג את שם הרשת.</string>
+    <string name="wifi_name_permission_message">Android דורש הרשאת מיקום מדויקת כדי להציג את שם רשת ה-Wi-Fi המחוברת. SickTv משתמשת בהרשאה רק כדי להציג את שם הרשת.</string>
     <string name="wifi_settings">הגדרות Wi-Fi</string>
     <string name="app_settings">הגדרות האפליקציה</string>
     <string name="continue_label">המשך</string>
@@ -102,7 +102,7 @@
     <string name="weather_unavailable">מזג האוויר אינו זמין</string>
     <string name="weather_nearby">המיקום הנוכחי</string>
     <string name="weather_attribution">Open-Meteo</string>
-    <string name="media_access_label">פקדי המדיה של CleanYourTV</string>
+    <string name="media_access_label">פקדי המדיה של SickTv</string>
     <string name="media_access_title">אישור פקדי מדיה</string>
     <string name="media_access_hint">פתח את הגדרות הטלוויזיה ואפשר גישה להתראות כדי להציג מה מתנגן ולשלוט בו.</string>
     <string name="media_nothing_playing">לא מתנגן דבר</string>
@@ -110,7 +110,7 @@
     <string name="check_updates">בדוק עדכונים</string>
     <string name="update_available_title">עדכון זמין</string>
     <string name="update_checking">בודק עדכונים…</string>
-    <string name="up_to_date">CleanYourTV מעודכן</string>
+    <string name="up_to_date">SickTv מעודכן</string>
     <string name="update_ready_hint">עדכון חדש זמין ב־GitHub</string>
     <string name="screensaver_preview">תצוגה מקדימה של שומר מסך</string>
     <string name="screensaver_settings">הגדרות שומר מסך של הטלוויזיה</string>

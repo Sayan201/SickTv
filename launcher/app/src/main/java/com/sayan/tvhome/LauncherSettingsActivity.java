@@ -144,7 +144,7 @@ public final class LauncherSettingsActivity extends Activity {
 
     private void onUpdateClicked() {
         if (UpdateChecker.isUpdateAvailable(this)) {
-            String version = choices.getString(UpdateChecker.PREF_UPDATE_VERSION, "CleanYourTV Update");
+            String version = choices.getString(UpdateChecker.PREF_UPDATE_VERSION, "SickTv Update");
             String url = choices.getString(UpdateChecker.PREF_UPDATE_URL, "");
             String body = choices.getString(UpdateChecker.PREF_UPDATE_BODY, "");
             UpdateChecker.showUpdateDialog(this, version, url, body);

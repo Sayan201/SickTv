@@ -1,12 +1,12 @@
 # Security
 
-CleanYourTV talks to TVs over ADB and installs a launcher on them, so a security bug here can
+SickTv talks to TVs over ADB and installs a launcher on them, so a security bug here can
 reach people's living rooms. Please report anything you find privately, not in a public issue.
 
 ## How to report
 
 Use GitHub's private vulnerability reporting: open this repository's
-[Security tab](https://github.com/Sayan201/CleanYourTv/security) and choose **Report a vulnerability**.
+[Security tab](https://github.com/Sayan201/SickTv/security) and choose **Report a vulnerability**.
 Only the maintainer sees the report. If private reporting is unavailable, contact the repository
 owner privately on GitHub; do not post vulnerability details in a public issue.
 

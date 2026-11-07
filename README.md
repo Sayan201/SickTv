@@ -1,4 +1,4 @@
-# CleanYourTV for Android TV & Google TV
+# SickTv for Android TV & Google TV
 
 A clean, customizable, and lightweight home screen launcher and debloating setup for universal Android TV and Google TV devices.
 
@@ -25,9 +25,9 @@ This repository provides the launcher app, mobile companion installer, package m
 
 The original customized launcher is the native Android app in the `launcher` folder, with application ID `com.sayan.tvhome`.
 
-## Standalone CleanYourTV application
+## Standalone SickTv application
 
-The `launcher/standalone` Gradle module builds a second, independently installable application with application ID `com.sayan.cleanyourtv`. It reuses the maintained launcher implementation and resources, so the separate package can offer the same home-screen features without replacing the existing customized app. The manifest displays it as **CleanYourTV Standalone**.
+The `launcher/standalone` Gradle module builds a second, independently installable application with application ID `com.sayan.cleanyourtv`. It reuses the maintained launcher implementation and resources, so the separate package can offer the same home-screen features without replacing the existing customized app. The manifest displays it as **SickTv Standalone**.
 
 Build the standalone APK from the repository root:
 
@@ -36,7 +36,7 @@ cd launcher
 ./gradlew --no-daemon :standalone:assembleRelease
 ```
 
-The APK is written to `launcher/standalone/build/outputs/apk/release/standalone-release.apk`. GitHub Actions builds and uploads it as the `CleanYourTV-Standalone-APK` workflow artifact on pull requests and pushes covered by CI. The artifact is retained for 14 days. The release build is signed with Gradle's debug signing configuration for sideloading, consistent with the existing customized launcher; it is not a Play Store release.
+The APK is written to `launcher/standalone/build/outputs/apk/release/standalone-release.apk`. GitHub Actions builds and uploads it as the `SickTv-Standalone-APK` workflow artifact on pull requests and pushes covered by CI. The artifact is retained for 14 days. The release build is signed with Gradle's debug signing configuration for sideloading, consistent with the existing customized launcher; it is not a Play Store release.
 
 The standalone module shares the existing source and resource directories rather than maintaining a forked copy of the launcher code. Feature fixes made to the shared implementation therefore apply to both packages. The original installation and its package identity remain unchanged.
 
@@ -50,20 +50,20 @@ Device-specific debloat lists and package records are documented in [examples/](
 
 ## Install on the TV with SickTv Companion
 
-The companion mobile app **SickTv** (`app.sicktv`) runs directly on your Android phone to discover your TV, debloat it, and install the CleanYourTV launcher over wireless ADB without needing a computer or command-line scripts.
+The companion mobile app **SickTv** (`app.sicktv`) runs directly on your Android phone to discover your TV, debloat it, and install the SickTv launcher over wireless ADB without needing a computer or command-line scripts.
 
 ### How to use SickTv:
 1. Ensure your phone and Android TV are connected to the same Wi-Fi network.
 2. Enable **Network Debugging** (or **Wireless Debugging** on Android 11+) in your TV's Developer options.
 3. Open **SickTv** on your phone. It automatically scans your local network and discovers your TV.
 4. Select your TV, review the debloat list for your model, and tap to disable bloatware.
-5. Select **CleanYourTV** from the launcher list to automatically download and install `com.sayan.tvhome` as your default home screen.
+5. Select **SickTv** from the launcher list to automatically download and install `com.sayan.tvhome` as your default home screen.
 
 ## Downloads & GitHub Releases
 
-Every push to `main` automatically builds, signs, and publishes the 2 official APK packages to the repository's [GitHub Releases](https://github.com/Sayan201/CleanYourTv/releases):
+Every push to `main` automatically builds, signs, and publishes the 2 official APK packages to the repository's [GitHub Releases](https://github.com/Sayan201/SickTv/releases):
 
-- **`launcher.apk`**: CleanYourTv Launcher for Android TV (`com.sayan.tvhome`).
+- **`launcher.apk`**: SickTv Launcher for Android TV (`com.sayan.tvhome`).
 - **`sicktv-companion.apk`**: SickTv Companion app for Android phones (`app.sicktv`).
 
 ## Useful files

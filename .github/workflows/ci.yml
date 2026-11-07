@@ -23,6 +23,7 @@ jobs:
           tools/venv/bin/pip install -q -r tools/requirements.txt
       - name: Example lists, README tables, shell helpers
         env:
+          SICKTV_STRICT: ${{ github.event_name == 'push' && '1' || '' }}
           CLEANYOURTV_STRICT: ${{ github.event_name == 'push' && '1' || '' }}
         run: python3 -m unittest discover -s tests -v
 
@@ -68,7 +69,7 @@ jobs:
       - name: Upload standalone APK
         uses: actions/upload-artifact@v4
         with:
-          name: CleanYourTV-Standalone-APK
+          name: SickTv-Standalone-APK
           path: launcher/standalone/build/outputs/apk/release/standalone-release.apk
           if-no-files-found: error
           retention-days: 14

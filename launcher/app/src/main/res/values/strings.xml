@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CleanYourTV Custom</string>
+    <string name="app_name">SickTv</string>
     <string name="inputs">Inputs</string>
     <string name="wifi">Wi-Fi</string>
     <string name="wifi_name_permission_title">Show Wi-Fi name</string>
-    <string name="wifi_name_permission_message">Android requires precise location access to show the name of the connected Wi-Fi network. CleanYourTV uses it only to display that network name.</string>
+    <string name="wifi_name_permission_message">Android requires precise location access to show the name of the connected Wi-Fi network. SickTv uses it only to display that network name.</string>
     <string name="wifi_settings">Wi-Fi settings</string>
     <string name="app_settings">App settings</string>
     <string name="continue_label">Continue</string>
@@ -39,7 +39,7 @@
     <string name="vpn">VPN</string>
     <string name="vpn_off">VPN off</string>
     <string name="home_settings">Choose default home</string>
-    <string name="home_settings_help">Select your original home to stop using CleanYourTV as Home, or CleanYourTV to switch back. The original launcher must be enabled and your TV must provide a home picker; use the restore script first if it was disabled.</string>
+    <string name="home_settings_help">Select your original home to stop using SickTv as Home, or SickTv to switch back. The original launcher must be enabled and your TV must provide a home picker; use the restore script first if it was disabled.</string>
     <string name="launcher_settings">Launcher settings</string>
     <string name="columns_label">Apps per row</string>
     <string name="animations_state">Animations: %1$s</string>
@@ -104,7 +104,7 @@
     <string name="weather_unavailable">Weather unavailable</string>
     <string name="weather_nearby">Current location</string>
     <string name="weather_attribution">Open-Meteo</string>
-    <string name="media_access_label">CleanYourTV media controls</string>
+    <string name="media_access_label">SickTv media controls</string>
     <string name="media_access_title">Allow media controls</string>
     <string name="media_access_hint">Open TV settings and allow notification access to show what is playing and control it.</string>
     <string name="media_nothing_playing">Nothing playing</string>
@@ -112,7 +112,7 @@
     <string name="check_updates">Check for updates</string>
     <string name="update_available_title">Update available</string>
     <string name="update_checking">Checking for updates…</string>
-    <string name="up_to_date">CleanYourTV is up to date</string>
+    <string name="up_to_date">SickTv is up to date</string>
     <string name="update_ready_hint">New update ready on GitHub</string>
     <string name="screensaver_preview">Preview screensaver</string>
     <string name="screensaver_settings">TV screensaver settings</string>

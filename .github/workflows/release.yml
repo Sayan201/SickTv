@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   build-and-release:
-    name: Build and publish CleanYourTv & SickTv APKs
+    name: Build and publish SickTv APKs
     runs-on: ubuntu-latest
     steps:
       - name: Check out source
@@ -52,40 +52,40 @@ jobs:
           KEY_PASS="${ANDROID_KEY_PASSWORD:-${RELEASE_KEY_PASSWORD:-$STORE_PASS}}"
 
           if [ -n "$KEYSTORE_DATA" ]; then
-            echo "$KEYSTORE_DATA" | base64 --decode > "$RUNNER_TEMP/cleanyourtv-release.jks" || true
-            if keytool -list -keystore "$RUNNER_TEMP/cleanyourtv-release.jks" -storepass "$STORE_PASS" -alias "$KEY_AL" >/dev/null 2>&1; then
+            echo "$KEYSTORE_DATA" | base64 --decode > "$RUNNER_TEMP/sicktv-release.jks" || true
+            if keytool -list -keystore "$RUNNER_TEMP/sicktv-release.jks" -storepass "$STORE_PASS" -alias "$KEY_AL" >/dev/null 2>&1; then
               echo "Custom GitHub keystore verified successfully with alias '$KEY_AL'."
-              echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/cleanyourtv-release.jks" >> "$GITHUB_ENV"
+              echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/sicktv-release.jks" >> "$GITHUB_ENV"
               echo "ANDROID_KEYSTORE_PASSWORD=$STORE_PASS" >> "$GITHUB_ENV"
               echo "ANDROID_KEY_ALIAS=$KEY_AL" >> "$GITHUB_ENV"
               echo "ANDROID_KEY_PASSWORD=$KEY_PASS" >> "$GITHUB_ENV"
-              echo "RELEASE_KEYSTORE=$RUNNER_TEMP/cleanyourtv-release.jks" >> "$GITHUB_ENV"
+              echo "RELEASE_KEYSTORE=$RUNNER_TEMP/sicktv-release.jks" >> "$GITHUB_ENV"
               echo "RELEASE_KEY_PASSWORD=$KEY_PASS" >> "$GITHUB_ENV"
               echo "RELEASE_KEY_ALIAS=$KEY_AL" >> "$GITHUB_ENV"
-            elif keytool -list -keystore "$RUNNER_TEMP/cleanyourtv-release.jks" -storepass "$STORE_PASS" >/dev/null 2>&1; then
-              DETECTED_ALIAS=$(keytool -list -keystore "$RUNNER_TEMP/cleanyourtv-release.jks" -storepass "$STORE_PASS" | grep -i 'PrivateKeyEntry' | head -n 1 | awk -F',' '{print $1}' | tr -d ' ')
+            elif keytool -list -keystore "$RUNNER_TEMP/sicktv-release.jks" -storepass "$STORE_PASS" >/dev/null 2>&1; then
+              DETECTED_ALIAS=$(keytool -list -keystore "$RUNNER_TEMP/sicktv-release.jks" -storepass "$STORE_PASS" | grep -i 'PrivateKeyEntry' | head -n 1 | awk -F',' '{print $1}' | tr -d ' ')
               if [ -n "$DETECTED_ALIAS" ]; then
                 echo "Custom GitHub keystore unlocked; detected private key alias: '$DETECTED_ALIAS'."
-                echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/cleanyourtv-release.jks" >> "$GITHUB_ENV"
+                echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/sicktv-release.jks" >> "$GITHUB_ENV"
                 echo "ANDROID_KEYSTORE_PASSWORD=$STORE_PASS" >> "$GITHUB_ENV"
                 echo "ANDROID_KEY_ALIAS=$DETECTED_ALIAS" >> "$GITHUB_ENV"
                 echo "ANDROID_KEY_PASSWORD=$KEY_PASS" >> "$GITHUB_ENV"
-                echo "RELEASE_KEYSTORE=$RUNNER_TEMP/cleanyourtv-release.jks" >> "$GITHUB_ENV"
+                echo "RELEASE_KEYSTORE=$RUNNER_TEMP/sicktv-release.jks" >> "$GITHUB_ENV"
                 echo "RELEASE_KEY_PASSWORD=$KEY_PASS" >> "$GITHUB_ENV"
                 echo "RELEASE_KEY_ALIAS=$DETECTED_ALIAS" >> "$GITHUB_ENV"
               else
                 echo "WARNING: Custom keystore unlocked but no PrivateKeyEntry found; falling back to repo keystore."
-                rm -f "$RUNNER_TEMP/cleanyourtv-release.jks"
+                rm -f "$RUNNER_TEMP/sicktv-release.jks"
               fi
             else
               echo "WARNING: Custom keystore could not be unlocked with provided secret credentials; falling back to repo keystore."
-              rm -f "$RUNNER_TEMP/cleanyourtv-release.jks"
+              rm -f "$RUNNER_TEMP/sicktv-release.jks"
             fi
           else
             echo "No custom secrets provided, using deterministic repository keystore."
           fi
 
-      - name: Build CleanYourTv launcher APK
+      - name: Build SickTv launcher APK
         working-directory: launcher
         run: |
           chmod +x gradlew
@@ -117,7 +117,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_type == 'tag' && github.ref_name || 'latest' }}
-          name: ${{ github.ref_type == 'tag' && format('CleanYourTv & SickTv {0}', github.ref_name) || 'CleanYourTv & SickTv (Latest Build)' }}
+          name: ${{ github.ref_type == 'tag' && format('SickTv {0}', github.ref_name) || 'SickTv (Latest Build)' }}
           draft: false
           prerelease: false
           make_latest: true
@@ -126,12 +126,12 @@ jobs:
             release-assets/launcher.apk
             release-assets/sicktv-companion.apk
           body: |
-            ## CleanYourTv & SickTv Companion
+            ## SickTv
 
             Official signed Android APK packages for your Android TV and Android phone.
 
             ### Downloads (2 Apps)
-            - **`launcher.apk`**: CleanYourTv Launcher for Android TV (`com.sayan.tvhome`).
+            - **`launcher.apk`**: SickTv Launcher for Android TV (`com.sayan.tvhome`).
             - **`sicktv-companion.apk`**: SickTv Companion app for Android phones (`app.sicktv`). Features wireless ADB TV connection, 1-click debloating with device-specific profiles, and seamless launcher setup.
 
             ---

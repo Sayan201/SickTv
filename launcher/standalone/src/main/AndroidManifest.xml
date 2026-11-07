@@ -30,7 +30,7 @@
     </queries>
 
     <application
-        android:label="CleanYourTV Standalone"
+        android:label="SickTv Standalone"
         android:icon="@mipmap/ic_launcher"
         android:banner="@drawable/banner"
         android:theme="@style/Theme.TvHome"

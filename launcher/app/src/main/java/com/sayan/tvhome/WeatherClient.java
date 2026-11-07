@@ -196,7 +196,7 @@ final class WeatherClient {
             conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(4_000);
             conn.setReadTimeout(4_000);
-            conn.setRequestProperty("User-Agent", "CleanYourTV-Custom/1.0 (Android TV launcher)");
+            conn.setRequestProperty("User-Agent", "SickTv-Launcher/1.0 (Android TV launcher)");
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) return null;
             String text = readStream(conn.getInputStream());
             JSONObject json = new JSONObject(text);
@@ -220,7 +220,7 @@ final class WeatherClient {
             conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(4_000);
             conn.setReadTimeout(4_000);
-            conn.setRequestProperty("User-Agent", "CleanYourTV-Custom/1.0 (Android TV launcher)");
+            conn.setRequestProperty("User-Agent", "SickTv-Launcher/1.0 (Android TV launcher)");
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) return null;
             String text = readStream(conn.getInputStream());
             JSONObject json = new JSONObject(text);
@@ -272,7 +272,7 @@ final class WeatherClient {
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setConnectTimeout(8_000);
                 connection.setReadTimeout(8_000);
-                connection.setRequestProperty("User-Agent", "CleanYourTV-Custom/1.0 (Android TV launcher)");
+                connection.setRequestProperty("User-Agent", "SickTv-Launcher/1.0 (Android TV launcher)");
                 if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) throw new IllegalStateException("Weather response unavailable");
                 String body = readStream(connection.getInputStream());
                 JSONObject current = new JSONObject(body).getJSONObject("current");

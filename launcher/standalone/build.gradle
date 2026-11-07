@@ -7,7 +7,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        // A separate package: can be installed beside the existing CleanYourTV build.
+        // A separate package: can be installed beside the main SickTv build.
         applicationId 'com.sayan.cleanyourtv'
         minSdk 26
         targetSdk 34

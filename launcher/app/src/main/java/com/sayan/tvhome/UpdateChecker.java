@@ -40,11 +40,15 @@ public final class UpdateChecker {
     }
 
     private static final String GITHUB_RELEASE_URL =
+            "https://api.github.com/repos/Sayan201/SickTv/releases/latest";
+    private static final String GITHUB_RELEASE_URL_FALLBACK =
             "https://api.github.com/repos/Sayan201/CleanYourTv/releases/latest";
     private static final String GITHUB_FALLBACK_COMMITS_URL =
+            "https://api.github.com/repos/Sayan201/SickTv/commits/main";
+    private static final String GITHUB_FALLBACK_COMMITS_URL_FALLBACK =
             "https://api.github.com/repos/Sayan201/CleanYourTv/commits/main";
     private static final String DEFAULT_APK_URL =
-            "https://github.com/Sayan201/CleanYourTv/releases/download/latest/launcher.apk";
+            "https://github.com/Sayan201/SickTv/releases/download/latest/launcher.apk";
 
     public static final String PREF_UPDATE_AVAILABLE = "update_available";
     public static final String PREF_UPDATE_VERSION = "update_version";
@@ -57,6 +61,28 @@ public final class UpdateChecker {
     private static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
 
     private UpdateChecker() {}
+
+    private static HttpURLConnection openGitHubConnection(String primaryUrl, String fallbackUrl, String verName) {
+        try {
+            HttpURLConnection conn = (HttpURLConnection) new URL(primaryUrl).openConnection();
+            conn.setConnectTimeout(8000);
+            conn.setReadTimeout(10000);
+            conn.setRequestProperty("User-Agent", "SickTv-Launcher/" + verName);
+            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                return conn;
+            }
+            conn.disconnect();
+        } catch (Exception ignored) {}
+        try {
+            HttpURLConnection fallback = (HttpURLConnection) new URL(fallbackUrl).openConnection();
+            fallback.setConnectTimeout(8000);
+            fallback.setReadTimeout(10000);
+            fallback.setRequestProperty("User-Agent", "SickTv-Launcher/" + verName);
+            return fallback;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     public static boolean isUpdateAvailable(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(Config.SETTINGS_NAME, Context.MODE_PRIVATE);
@@ -79,12 +105,9 @@ public final class UpdateChecker {
                 String downloadUrl = DEFAULT_APK_URL;
                 String releaseBody = "";
 
-                HttpURLConnection conn = (HttpURLConnection) new URL(GITHUB_RELEASE_URL).openConnection();
-                conn.setConnectTimeout(8000);
-                conn.setReadTimeout(10000);
-                conn.setRequestProperty("User-Agent", "CleanYourTV-Launcher/" + currentVerName);
+                HttpURLConnection conn = openGitHubConnection(GITHUB_RELEASE_URL, GITHUB_RELEASE_URL_FALLBACK, currentVerName);
 
-                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                if (conn != null && conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     String json = readStream(conn.getInputStream());
                     JSONObject release = new JSONObject(json);
                     versionName = release.optString("name", "Latest Build");
@@ -116,11 +139,8 @@ public final class UpdateChecker {
                     }
                 } else {
                     // Fallback to latest commit on main branch
-                    HttpURLConnection commitConn = (HttpURLConnection) new URL(GITHUB_FALLBACK_COMMITS_URL).openConnection();
-                    commitConn.setConnectTimeout(8000);
-                    commitConn.setReadTimeout(10000);
-                    commitConn.setRequestProperty("User-Agent", "CleanYourTV-Launcher/" + currentVerName);
-                    if (commitConn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    HttpURLConnection commitConn = openGitHubConnection(GITHUB_FALLBACK_COMMITS_URL, GITHUB_FALLBACK_COMMITS_URL_FALLBACK, currentVerName);
+                    if (commitConn != null && commitConn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         String commitJson = readStream(commitConn.getInputStream());
                         JSONObject commitObj = new JSONObject(commitJson);
                         JSONObject commitDetail = commitObj.optJSONObject("commit");
@@ -171,12 +191,12 @@ public final class UpdateChecker {
 
     public static void showUpdateDialog(Activity activity, String version, String downloadUrl, String body) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity)
-                .setTitle("CleanYourTV Update Available")
+                .setTitle("SickTv Update Available")
                 .setMessage(version + "\n\nA new build has been pushed to GitHub with updates and fixes.")
                 .setPositiveButton("Download & Install", (dialog, which) -> downloadAndInstall(activity, downloadUrl))
                 .setNeutralButton("View on GitHub", (dialog, which) -> {
                     try {
-                        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Sayan201/CleanYourTv/releases/latest")));
+                        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Sayan201/SickTv/releases/latest")));
                     } catch (Exception e) {
                         Toast.makeText(activity, "Could not open browser", Toast.LENGTH_SHORT).show();
                     }
@@ -204,7 +224,7 @@ public final class UpdateChecker {
                 conn.setConnectTimeout(10000);
                 conn.setReadTimeout(20000);
                 conn.setInstanceFollowRedirects(true);
-                conn.setRequestProperty("User-Agent", "CleanYourTV-Launcher");
+                conn.setRequestProperty("User-Agent", "SickTv-Launcher");
 
                 int fileLength = conn.getContentLength();
                 in = conn.getInputStream();

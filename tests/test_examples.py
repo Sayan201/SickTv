@@ -69,10 +69,10 @@ class ExampleListsTest(unittest.TestCase):
 
     def test_readme_documents_universal_tv(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("CleanYourTV for Android TV & Google TV", readme)
+        self.assertIn("SickTv for Android TV & Google TV", readme)
         self.assertNotIn("Xiaomi MiTV-AXFR1", readme)
 
-    @unittest.skipUnless(os.environ.get("CLEANYOURTV_STRICT"), "counts are fixed up on merge; strict on main only")
+    @unittest.skipUnless(os.environ.get("SICKTV_STRICT") or os.environ.get("CLEANYOURTV_STRICT"), "counts are fixed up on merge; strict on main only")
     def test_readme_counts(self):
         index = EXAMPLES / "README.md"
         rows = table_rows(index, "| Folder |")

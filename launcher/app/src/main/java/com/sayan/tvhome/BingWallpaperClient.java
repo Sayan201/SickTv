@@ -86,7 +86,7 @@ final class BingWallpaperClient {
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setConnectTimeout(6_000);
                 conn.setReadTimeout(8_000);
-                conn.setRequestProperty("User-Agent", "CleanYourTV-Custom/1.0 (Android TV launcher)");
+                conn.setRequestProperty("User-Agent", "SickTv-Launcher/1.0 (Android TV launcher)");
                 if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                     throw new IllegalStateException("HTTP response: " + conn.getResponseCode());
                 }
@@ -180,7 +180,7 @@ final class BingWallpaperClient {
             conn = (HttpURLConnection) imgUrl.openConnection();
             conn.setConnectTimeout(8_000);
             conn.setReadTimeout(12_000);
-            conn.setRequestProperty("User-Agent", "CleanYourTV-Custom/1.0 (Android TV launcher)");
+            conn.setRequestProperty("User-Agent", "SickTv-Launcher/1.0 (Android TV launcher)");
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new IllegalStateException("HTTP image response: " + conn.getResponseCode());
             }
