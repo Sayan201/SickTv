@@ -1,4 +1,16 @@
-The bundled daily wallpapers are cropped JPEG versions of free Unsplash photos.
+SickTv Wallpaper Sources & Credits
+==================================
+
+1. Microsoft Bing Daily Wallpaper Engine (Primary)
+--------------------------------------------------
+SickTv dynamically fetches the daily high-resolution landscape photo from Microsoft Bing:
+- Home Screen: Bing Picture of the Day (idx=0) via https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US
+- Standby Mode Screensaver: Yesterday's Bing photo (idx=1)
+Source & Copyright: Microsoft Bing (https://www.bing.com) and respective photographers.
+
+2. Offline Fallback Wallpapers (Unsplash)
+-----------------------------------------
+The bundled offline daily wallpapers are cropped JPEG versions of free Unsplash photos.
 Unsplash License: https://unsplash.com/license
 
 1. White Pocket Sunrise — John Fowler

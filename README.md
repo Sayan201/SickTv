@@ -67,7 +67,7 @@ Every push to `main` and release tag automatically builds, signs, and publishes 
 | [launcher/companion/](launcher/companion/) | SickTv mobile companion source and device catalog |
 | [tools/](tools/) | ADB connection and package disable/restore utilities |
 | [Device profiles](examples/) | Curated package debloat inventories and device notes |
-| [Wallpaper credits](docs/wallpaper-sources.md) | Credits for the bundled wallpaper photos |
+| [Wallpaper credits](docs/wallpaper-sources.md) | Sources and credits for Microsoft Bing Daily Wallpaper Engine and offline photos |
 | [config.xml](launcher/app/src/main/res/values/config.xml) | Launcher defaults and settings |
 
 ## Privacy and safety
