@@ -11,8 +11,7 @@ body:
         - Install script (build-and-install)
         - Debloat or restore scripts
         - tools/tv.py or b64push.py
-        - The prompt (PROMPT.md)
-        - Website (cleanyour.tv)
+        - SickTv Companion app (phone)
     validations:
       required: true
   - type: input

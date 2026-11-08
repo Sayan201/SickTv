@@ -103,4 +103,4 @@ Notes for a model that has no tested list yet live in [`docs/devices/`](../docs/
 
 
 To add your TV, see [CONTRIBUTING.md](../CONTRIBUTING.md). The quickest way to get a list is to
-run the prompt in [PROMPT.md](../PROMPT.md) and copy the packages your assistant disabled.
+inspect packages via the SickTv Companion app or ADB commands, and test disabling them carefully.

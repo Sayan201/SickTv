@@ -49,26 +49,12 @@ Ideas that fit the direction: an idle screensaver with clock and ambient colour,
 for apps without banners, a settings screen to edit the dock from the TV, localisation.
 Ideas that don't: recommendation rows, content feeds, ads, telemetry.
 
-## 3. Improve the prompt and tools
+## 3. Improve tools and companion app
 
-`PROMPT.md` is what most people will actually use. If your assistant got stuck somewhere, the fix
-usually belongs in the prompt as one extra sentence, not in a script. Keep it brand-neutral; put
-brand-specific knowledge in `examples/`.
-
-`tools/tv.py` and `tools/b64push.py` exist because the stock `adb` is blocked on recent macOS. If
-you find a cleaner workaround, open an issue first.
-
-## 4. Show what you built
-
-Built your own launcher, a port to another platform, or an add-on that is too big or too personal
-for the shared launcher? Put it in its own repository and add one row to
-[`SHOWCASE.md`](SHOWCASE.md). That page is the place for alternative launchers, forks with a
-different look, and tools around the launcher; this repo keeps one small reference launcher and
-points at everything else. The rules for a row are on that page.
-
-Things that stay in this repo: debloat lists, fixes and small, opt-in features for the reference
-launcher, prompt and tool improvements. Things that go in the showcase: a second launcher, a
-restyle, a platform port, anything with its own background services or network access.
+Contributions to `tools/tv.py`, shell scripts, or the SickTv Companion app in `launcher/companion/`
+are welcome. Keep tools modular and resilient across different Android TV firmware implementations.
+`tools/tv.py` and `tools/b64push.py` exist because stock `adb` can be restricted on recent macOS;
+if you find clean cross-platform improvements, open an issue or PR.
 
 ## Pull requests
 
