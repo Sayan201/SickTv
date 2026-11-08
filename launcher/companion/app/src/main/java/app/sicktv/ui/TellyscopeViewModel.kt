@@ -1028,7 +1028,8 @@ class SickTvViewModel(
         val id = _state.value.selectedId ?: return
         val download = downloader ?: return
         val launcher = apkLauncher(pkg) ?: return
-        val store = _state.value.device.launcher?.let { it.fire?.store ?: true } ?: return
+        val installed = installedLauncher(_state.value.device.apps, pkg) != null
+        val store = if (installed) false else (_state.value.device.launcher?.let { it.fire?.store ?: true } ?: return)
         val list = unverified()
         launcherJob?.cancel()
         updateDevice(id) { d -> d.copy(launcher = d.launcher?.copy(pkg = pkg, fire = FireInstall(FireInstall.Step.Checking, store = store, list = list))) }
@@ -1136,7 +1137,7 @@ class SickTvViewModel(
         when (result) {
             // The steps close with it: Installing would keep them up, and Close waits on that.
             InstallResult.Done -> launcherInstalled(id, launcher.pkg) { step ->
-                updateDevice(id) { it.copy(launcher = it.launcher?.let { l -> l.copy(step = step, fire = if (l.fire?.store == true) null else FireInstall(list = l.fire?.list)) }) }
+                updateDevice(id) { it.copy(launcher = it.launcher?.let { l -> l.copy(step = step, fire = if (l.fire?.store == true || installedLauncher(it.apps, launcher.pkg) != null) null else FireInstall(list = l.fire?.list)) }) }
             }
             is InstallResult.Refused -> setFire(id) {
                 it.copy(step = FireInstall.Step.Refused, error = Copy.installRefused(result.reason, launcher.name))
@@ -1149,7 +1150,7 @@ class SickTvViewModel(
         val id = _state.value.selectedId ?: return
         if (_state.value.device.launcher?.fire?.step == FireInstall.Step.Installing) return
         launcherJob?.cancel()
-        updateDevice(id) { d -> d.copy(launcher = d.launcher?.let { l -> l.copy(fire = if (l.fire?.store == true) null else FireInstall(list = l.fire?.list)) }) }
+        updateDevice(id) { d -> d.copy(launcher = d.launcher?.let { l -> l.copy(fire = if (l.fire?.store == true || installedLauncher(d.apps, l.pkg) != null) null else FireInstall(list = l.fire?.list)) }) }
     }
 
     /** Not now on the Apps tab's card: it stays away on this TV, and Tweaks keeps the way in. */

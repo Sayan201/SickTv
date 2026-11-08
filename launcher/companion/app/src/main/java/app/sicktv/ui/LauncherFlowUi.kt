@@ -316,10 +316,22 @@ fun LauncherScreen(
                             }
                             // Current, or a TV that can't take it as Home: only Open.
                             !have.home && current != null -> {
+                                if (direct && downloadable(chosen)) {
+                                    OutlinedButton(onClick = { actions.fireCheck(chosen) }, enabled = flow.fire == null) {
+                                        Text(Copy.UPDATE.resolve())
+                                    }
+                                }
                                 TextButton(onClick = { actions.open(chosen) }) { Text(Copy.OPEN.resolve()) }
                                 IconButtonText(Icons.Outlined.Home, Copy.MAKE_HOME.resolve()) { if (have.homeService) askService = true else switch(false) }
                             }
-                            else -> IconButtonText(DeviceIcons.Tv, Copy.OPEN.resolve()) { actions.open(chosen) }
+                            else -> {
+                                if (direct && downloadable(chosen)) {
+                                    OutlinedButton(onClick = { actions.fireCheck(chosen) }, enabled = flow.fire == null) {
+                                        Text(Copy.UPDATE.resolve())
+                                    }
+                                }
+                                IconButtonText(DeviceIcons.Tv, Copy.OPEN.resolve()) { actions.open(chosen) }
+                            }
                         }
                     }
                     LauncherFlow.Step.Waiting -> TextButton(onClick = { actions.install(flow.pkg) }) { Text(Copy.OPEN_STORE_AGAIN.resolve()) }

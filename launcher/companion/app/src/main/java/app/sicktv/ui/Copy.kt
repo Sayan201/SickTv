@@ -213,6 +213,7 @@ object Copy {
     val INSTALL = UiText(R.string.copy_install)
     /** Shows a launcher on the TV, from the picker. */
     val OPEN = UiText(R.string.copy_open)
+    val UPDATE = UiText(R.string.copy_install_update)
     /** A launcher's screenshot in the picker, for screen readers. */
     fun homeScreenOf(name: String) = UiText(R.string.copy_home_screen_of, name)
     /** In a launcher's screenshot box when the picture couldn't be had; [TRY_AGAIN] under it loads it again. */
