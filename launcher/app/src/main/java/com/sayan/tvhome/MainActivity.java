@@ -1673,17 +1673,29 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         int to = from + delta;
         if (from < 0 || to < 0 || to >= adapter.movableCount()) return;
         String moving = adapter.keyAt(from);
-        adapter.move(from, to);
+        keepScroll(() -> adapter.move(from, to));
         Order order = new Order(Order.dockKey(dockApps), adapter.movableKeys());
         if (!Order.save(Order.file(this), order)) {
-            adapter.move(to, from);
+            keepScroll(() -> adapter.move(to, from));
             Toast.makeText(this, R.string.reorder_not_saved, Toast.LENGTH_SHORT).show();
             return;
         }
         adapter.setSavedOrder(Order.ranks(order, dockApps));
         lastFocused = to;
         lastFocusedKey = moving;
-        focusTile(to);
+        final int target = to;
+        grid.postOnAnimation(new Runnable() {
+            int frames;
+
+            @Override
+            public void run() {
+                if ((grid.hasPendingAdapterUpdates() || grid.isLayoutRequested()) && ++frames < 10) {
+                    grid.postOnAnimation(this);
+                    return;
+                }
+                focusTile(target);
+            }
+        });
     }
 
     // ---- top shelf -------------------------------------------------------------------------------
@@ -2152,25 +2164,37 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             return;
         }
         final int pos = adapter.focusablePosition(Math.max(0, Math.min(position, adapter.appCount() - 1)));
-        grid.smoothScrollToPosition(pos);
         RecyclerView.ViewHolder vh = grid.findViewHolderForAdapterPosition(pos);
         if (vh != null) {
             View card = vh.itemView.findViewById(R.id.card);
-            card.requestFocus();
-            onTileFocused(pos, card);
-            return;
+            if (card != null) {
+                card.requestFocus();
+                onTileFocused(pos, card);
+                return;
+            }
         }
         if (!animations) {
-            grid.scrollToPosition(pos);
+            if (dockRow && pos < COLUMNS) {
+                grid.scrollToPosition(0);
+            } else {
+                grid.scrollToPosition(pos);
+            }
             grid.post(() -> {
                 RecyclerView.ViewHolder h = grid.findViewHolderForAdapterPosition(pos);
                 if (h != null) {
                     View card = h.itemView.findViewById(R.id.card);
-                    card.requestFocus();
-                    onTileFocused(pos, card);
+                    if (card != null) {
+                        card.requestFocus();
+                        onTileFocused(pos, card);
+                    }
                 }
             });
             return;
+        }
+        if (dockRow && pos < COLUMNS) {
+            grid.smoothScrollToPosition(0);
+        } else {
+            grid.smoothScrollToPosition(pos);
         }
         pendingFocusScroll = new RecyclerView.OnScrollListener() {
             @Override
