@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/glass_panel"
-    android:padding="6dp"
-    android:elevation="12dp">
+    android:padding="8dp"
+    android:elevation="14dp">
 
     <TextView
         android:layout_width="match_parent"

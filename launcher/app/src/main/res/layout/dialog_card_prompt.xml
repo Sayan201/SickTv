@@ -10,7 +10,7 @@
     android:paddingEnd="26dp"
     android:paddingTop="22dp"
     android:paddingBottom="20dp"
-    android:elevation="12dp">
+    android:elevation="14dp">
 
     <TextView
         android:id="@+id/title"

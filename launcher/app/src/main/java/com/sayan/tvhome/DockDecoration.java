@@ -19,6 +19,7 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
     private final int dockSize;
     private final float density;
     private final float radius;
+    private final Paint backplate = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint fill = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint specular = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint rim = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -32,7 +33,7 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
 
         rim.setStyle(Paint.Style.STROKE);
         rim.setStrokeWidth(1.2f * density);
-        rim.setColor(0x38FFFFFF);
+        rim.setColor(0x4DFFFFFF);
 
         glow.setStyle(Paint.Style.STROKE);
     }
@@ -84,6 +85,10 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
         bounds.set(minLeft - padH, minTop - padV, maxRight + padH, maxBottom + padV);
         float capsuleRadius = Math.min(bounds.height() / 2f, 26f * density);
 
+        // Translucent obsidian backplate for physical glass refraction & depth
+        backplate.setShader(new LinearGradient(0, bounds.top, 0, bounds.bottom,
+                0x4D0C101A, 0x3805070D, Shader.TileMode.CLAMP));
+
         // Translucent liquid glass gradient fill
         fill.setShader(new LinearGradient(0, bounds.top, 0, bounds.bottom,
                 0x33FFFFFF, 0x14FFFFFF, Shader.TileMode.CLAMP));
@@ -100,6 +105,9 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
             c.drawRoundRect(bounds.left - o, bounds.top - o, bounds.right + o, bounds.bottom + o,
                     capsuleRadius + o, capsuleRadius + o, glow);
         }
+
+        // Obsidian backplate
+        c.drawRoundRect(bounds, capsuleRadius, capsuleRadius, backplate);
 
         // Base glass slab
         c.drawRoundRect(bounds, capsuleRadius, capsuleRadius, fill);

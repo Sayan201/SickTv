@@ -18,7 +18,7 @@ import java.util.Base64
  */
 val DATA_KEYS = listOf(
     // SickTv primary data key (tools/data-keys/primary.pub)
-    "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE6dGdLm2q/KvXyONuN8ffL6Y/SvVA466GBO1GJ8tsx7hL3a041ocIDw8dB/XAZ6wrUIkNjkp3hEmTPBOA7hJnlw==",
+    "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEbm/UjGBrEk/cHJDVRCfyT+XADtU7oQBaS3TTu+RiKT/BYVYZMMkq/3/LWU5R/E9IF69FYZv9v8COFV7tV6gSIQ==",
     // tools/data-keys/backup.pub, kept offline for a rotation or a leak
     "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEXaezXF+/UiXq/fGZOL8NYllUzxPyMbBO46pueSEjOIY+KNX19fSDZ0yEqKK+C4eC3YLwan7KlRQSLdziOrFC7g==",
 )
