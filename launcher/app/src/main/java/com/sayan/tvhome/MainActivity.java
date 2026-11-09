@@ -255,6 +255,16 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         }
     }
 
+    private static final long UPDATE_CHECK_THROTTLE_MS = 15L * 60 * 1000;
+
+    private void checkUpdatesThrottled() {
+        android.content.SharedPreferences prefs = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE);
+        long lastCheck = prefs.getLong(UpdateChecker.PREF_LAST_CHECK, 0L);
+        if (System.currentTimeMillis() - lastCheck >= UPDATE_CHECK_THROTTLE_MS) {
+            UpdateChecker.check(this, (hasUpdate, ver, url, body) -> refreshSettingsPillUpdateBadge());
+        }
+    }
+
     private final Handler handler = new Handler(Looper.getMainLooper());
     /** Refreshes the network pill when the connection changes: at boot Wi-Fi often connects after Home is shown. */
     private final ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
@@ -1160,6 +1170,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         isPaused = false;
         resetIdleTimer();
         refreshSettingsPillUpdateBadge();
+        checkUpdatesThrottled();
         // A festival that started or ended while Home was in the background: rebuild with or without it.
         if (festive != festival.active(LocalDate.now())) {
             recreate();

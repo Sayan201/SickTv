@@ -219,12 +219,32 @@ public final class UpdateChecker {
             InputStream in = null;
             FileOutputStream out = null;
             try {
-                URL url = new URL(downloadUrl);
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setConnectTimeout(10000);
-                conn.setReadTimeout(20000);
-                conn.setInstanceFollowRedirects(true);
-                conn.setRequestProperty("User-Agent", "SickTv-Launcher");
+                String currentUrl = downloadUrl;
+                for (int redirect = 0; redirect < 5; redirect++) {
+                    URL url = new URL(currentUrl);
+                    HttpURLConnection c = (HttpURLConnection) url.openConnection();
+                    c.setConnectTimeout(15000);
+                    c.setReadTimeout(30000);
+                    c.setInstanceFollowRedirects(true);
+                    c.setRequestProperty("User-Agent", "SickTv-Launcher");
+                    int code = c.getResponseCode();
+                    if (code == HttpURLConnection.HTTP_MOVED_PERM ||
+                            code == HttpURLConnection.HTTP_MOVED_TEMP ||
+                            code == HttpURLConnection.HTTP_SEE_OTHER ||
+                            code == 307 || code == 308) {
+                        String location = c.getHeaderField("Location");
+                        c.disconnect();
+                        if (location != null && !location.isEmpty()) {
+                            currentUrl = location;
+                            continue;
+                        }
+                    }
+                    conn = c;
+                    break;
+                }
+                if (conn == null || conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    throw new IOException("HTTP " + (conn != null ? conn.getResponseCode() : -1));
+                }
 
                 int fileLength = conn.getContentLength();
                 in = conn.getInputStream();

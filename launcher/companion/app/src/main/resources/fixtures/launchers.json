@@ -4,7 +4,7 @@
     { "package": "com.sayan.tvhome", "name": "SickTv Launcher", "about": "Minimal, fast TV launcher with fluid dock navigation and customizable widgets.",
       "signers": ["6299aefa036ad5aeb2b7626a4aa32aae2919bb9965d4a1bc65da2c9716f4f19c"], "max_mb": 64,
       "releases": "https://github.com/Sayan201/SickTv/releases", "apk": "launcher.apk",
-      "icon": { "file": "images/sicktv-icon.png", "sha256": "a92d20aecdc4d5f862ae37b7c15c312484f597ecd66a6b96fccf7adf4b3cfd3c" },
+      "icon": { "file": "images/sicktv-icon.png", "sha256": "454f6c3277d4bee969bbf5e479b35d3fad1b45c04fa5b683c7f16b55dbc8c9a2" },
       "screenshot": { "file": "images/sicktv.png", "sha256": "f370068260001a5efea690a62c6b8a3b92f3a0742bd9e7c53fdeac7b87e5dded" } },
     { "package": "com.sayan.cleanyourtv", "name": "CleanYourTv Launcher", "about": "Original classic TV launcher edition with fluid navigation.",
       "icon": { "file": "images/cleanyourtv-icon.png", "sha256": "a92d20aecdc4d5f862ae37b7c15c312484f597ecd66a6b96fccf7adf4b3cfd3c" },

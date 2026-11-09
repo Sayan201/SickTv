@@ -24,8 +24,8 @@ android {
         minSdk = 26
         targetSdk = 37
         // A PR into main must raise both past the latest v* tag (.github/workflows/release-check.yml).
-        versionCode = 31
-        versionName = "0.18.0"
+        versionCode = 32
+        versionName = "0.19.0"
 
         // An alpha tag (release.yml, vX.Y.Z-alpha.N on dev) passes -Psicktv.alpha=N:
         // a separate app ID, so it installs next to the release.

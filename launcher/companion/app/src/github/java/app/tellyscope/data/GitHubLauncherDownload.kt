@@ -102,10 +102,7 @@ class AndroidLauncherDownload(context: Context) : AndroidLauncherPick(context), 
             c.disconnect()
         } ?: return null
         val apk = pageApk(download("$releases/expanded_assets/$tag").decodeToString(), tag, releases, launcher.apk) ?: return null
-        val head = URL(apk).openConnection() as HttpURLConnection
-        head.requestMethod = "HEAD"
-        head.connectTimeout = 10_000
-        head.readTimeout = 10_000
+        val head = openFollowRedirects(apk, "HEAD", timeout = 10_000, readTimeout = 10_000)
         val size = try {
             head.contentLengthLong.takeIf { head.responseCode == 200 } ?: return null
         } finally {
@@ -118,9 +115,7 @@ class AndroidLauncherDownload(context: Context) : AndroidLauncherPick(context), 
         dir.deleteRecursively()
         dir.mkdirs()
         val file = File(dir, apkName(launcher))
-        val c = URL(release.apk).openConnection() as HttpURLConnection
-        c.connectTimeout = 10_000
-        c.readTimeout = 30_000
+        val c = openFollowRedirects(release.apk, "GET", timeout = 15_000, readTimeout = 30_000)
         try {
             if (c.responseCode != 200) throw IOException("HTTP ${c.responseCode}")
             c.inputStream.use { input ->
@@ -143,4 +138,34 @@ class AndroidLauncherDownload(context: Context) : AndroidLauncherPick(context), 
         }
         read(file, launcher)
     }
+}
+
+/** Opens an [HttpURLConnection], resolving cross-domain redirects (such as GitHub release assets). */
+private fun openFollowRedirects(
+    url: String,
+    method: String = "GET",
+    timeout: Int = 10_000,
+    readTimeout: Int = 10_000,
+    maxHops: Int = 5,
+): HttpURLConnection {
+    var current = url
+    for (i in 0 until maxHops) {
+        val conn = URL(current).openConnection() as HttpURLConnection
+        conn.requestMethod = method
+        conn.connectTimeout = timeout
+        conn.readTimeout = readTimeout
+        conn.instanceFollowRedirects = true
+        conn.setRequestProperty("User-Agent", "SickTv-Companion")
+        val code = conn.responseCode
+        if (code in 301..308) {
+            val loc = conn.getHeaderField("Location")
+            conn.disconnect()
+            if (!loc.isNullOrEmpty()) {
+                current = loc
+                continue
+            }
+        }
+        return conn
+    }
+    throw IOException("Too many redirects: $url")
 }
