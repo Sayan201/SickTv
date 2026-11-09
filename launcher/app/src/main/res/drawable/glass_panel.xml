@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Ambient outer edge glow -->
+    <!-- Ambient subtle glass contour -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#1400E5FF" />
-            <stroke android:width="2dp" android:color="#2600E5FF" />
+            <stroke android:width="1dp" android:color="#20FFFFFF" />
             <corners android:radius="24dp" />
         </shape>
     </item>
-    <!-- Translucent obsidian liquid glass body (~75-80% opacity) -->
+    <!-- Artefact-style acrylic dark glass body (~45% opacity, neutral transparent) -->
     <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
         <shape android:shape="rectangle">
             <gradient
                 android:angle="270"
-                android:startColor="#CC141A29"
-                android:centerColor="#D40E1322"
-                android:endColor="#DE080B14" />
+                android:startColor="#660B0C22"
+                android:centerColor="#730C0D26"
+                android:endColor="#8008081A" />
             <corners android:radius="23dp" />
         </shape>
     </item>
-    <!-- Top specular reflection sheen -->
+    <!-- Specular top reflection sheen -->
     <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
         <shape android:shape="rectangle">
             <gradient
                 android:angle="270"
-                android:startColor="#38FFFFFF"
-                android:centerColor="#0AFFFFFF"
+                android:startColor="#45FFFFFF"
+                android:centerColor="#0DFFFFFF"
                 android:endColor="#00FFFFFF" />
             <corners android:radius="23dp" />
         </shape>
     </item>
-    <!-- Crisp luminous glass rim -->
+    <!-- Crisp luminous white glass rim -->
     <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
         <shape android:shape="rectangle">
-            <stroke android:width="1.2dp" android:color="#59FFFFFF" />
+            <stroke android:width="1.2dp" android:color="#4DFFFFFF" />
             <corners android:radius="23dp" />
         </shape>
     </item>

@@ -6,8 +6,9 @@
                 <shape android:shape="rectangle">
                     <gradient
                         android:angle="270"
-                        android:startColor="#F00088FF"
-                        android:endColor="#F00052D4" />
+                        android:startColor="#59FFFFFF"
+                        android:centerColor="#38FFFFFF"
+                        android:endColor="#20FFFFFF" />
                     <corners android:radius="21dp" />
                 </shape>
             </item>
@@ -15,15 +16,15 @@
                 <shape android:shape="rectangle">
                     <gradient
                         android:angle="270"
-                        android:startColor="#4DFFFFFF"
-                        android:centerColor="#10FFFFFF"
+                        android:startColor="#99FFFFFF"
+                        android:centerColor="#26FFFFFF"
                         android:endColor="#00FFFFFF" />
                     <corners android:radius="21dp" />
                 </shape>
             </item>
             <item>
                 <shape android:shape="rectangle">
-                    <stroke android:width="1.5dp" android:color="#B3FFFFFF" />
+                    <stroke android:width="1.5dp" android:color="#FFFFFFFF" />
                     <corners android:radius="21dp" />
                 </shape>
             </item>
@@ -32,8 +33,8 @@
     <!-- Reorder button while reorder mode is on (focus is on the tiles then). -->
     <item android:state_activated="true">
         <shape android:shape="rectangle">
-            <solid android:color="#596EC1FF" />
-            <stroke android:width="1.5dp" android:color="#FF6EC1FF" />
+            <solid android:color="#40FFFFFF" />
+            <stroke android:width="1.5dp" android:color="#E6FFFFFF" />
             <corners android:radius="21dp" />
         </shape>
     </item>
