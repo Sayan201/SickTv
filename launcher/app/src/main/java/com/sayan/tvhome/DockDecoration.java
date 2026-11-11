@@ -83,8 +83,8 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
         float padH = 16f * density;
         float padV = 10f * density;
         bounds.set(minLeft - padH, minTop - padV, maxRight + padH, maxBottom + padV);
-        float minAllowed = 4f * density;
-        float maxAllowed = parent.getWidth() - 4f * density;
+        float minAllowed = 6f * density;
+        float maxAllowed = parent.getWidth() - 6f * density;
         if (bounds.left < minAllowed) bounds.left = minAllowed;
         if (bounds.right > maxAllowed) bounds.right = maxAllowed;
         float capsuleRadius = Math.min(bounds.height() / 2f, 26f * density);
