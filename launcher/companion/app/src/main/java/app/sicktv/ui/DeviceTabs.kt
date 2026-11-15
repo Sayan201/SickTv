@@ -256,8 +256,8 @@ fun DeviceTabsScreen(
 
     Box {
         Scaffold(
-            // Lifted by the Remote's rise, so a message isn't hidden behind the button.
-            snackbarHost = { SnackbarHost(snackbar, Modifier.padding(bottom = RemoteRise)) },
+            // Lifted so a snackbar message isn't hidden behind the floating dock.
+            snackbarHost = { SnackbarHost(snackbar, Modifier.padding(bottom = 76.dp)) },
             // Install on Apps and upload on Files as crisp white GlassFab; the Remote has its own button in the bar.
             floatingActionButton = {
                 if (!offline) when (tab) {
