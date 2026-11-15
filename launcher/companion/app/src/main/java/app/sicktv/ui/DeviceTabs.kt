@@ -64,6 +64,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import app.sicktv.ui.theme.GlassDock
 import app.sicktv.ui.theme.GlassDockItem
+import app.sicktv.ui.theme.GlassCard
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -473,12 +474,8 @@ fun DeviceTabsScreen(
 /** A titled card for a tab's block, not folded: each tab has room for it. */
 @Composable
 private fun Panel(title: String, body: @Composable () -> Unit) {
-    Card(
-        Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-        border = LiquidGlass.borderStroke(),
-    ) {
-        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+    GlassCard(Modifier.fillMaxWidth()) {
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 4.dp))
             body()
         }
@@ -787,7 +784,7 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
         Box(
             Modifier
                 .size(RemoteSize + 8.dp)
-                .background(Color(0xF0101624), CircleShape)
+                .background(Color(0xF00E0E12), CircleShape)
         )
         Surface(
             onClick = onClick,
@@ -818,53 +815,47 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
 @Composable
 private fun SuggestedCard(lists: Suggestions?, d: DebloatState, offline: Boolean, onChanges: () -> Unit) {
     val c = MaterialTheme.colorScheme
-    Card(
-        colors = CardDefaults.cardColors(containerColor = c.surfaceContainerLow),
-        shape = MaterialTheme.shapes.large,
-        border = LiquidGlass.borderStroke(),
-    ) {
-        Column(Modifier.padding(start = 16.dp, end = 8.dp, top = 8.dp, bottom = 12.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    when (lists) {
-                        is Suggestions.Ready -> when {
-                            d.total == 0 -> stringResource(R.string.tabs_suggested_none, lists.list.name)
-                            d.on == 0 -> pluralStringResource(R.plurals.tabs_suggested_all_off, d.total, d.total)
-                            else -> pluralStringResource(R.plurals.tabs_suggested_some_off, d.total, d.total - d.on, d.total)
-                        }
-                        is Suggestions.NoList -> stringResource(R.string.tabs_suggested_no_list)
-                        Suggestions.Unavailable -> stringResource(R.string.tabs_suggested_unavailable)
-                        null -> stringResource(if (offline) R.string.tabs_suggested_offline else R.string.tabs_suggested_loading)
-                    },
-                    Modifier.weight(1f),
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-                TextButton(onClick = onChanges) { Text(stringResource(R.string.tabs_see_changes)) }
-            }
-            if (d.back > 0) {
-                val required = stringResource(R.string.tabs_action_required)
-                val cameBack = pluralStringResource(R.plurals.tabs_came_back_on, d.back, d.back)
-                Text(
-                    buildAnnotatedString {
-                        withStyle(SpanStyle(fontWeight = FontWeight.SemiBold)) { append(required) }
-                        append(" ")
-                        append(cameBack)
-                    },
-                    Modifier.padding(end = 8.dp, bottom = 4.dp),
-                    style = MaterialTheme.typography.bodyLarge, color = c.error,
-                )
-            }
-            val note = when {
-                lists is Suggestions.Unavailable -> stringResource(R.string.tabs_note_unavailable)
-                lists is Suggestions.NoList -> stringResource(R.string.tabs_note_no_list)
-                lists is Suggestions.Ready && lists.byMaker -> stringResource(R.string.tabs_note_by_maker, lists.list.name)
-                lists is Suggestions.Ready && !d.todo -> stringResource(R.string.tabs_note_gate)
-                else -> null
-            }
-            note?.let { Text(it, Modifier.padding(end = 8.dp), style = MaterialTheme.typography.bodySmall, color = c.onSurfaceVariant) }
-            if (lists is Suggestions.Ready) {
-                Text(stringResource(R.string.tabs_lists_credit), Modifier.padding(end = 8.dp), style = MaterialTheme.typography.bodySmall, color = c.onSurfaceVariant)
-            }
+    GlassCard(Modifier.fillMaxWidth()) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                when (lists) {
+                    is Suggestions.Ready -> when {
+                        d.total == 0 -> stringResource(R.string.tabs_suggested_none, lists.list.name)
+                        d.on == 0 -> pluralStringResource(R.plurals.tabs_suggested_all_off, d.total, d.total)
+                        else -> pluralStringResource(R.plurals.tabs_suggested_some_off, d.total, d.total - d.on, d.total)
+                    }
+                    is Suggestions.NoList -> stringResource(R.string.tabs_suggested_no_list)
+                    Suggestions.Unavailable -> stringResource(R.string.tabs_suggested_unavailable)
+                    null -> stringResource(if (offline) R.string.tabs_suggested_offline else R.string.tabs_suggested_loading)
+                },
+                Modifier.weight(1f),
+                style = MaterialTheme.typography.bodyLarge,
+            )
+            TextButton(onClick = onChanges) { Text(stringResource(R.string.tabs_see_changes)) }
+        }
+        if (d.back > 0) {
+            val required = stringResource(R.string.tabs_action_required)
+            val cameBack = pluralStringResource(R.plurals.tabs_came_back_on, d.back, d.back)
+            Text(
+                buildAnnotatedString {
+                    withStyle(SpanStyle(fontWeight = FontWeight.SemiBold)) { append(required) }
+                    append(" ")
+                    append(cameBack)
+                },
+                Modifier.padding(end = 8.dp, bottom = 4.dp),
+                style = MaterialTheme.typography.bodyLarge, color = c.error,
+            )
+        }
+        val note = when {
+            lists is Suggestions.Unavailable -> stringResource(R.string.tabs_note_unavailable)
+            lists is Suggestions.NoList -> stringResource(R.string.tabs_note_no_list)
+            lists is Suggestions.Ready && lists.byMaker -> stringResource(R.string.tabs_note_by_maker, lists.list.name)
+            lists is Suggestions.Ready && !d.todo -> stringResource(R.string.tabs_note_gate)
+            else -> null
+        }
+        note?.let { Text(it, Modifier.padding(end = 8.dp), style = MaterialTheme.typography.bodySmall, color = c.onSurfaceVariant) }
+        if (lists is Suggestions.Ready) {
+            Text(stringResource(R.string.tabs_lists_credit), Modifier.padding(end = 8.dp), style = MaterialTheme.typography.bodySmall, color = c.onSurfaceVariant)
         }
     }
 }
@@ -873,10 +864,9 @@ private fun SuggestedCard(lists: Suggestions?, d: DebloatState, offline: Boolean
 @Composable
 private fun AndroidCard(state: UiState, snap: Snapshot?, offline: Boolean, onUpdates: () -> Unit) {
     val device = state.selected ?: return
-    Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-        shape = MaterialTheme.shapes.large,
-        border = LiquidGlass.borderStroke(),
+    GlassCard(
+        modifier = Modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(0.dp),
     ) {
         StatusRow(
             Icons.Default.Info,
@@ -884,7 +874,6 @@ private fun AndroidCard(state: UiState, snap: Snapshot?, offline: Boolean, onUpd
                 ?: device.android?.let { stringResource(R.string.tabs_android_version, it) } ?: "Android",
             (snap?.softwareMonth ?: device.lastKnown?.softwareMonth)?.let { stringResource(R.string.tabs_updated, Copy.month(it)) },
             stringResource(R.string.tabs_check_updates), !offline, onUpdates,
-
         )
     }
 }
@@ -893,10 +882,9 @@ private fun AndroidCard(state: UiState, snap: Snapshot?, offline: Boolean, onUpd
 @Composable
 private fun StoreCard(store: AppInfo, offline: Boolean, locked: Boolean, actions: DeviceActions) {
     val name = stringResource(if (store.packageName == AMAZON_APPSTORE) R.string.tabs_store_amazon else R.string.tabs_store_play)
-    Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-        shape = MaterialTheme.shapes.large,
-        border = LiquidGlass.borderStroke(),
+    GlassCard(
+        modifier = Modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(0.dp),
     ) {
         if (store.enabled) {
             StatusRow(TileIcons.Store, name, stringResource(R.string.tabs_store_sub), Copy.button(Action.Open).resolve(), !offline && !locked) {

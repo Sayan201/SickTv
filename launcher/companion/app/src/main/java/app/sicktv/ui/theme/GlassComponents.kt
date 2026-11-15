@@ -9,7 +9,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -230,3 +233,86 @@ fun RowScope.GlassDockItem(
         )
     }
 }
+
+/**
+ * Pure Liquid Glass Card container.
+ * Smoked obsidian gradient fill with specular hairline border, built directly on Compose Foundation.
+ */
+@Composable
+fun GlassCard(
+    modifier: Modifier = Modifier,
+    shape: Shape = RoundedCornerShape(18.dp),
+    border: BorderStroke? = LiquidGlass.borderStroke(1.dp),
+    backgroundBrush: Brush = LiquidGlass.CardGlassBrush,
+    contentPadding: PaddingValues = PaddingValues(16.dp),
+    onClick: (() -> Unit)? = null,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    val clickableModifier = if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier
+    Box(
+        modifier = modifier
+            .clip(shape)
+            .background(backgroundBrush, shape)
+            .then(if (border != null) Modifier.border(border, shape) else Modifier)
+            .then(clickableModifier)
+            .padding(contentPadding),
+    ) {
+        Column(content = content)
+    }
+}
+
+/**
+ * Translucent smoked obsidian banner for offline/warning/info alerts.
+ * Replaces solid Material 3 containers with an elegant liquid glass appearance.
+ */
+@Composable
+fun GlassBanner(
+    modifier: Modifier = Modifier,
+    icon: (@Composable () -> Unit)? = null,
+    title: String,
+    message: String? = null,
+    action: (@Composable () -> Unit)? = null,
+    shape: Shape = RoundedCornerShape(20.dp),
+    border: BorderStroke = LiquidGlass.borderStroke(1.dp),
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(shape)
+            .background(LiquidGlass.CardGlassBrush, shape)
+            .border(border, shape)
+            .padding(16.dp),
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (icon != null) {
+                        icon()
+                        Spacer(Modifier.width(8.dp))
+                    }
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = Color.White,
+                    )
+                }
+                if (message != null) {
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text = message,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color(0xCCFFFFFF),
+                    )
+                }
+            }
+            if (action != null) {
+                Spacer(Modifier.width(12.dp))
+                action()
+            }
+        }
+    }
+}
+

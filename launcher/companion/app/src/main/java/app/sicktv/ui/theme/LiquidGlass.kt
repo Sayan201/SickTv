@@ -33,18 +33,18 @@ object LiquidGlass {
     val NeonCyanSheen = Color(0x6600E5FF)
     val NeonCyanGlow = Color(0x2200E5FF)
 
-    // Smoked acrylic glass tones
-    val SmokedAcrylicTop = Color(0xFF161E2C)
-    val SmokedAcrylicBottom = Color(0xFF0E1420)
-    val SmokedAcrylicHigh = Color(0xFF1E283A)
+    // Smoked acrylic glass tones (neutral obsidian, zero blue tint)
+    val SmokedAcrylicTop = Color(0xFF18181C)
+    val SmokedAcrylicBottom = Color(0xFF0D0D10)
+    val SmokedAcrylicHigh = Color(0xFF242428)
 
     /**
      * Vertical hairline specular border: soft reflection on top, subtle transparency at bottom.
      */
     fun borderStroke(
         width: Dp = 1.dp,
-        topColor: Color = Color(0x28FFFFFF),
-        bottomColor: Color = Color(0x0AFFFFFF),
+        topColor: Color = Color(0x33FFFFFF),
+        bottomColor: Color = Color(0x0EFFFFFF),
     ): BorderStroke = BorderStroke(
         width = width,
         brush = Brush.verticalGradient(
@@ -92,9 +92,9 @@ object LiquidGlass {
      */
     val DockBackgroundBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xF0151C2A),
-            Color(0xF80E1320),
-            Color(0xFF090D16),
+            Color(0xF018181C),
+            Color(0xF80E0E12),
+            Color(0xFF000000),
         ),
     )
 
@@ -103,8 +103,8 @@ object LiquidGlass {
      */
     val TileGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xFF182232),
-            Color(0xFF101724),
+            Color(0xFF18181C),
+            Color(0xFF0F0F12),
         ),
     )
 
@@ -113,8 +113,8 @@ object LiquidGlass {
      */
     val ActiveTileGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xFF192A3E),
-            Color(0xFF101D2E),
+            Color(0xFF1E2228),
+            Color(0xFF121418),
         ),
     )
 
@@ -123,8 +123,8 @@ object LiquidGlass {
      */
     val CardGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0x332A3950),
-            Color(0x1A141D2B),
+            Color(0x3326262C),
+            Color(0x1A141418),
         ),
     )
 }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.text.font.FontWeight
 import app.sicktv.ui.theme.LiquidGlass
 import app.sicktv.ui.theme.GlassButton
+import app.sicktv.ui.theme.GlassCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,8 +39,6 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
@@ -384,13 +383,11 @@ private fun Modifier.treeLine(color: Color, last: Boolean = false, head: Boolean
 /** No list for this TV: send its model and stock apps to cleanyourtv, where the lists come from. */
 @Composable
 private fun HelpAddCard(onHelpAdd: () -> Unit) {
-    Card(
+    GlassCard(
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-        border = LiquidGlass.borderStroke(1.dp),
         modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
     ) {
-        Row(Modifier.padding(16.dp)) {
+        Row {
             Icon(AddToQueue, contentDescription = null, tint = LiquidGlass.NeonCyan)
             Spacer(Modifier.width(16.dp))
             Column(Modifier.weight(1f)) {
@@ -421,13 +418,13 @@ private fun MatchCard(kind: DeviceKind, name: String, detail: String, match: Mat
         Match.Exact -> LiquidGlass.activeBorderStroke(1.dp)
         else -> LiquidGlass.borderStroke(1.dp)
     }
-    Surface(
-        color = MaterialTheme.colorScheme.surfaceContainerLow,
+    GlassCard(
         shape = RoundedCornerShape(16.dp),
         border = border,
         modifier = Modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(start = 16.dp, top = 12.dp, bottom = 12.dp, end = 4.dp),
     ) {
-        Row(Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp, end = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(DeviceIcons.of(kind), contentDescription = kind.word(), tint = if (match == Match.Exact) LiquidGlass.NeonCyan else MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.width(16.dp))
             Column(Modifier.weight(1f)) {

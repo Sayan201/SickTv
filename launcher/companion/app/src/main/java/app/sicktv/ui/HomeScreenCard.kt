@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import app.sicktv.ui.theme.GlassButton
+import app.sicktv.ui.theme.GlassBanner
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -125,18 +126,10 @@ fun HomeScreenBlock(ui: DeviceUi, actions: DeviceActions, fire: Boolean = false)
 /** Material 3 has no banner; a tonal surface stands in, as for the other notes. */
 @Composable
 private fun NoDefaultBanner() {
-    Surface(
-        color = MaterialTheme.colorScheme.surfaceContainerLow,
-        shape = RoundedCornerShape(16.dp),
-        border = LiquidGlass.borderStroke(1.dp),
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Row(Modifier.padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(HubIcons.InfoOutline, contentDescription = null, Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSecondaryContainer)
-            Spacer(Modifier.width(8.dp))
-            Text(Copy.NO_DEFAULT.resolve(), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSecondaryContainer)
-        }
-    }
+    GlassBanner(
+        icon = { Icon(HubIcons.InfoOutline, contentDescription = null, Modifier.size(20.dp), tint = LiquidGlass.NeonCyan) },
+        title = Copy.NO_DEFAULT.resolve(),
+    )
 }
 
 @Composable

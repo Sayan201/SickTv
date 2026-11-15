@@ -27,9 +27,12 @@ import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import app.sicktv.ui.theme.LiquidGlass
+import app.sicktv.ui.theme.GlassCard
+import app.sicktv.ui.theme.GlassBanner
+import app.sicktv.ui.theme.GlassButton
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
@@ -165,35 +168,30 @@ internal fun SystemWidget(s: Snapshot) = SystemWidget(s.storageUsedGb, s.storage
 @Composable
 internal fun SystemWidget(usedGb: Double?, totalGb: Double?, live: Snapshot?, asOf: String? = null) {
     val dash = "\u2014"
-    Card(
-        Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-        border = LiquidGlass.borderStroke(),
-    ) {
-        Column(Modifier.padding(16.dp)) {
-            if (asOf != null) {
-                Text(stringResource(R.string.device_as_of, asOf), Modifier.padding(bottom = 8.dp), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-            val used = usedGb
-            val total = totalGb?.takeIf { it > 0 }
-            if (used != null && total != null) {
-                Row {
-                    Text(stringResource(R.string.device_internal_storage), Modifier.weight(1f), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text(stringResource(R.string.device_gb_used, Copy.gbOf(used, total).resolve()), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                }
-                Copy.free(used, total)?.let { Text(it.resolve(), style = MaterialTheme.typography.titleLarge) }
-                val full = used / total
-                LinearProgressIndicator(
-                    progress = { full.toFloat().coerceIn(0f, 1f) },
-                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 16.dp).height(8.dp),
-                    color = if (full >= Copy.FULL) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
-                )
-            }
+    GlassCard(Modifier.fillMaxWidth()) {
+        if (asOf != null) {
+            Text(stringResource(R.string.device_as_of, asOf), Modifier.padding(bottom = 8.dp), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        val used = usedGb
+        val total = totalGb?.takeIf { it > 0 }
+        if (used != null && total != null) {
             Row {
-                Vital(stringResource(R.string.device_cpu), live?.let { stringResource(R.string.device_percent, it.cpuPercent) } ?: dash, Modifier.weight(1f))
-                Vital(stringResource(R.string.device_ram), live?.takeIf { it.ramTotalMb > 0 }?.let { stringResource(R.string.device_percent, it.ramUsedMb * 100 / it.ramTotalMb) } ?: dash, Modifier.weight(1f), Alignment.CenterHorizontally)
-                Vital(stringResource(R.string.device_network), live?.netBytesPerSec?.let { Copy.speed(it).resolve() } ?: dash, Modifier.weight(1f), Alignment.End)
+                Text(stringResource(R.string.device_internal_storage), Modifier.weight(1f), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(stringResource(R.string.device_gb_used, Copy.gbOf(used, total).resolve()), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
+            Copy.free(used, total)?.let { Text(it.resolve(), style = MaterialTheme.typography.titleLarge) }
+            val full = used / total
+            LinearProgressIndicator(
+                progress = { full.toFloat().coerceIn(0f, 1f) },
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 16.dp).height(8.dp),
+                color = if (full >= Copy.FULL) MaterialTheme.colorScheme.error else LiquidGlass.NeonCyan,
+                trackColor = Color(0x1FFFFFFF),
+            )
+        }
+        Row {
+            Vital(stringResource(R.string.device_cpu), live?.let { stringResource(R.string.device_percent, it.cpuPercent) } ?: dash, Modifier.weight(1f))
+            Vital(stringResource(R.string.device_ram), live?.takeIf { it.ramTotalMb > 0 }?.let { stringResource(R.string.device_percent, it.ramUsedMb * 100 / it.ramTotalMb) } ?: dash, Modifier.weight(1f), Alignment.CenterHorizontally)
+            Vital(stringResource(R.string.device_network), live?.netBytesPerSec?.let { Copy.speed(it).resolve() } ?: dash, Modifier.weight(1f), Alignment.End)
         }
     }
 }
@@ -295,22 +293,21 @@ internal fun StateDot(state: DeviceState) {
 /** The TV refused (revoked access, a reset, or Deny); retrying stopped so the prompt doesn't nag. */
 @Composable
 internal fun NotAllowedCard(onConnect: () -> Unit) {
-    Card(
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.errorContainer,
-            contentColor = MaterialTheme.colorScheme.onErrorContainer,
-        ),
+    GlassCard(
+        modifier = Modifier.fillMaxWidth(),
+        border = BorderStroke(1.dp, Brush.verticalGradient(listOf(Color(0xFFFF6B6B), Color(0x40FF6B6B)))),
     ) {
-        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             CardTitle(Icons.Default.Warning, stringResource(R.string.device_not_allowed_title))
             Text(
                 stringResource(R.string.device_not_allowed_text),
                 style = MaterialTheme.typography.bodyMedium,
             )
-            Button(onClick = onConnect) { Text(stringResource(R.string.device_connect_again)) }
+            GlassButton(primary = true, onClick = onConnect) { Text(stringResource(R.string.device_connect_again)) }
             Text(
                 stringResource(R.string.device_not_allowed_hint),
                 style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
     }
@@ -319,7 +316,7 @@ internal fun NotAllowedCard(onConnect: () -> Unit) {
 @Composable
 private fun CardTitle(icon: androidx.compose.ui.graphics.vector.ImageVector, text: String) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Icon(icon, contentDescription = null, Modifier.size(20.dp))
+        Icon(icon, contentDescription = null, Modifier.size(20.dp), tint = LiquidGlass.NeonCyan)
         Spacer(Modifier.width(8.dp))
         Text(text, style = MaterialTheme.typography.titleSmall)
     }
@@ -327,26 +324,17 @@ private fun CardTitle(icon: androidx.compose.ui.graphics.vector.ImageVector, tex
 
 @Composable
 internal fun OfflineCard(device: Device, now: Long, offWifi: Boolean, onReconnect: () -> Unit) {
-    // Material 3 has no warning role; tertiary is the standard stand-in, kept apart from error.
-    Card(
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
-        ),
-    ) {
-        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                CardTitle(Icons.Default.Info, if (offWifi) Copy.PHONE_OFF_WIFI.resolve() else stringResource(R.string.device_offline))
-                Text(
-                    if (offWifi) Copy.OFF_WIFI_LINE.resolve()
-                    else stringResource(R.string.device_offline_text, device.lastSeen?.let { Copy.ago(it, now).resolve() } ?: stringResource(R.string.device_a_while_ago)),
-                    style = MaterialTheme.typography.bodyMedium,
-                )
+    GlassBanner(
+        icon = { Icon(Icons.Default.Info, contentDescription = null, Modifier.size(20.dp), tint = LiquidGlass.NeonCyan) },
+        title = if (offWifi) Copy.PHONE_OFF_WIFI.resolve() else stringResource(R.string.device_offline),
+        message = if (offWifi) Copy.OFF_WIFI_LINE.resolve()
+        else stringResource(R.string.device_offline_text, device.lastSeen?.let { Copy.ago(it, now).resolve() } ?: stringResource(R.string.device_a_while_ago)),
+        action = {
+            GlassButton(primary = true, onClick = onReconnect) {
+                Text(stringResource(R.string.device_reconnect))
             }
-            Spacer(Modifier.width(12.dp))
-            FilledTonalButton(onClick = onReconnect) { Text(stringResource(R.string.device_reconnect)) }
-        }
-    }
+        },
+    )
 }
 
 /** App names by memory use, largest first, for the health line. */

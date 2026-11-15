@@ -21,9 +21,9 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import app.sicktv.ui.theme.GlassCard
+import app.sicktv.ui.theme.GlassButton
+import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
@@ -124,19 +124,17 @@ internal fun HistoryList(
     }
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
         if (off > 0) {
-            Card(
-                Modifier.fillMaxWidth().padding(bottom = 14.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-                shape = MaterialTheme.shapes.large,
+            GlassCard(
+                modifier = Modifier.fillMaxWidth().padding(bottom = 14.dp),
             ) {
-                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(Copy.putBackTitle(off).resolve(), style = MaterialTheme.typography.titleSmall)
                     Text(Copy.PUT_BACK_TEXT.resolve(), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     for (line in Copy.restoreLines(restore)) Text(line.resolve(), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Spacer(Modifier.size(8.dp))
-                    FilledTonalButton(onClick = { confirming = true }, enabled = !busy) {
+                    GlassButton(primary = true, onClick = { confirming = true }, enabled = !busy) {
                         if (restoring) {
-                            CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp, color = Color(0xFF0B1018))
                             Spacer(Modifier.width(8.dp))
                             Text(stringResource(R.string.history_restoring))
                         } else {

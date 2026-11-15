@@ -18,9 +18,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FilledTonalButton
+import app.sicktv.ui.theme.GlassCard
+import app.sicktv.ui.theme.GlassButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,6 +31,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
@@ -89,27 +89,22 @@ fun HomeNoteCard(
     modifier: Modifier = Modifier,
 ) {
     val c = MaterialTheme.colorScheme
-    Card(
-        colors = CardDefaults.cardColors(containerColor = c.surfaceContainer),
-        shape = MaterialTheme.shapes.large,
-        border = LiquidGlass.borderStroke(),
+    GlassCard(
         modifier = modifier.fillMaxWidth(),
     ) {
-        Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 12.dp)) {
-            Row {
-                Box(Modifier.size(40.dp).background(c.tertiaryContainer, CircleShape), contentAlignment = Alignment.Center) {
-                    Icon(icon, contentDescription = null, tint = c.onTertiaryContainer, modifier = Modifier.size(24.dp))
-                }
-                Spacer(Modifier.width(16.dp))
-                Column(Modifier.weight(1f)) {
-                    Text(title, style = MaterialTheme.typography.titleMedium)
-                    Text(text, style = MaterialTheme.typography.bodyMedium, color = c.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp))
-                }
+        Row {
+            Box(Modifier.size(40.dp).background(Color(0x2400E5FF), CircleShape), contentAlignment = Alignment.Center) {
+                Icon(icon, contentDescription = null, tint = LiquidGlass.NeonCyan, modifier = Modifier.size(24.dp))
             }
-            Row(Modifier.fillMaxWidth().padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)) {
-                TextButton(onClick = onDismiss) { Text(dismissLabel) }
-                FilledTonalButton(onClick = onAction) { Text(actionLabel) }
+            Spacer(Modifier.width(16.dp))
+            Column(Modifier.weight(1f)) {
+                Text(title, style = MaterialTheme.typography.titleMedium)
+                Text(text, style = MaterialTheme.typography.bodyMedium, color = c.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp))
             }
+        }
+        Row(Modifier.fillMaxWidth().padding(top = 12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)) {
+            TextButton(onClick = onDismiss) { Text(dismissLabel) }
+            GlassButton(primary = true, onClick = onAction) { Text(actionLabel) }
         }
     }
 }

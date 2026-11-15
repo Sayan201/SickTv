@@ -139,9 +139,9 @@ internal fun Cookie(device: Device, size: Dp) {
             .clip(shape)
             .background(
                 brush = if (on) Brush.verticalGradient(
-                    listOf(Color(0xFF1B2638), Color(0xFF101724))
+                    listOf(Color(0xFF222228), Color(0xFF121215))
                 ) else Brush.verticalGradient(
-                    listOf(Color(0xFF161F2C), Color(0xFF0F1520))
+                    listOf(Color(0xFF18181C), Color(0xFF0C0C0E))
                 ),
                 shape = shape,
             )
