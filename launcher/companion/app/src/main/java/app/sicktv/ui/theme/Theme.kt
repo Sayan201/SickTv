@@ -115,10 +115,10 @@ private val DarkBrand = darkColorScheme(
     secondaryFixedDim = Color(0xFF90CEE2),
     onSecondaryFixed = Color(0xFF001F26),
     onSecondaryFixedVariant = Color(0xFF1A3844),
-    tertiaryFixed = Color(0xFFE4DFFF),
-    tertiaryFixedDim = Color(0xFF8C7CFF),
-    onTertiaryFixed = Color(0xFF180054),
-    onTertiaryFixedVariant = Color(0xFF3A287E),
+    tertiaryFixed = Color(0xFF80F2FF),
+    tertiaryFixedDim = Color(0xFF00E5FF),
+    onTertiaryFixed = Color(0xFF002025),
+    onTertiaryFixedVariant = Color(0xFF004F58),
 )
 
 /** Numbers come first: the app font with tabular figures, so values line up and don't jitter as they update. */

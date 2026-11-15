@@ -248,7 +248,7 @@ fun GlassCard(
     onClick: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val clickableModifier = if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier
+    val clickableModifier = if (onClick != null) Modifier.clickable { onClick() } else Modifier
     Box(
         modifier = modifier
             .clip(shape)
