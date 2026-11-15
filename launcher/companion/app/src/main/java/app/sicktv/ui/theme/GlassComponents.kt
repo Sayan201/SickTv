@@ -48,10 +48,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
@@ -654,11 +658,11 @@ fun GlassDock(
     itemCount: Int = 5,
     content: @Composable RowScope.() -> Unit,
 ) {
-    var widthPx by remember { androidx.compose.runtime.mutableIntStateOf(0) }
+    var widthPx by remember { mutableIntStateOf(0) }
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .androidx.compose.ui.layout.onSizeChanged { widthPx = it.width }
+            .onSizeChanged { widthPx = it.width }
             .background(LiquidGlass.DockBackgroundBrush, shape)
             .border(LiquidGlass.borderStroke(1.dp), shape)
             .navigationBarsPadding(),
@@ -667,8 +671,8 @@ fun GlassDock(
             val slotWidth = widthPx.toFloat() / itemCount
             Box(
                 modifier = Modifier
-                    .offset { androidx.compose.ui.unit.IntOffset((indicatorIndex * slotWidth).toInt(), 0) }
-                    .width(with(androidx.compose.ui.platform.LocalDensity.current) { slotWidth.toDp() })
+                    .offset { IntOffset((indicatorIndex * slotWidth).toInt(), 0) }
+                    .width(with(LocalDensity.current) { slotWidth.toDp() })
                     .height(68.dp)
                     .padding(horizontal = 4.dp, vertical = 6.dp)
                     .clip(RoundedCornerShape(16.dp))
