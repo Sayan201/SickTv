@@ -34,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.sicktv.R
+import app.sicktv.ui.theme.LiquidGlass
 import app.sicktv.ui.theme.SmallNumber
 
 /**
@@ -74,6 +75,7 @@ fun WelcomeScreen(askLocalNetwork: Boolean, onContinue: () -> Unit, onSkip: () -
             Card(
                 Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
+                border = LiquidGlass.borderStroke(),
             ) {
                 Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     steps.forEachIndexed { i, step ->

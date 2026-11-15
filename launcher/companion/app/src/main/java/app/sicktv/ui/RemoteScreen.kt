@@ -173,6 +173,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import app.sicktv.data.Device
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import app.sicktv.R
@@ -477,7 +478,12 @@ private fun StateLine(what: String, then: String) {
 private fun DPad(enabled: Boolean, press: suspend (RemoteKey) -> Boolean, size: Dp = DPAD_MAX) {
     // Every part keeps its share of the full-size pad, so a smaller pad is the same pad, scaled.
     val scale = size / DPAD_MAX
-    Surface(Modifier.size(size), shape = CircleShape, color = MaterialTheme.colorScheme.surfaceContainerHigh) {
+    Surface(
+        Modifier.size(size),
+        shape = CircleShape,
+        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        border = LiquidGlass.borderStroke(1.dp, Color(0x38FFFFFF), Color(0x10FFFFFF)),
+    ) {
         Box {
             val arrow = Modifier.size(80.dp * scale)
             val glyph = Modifier.size(40.dp * scale)
@@ -496,7 +502,10 @@ private fun DPad(enabled: Boolean, press: suspend (RemoteKey) -> Boolean, size: 
             }
             KeySurface(
                 RemoteKey.OK, stringResource(R.string.remote_ok), enabled, press, CircleShape, MaterialTheme.colorScheme.primary,
-                Modifier.size(112.dp * scale).align(Alignment.Center),
+                Modifier
+                    .size(112.dp * scale)
+                    .align(Alignment.Center)
+                    .border(LiquidGlass.borderStroke(1.dp, Color(0x80FFFFFF), Color(0x20FFFFFF)), CircleShape),
             ) {}
         }
     }
@@ -512,7 +521,12 @@ private fun RoundKey(
     modifier: Modifier = Modifier,
     size: Dp = 64.dp,
     icon: @Composable () -> Unit,
-) = KeySurface(key, label, enabled, press, CircleShape, MaterialTheme.colorScheme.secondaryContainer, modifier.size(size), icon)
+) = KeySurface(
+    key, label, enabled, press, CircleShape,
+    MaterialTheme.colorScheme.secondaryContainer,
+    modifier.size(size).border(LiquidGlass.borderStroke(1.dp, Color(0x28FFFFFF), Color(0x0AFFFFFF)), CircleShape),
+    icon,
+)
 
 /** Off in Settings, a key press or a button tap doesn't vibrate. */
 private val LocalKeyHaptics = staticCompositionLocalOf { true }
@@ -689,6 +703,7 @@ private fun Touchpad(enabled: Boolean, press: suspend (RemoteKey) -> Boolean, mo
     Surface(
         shape = RoundedCornerShape(28.dp),
         color = c.surfaceContainerHigh,
+        border = LiquidGlass.borderStroke(1.dp, Color(0x38FFFFFF), Color(0x10FFFFFF)),
         modifier = modifier.pointerInput(enabled, haptics) {
             if (!enabled) return@pointerInput
             val swipe = SWIPE.toPx()

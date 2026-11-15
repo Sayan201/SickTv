@@ -14,6 +14,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
@@ -1028,9 +1029,9 @@ internal fun InstalledChip(home: Boolean) {
     val c = MaterialTheme.colorScheme
     Surface(
         shape = RoundedCornerShape(8.dp),
-        color = if (home) c.tertiary else Color.Transparent,
+        color = if (home) c.tertiary.copy(alpha = 0.85f) else Color(0x14FFFFFF),
         contentColor = if (home) c.onTertiary else c.onSurfaceVariant,
-        border = if (home) null else BorderStroke(1.dp, c.outline),
+        border = if (home) BorderStroke(1.dp, Color(0x608C7CFF)) else LiquidGlass.borderStroke(1.dp, Color(0x38FFFFFF), Color(0x10FFFFFF)),
     ) {
         Row(Modifier.height(24.dp).padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(if (home) Icons.Outlined.Home else Icons.Default.Check, null, Modifier.size(14.dp))

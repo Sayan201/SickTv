@@ -29,6 +29,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -126,7 +127,10 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             item {
-                Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)) {
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+                    border = LiquidGlass.borderStroke(),
+                ) {
                     if (checkUpdates != null) Row(
                         Modifier.fillMaxWidth()
                             .toggleable(checkUpdates, role = Role.Switch, onValueChange = onCheckUpdates)
@@ -204,7 +208,10 @@ fun SettingsScreen(
                 }
             }
             if (advanced) item {
-                Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)) {
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+                    border = LiquidGlass.borderStroke(),
+                ) {
                     ListsFrom(listSource, onOpen = { open(CLEANYOURTV) })
                     HorizontalDivider(color = MaterialTheme.colorScheme.surface)
                     Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {

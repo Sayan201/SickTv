@@ -3,6 +3,7 @@
 package app.sicktv.ui
 
 import androidx.compose.foundation.background
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -91,6 +92,7 @@ fun HomeNoteCard(
     Card(
         colors = CardDefaults.cardColors(containerColor = c.surfaceContainer),
         shape = MaterialTheme.shapes.large,
+        border = LiquidGlass.borderStroke(),
         modifier = modifier.fillMaxWidth(),
     ) {
         Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 12.dp)) {

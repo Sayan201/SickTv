@@ -8,7 +8,9 @@ import androidx.activity.compose.BackHandler
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -277,7 +279,11 @@ fun DeviceTabsScreen(
                 // The Remote sits in the middle of the bar on every tab: an action, never a selected tab. Its round
                 // button sits in a notch cut into the bar's top edge, and is the same action as the label slot under it.
                 // The bar's own container is clear, so the notched shape behind it is what shows.
-                Box(Modifier.background(MaterialTheme.colorScheme.surfaceContainerHigh, NotchedBarShape)) {
+                Box(
+                    Modifier
+                        .background(LiquidGlass.DockBackgroundBrush, NotchedBarShape)
+                        .border(LiquidGlass.borderStroke(1.dp), NotchedBarShape)
+                ) {
                     ShortNavigationBar(containerColor = Color.Transparent) {
                         TvTab.entries.forEach { t ->
                             if (t == TvTab.Files) ShortNavigationBarItem(
@@ -474,6 +480,7 @@ private fun Panel(title: String, body: @Composable () -> Unit) {
     Card(
         Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+        border = LiquidGlass.borderStroke(),
     ) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 4.dp))
@@ -617,7 +624,14 @@ internal fun MenuBlock(items: @Composable () -> Unit) {
 /** "Search apps" under the Apps buttons, pinned with them; a tap opens the search at the top. */
 @Composable
 private fun SearchPill(enabled: Boolean, onClick: () -> Unit) {
-    Surface(onClick = onClick, enabled = enabled, shape = CircleShape, color = MaterialTheme.colorScheme.surfaceContainerHigh, modifier = Modifier.fillMaxWidth()) {
+    Surface(
+        onClick = onClick,
+        enabled = enabled,
+        shape = CircleShape,
+        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        border = LiquidGlass.borderStroke(1.dp, Color(0x28FFFFFF), Color(0x0AFFFFFF)),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
         Row(Modifier.padding(horizontal = 16.dp, vertical = 14.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Default.Search, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.width(16.dp))
@@ -771,11 +785,19 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
         Surface(
             onClick = onClick,
             enabled = enabled,
-            modifier = Modifier.size(RemoteSize),
+            modifier = Modifier
+                .size(RemoteSize)
+                .then(
+                    if (enabled) {
+                        Modifier
+                            .background(LiquidGlass.RemoteLensBrush, CircleShape)
+                            .border(LiquidGlass.borderStroke(1.5.dp, Color(0x80FFFFFF), Color(0x30FFFFFF)), CircleShape)
+                    } else Modifier
+                ),
             shape = CircleShape,
-            color = if (enabled) c.primary else c.onSurface.copy(alpha = 0.12f).compositeOver(c.surfaceContainerHigh),
-            contentColor = if (enabled) c.onPrimary else c.onSurface.copy(alpha = 0.38f),
-            shadowElevation = if (enabled) 6.dp else 0.dp,
+            color = if (enabled) Color.Transparent else c.onSurface.copy(alpha = 0.12f).compositeOver(c.surfaceContainerHigh),
+            contentColor = if (enabled) Color(0xFF002B33) else c.onSurface.copy(alpha = 0.38f),
+            shadowElevation = if (enabled) 8.dp else 0.dp,
         ) {
             Box(contentAlignment = Alignment.Center) { Icon(TileIcons.Remote, null, Modifier.size(26.dp)) }
         }
@@ -789,7 +811,11 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
 @Composable
 private fun SuggestedCard(lists: Suggestions?, d: DebloatState, offline: Boolean, onChanges: () -> Unit) {
     val c = MaterialTheme.colorScheme
-    Card(colors = CardDefaults.cardColors(containerColor = c.surfaceContainerLow), shape = MaterialTheme.shapes.large) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = c.surfaceContainerLow),
+        shape = MaterialTheme.shapes.large,
+        border = LiquidGlass.borderStroke(),
+    ) {
         Column(Modifier.padding(start = 16.dp, end = 8.dp, top = 8.dp, bottom = 12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
@@ -840,7 +866,11 @@ private fun SuggestedCard(lists: Suggestions?, d: DebloatState, offline: Boolean
 @Composable
 private fun AndroidCard(state: UiState, snap: Snapshot?, offline: Boolean, onUpdates: () -> Unit) {
     val device = state.selected ?: return
-    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow), shape = MaterialTheme.shapes.large) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+        shape = MaterialTheme.shapes.large,
+        border = LiquidGlass.borderStroke(),
+    ) {
         StatusRow(
             Icons.Default.Info,
             device.fireOs?.let { stringResource(R.string.tabs_fire_os_version, it) }
@@ -856,7 +886,11 @@ private fun AndroidCard(state: UiState, snap: Snapshot?, offline: Boolean, onUpd
 @Composable
 private fun StoreCard(store: AppInfo, offline: Boolean, locked: Boolean, actions: DeviceActions) {
     val name = stringResource(if (store.packageName == AMAZON_APPSTORE) R.string.tabs_store_amazon else R.string.tabs_store_play)
-    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow), shape = MaterialTheme.shapes.large) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+        shape = MaterialTheme.shapes.large,
+        border = LiquidGlass.borderStroke(),
+    ) {
         if (store.enabled) {
             StatusRow(TileIcons.Store, name, stringResource(R.string.tabs_store_sub), Copy.button(Action.Open).resolve(), !offline && !locked) {
                 actions.openStore(store.packageName, name)
