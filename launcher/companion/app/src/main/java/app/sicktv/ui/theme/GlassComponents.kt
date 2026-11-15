@@ -67,6 +67,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -649,23 +650,38 @@ fun GlassBanner(
 
 /**
  * Custom Liquid Glass floating bottom dock container with animated sliding indicator.
+ * Implements the authentic Zangetsu floating capsule design system.
  */
 @Composable
 fun GlassDock(
-    shape: Shape,
+    shape: Shape = CircleShape,
     modifier: Modifier = Modifier,
     indicatorIndex: Float? = null,
-    itemCount: Int = 5,
+    itemCount: Int = 4,
     content: @Composable RowScope.() -> Unit,
 ) {
     var widthPx by remember { mutableIntStateOf(0) }
     Box(
         modifier = modifier
-            .fillMaxWidth()
+            .height(60.dp)
             .onSizeChanged { widthPx = it.width }
+            .shadow(
+                elevation = 16.dp,
+                shape = shape,
+                spotColor = Color(0x66000000),
+                ambientColor = Color(0x33000000),
+            )
+            .clip(shape)
             .background(LiquidGlass.DockBackgroundBrush, shape)
-            .border(LiquidGlass.borderStroke(1.dp), shape)
-            .navigationBarsPadding(),
+            .border(
+                BorderStroke(
+                    1.dp,
+                    Brush.verticalGradient(
+                        listOf(Color(0x38FFFFFF), Color(0x0CFFFFFF)),
+                    ),
+                ),
+                shape,
+            ),
     ) {
         if (indicatorIndex != null && widthPx > 0 && itemCount > 0) {
             val slotWidth = widthPx.toFloat() / itemCount
@@ -673,25 +689,39 @@ fun GlassDock(
                 modifier = Modifier
                     .offset { IntOffset((indicatorIndex * slotWidth).toInt(), 0) }
                     .width(with(LocalDensity.current) { slotWidth.toDp() })
-                    .height(68.dp)
-                    .padding(horizontal = 4.dp, vertical = 6.dp)
-                    .clip(RoundedCornerShape(16.dp))
+                    .fillMaxHeight()
+                    .padding(horizontal = 4.dp, vertical = 4.dp)
+                    .shadow(
+                        elevation = 12.dp,
+                        shape = CircleShape,
+                        spotColor = Color(0xFFFF2A42),
+                        ambientColor = Color(0xFFFF2A42),
+                    )
+                    .clip(CircleShape)
                     .background(
                         brush = Brush.verticalGradient(
-                            listOf(Color(0xFF2E0910), Color(0xFF160407)),
+                            listOf(
+                                Color(0xFFFF243C),
+                                Color(0xFFD60018),
+                                Color(0xFF8A000F),
+                            ),
                         ),
                     )
                     .border(
-                        BorderStroke(1.dp, Brush.verticalGradient(listOf(Color(0x99FF2A42), Color(0x20FF2A42)))),
-                        RoundedCornerShape(16.dp),
+                        BorderStroke(
+                            1.dp,
+                            Brush.verticalGradient(
+                                listOf(Color(0x80FFFFFF), Color(0x33FF2A42)),
+                            ),
+                        ),
+                        CircleShape,
                     ),
             )
         }
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(68.dp)
-                .padding(horizontal = 4.dp, vertical = 6.dp),
+                .fillMaxSize()
+                .padding(horizontal = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround,
             content = content,
@@ -701,6 +731,8 @@ fun GlassDock(
 
 /**
  * Single navigation item inside the [GlassDock] with fluid indicator animation.
+ * Follows the Zangetsu styling: pure white icon and text when selected over the red pill,
+ * and muted smoked white when unselected.
  */
 @Composable
 fun RowScope.GlassDockItem(
@@ -711,15 +743,14 @@ fun RowScope.GlassDockItem(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
-    val selectedColor = LiquidGlass.NeonCrimson
-    val unselectedColor = Color(0x8AFFFFFF)
-    val contentColor = if (selected) selectedColor else unselectedColor
+    val contentColor = if (selected) Color.White else Color(0x99FFFFFF)
+    val labelColor = if (selected) Color.White else Color(0x80FFFFFF)
 
     Column(
         modifier = modifier
             .weight(1f)
             .fillMaxHeight()
-            .clip(RoundedCornerShape(12.dp))
+            .clip(CircleShape)
             .clickable(
                 enabled = enabled,
                 onClick = onClick,
@@ -728,28 +759,19 @@ fun RowScope.GlassDockItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Box(
-            modifier = Modifier
-                .size(width = 44.dp, height = 26.dp)
-                .background(
-                    color = if (selected) Color(0x28FF2A42) else Color.Transparent,
-                    shape = CircleShape,
-                ),
-            contentAlignment = Alignment.Center,
-        ) {
-            CompositionLocalProvider(LocalContentColor provides contentColor) {
-                icon()
-            }
+        CompositionLocalProvider(LocalContentColor provides contentColor) {
+            icon()
         }
         Spacer(Modifier.height(2.dp))
         Text(
             text = label,
             style = MaterialTheme.typography.labelSmall.copy(
-                fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
+                fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
                 fontSize = 11.sp,
             ),
-            color = contentColor,
+            color = labelColor,
             maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
     }
 }

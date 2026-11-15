@@ -77,22 +77,24 @@ object LiquidGlass {
     /**
      * Liquid lens brush for the floating remote button: glowing deep crimson with specular highlight.
      */
-    val RemoteLensBrush = Brush.verticalGradient(
+    val RemoteLensBrush = Brush.radialGradient(
         colors = listOf(
-            Color(0xFF38080E),
-            Color(0xFF220408),
-            Color(0xFF140205),
+            Color(0xFFFF334C),
+            Color(0xFFE0001B),
+            Color(0xFF88000E),
+            Color(0xFF4A0007),
         ),
+        radius = 110f,
     )
 
     /**
-     * Dock background brush: subtle specular sheen at the upper edge tapering into obsidian acrylic.
+     * Dock background brush: translucent smoked obsidian acrylic glass with specular top reflection.
      */
     val DockBackgroundBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xF5141418),
-            Color(0xFA0E0E12),
-            Color(0xFF000000),
+            Color(0xDD18181E),
+            Color(0xF0101014),
+            Color(0xF80A0A0D),
         ),
     )
 

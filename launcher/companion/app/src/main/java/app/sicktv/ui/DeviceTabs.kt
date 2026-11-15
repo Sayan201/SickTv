@@ -93,6 +93,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Offset
@@ -282,14 +283,13 @@ fun DeviceTabsScreen(
                 }
             },
             bottomBar = {
-                // The Remote sits in the middle of the bar on every tab: an action, never a selected tab. Its round
-                // button sits in a notch cut into the bar's top edge, and is the same action as the label slot under it.
-                // The active tab indicator smoothly glides horizontally between tabs with spring physics.
+                // The floating Zangetsu dock capsule (Overview, Apps, Files, Tweaks)
+                // paired with the standalone floating 3D Ruby Remote Orb on the right.
                 val targetTabIdx = when (tab) {
                     TvTab.Overview -> 0
                     TvTab.Apps -> 1
-                    TvTab.Files -> 3
-                    TvTab.Tweaks -> 4
+                    TvTab.Files -> 2
+                    TvTab.Tweaks -> 3
                 }
                 val animatedTabIdx by androidx.compose.animation.core.animateFloatAsState(
                     targetValue = targetTabIdx.toFloat(),
@@ -299,19 +299,20 @@ fun DeviceTabsScreen(
                     ),
                     label = "tabGlide",
                 )
-                Box {
-                    GlassDock(shape = NotchedBarShape, indicatorIndex = animatedTabIdx, itemCount = 5) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .navigationBarsPadding()
+                        .padding(start = 14.dp, end = 14.dp, bottom = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    GlassDock(
+                        shape = CircleShape,
+                        indicatorIndex = animatedTabIdx,
+                        itemCount = 4,
+                        modifier = Modifier.weight(1f),
+                    ) {
                         TvTab.entries.forEach { t ->
-                            if (t == TvTab.Files) {
-                                GlassDockItem(
-                                    selected = false,
-                                    onClick = actions.remote,
-                                    icon = { Spacer(Modifier.size(24.dp)) },
-                                    label = stringResource(R.string.tabs_remote),
-                                    enabled = !offline,
-                                    modifier = Modifier.testTag("barRemote"),
-                                )
-                            }
                             GlassDockItem(
                                 selected = tab == t,
                                 onClick = {
@@ -324,7 +325,12 @@ fun DeviceTabsScreen(
                             )
                         }
                     }
-                    RemoteButton(enabled = !offline, onClick = actions.remote, modifier = Modifier.align(Alignment.TopCenter))
+                    Spacer(Modifier.width(10.dp))
+                    RemoteButton(
+                        enabled = !offline,
+                        onClick = actions.remote,
+                        modifier = Modifier.testTag("barRemote"),
+                    )
                 }
             },
         ) { pad ->
@@ -786,87 +792,78 @@ internal fun offerLauncherCard(ui: DeviceUi, debloat: DebloatState, fire: Boolea
         else -> false
     } && offerLauncher(ui.apps, ui.launcherCardHidden, fire)
 
-/** The Remote's round button, centred on the bottom bar's top edge, so it rises by half its size. */
-private val RemoteSize = 60.dp
-private val RemoteRise = RemoteSize / 2
-
 /**
- * The bottom bar with a round notch cut into the middle of its top edge for the Remote's button: 6dp wider than the
- * button all round, with the corners where it meets the edge rounded at 6dp.
+ * 3D Ruby Glass Remote Orb floating alongside the Zangetsu dock capsule.
+ * Styled after the circular volumetric crimson ruby orb from the Zangetsu design reference.
  */
-private val NotchedBarShape = object : Shape {
-    override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
-        val notch = with(density) { (RemoteRise + 6.dp).toPx() }
-        val fillet = with(density) { 6.dp.toPx() }
-        val cx = size.width / 2
-        // Each rounded corner is a circle touching the top edge and the notch's circle.
-        val dx = sqrt((notch + fillet) * (notch + fillet) - fillet * fillet)
-        val meet = Math.toDegrees(atan2(fillet, dx).toDouble()).toFloat()
-        val path = Path().apply {
-            moveTo(0f, 0f)
-            lineTo(cx - dx, 0f)
-            arcTo(Rect(Offset(cx - dx, fillet), fillet), -90f, 90f - meet, false)
-            arcTo(Rect(Offset(cx, 0f), notch), 180f - meet, -(180f - 2 * meet), false)
-            arcTo(Rect(Offset(cx + dx, fillet), fillet), -180f + meet, 90f - meet, false)
-            lineTo(size.width, 0f)
-            lineTo(size.width, size.height)
-            lineTo(0f, size.height)
-            close()
-        }
-        return Outline.Generic(path)
-    }
-}
-
-// The Remote's round button in the bar's notch. Offline it stays, greyed, so the bar doesn't shift; the grey is solid
-// (over the bar's surfaceContainerHigh), so the page under the notch doesn't show through it.
-// TalkBack reads the slot's label instead, so the button itself is left out.
 @Composable
 private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    val rubyBrush = Brush.radialGradient(
+        colors = listOf(
+            Color(0xFFFF334C),
+            Color(0xFFE0001B),
+            Color(0xFF88000E),
+            Color(0xFF4A0007),
+        ),
+        radius = 110f,
+    )
+    val disabledBrush = Brush.verticalGradient(
+        colors = listOf(Color(0xFF222228), Color(0xFF141418)),
+    )
+    val borderStroke = if (enabled) {
+        BorderStroke(
+            1.5.dp,
+            Brush.verticalGradient(
+                listOf(Color(0x99FFFFFF), Color(0x60FF2A42), Color(0x20FF2A42)),
+            ),
+        )
+    } else {
+        BorderStroke(1.dp, Color(0x1EFFFFFF))
+    }
+
     Box(
-        modifier
-            .offset(y = -RemoteRise)
-            .clearAndSetSemantics {},
+        modifier = modifier
+            .size(60.dp)
+            .then(
+                if (enabled) {
+                    Modifier.shadow(
+                        elevation = 14.dp,
+                        shape = CircleShape,
+                        spotColor = Color(0xFFFF2A42),
+                        ambientColor = Color(0xFFFF2A42),
+                    )
+                } else Modifier,
+            )
+            .clip(CircleShape)
+            .background(if (enabled) rubyBrush else disabledBrush, CircleShape)
+            .border(borderStroke, CircleShape)
+            .clickable(
+                enabled = enabled,
+                onClick = onClick,
+                onClickLabel = stringResource(R.string.tabs_remote),
+            ),
         contentAlignment = Alignment.Center,
     ) {
-        // Ambient crimson glow ring behind the button
         if (enabled) {
             Box(
                 Modifier
-                    .size(RemoteSize + 14.dp)
-                    .clip(CircleShape)
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.48f)
+                    .align(Alignment.TopCenter)
+                    .clip(RoundedCornerShape(topStartPercent = 100, topEndPercent = 100))
                     .background(
-                        Brush.radialGradient(
-                            listOf(Color(0x66FF2A42), Color.Transparent),
+                        Brush.verticalGradient(
+                            listOf(Color(0x50FFFFFF), Color(0x00FFFFFF)),
                         ),
                     ),
             )
         }
-        // Smoked acrylic backing disc filling the notch seamlessly
-        Box(
-            Modifier
-                .size(RemoteSize + 6.dp)
-                .background(Color(0xFF0E0E12), CircleShape)
-                .border(BorderStroke(1.dp, Color(0x20FFFFFF)), CircleShape),
+        Icon(
+            imageVector = TileIcons.Remote,
+            contentDescription = stringResource(R.string.tabs_remote),
+            modifier = Modifier.size(26.dp),
+            tint = if (enabled) Color.White else Color(0x55FFFFFF),
         )
-        Surface(
-            onClick = onClick,
-            enabled = enabled,
-            modifier = Modifier
-                .size(RemoteSize)
-                .then(
-                    if (enabled) {
-                        Modifier
-                            .background(LiquidGlass.RemoteLensBrush, CircleShape)
-                            .border(BorderStroke(1.5.dp, Brush.verticalGradient(listOf(Color(0xFFFF384E), Color(0x80FF2A42)))), CircleShape)
-                    } else Modifier
-                ),
-            shape = CircleShape,
-            color = if (enabled) Color.Transparent else Color(0xFF1E1E24),
-            contentColor = if (enabled) LiquidGlass.NeonCrimson else Color(0x60FFFFFF),
-            shadowElevation = if (enabled) 8.dp else 0.dp,
-        ) {
-            Box(contentAlignment = Alignment.Center) { Icon(TileIcons.Remote, null, Modifier.size(26.dp), tint = if (enabled) LiquidGlass.NeonCrimson else Color(0x60FFFFFF)) }
-        }
     }
 }
 
