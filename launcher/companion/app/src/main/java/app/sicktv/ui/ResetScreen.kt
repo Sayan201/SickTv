@@ -3,7 +3,10 @@
 package app.sicktv.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.RoundedCornerShape
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -310,12 +313,21 @@ private fun Result(plan: ResetPlan, failed: List<ResetFailure>) {
 @Composable
 internal fun ResultHead(ok: Boolean, title: String, text: String) {
     val c = MaterialTheme.colorScheme
+    val squircle = RoundedCornerShape(26.dp)
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Box(
-            Modifier.size(96.dp).clip(MaterialShapes.Cookie9Sided.toShape()).background(if (ok) c.primaryContainer else c.errorContainer),
+            Modifier.size(96.dp)
+                .clip(squircle)
+                .background(if (ok) Color(0x2800E5FF) else c.errorContainer)
+                .border(if (ok) LiquidGlass.activeBorderStroke(1.5.dp) else LiquidGlass.borderStroke(1.dp), squircle),
             contentAlignment = Alignment.Center,
         ) {
-            Icon(if (ok) Icons.Default.Check else Icons.Default.Warning, contentDescription = null, Modifier.size(44.dp), tint = if (ok) c.onPrimaryContainer else c.onErrorContainer)
+            Icon(
+                if (ok) Icons.Default.Check else Icons.Default.Warning,
+                contentDescription = null,
+                Modifier.size(44.dp),
+                tint = if (ok) LiquidGlass.NeonCyan else c.onErrorContainer,
+            )
         }
         Text(title, style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center, modifier = Modifier.padding(top = 24.dp))
         Text(

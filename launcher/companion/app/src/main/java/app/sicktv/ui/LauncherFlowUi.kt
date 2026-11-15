@@ -758,7 +758,14 @@ private fun SourceRow(source: String?, release: LauncherRelease?, onOpen: () -> 
 @Composable
 private fun WarningBadge() {
     val c = MaterialTheme.colorScheme
-    Box(Modifier.size(56.dp).clip(MaterialShapes.Cookie9Sided.toShape()).background(c.errorContainer), contentAlignment = Alignment.Center) {
+    val squircle = RoundedCornerShape(16.dp)
+    Box(
+        Modifier.size(56.dp)
+            .clip(squircle)
+            .background(c.errorContainer)
+            .border(LiquidGlass.borderStroke(1.dp), squircle),
+        contentAlignment = Alignment.Center,
+    ) {
         Icon(Icons.Default.Warning, null, Modifier.size(32.dp), tint = c.onErrorContainer)
     }
 }

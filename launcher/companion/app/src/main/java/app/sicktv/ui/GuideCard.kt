@@ -19,11 +19,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,6 +34,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -39,6 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import app.sicktv.R
+import app.sicktv.ui.theme.LiquidGlass
 
 /**
  * How to switch on debugging, per brand, because the menu names differ. [pair] is where the
@@ -115,11 +120,26 @@ fun BrandChips(brand: TvBrand, onPick: (TvBrand) -> Unit) {
         Text(stringResource(R.string.guide_pick_tv), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             brands.forEach { b ->
+                val isSelected = b == brand
                 FilterChip(
-                    selected = b == brand,
+                    selected = isSelected,
                     onClick = { onPick(b) },
                     label = { Text(stringResource(b.name)) },
-                    leadingIcon = if (b == brand) ({ Icon(Icons.Default.Check, null, Modifier.size(18.dp)) }) else null,
+                    leadingIcon = if (isSelected) ({ Icon(Icons.Default.Check, null, Modifier.size(18.dp)) }) else null,
+                    shape = RoundedCornerShape(12.dp),
+                    colors = FilterChipDefaults.filterChipColors(
+                        containerColor = Color(0x0CFFFFFF),
+                        labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        selectedContainerColor = Color(0x2400E5FF),
+                        selectedLabelColor = LiquidGlass.NeonCyan,
+                        selectedLeadingIconColor = LiquidGlass.NeonCyan,
+                    ),
+                    border = FilterChipDefaults.filterChipBorder(
+                        enabled = true,
+                        selected = isSelected,
+                        borderColor = Color(0x18FFFFFF),
+                        selectedBorderColor = LiquidGlass.NeonCyan.copy(alpha = 0.6f),
+                    ),
                 )
             }
         }
@@ -143,7 +163,10 @@ fun GuideSteps(brand: TvBrand, step: Int, onStep: (Int) -> Unit, findTvs: @Compo
             Row(Modifier.height(IntrinsicSize.Min)) {
                 Column(Modifier.width(32.dp).fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally) {
                     StepDot(i + 1, done = i < step, current = i == step)
-                    if (!last) Box(Modifier.padding(vertical = 4.dp).width(2.dp).weight(1f).background(MaterialTheme.colorScheme.outlineVariant))
+                    if (!last) {
+                        val lineColor = if (i < step) Color(0x3500E5FF) else Color(0x1AFFFFFF)
+                        Box(Modifier.padding(vertical = 4.dp).width(2.dp).weight(1f).background(lineColor, CircleShape))
+                    }
                 }
                 Column(
                     Modifier.padding(start = 16.dp, top = 4.dp, bottom = if (last) 8.dp else 24.dp).weight(1f),
@@ -160,8 +183,26 @@ fun GuideSteps(brand: TvBrand, step: Int, onStep: (Int) -> Unit, findTvs: @Compo
                         i == step -> {
                             Text(marked(body), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             Row(Modifier.padding(top = 12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Button(onClick = { onStep(i + 1) }) { Text(stringResource(R.string.guide_done_next)) }
-                                if (i > 0) TextButton(onClick = { onStep(i - 1) }) { Text(stringResource(R.string.guide_back)) }
+                                Button(
+                                    onClick = { onStep(i + 1) },
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color.White,
+                                        contentColor = Color(0xFF0B1018),
+                                    ),
+                                    shape = CircleShape,
+                                ) {
+                                    Text(stringResource(R.string.guide_done_next), fontWeight = FontWeight.SemiBold)
+                                }
+                                if (i > 0) {
+                                    TextButton(
+                                        onClick = { onStep(i - 1) },
+                                        colors = ButtonDefaults.textButtonColors(
+                                            contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        ),
+                                    ) {
+                                        Text(stringResource(R.string.guide_back))
+                                    }
+                                }
                             }
                         }
                     }
@@ -173,16 +214,36 @@ fun GuideSteps(brand: TvBrand, step: Int, onStep: (Int) -> Unit, findTvs: @Compo
 
 @Composable
 private fun StepDot(n: Int, done: Boolean, current: Boolean) {
-    val c = MaterialTheme.colorScheme
-    val filled = done || current
+    val background = when {
+        done -> Color(0x2800E5FF)
+        current -> Color(0x1F00E5FF)
+        else -> Color(0x0DFFFFFF)
+    }
+    val borderModifier = when {
+        done || current -> Modifier.border(LiquidGlass.activeBorderStroke(1.5.dp), CircleShape)
+        else -> Modifier.border(LiquidGlass.borderStroke(1.dp), CircleShape)
+    }
     Box(
         Modifier.size(32.dp)
-            .background(if (filled) c.primary else c.surface, CircleShape)
-            .border(2.dp, if (filled) c.primary else c.outlineVariant, CircleShape),
+            .background(background, CircleShape)
+            .then(borderModifier),
         contentAlignment = Alignment.Center,
     ) {
-        if (done) Icon(Icons.Default.Check, contentDescription = stringResource(R.string.guide_done), Modifier.size(18.dp), tint = c.onPrimary)
-        else Text("$n", style = MaterialTheme.typography.labelLarge, color = if (current) c.onPrimary else c.outline)
+        if (done) {
+            Icon(
+                Icons.Default.Check,
+                contentDescription = stringResource(R.string.guide_done),
+                modifier = Modifier.size(18.dp),
+                tint = LiquidGlass.NeonCyan,
+            )
+        } else {
+            Text(
+                "$n",
+                style = MaterialTheme.typography.labelLarge,
+                color = if (current) LiquidGlass.NeonCyan else MaterialTheme.colorScheme.outline,
+                fontWeight = if (current) FontWeight.Bold else FontWeight.Normal,
+            )
+        }
     }
 }
 
@@ -197,15 +258,37 @@ fun HelpDialog(brand: TvBrand, onAddByIp: () -> Unit, onDismiss: () -> Unit) {
     }
     AlertDialog(
         onDismissRequest = onDismiss,
+        shape = RoundedCornerShape(28.dp),
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+        modifier = Modifier.border(LiquidGlass.borderStroke(1.dp), RoundedCornerShape(28.dp)),
         title = { Text(stringResource(R.string.guide_help_title)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 tips.forEach { Text(stringResource(it), style = MaterialTheme.typography.bodyMedium) }
             }
         },
-        confirmButton = { Button(onClick = { onDismiss(); onAddByIp() }) { Text(stringResource(R.string.guide_add_by_ip)) } },
-        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.guide_close)) } },
-
+        confirmButton = {
+            Button(
+                onClick = { onDismiss(); onAddByIp() },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color(0xFF0B1018),
+                ),
+                shape = CircleShape,
+            ) {
+                Text(stringResource(R.string.guide_add_by_ip), fontWeight = FontWeight.SemiBold)
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = onDismiss,
+                colors = ButtonDefaults.textButtonColors(
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                ),
+            ) {
+                Text(stringResource(R.string.guide_close))
+            }
+        },
     )
 }
 

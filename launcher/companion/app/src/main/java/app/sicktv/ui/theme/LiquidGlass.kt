@@ -39,12 +39,12 @@ object LiquidGlass {
     val SmokedAcrylicHigh = Color(0xFF1E283A)
 
     /**
-     * Vertical hairline specular border: bright reflection on top, subtle transparency at bottom.
+     * Vertical hairline specular border: soft reflection on top, subtle transparency at bottom.
      */
     fun borderStroke(
         width: Dp = 1.dp,
-        topColor: Color = Color(0x38FFFFFF),
-        bottomColor: Color = Color(0x0EFFFFFF),
+        topColor: Color = Color(0x28FFFFFF),
+        bottomColor: Color = Color(0x0AFFFFFF),
     ): BorderStroke = BorderStroke(
         width = width,
         brush = Brush.verticalGradient(
@@ -60,7 +60,7 @@ object LiquidGlass {
     ): BorderStroke = BorderStroke(
         width = width,
         brush = Brush.verticalGradient(
-            colors = listOf(Color(0x8000E5FF), Color(0x2000E5FF)),
+            colors = listOf(Color(0xB300E5FF), Color(0x3300E5FF)),
         ),
     )
 
@@ -81,9 +81,9 @@ object LiquidGlass {
      */
     val RemoteLensBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xFF33ECFF),
-            Color(0xFF00E5FF),
-            Color(0xFF009AB0),
+            Color(0xFF38F0FF),
+            Color(0xFF00D5EC),
+            Color(0xFF008394),
         ),
     )
 
@@ -92,9 +92,29 @@ object LiquidGlass {
      */
     val DockBackgroundBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xFF1A2332),
-            Color(0xFF121924),
-            Color(0xFF0B1018),
+            Color(0xF0151C2A),
+            Color(0xF80E1320),
+            Color(0xFF090D16),
+        ),
+    )
+
+    /**
+     * Tile background brush for normal action tiles.
+     */
+    val TileGlassBrush = Brush.verticalGradient(
+        colors = listOf(
+            Color(0xFF182232),
+            Color(0xFF101724),
+        ),
+    )
+
+    /**
+     * Active tile brush: smoked acrylic with glowing cyan undertone.
+     */
+    val ActiveTileGlassBrush = Brush.verticalGradient(
+        colors = listOf(
+            Color(0xFF192A3E),
+            Color(0xFF101D2E),
         ),
     )
 

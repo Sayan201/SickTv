@@ -826,7 +826,14 @@ private fun RestartDialog(restart: Restart, now: Long, tvName: String, onHide: (
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun StatusShape(icon: ImageVector, container: Color, content: Color) {
-    Box(Modifier.size(56.dp).clip(MaterialShapes.Cookie9Sided.toShape()).background(container), contentAlignment = Alignment.Center) {
+    val squircle = RoundedCornerShape(16.dp)
+    Box(
+        Modifier.size(56.dp)
+            .clip(squircle)
+            .background(container)
+            .border(LiquidGlass.borderStroke(1.dp), squircle),
+        contentAlignment = Alignment.Center,
+    ) {
         Icon(icon, contentDescription = null, tint = content, modifier = Modifier.size(28.dp))
     }
 }

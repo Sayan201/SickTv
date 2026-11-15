@@ -4,7 +4,13 @@ package app.sicktv.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.text.font.FontWeight
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -374,11 +380,13 @@ private fun Modifier.treeLine(color: Color, last: Boolean = false, head: Boolean
 @Composable
 private fun HelpAddCard(onHelpAdd: () -> Unit) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+        border = LiquidGlass.borderStroke(1.dp),
         modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
     ) {
         Row(Modifier.padding(16.dp)) {
-            Icon(AddToQueue, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Icon(AddToQueue, contentDescription = null, tint = LiquidGlass.NeonCyan)
             Spacer(Modifier.width(16.dp))
             Column(Modifier.weight(1f)) {
                 Text(stringResource(R.string.lists_help_add_title), style = MaterialTheme.typography.titleSmall)
@@ -386,7 +394,17 @@ private fun HelpAddCard(onHelpAdd: () -> Unit) {
                     stringResource(R.string.lists_help_add_text),
                     style = MaterialTheme.typography.bodyMedium,
                 )
-                FilledTonalButton(onClick = onHelpAdd, modifier = Modifier.align(Alignment.End).padding(top = 8.dp)) { Text(stringResource(R.string.lists_help_add_button)) }
+                Button(
+                    onClick = onHelpAdd,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.White,
+                        contentColor = Color(0xFF0B1018),
+                    ),
+                    shape = CircleShape,
+                    modifier = Modifier.align(Alignment.End).padding(top = 8.dp),
+                ) {
+                    Text(stringResource(R.string.lists_help_add_button), fontWeight = FontWeight.SemiBold)
+                }
             }
         }
     }
@@ -398,19 +416,22 @@ private enum class Match { Exact, Loose, None }
 /** What the apps below came from, on top of the page, with the way out to every list. */
 @Composable
 private fun MatchCard(kind: DeviceKind, name: String, detail: String, match: Match, onNotThis: () -> Unit) {
-    val c = MaterialTheme.colorScheme
-    val (bg, fg) = when (match) {
-        Match.Exact -> c.secondaryContainer to c.onSecondaryContainer
-        Match.Loose -> c.tertiaryContainer to c.onTertiaryContainer
-        Match.None -> c.surfaceContainerHigh to c.onSurface
+    val border = when (match) {
+        Match.Exact -> LiquidGlass.activeBorderStroke(1.dp)
+        else -> LiquidGlass.borderStroke(1.dp)
     }
-    Surface(color = bg, contentColor = fg, shape = MaterialTheme.shapes.large, modifier = Modifier.fillMaxWidth()) {
+    Surface(
+        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        shape = RoundedCornerShape(16.dp),
+        border = border,
+        modifier = Modifier.fillMaxWidth(),
+    ) {
         Row(Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp, end = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(DeviceIcons.of(kind), contentDescription = kind.word())
+            Icon(DeviceIcons.of(kind), contentDescription = kind.word(), tint = if (match == Match.Exact) LiquidGlass.NeonCyan else MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.width(16.dp))
             Column(Modifier.weight(1f)) {
                 Text(name, style = MaterialTheme.typography.titleMedium)
-                Text(detail, style = MaterialTheme.typography.bodySmall)
+                Text(detail, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             TextButton(onClick = onNotThis) { Text(stringResource(R.string.lists_not_this_tv)) }
         }
@@ -421,6 +442,9 @@ private fun MatchCard(kind: DeviceKind, name: String, detail: String, match: Mat
 internal fun DisableDialog(apps: List<Suggested>, onDisable: () -> Unit, onDismiss: () -> Unit, enabled: Boolean = true) {
     AlertDialog(
         onDismissRequest = onDismiss,
+        shape = RoundedCornerShape(28.dp),
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+        modifier = Modifier.border(LiquidGlass.borderStroke(1.dp), RoundedCornerShape(28.dp)),
         title = { Text(pluralStringResource(R.plurals.lists_disable_apps_confirm, apps.size, apps.size)) },
         text = {
             // Every name, so a list can't slip something in behind a count.
@@ -436,7 +460,19 @@ internal fun DisableDialog(apps: List<Suggested>, onDisable: () -> Unit, onDismi
                 }
             }
         },
-        confirmButton = { Button(onClick = onDisable, enabled = enabled) { Text(stringResource(R.string.lists_disable_yes)) } },
+        confirmButton = {
+            Button(
+                onClick = onDisable,
+                enabled = enabled,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color(0xFF0B1018),
+                ),
+                shape = CircleShape,
+            ) {
+                Text(stringResource(R.string.lists_disable_yes), fontWeight = FontWeight.SemiBold)
+            }
+        },
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.lists_cancel)) } },
     )
 }

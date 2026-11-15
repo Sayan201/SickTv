@@ -6,6 +6,7 @@ package app.sicktv.ui
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,6 +39,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -246,6 +248,7 @@ fun ConnectedDevicesCard(peripherals: List<Peripheral>, startOpen: Boolean = fal
     Card(
         colors = CardDefaults.cardColors(containerColor = c.surfaceContainerLow),
         shape = MaterialTheme.shapes.large,
+        border = LiquidGlass.borderStroke(),
         modifier = Modifier.fillMaxWidth().animateContentSize().testTag("connectedDevices"),
     ) {
         Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp)) {
@@ -638,13 +641,25 @@ private fun Outcome(
         modifier.verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Box(Modifier.size(96.dp).clip(MaterialShapes.Cookie9Sided.toShape()).background(bg), contentAlignment = Alignment.Center) {
-            Icon(if (kind == Verdict.Done) AccessIcons.ShieldOk else AccessIcons.Shield, contentDescription = null, Modifier.size(44.dp), tint = fg)
+        val squircle = RoundedCornerShape(26.dp)
+        Box(
+            Modifier.size(96.dp)
+                .clip(squircle)
+                .background(if (kind == Verdict.Done) Color(0x2800E5FF) else Color(0x18FFFFFF))
+                .border(if (kind == Verdict.Done) LiquidGlass.activeBorderStroke(1.5.dp) else LiquidGlass.borderStroke(1.dp), squircle),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(if (kind == Verdict.Done) AccessIcons.ShieldOk else AccessIcons.Shield, contentDescription = null, Modifier.size(44.dp), tint = if (kind == Verdict.Done) LiquidGlass.NeonCyan else fg)
         }
         Text(title, style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center, modifier = Modifier.padding(top = 32.dp))
         Text(text, style = MaterialTheme.typography.bodyLarge, color = c.onSurfaceVariant, textAlign = TextAlign.Center, modifier = Modifier.padding(top = 12.dp))
         if (trust) {
-            Surface(shape = MaterialTheme.shapes.large, color = c.surfaceContainerHigh, modifier = Modifier.fillMaxWidth().padding(top = 24.dp)) {
+            Surface(
+                shape = RoundedCornerShape(16.dp),
+                color = MaterialTheme.colorScheme.surfaceContainerLow,
+                border = LiquidGlass.borderStroke(1.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
+            ) {
                 Row(Modifier.padding(16.dp)) {
                     Icon(AccessIcons.ShieldNote, contentDescription = null, tint = c.onSurfaceVariant)
                     Spacer(Modifier.width(16.dp))

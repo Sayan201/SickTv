@@ -17,7 +17,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CheckCircle
@@ -49,6 +53,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.GraphicsLayerScope
 import androidx.compose.ui.graphics.TransformOrigin
@@ -128,11 +133,31 @@ internal fun Cookie(device: Device, size: Dp) {
     val kind = deviceKind(device)
     val c = MaterialTheme.colorScheme
     val on = device.state == DeviceState.Online
+    val shape = RoundedCornerShape(size * 0.28f)
     Box(
-        Modifier.size(size).clip(MaterialShapes.Cookie9Sided.toShape()).background(if (on) c.primaryContainer else c.surfaceContainerHighest),
+        Modifier
+            .size(size)
+            .clip(shape)
+            .background(
+                brush = if (on) Brush.verticalGradient(
+                    listOf(Color(0xFF1B2638), Color(0xFF101724))
+                ) else Brush.verticalGradient(
+                    listOf(Color(0xFF161F2C), Color(0xFF0F1520))
+                ),
+                shape = shape,
+            )
+            .border(
+                if (on) LiquidGlass.activeBorderStroke(1.dp) else LiquidGlass.borderStroke(1.dp),
+                shape = shape,
+            ),
         contentAlignment = Alignment.Center,
     ) {
-        Icon(DeviceIcons.of(kind), contentDescription = kind.word(), Modifier.size(size / 2), tint = if (on) c.onPrimaryContainer else c.outline)
+        Icon(
+            DeviceIcons.of(kind),
+            contentDescription = kind.word(),
+            Modifier.size(size / 2),
+            tint = if (on) LiquidGlass.NeonCyan else c.outline,
+        )
     }
 }
 
@@ -169,10 +194,14 @@ fun TvHero(state: UiState, live: Snapshot?, actions: DeviceActions, chips: Boole
                 val made = makerLine(device)
                 if (made.isNotEmpty()) Text(made, style = MaterialTheme.typography.bodyMedium, color = c.onSurfaceVariant)
                 val health = live?.let { Copy.health(it, heaviest(it, state.device.apps)) }
-                Surface(shape = CircleShape, color = if (health?.ok == false) c.errorContainer else c.secondaryContainer) {
-                    Row(Modifier.padding(horizontal = 12.dp, vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                Surface(
+                    shape = CircleShape,
+                    color = if (health?.ok == false) c.errorContainer else Color(0x18FFFFFF),
+                    border = BorderStroke(1.dp, if (health?.ok == false) c.error else Color(0x28FFFFFF)),
+                ) {
+                    Row(Modifier.padding(horizontal = 14.dp, vertical = 6.dp), verticalAlignment = Alignment.CenterVertically) {
                         if (health != null) {
-                            Icon(if (health.ok) Icons.Default.CheckCircle else Icons.Default.Warning, null, Modifier.size(16.dp), tint = if (health.ok) c.primary else c.error)
+                            Icon(if (health.ok) Icons.Default.CheckCircle else Icons.Default.Warning, null, Modifier.size(16.dp), tint = if (health.ok) LiquidGlass.NeonCyan else c.error)
                         } else StateDot(device.state)
                         Spacer(Modifier.width(8.dp))
                         Text((health?.text ?: Copy.state(device.state)).resolve(), style = MaterialTheme.typography.labelLarge)

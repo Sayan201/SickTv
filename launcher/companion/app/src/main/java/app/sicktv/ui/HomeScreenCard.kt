@@ -2,6 +2,7 @@
 
 package app.sicktv.ui
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,8 +11,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -35,6 +39,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.sicktv.R
@@ -42,6 +47,7 @@ import app.sicktv.data.Action
 import app.sicktv.data.AppInfo
 import app.sicktv.data.FIRE_HOME_STARTER
 import app.sicktv.data.resolve
+import app.sicktv.ui.theme.LiquidGlass
 
 /**
  * The launchers the Home screen card lists: the one on Home, then the ones the user added, then the TV's own.
@@ -97,7 +103,15 @@ fun HomeScreenBlock(ui: DeviceUi, actions: DeviceActions, fire: Boolean = false)
         Column(Modifier.fillMaxWidth().padding(top = 16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(Copy.CHANGE_HOME.resolve(), style = MaterialTheme.typography.bodyLarge)
             Text(Copy.CHANGE_HOME_TEXT.resolve(), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            FilledTonalButton(onClick = actions.installLauncher, enabled = !locked) { Text(Copy.CHANGE_HOME.resolve()) }
+            Button(
+                onClick = actions.installLauncher,
+                enabled = !locked,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0x18FFFFFF),
+                    contentColor = MaterialTheme.colorScheme.onSurface,
+                ),
+                shape = CircleShape,
+            ) { Text(Copy.CHANGE_HOME.resolve()) }
         }
     }
     val (pkg, action) = ui.pending ?: return
@@ -117,7 +131,12 @@ fun HomeScreenBlock(ui: DeviceUi, actions: DeviceActions, fire: Boolean = false)
 /** Material 3 has no banner; a tonal surface stands in, as for the other notes. */
 @Composable
 private fun NoDefaultBanner() {
-    Surface(color = MaterialTheme.colorScheme.secondaryContainer, shape = MaterialTheme.shapes.medium, modifier = Modifier.fillMaxWidth()) {
+    Surface(
+        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        shape = RoundedCornerShape(16.dp),
+        border = LiquidGlass.borderStroke(1.dp),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
         Row(Modifier.padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(HubIcons.InfoOutline, contentDescription = null, Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSecondaryContainer)
             Spacer(Modifier.width(8.dp))
@@ -167,10 +186,30 @@ private fun LauncherRow(app: AppInfo, move: Action?, locked: Boolean, onMove: (A
         val serviceOn = app.home && app.homeServiceOff
         if (move != null || serviceOn || app.removable) {
             Row(Modifier.padding(start = 52.dp, top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                if (move != null) FilledTonalButton(onClick = { onMove(move) }, enabled = !locked) {
+                if (move != null) Button(
+                    onClick = { onMove(move) },
+                    enabled = !locked,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0x18FFFFFF),
+                        contentColor = MaterialTheme.colorScheme.onSurface,
+                        disabledContainerColor = Color(0x0CFFFFFF),
+                        disabledContentColor = MaterialTheme.colorScheme.outline,
+                    ),
+                    shape = CircleShape,
+                ) {
                     Text((if (move == Action.HomeBack) Copy.RESTORE_STOCK_HOME else Copy.MAKE_HOME).resolve())
                 }
-                if (serviceOn) FilledTonalButton(onClick = { turningOn = true }, enabled = !locked) { Text(Copy.TURN_ON.resolve()) }
+                if (serviceOn) Button(
+                    onClick = { turningOn = true },
+                    enabled = !locked,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.White,
+                        contentColor = Color(0xFF0B1018),
+                    ),
+                    shape = CircleShape,
+                ) {
+                    Text(Copy.TURN_ON.resolve(), fontWeight = FontWeight.SemiBold)
+                }
                 if (app.removable) TextButton(onClick = onUninstall, enabled = !locked) { Text(Copy.button(Action.Uninstall).resolve()) }
             }
         }
@@ -204,9 +243,24 @@ private fun MakeHomeDialog(app: AppInfo, action: Action, current: AppInfo?, apps
     }
     AlertDialog(
         onDismissRequest = actions.cancel,
+        shape = RoundedCornerShape(28.dp),
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+        modifier = Modifier.border(LiquidGlass.borderStroke(1.dp), RoundedCornerShape(28.dp)),
         title = { Text(Copy.makeHomeTitle(app.label).resolve()) },
         text = { Text(text) },
-        confirmButton = { Button(onClick = if (asks) ({ askService = true }) else actions.confirm, enabled = !locked) { Text(Copy.MAKE_HOME.resolve()) } },
+        confirmButton = {
+            Button(
+                onClick = if (asks) ({ askService = true }) else actions.confirm,
+                enabled = !locked,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color(0xFF0B1018),
+                ),
+                shape = CircleShape,
+            ) {
+                Text(Copy.MAKE_HOME.resolve(), fontWeight = FontWeight.SemiBold)
+            }
+        },
         dismissButton = { TextButton(onClick = actions.cancel) { Text(stringResource(R.string.screen_cancel)) } },
     )
 }

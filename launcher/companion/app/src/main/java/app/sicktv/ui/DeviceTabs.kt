@@ -65,6 +65,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ShortNavigationBar
 import androidx.compose.material3.ShortNavigationBarItem
+import androidx.compose.material3.ShortNavigationBarItemDefaults
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -284,6 +285,13 @@ fun DeviceTabsScreen(
                         .background(LiquidGlass.DockBackgroundBrush, NotchedBarShape)
                         .border(LiquidGlass.borderStroke(1.dp), NotchedBarShape)
                 ) {
+                    val navColors = ShortNavigationBarItemDefaults.colors(
+                        selectedIconColor = LiquidGlass.NeonCyan,
+                        selectedTextColor = LiquidGlass.NeonCyan,
+                        indicatorColor = Color(0x2400E5FF),
+                        unselectedIconColor = Color(0x8AFFFFFF),
+                        unselectedTextColor = Color(0x8AFFFFFF),
+                    )
                     ShortNavigationBar(containerColor = Color.Transparent) {
                         TvTab.entries.forEach { t ->
                             if (t == TvTab.Files) ShortNavigationBarItem(
@@ -292,6 +300,7 @@ fun DeviceTabsScreen(
                                 icon = { Spacer(Modifier.size(24.dp)) },
                                 label = { Text(stringResource(R.string.tabs_remote)) },
                                 enabled = !offline,
+                                colors = navColors,
                                 modifier = Modifier.testTag("barRemote"),
                             )
                             ShortNavigationBarItem(
@@ -303,6 +312,7 @@ fun DeviceTabsScreen(
                                 },
                                 icon = { Icon(t.icon(), contentDescription = null) },
                                 label = { Text(stringResource(t.label)) },
+                                colors = navColors,
                             )
                         }
                     }
@@ -781,7 +791,18 @@ private val NotchedBarShape = object : Shape {
 @Composable
 private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val c = MaterialTheme.colorScheme
-    Box(modifier.offset(y = -RemoteRise).clearAndSetSemantics {}) {
+    Box(
+        modifier
+            .offset(y = -RemoteRise)
+            .clearAndSetSemantics {},
+        contentAlignment = Alignment.Center,
+    ) {
+        // Smoked acrylic backing disc filling the notch seamlessly
+        Box(
+            Modifier
+                .size(RemoteSize + 8.dp)
+                .background(Color(0xF0101624), CircleShape)
+        )
         Surface(
             onClick = onClick,
             enabled = enabled,
@@ -791,12 +812,12 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
                     if (enabled) {
                         Modifier
                             .background(LiquidGlass.RemoteLensBrush, CircleShape)
-                            .border(LiquidGlass.borderStroke(1.5.dp, Color(0x80FFFFFF), Color(0x30FFFFFF)), CircleShape)
+                            .border(LiquidGlass.borderStroke(1.5.dp, Color(0xB3FFFFFF), Color(0x35FFFFFF)), CircleShape)
                     } else Modifier
                 ),
             shape = CircleShape,
             color = if (enabled) Color.Transparent else c.onSurface.copy(alpha = 0.12f).compositeOver(c.surfaceContainerHigh),
-            contentColor = if (enabled) Color(0xFF002B33) else c.onSurface.copy(alpha = 0.38f),
+            contentColor = if (enabled) Color.White else c.onSurface.copy(alpha = 0.38f),
             shadowElevation = if (enabled) 8.dp else 0.dp,
         ) {
             Box(contentAlignment = Alignment.Center) { Icon(TileIcons.Remote, null, Modifier.size(26.dp)) }

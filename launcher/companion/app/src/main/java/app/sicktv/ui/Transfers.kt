@@ -2,7 +2,11 @@
 
 package app.sicktv.ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.RoundedCornerShape
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -102,21 +106,31 @@ private fun Tile(
     badge: Int? = null,
 ) {
     val c = MaterialTheme.colorScheme
+    val shape = RoundedCornerShape(18.dp)
+    val tileBorder = when {
+        !enabled -> null
+        primary -> LiquidGlass.activeBorderStroke(1.dp)
+        else -> LiquidGlass.borderStroke(1.dp)
+    }
     Surface(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier
+            .background(
+                brush = when {
+                    !enabled -> SolidColor(c.onSurface.copy(alpha = 0.06f))
+                    primary -> LiquidGlass.ActiveTileGlassBrush
+                    else -> LiquidGlass.TileGlassBrush
+                },
+                shape = shape,
+            )
+            .then(if (tileBorder != null) Modifier.border(tileBorder, shape) else Modifier),
         enabled = enabled,
-        shape = MaterialTheme.shapes.large,
-        // Material's disabled colours, so a greyed-out Debloat doesn't still read as the main button.
-        color = when {
-            !enabled -> c.onSurface.copy(alpha = 0.12f)
-            primary -> c.primary
-            else -> c.secondaryContainer
-        },
+        shape = shape,
+        color = Color.Transparent,
         contentColor = when {
             !enabled -> c.onSurface.copy(alpha = 0.38f)
-            primary -> c.onPrimary
-            else -> c.onSecondaryContainer
+            primary -> Color(0xFFEDF2F7)
+            else -> c.onSurface
         },
     ) {
         Column(
@@ -124,8 +138,20 @@ private fun Tile(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            BadgedBox(badge = { if (badge != null) Badge { Text(badge.toString()) } }) {
-                Icon(icon, contentDescription = null, Modifier.size(28.dp))
+            BadgedBox(
+                badge = {
+                    if (badge != null) Badge(
+                        containerColor = LiquidGlass.NeonCyan,
+                        contentColor = Color(0xFF002229),
+                    ) { Text(badge.toString()) }
+                },
+            ) {
+                Icon(
+                    icon,
+                    contentDescription = null,
+                    Modifier.size(28.dp),
+                    tint = if (primary) LiquidGlass.NeonCyan else c.onSurfaceVariant,
+                )
             }
             Text(label, style = MaterialTheme.typography.labelLarge, maxLines = 1)
         }

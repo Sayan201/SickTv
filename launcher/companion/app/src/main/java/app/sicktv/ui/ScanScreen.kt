@@ -18,9 +18,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.graphics.Color
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
@@ -55,6 +60,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -128,7 +134,11 @@ fun ScanScreen(
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
             Text(stringResource(R.string.scan_title), style = MaterialTheme.typography.headlineMedium)
-            Surface(shape = MaterialTheme.shapes.large, color = MaterialTheme.colorScheme.secondaryContainer) {
+            Surface(
+                shape = RoundedCornerShape(16.dp),
+                color = MaterialTheme.colorScheme.surfaceContainerLow,
+                border = LiquidGlass.borderStroke(1.dp),
+            ) {
                 Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Default.Info, null, Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSecondaryContainer)
                     Spacer(Modifier.width(12.dp))
@@ -187,10 +197,12 @@ private fun FoundTvs(scan: ScanUi, now: Long, onRescan: () -> Unit, onPick: (Sca
             val row = scan.rows[hit.ip] ?: RowState.Found
             Card(
                 Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+                shape = RoundedCornerShape(20.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+                border = LiquidGlass.borderStroke(1.dp),
             ) {
                 Row(Modifier.padding(start = 16.dp, top = 12.dp, end = 12.dp, bottom = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Icon(DeviceIcons.Tv, null, Modifier.size(24.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Icon(DeviceIcons.Tv, null, Modifier.size(24.dp), tint = LiquidGlass.NeonCyan)
                     Spacer(Modifier.width(16.dp))
                     Column(Modifier.weight(1f)) {
                         Text(hit.hostname ?: hit.maker ?: stringResource(R.string.scan_android_device), style = MaterialTheme.typography.titleMedium)
@@ -200,13 +212,21 @@ private fun FoundTvs(scan: ScanUi, now: Long, onRescan: () -> Unit, onPick: (Sca
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
-                    FilledTonalButton(onClick = { onPick(hit) }) {
+                    Button(
+                        onClick = { onPick(hit) },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.White,
+                            contentColor = Color(0xFF0B1018),
+                        ),
+                        shape = CircleShape,
+                    ) {
                         Text(
                             when (row) {
                                 RowState.Found -> stringResource(R.string.scan_connect)
                                 RowState.NotAllowed, is RowState.Unreachable -> stringResource(R.string.scan_try_again)
                                 else -> stringResource(R.string.scan_continue)
                             },
+                            fontWeight = FontWeight.SemiBold,
                         )
                     }
                 }
@@ -252,7 +272,17 @@ private fun FoundTvs(scan: ScanUi, now: Long, onRescan: () -> Unit, onPick: (Sca
             }
         }
         // Until a TV turns up, Rescan stays in one place; it waits out a scan rather than throw its probes away.
-        if (scan.hits.isEmpty()) FilledTonalButton(onClick = onRescan, enabled = !scan.scanning) {
+        if (scan.hits.isEmpty()) Button(
+            onClick = onRescan,
+            enabled = !scan.scanning,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0x18FFFFFF),
+                contentColor = MaterialTheme.colorScheme.onSurface,
+                disabledContainerColor = Color(0x0CFFFFFF),
+                disabledContentColor = MaterialTheme.colorScheme.outline,
+            ),
+            shape = CircleShape,
+        ) {
             Icon(Icons.Default.Refresh, null, Modifier.size(18.dp))
             Spacer(Modifier.width(8.dp))
             Text(stringResource(R.string.scan_rescan))
@@ -268,9 +298,14 @@ private fun OffWifi(modifier: Modifier, onOpenWifi: () -> Unit, onAddByIp: () ->
         verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Surface(Modifier.size(112.dp), shape = CircleShape, color = MaterialTheme.colorScheme.secondaryContainer) {
+        Surface(
+            Modifier.size(112.dp),
+            shape = CircleShape,
+            color = Color(0x18FFFFFF),
+            border = LiquidGlass.borderStroke(1.dp),
+        ) {
             Box(contentAlignment = Alignment.Center) {
-                Icon(DeviceIcons.WifiOff, null, Modifier.size(56.dp), tint = MaterialTheme.colorScheme.onSecondaryContainer)
+                Icon(DeviceIcons.WifiOff, null, Modifier.size(56.dp), tint = LiquidGlass.NeonCyan)
             }
         }
         Spacer(Modifier.height(8.dp))
@@ -282,7 +317,16 @@ private fun OffWifi(modifier: Modifier, onOpenWifi: () -> Unit, onAddByIp: () ->
             textAlign = TextAlign.Center,
         )
         Spacer(Modifier.height(4.dp))
-        Button(onClick = onOpenWifi) { Text(stringResource(R.string.scan_open_wifi)) }
+        Button(
+            onClick = onOpenWifi,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.White,
+                contentColor = Color(0xFF0B1018),
+            ),
+            shape = CircleShape,
+        ) {
+            Text(stringResource(R.string.scan_open_wifi), fontWeight = FontWeight.SemiBold)
+        }
         // VPNs and odd setups can still reach a TV by its address.
         TextButton(onClick = onAddByIp) { Text(stringResource(R.string.scan_add_by_ip)) }
     }
@@ -294,6 +338,8 @@ private fun AddByIpDialog(subnet: String?, onDismiss: () -> Unit, onSubmit: (Str
     var error by remember { mutableStateOf<UiText?>(null) }
     AlertDialog(
         onDismissRequest = onDismiss,
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+        modifier = Modifier.border(LiquidGlass.borderStroke(1.dp), RoundedCornerShape(28.dp)),
         title = { Text(stringResource(R.string.scan_add_by_ip)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -311,7 +357,16 @@ private fun AddByIpDialog(subnet: String?, onDismiss: () -> Unit, onSubmit: (Str
                 )
             }
         },
-        confirmButton = { Button(onClick = { error = onSubmit(text) }) { Text(stringResource(R.string.scan_connect)) } },
+        confirmButton = {
+            Button(
+                onClick = { error = onSubmit(text) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color(0xFF0B1018),
+                ),
+                shape = CircleShape,
+            ) { Text(stringResource(R.string.scan_connect)) }
+        },
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.scan_cancel)) } },
     )
 }

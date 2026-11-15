@@ -29,6 +29,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
@@ -166,7 +167,8 @@ internal fun SystemWidget(usedGb: Double?, totalGb: Double?, live: Snapshot?, as
     val dash = "\u2014"
     Card(
         Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+        border = LiquidGlass.borderStroke(),
     ) {
         Column(Modifier.padding(16.dp)) {
             if (asOf != null) {
