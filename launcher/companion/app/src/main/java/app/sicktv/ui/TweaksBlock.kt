@@ -4,6 +4,7 @@ package app.sicktv.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,11 +13,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -26,15 +24,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import app.sicktv.R
 import app.sicktv.adb.Tweak
 import app.sicktv.adb.Tweaks
 import app.sicktv.data.TvSettings
 import app.sicktv.data.TvTweaks
 import app.sicktv.data.resolve
+import app.sicktv.ui.theme.GlassButton
+import app.sicktv.ui.theme.GlassLinearProgress
+import app.sicktv.ui.theme.GlassSwitch
 
 /**
  * Whole-TV settings and housekeeping. The two switches land in History with Undo; clearing
@@ -45,7 +49,7 @@ fun TweaksBlock(ui: DeviceUi, actions: DeviceActions) {
     val tweaks = ui.tweaks
     var askDns by rememberSaveable { mutableStateOf(false) }
     val dnsOn = tweaks?.dnsHost != null
-    if (ui.busy in TWEAK_BUSY) LinearProgressIndicator(Modifier.fillMaxWidth())
+    if (ui.busy in TWEAK_BUSY) GlassLinearProgress(progress = 0.5f, modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp))
     val dnsOk = tweaks?.dnsSupported != false
     SwitchRow(
         Copy.DNS_TITLE.resolve(),
@@ -80,24 +84,61 @@ internal fun fastAnimationsShown(tweaks: TvTweaks?) = tweaks?.fireOs != true || 
 private fun SwitchRow(title: String, state: String, checked: Boolean, enabled: Boolean, onChange: (Boolean) -> Unit) {
     // The whole row toggles, not just the thumb: a bigger target, read as one switch by TalkBack.
     Row(
-        Modifier.fillMaxWidth().toggleable(checked, enabled = enabled, role = Role.Switch, onValueChange = onChange).padding(vertical = 8.dp),
+        Modifier
+            .fillMaxWidth()
+            .toggleable(checked, enabled = enabled, role = Role.Switch, onValueChange = onChange)
+            .padding(vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f)) {
-            Text(title, style = MaterialTheme.typography.bodyLarge)
-            Text(state, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(
+                title,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 14.sp,
+                ),
+                color = Color.White,
+            )
+            Text(
+                state,
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
+                color = Color(0x8AFFFFFF),
+            )
         }
         Spacer(Modifier.width(12.dp))
-        Switch(checked = checked, onCheckedChange = null, enabled = enabled)
+        GlassSwitch(checked = checked, onCheckedChange = null, enabled = enabled)
     }
 }
 
 @Composable
 private fun ButtonRow(title: String, text: String, button: String, enabled: Boolean, onClick: () -> Unit) {
-    Column(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text(title, style = MaterialTheme.typography.bodyLarge)
-        Text(text, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        FilledTonalButton(onClick = onClick, enabled = enabled) { Text(button) }
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(vertical = 10.dp),
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Text(
+            title,
+            style = MaterialTheme.typography.bodyLarge.copy(
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 14.sp,
+            ),
+            color = Color.White,
+        )
+        Text(
+            text,
+            style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
+            color = Color(0x8AFFFFFF),
+        )
+        GlassButton(
+            primary = false,
+            onClick = onClick,
+            enabled = enabled,
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+        ) {
+            Text(button, color = Color.White, style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Medium))
+        }
     }
 }
 

@@ -388,7 +388,7 @@ private fun HelpAddCard(onHelpAdd: () -> Unit) {
         modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
     ) {
         Row {
-            Icon(AddToQueue, contentDescription = null, tint = LiquidGlass.NeonCyan)
+            Icon(AddToQueue, contentDescription = null, tint = LiquidGlass.NeonCrimson)
             Spacer(Modifier.width(16.dp))
             Column(Modifier.weight(1f)) {
                 Text(stringResource(R.string.lists_help_add_title), style = MaterialTheme.typography.titleSmall)
@@ -425,7 +425,7 @@ private fun MatchCard(kind: DeviceKind, name: String, detail: String, match: Mat
         contentPadding = PaddingValues(start = 16.dp, top = 12.dp, bottom = 12.dp, end = 4.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(DeviceIcons.of(kind), contentDescription = kind.word(), tint = if (match == Match.Exact) LiquidGlass.NeonCyan else MaterialTheme.colorScheme.onSurfaceVariant)
+            Icon(DeviceIcons.of(kind), contentDescription = kind.word(), tint = if (match == Match.Exact) LiquidGlass.NeonCrimson else MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.width(16.dp))
             Column(Modifier.weight(1f)) {
                 Text(name, style = MaterialTheme.typography.titleMedium)

@@ -253,11 +253,11 @@ fun DeviceTabsScreen(
         Scaffold(
             // Lifted by the Remote's rise, so a message isn't hidden behind the button.
             snackbarHost = { SnackbarHost(snackbar, Modifier.padding(bottom = RemoteRise)) },
-            // Install on Apps and upload on Files as Material's extended FAB; the Remote has its own button in the bar.
+            // Install on Apps and upload on Files as crisp white GlassFab; the Remote has its own button in the bar.
             floatingActionButton = {
                 if (!offline) when (tab) {
-                    TvTab.Apps -> ExtendedFloatingActionButton(onClick = actions.pickApp, icon = { Icon(Icons.Default.Add, null) }, text = { Text(stringResource(R.string.tabs_install_app)) })
-                    TvTab.Files -> ExtendedFloatingActionButton(onClick = { actions.pickFile(ui.files.folder) }, icon = { Icon(TileIcons.Upload, null) }, text = { Text(stringResource(R.string.tabs_upload_files)) })
+                    TvTab.Apps -> app.sicktv.ui.theme.GlassFab(onClick = actions.pickApp, icon = Icons.Default.Add, text = stringResource(R.string.tabs_install_app))
+                    TvTab.Files -> app.sicktv.ui.theme.GlassFab(onClick = { actions.pickFile(ui.files.folder) }, icon = TileIcons.Upload, text = stringResource(R.string.tabs_upload_files))
                     else -> {}
                 }
             },
@@ -269,7 +269,9 @@ fun DeviceTabsScreen(
                         // Each tab shows the TV big below, and in the bar once it has scrolled under it.
                         title = { TvBarTitle(device, collapse = { collapse }, morph = morph) },
                         colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = lerp(MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.surfaceContainer, collapse),
+                            containerColor = Color.Black,
+                            titleContentColor = Color.White,
+                            actionIconContentColor = Color(0xCCFFFFFF),
                         ),
                         actions = { AppMenu(state, actions) },
                     )
@@ -278,8 +280,23 @@ fun DeviceTabsScreen(
             bottomBar = {
                 // The Remote sits in the middle of the bar on every tab: an action, never a selected tab. Its round
                 // button sits in a notch cut into the bar's top edge, and is the same action as the label slot under it.
+                // The active tab indicator smoothly glides horizontally between tabs with spring physics.
+                val targetTabIdx = when (tab) {
+                    TvTab.Overview -> 0
+                    TvTab.Apps -> 1
+                    TvTab.Files -> 3
+                    TvTab.Tweaks -> 4
+                }
+                val animatedTabIdx by androidx.compose.animation.core.animateFloatAsState(
+                    targetValue = targetTabIdx.toFloat(),
+                    animationSpec = androidx.compose.animation.core.spring(
+                        dampingRatio = 0.78f,
+                        stiffness = androidx.compose.animation.core.Spring.StiffnessMediumLow,
+                    ),
+                    label = "tabGlide",
+                )
                 Box {
-                    GlassDock(shape = NotchedBarShape) {
+                    GlassDock(shape = NotchedBarShape, indicatorIndex = animatedTabIdx, itemCount = 5) {
                         TvTab.entries.forEach { t ->
                             if (t == TvTab.Files) {
                                 GlassDockItem(
@@ -523,16 +540,29 @@ private fun AppMenu(state: UiState, actions: DeviceActions) {
     val scope = rememberCoroutineScope()
     // The sheet slides away before what was picked opens.
     val pick = { then: () -> Unit -> scope.launch { sheet.hide() }.invokeOnCompletion { open = false; then() } }
-    ModalBottomSheet(onDismissRequest = { open = false }, sheetState = sheet) {
-        Column(Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)) {
+    ModalBottomSheet(
+        onDismissRequest = { open = false },
+        sheetState = sheet,
+        containerColor = Color(0xFF121216),
+        dragHandle = {
+            Box(
+                Modifier
+                    .padding(vertical = 10.dp)
+                    .size(width = 36.dp, height = 4.dp)
+                    .clip(CircleShape)
+                    .background(Color(0x33FFFFFF)),
+            )
+        },
+    ) {
+        Column(Modifier.padding(start = 16.dp, end = 16.dp, bottom = 24.dp)) {
             Row(Modifier.padding(start = 4.dp, bottom = 16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Cookie(device, 48.dp)
                 Spacer(Modifier.width(16.dp))
                 Column {
-                    Text(name(device), style = MaterialTheme.typography.titleLarge)
+                    Text(name(device), style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold), color = Color.White)
                     val health = state.device.snapshot?.takeIf { device.state == DeviceState.Online }?.let { Copy.health(it, heaviest(it, state.device.apps)).text.resolve() }
                     val line = listOf(makerLine(device), health.orEmpty()).filter { it.isNotEmpty() }.joinToString(" · ")
-                    if (line.isNotEmpty()) Text(line, style = MaterialTheme.typography.bodyMedium, color = c.onSurfaceVariant)
+                    if (line.isNotEmpty()) Text(line, style = MaterialTheme.typography.bodyMedium, color = Color(0x8AFFFFFF))
                 }
             }
             val off = state.device.restore.count
@@ -542,13 +572,13 @@ private fun AppMenu(state: UiState, actions: DeviceActions) {
                 {
                     MenuRow(
                         AccessIcons.Shield, Copy.WHO_HAS_ACCESS.resolve(),
-                        Copy.othersConnected(others).resolve().takeIf { others > 0 }, subColor = c.error,
+                        Copy.othersConnected(others).resolve().takeIf { others > 0 }, subColor = LiquidGlass.NeonCrimson,
                         dot = { if (state.device.access?.warning == true) MenuDot(true, false) },
                     ) { pick(actions.whoHasAccess) }
                 },
                 { MenuRow(Icons.Default.List, Copy.ADVANCED_MONITOR.resolve()) { pick(actions.advanced) } },
             )
-            Text("SickTv", style = MaterialTheme.typography.labelLarge, color = c.onSurfaceVariant, modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 8.dp))
+            Text("SickTv", style = MaterialTheme.typography.labelLarge, color = Color(0x8AFFFFFF), modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 8.dp))
             SheetGroup(
                 { MenuRow(Icons.Default.Settings, stringResource(R.string.tabs_settings)) { pick(actions.settings) } },
                 { MenuRow(Icons.Default.Share, Copy.SHARE.resolve()) { pick { shareSickTv(context) } } },
@@ -558,7 +588,7 @@ private fun AppMenu(state: UiState, actions: DeviceActions) {
             // Apart, and Forget in red, so neither is one slip from an everyday item.
             SheetGroup(
                 { MenuRow(HistoryIcons.History, Copy.RESET_TV.resolve(), Copy.RESET_KEEPS.resolve()) { pick(actions.reset) } },
-                { MenuRow(Icons.Default.Delete, stringResource(R.string.tabs_forget), tint = c.error) { pick { forgetting = true } } },
+                { MenuRow(Icons.Default.Delete, stringResource(R.string.tabs_forget), tint = LiquidGlass.NeonCrimson) { pick { forgetting = true } } },
             )
         }
     }
@@ -567,7 +597,7 @@ private fun AppMenu(state: UiState, actions: DeviceActions) {
 /** ⋮'s dot: red for [warning], else the primary colour for something [fresh]; nothing otherwise. */
 @Composable
 private fun MenuDot(warning: Boolean, fresh: Boolean) {
-    if (warning) Badge() else if (fresh) Badge(containerColor = MaterialTheme.colorScheme.primary)
+    if (warning) Badge(containerColor = LiquidGlass.NeonCrimson) else if (fresh) Badge(containerColor = LiquidGlass.NeonCrimson)
 }
 
 /** One group of the sheet: rows 2 dp apart, rounded at the group's ends. */
@@ -575,7 +605,7 @@ private fun MenuDot(warning: Boolean, fresh: Boolean) {
 private fun SheetGroup(vararg rows: @Composable () -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
         rows.forEachIndexed { i, row ->
-            Surface(color = MaterialTheme.colorScheme.surfaceContainerHighest, shape = groupShape(i, rows.size)) { row() }
+            Surface(color = Color(0xFF18181E), shape = groupShape(i, rows.size)) { row() }
         }
     }
 }
@@ -585,7 +615,7 @@ private fun MenuRow(
     icon: ImageVector,
     text: String,
     sub: String? = null,
-    subColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    subColor: Color = Color(0x8AFFFFFF),
     /** Icon and text in this colour, for Forget; else the usual ones. */
     tint: Color? = null,
     dot: @Composable () -> Unit = {},
@@ -595,10 +625,10 @@ private fun MenuRow(
         Modifier.fillMaxWidth().clickable(onClick = onClick).heightIn(min = 56.dp).padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        BadgedBox(badge = { dot() }) { Icon(icon, contentDescription = null, tint = tint ?: MaterialTheme.colorScheme.onSurfaceVariant) }
+        BadgedBox(badge = { dot() }) { Icon(icon, contentDescription = null, tint = tint ?: Color(0x8AFFFFFF)) }
         Spacer(Modifier.width(16.dp))
         Column {
-            Text(text, style = MaterialTheme.typography.bodyLarge, color = tint ?: MaterialTheme.colorScheme.onSurface)
+            Text(text, style = MaterialTheme.typography.bodyLarge, color = tint ?: Color.White)
             sub?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = subColor) }
         }
     }
@@ -617,18 +647,21 @@ internal fun MenuBlock(items: @Composable () -> Unit) {
 /** "Search apps" under the Apps buttons, pinned with them; a tap opens the search at the top. */
 @Composable
 private fun SearchPill(enabled: Boolean, onClick: () -> Unit) {
-    Surface(
-        onClick = onClick,
-        enabled = enabled,
-        shape = CircleShape,
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
-        border = LiquidGlass.borderStroke(1.dp, Color(0x28FFFFFF), Color(0x0AFFFFFF)),
-        modifier = Modifier.fillMaxWidth(),
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(46.dp)
+            .clip(CircleShape)
+            .background(Color(0xFF141418), CircleShape)
+            .border(BorderStroke(1.dp, Color(0x1EFFFFFF)), CircleShape)
+            .clickable(enabled = enabled, onClick = onClick)
+            .padding(horizontal = 16.dp),
+        contentAlignment = Alignment.CenterStart,
     ) {
-        Row(Modifier.padding(horizontal = 16.dp, vertical = 14.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.Search, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
-            Spacer(Modifier.width(16.dp))
-            Text(stringResource(R.string.tabs_search_apps), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(20.dp), tint = Color(0x80FFFFFF))
+            Spacer(Modifier.width(12.dp))
+            Text(stringResource(R.string.tabs_search_apps), style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp), color = Color(0x80FFFFFF))
         }
     }
 }
@@ -641,24 +674,36 @@ private fun SearchPill(enabled: Boolean, onClick: () -> Unit) {
 private fun SearchHeader(query: String, onQuery: (String) -> Unit, onClose: () -> Unit) {
     val focus = remember { FocusRequester() }
     LaunchedEffect(focus) { focus.requestFocus() }
-    Column(Modifier.background(MaterialTheme.colorScheme.surface).statusBarsPadding().padding(horizontal = 16.dp, vertical = 8.dp)) {
-        Surface(shape = CircleShape, color = MaterialTheme.colorScheme.surfaceContainerHigh, modifier = Modifier.fillMaxWidth()) {
+    Column(Modifier.background(Color.Black).statusBarsPadding().padding(horizontal = 16.dp, vertical = 8.dp)) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp)
+                .clip(CircleShape)
+                .background(Color(0xFF141418), CircleShape)
+                .border(BorderStroke(1.dp, Color(0x24FFFFFF)), CircleShape)
+                .padding(horizontal = 8.dp),
+            contentAlignment = Alignment.CenterStart,
+        ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.tabs_close_search)) }
+                IconButton(onClick = onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.tabs_close_search), tint = Color.White) }
                 TextField(
                     value = query,
                     onValueChange = onQuery,
-                    placeholder = { Text(stringResource(R.string.tabs_search_apps)) },
+                    placeholder = { Text(stringResource(R.string.tabs_search_apps), color = Color(0x80FFFFFF)) },
                     singleLine = true,
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent,
                         unfocusedContainerColor = Color.Transparent,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
+                        focusedTextColor = Color.White,
+                        unfocusedTextColor = Color.White,
+                        cursorColor = LiquidGlass.NeonCrimson,
                     ),
                     modifier = Modifier.weight(1f).focusRequester(focus),
                 )
-                if (query.isNotEmpty()) IconButton(onClick = { onQuery("") }) { Icon(Icons.Default.Close, contentDescription = stringResource(R.string.tabs_clear_search)) }
+                if (query.isNotEmpty()) IconButton(onClick = { onQuery("") }) { Icon(Icons.Default.Close, contentDescription = stringResource(R.string.tabs_clear_search), tint = Color.White) }
             }
         }
     }
@@ -773,18 +818,31 @@ private val NotchedBarShape = object : Shape {
 // TalkBack reads the slot's label instead, so the button itself is left out.
 @Composable
 private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier) {
-    val c = MaterialTheme.colorScheme
     Box(
         modifier
             .offset(y = -RemoteRise)
             .clearAndSetSemantics {},
         contentAlignment = Alignment.Center,
     ) {
+        // Ambient crimson glow ring behind the button
+        if (enabled) {
+            Box(
+                Modifier
+                    .size(RemoteSize + 14.dp)
+                    .clip(CircleShape)
+                    .background(
+                        Brush.radialGradient(
+                            listOf(Color(0x66FF2A42), Color.Transparent),
+                        ),
+                    ),
+            )
+        }
         // Smoked acrylic backing disc filling the notch seamlessly
         Box(
             Modifier
-                .size(RemoteSize + 8.dp)
-                .background(Color(0xF00E0E12), CircleShape)
+                .size(RemoteSize + 6.dp)
+                .background(Color(0xFF0E0E12), CircleShape)
+                .border(BorderStroke(1.dp, Color(0x20FFFFFF)), CircleShape),
         )
         Surface(
             onClick = onClick,
@@ -795,15 +853,15 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
                     if (enabled) {
                         Modifier
                             .background(LiquidGlass.RemoteLensBrush, CircleShape)
-                            .border(LiquidGlass.borderStroke(1.5.dp, Color(0xB3FFFFFF), Color(0x35FFFFFF)), CircleShape)
+                            .border(BorderStroke(1.5.dp, Brush.verticalGradient(listOf(Color(0xFFFF384E), Color(0x80FF2A42)))), CircleShape)
                     } else Modifier
                 ),
             shape = CircleShape,
-            color = if (enabled) Color.Transparent else c.onSurface.copy(alpha = 0.12f).compositeOver(c.surfaceContainerHigh),
-            contentColor = if (enabled) Color.White else c.onSurface.copy(alpha = 0.38f),
+            color = if (enabled) Color.Transparent else Color(0xFF1E1E24),
+            contentColor = if (enabled) LiquidGlass.NeonCrimson else Color(0x60FFFFFF),
             shadowElevation = if (enabled) 8.dp else 0.dp,
         ) {
-            Box(contentAlignment = Alignment.Center) { Icon(TileIcons.Remote, null, Modifier.size(26.dp)) }
+            Box(contentAlignment = Alignment.Center) { Icon(TileIcons.Remote, null, Modifier.size(26.dp), tint = if (enabled) LiquidGlass.NeonCrimson else Color(0x60FFFFFF)) }
         }
     }
 }
@@ -814,9 +872,11 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
  */
 @Composable
 private fun SuggestedCard(lists: Suggestions?, d: DebloatState, offline: Boolean, onChanges: () -> Unit) {
-    val c = MaterialTheme.colorScheme
     GlassCard(Modifier.fillMaxWidth()) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             Text(
                 when (lists) {
                     is Suggestions.Ready -> when {
@@ -829,9 +889,21 @@ private fun SuggestedCard(lists: Suggestions?, d: DebloatState, offline: Boolean
                     null -> stringResource(if (offline) R.string.tabs_suggested_offline else R.string.tabs_suggested_loading)
                 },
                 Modifier.weight(1f),
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 14.sp),
+                color = Color.White,
             )
-            TextButton(onClick = onChanges) { Text(stringResource(R.string.tabs_see_changes)) }
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .clickable(onClick = onChanges)
+                    .padding(horizontal = 8.dp, vertical = 4.dp),
+            ) {
+                Text(
+                    stringResource(R.string.tabs_see_changes),
+                    color = LiquidGlass.NeonCrimson,
+                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold, fontSize = 13.sp),
+                )
+            }
         }
         if (d.back > 0) {
             val required = stringResource(R.string.tabs_action_required)
@@ -842,8 +914,8 @@ private fun SuggestedCard(lists: Suggestions?, d: DebloatState, offline: Boolean
                     append(" ")
                     append(cameBack)
                 },
-                Modifier.padding(end = 8.dp, bottom = 4.dp),
-                style = MaterialTheme.typography.bodyLarge, color = c.error,
+                Modifier.padding(end = 8.dp, top = 4.dp, bottom = 4.dp),
+                style = MaterialTheme.typography.bodyLarge, color = LiquidGlass.NeonCrimson,
             )
         }
         val note = when {
@@ -853,9 +925,9 @@ private fun SuggestedCard(lists: Suggestions?, d: DebloatState, offline: Boolean
             lists is Suggestions.Ready && !d.todo -> stringResource(R.string.tabs_note_gate)
             else -> null
         }
-        note?.let { Text(it, Modifier.padding(end = 8.dp), style = MaterialTheme.typography.bodySmall, color = c.onSurfaceVariant) }
+        note?.let { Text(it, Modifier.padding(end = 8.dp, top = 2.dp), style = MaterialTheme.typography.bodySmall, color = Color(0x8AFFFFFF)) }
         if (lists is Suggestions.Ready) {
-            Text(stringResource(R.string.tabs_lists_credit), Modifier.padding(end = 8.dp), style = MaterialTheme.typography.bodySmall, color = c.onSurfaceVariant)
+            Text(stringResource(R.string.tabs_lists_credit), Modifier.padding(end = 8.dp, top = 2.dp), style = MaterialTheme.typography.bodySmall, color = Color(0x8AFFFFFF))
         }
     }
 }
@@ -900,13 +972,43 @@ private fun StoreCard(store: AppInfo, offline: Boolean, locked: Boolean, actions
 
 @Composable
 private fun StatusRow(icon: ImageVector, title: String, sub: String?, button: String, enabled: Boolean, onClick: () -> Unit) {
-    ListItem(
-        headlineContent = { Text(title) },
-        supportingContent = sub?.let { { Text(it) } },
-        leadingContent = { Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
-        trailingContent = { TextButton(onClick = onClick, enabled = enabled) { Text(button) } },
-        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-    )
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(
+            modifier = Modifier
+                .size(36.dp)
+                .clip(CircleShape)
+                .background(Color(0xFF22080C)),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = LiquidGlass.NeonCrimson)
+        }
+        Spacer(Modifier.width(14.dp))
+        Column(Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold), color = Color.White)
+            if (sub != null) {
+                Spacer(Modifier.height(2.dp))
+                Text(sub, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp), color = Color(0x8AFFFFFF))
+            }
+        }
+        Spacer(Modifier.width(8.dp))
+        Box(
+            modifier = Modifier
+                .clip(CircleShape)
+                .clickable(enabled = enabled, onClick = onClick)
+                .padding(horizontal = 10.dp, vertical = 6.dp),
+        ) {
+            Text(
+                button,
+                color = if (enabled) LiquidGlass.NeonCrimson else Color(0x60FFFFFF),
+                style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold, fontSize = 13.sp),
+            )
+        }
+    }
 }
 
 

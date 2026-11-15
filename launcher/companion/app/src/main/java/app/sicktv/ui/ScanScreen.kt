@@ -202,7 +202,7 @@ private fun FoundTvs(scan: ScanUi, now: Long, onRescan: () -> Unit, onPick: (Sca
                 contentPadding = PaddingValues(start = 16.dp, top = 12.dp, end = 12.dp, bottom = 12.dp),
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(DeviceIcons.Tv, null, Modifier.size(24.dp), tint = LiquidGlass.NeonCyan)
+                    Icon(DeviceIcons.Tv, null, Modifier.size(24.dp), tint = LiquidGlass.NeonCrimson)
                     Spacer(Modifier.width(16.dp))
                     Column(Modifier.weight(1f)) {
                         Text(hit.hostname ?: hit.maker ?: stringResource(R.string.scan_android_device), style = MaterialTheme.typography.titleMedium)
@@ -294,7 +294,7 @@ private fun OffWifi(modifier: Modifier, onOpenWifi: () -> Unit, onAddByIp: () ->
             border = LiquidGlass.borderStroke(1.dp),
         ) {
             Box(contentAlignment = Alignment.Center) {
-                Icon(DeviceIcons.WifiOff, null, Modifier.size(56.dp), tint = LiquidGlass.NeonCyan)
+                Icon(DeviceIcons.WifiOff, null, Modifier.size(56.dp), tint = LiquidGlass.NeonCrimson)
             }
         }
         Spacer(Modifier.height(8.dp))

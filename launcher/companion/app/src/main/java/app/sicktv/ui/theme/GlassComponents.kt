@@ -2,51 +2,77 @@
 
 package app.sicktv.ui.theme
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.width
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 /**
  * Pure Liquid Glass UI primitives built directly on Compose Foundation.
- * Eliminates stock Material 3 design quirks, tonal tinting, and unstable/expressive APIs
- * while providing an authentic smoked glass and electric neon aesthetic.
+ * Implements the authentic Zangetsu OLED black & vivid neon crimson design system.
  */
 
 /**
- * Modern pill button: white pill for primary actions, smoked glass capsule for secondary/tonal actions.
+ * Modern pill button: crisp white pill for primary actions, smoked obsidian capsule for secondary/tonal actions.
  */
 @Composable
 fun GlassButton(
@@ -61,17 +87,18 @@ fun GlassButton(
     val backgroundBrush = when {
         !enabled -> SolidColor(Color(0x0CFFFFFF))
         primary -> SolidColor(Color.White)
-        else -> SolidColor(Color(0x18FFFFFF))
+        else -> SolidColor(Color(0xFF16161B))
     }
 
     val contentColor = when {
         !enabled -> Color(0x60FFFFFF)
-        primary -> Color(0xFF0B1018)
+        primary -> Color(0xFF000000)
         else -> Color.White
     }
 
     val borderStroke = when {
-        !enabled || primary -> null
+        !enabled -> null
+        primary -> null
         else -> LiquidGlass.borderStroke(1.dp)
     }
 
@@ -97,6 +124,388 @@ fun GlassButton(
 }
 
 /**
+ * Crisp white Floating Action Button matching the design reference (+ Install app, Upload files).
+ */
+@Composable
+fun GlassFab(
+    onClick: () -> Unit,
+    icon: ImageVector,
+    text: String,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) {
+    Box(
+        modifier = modifier
+            .shadow(elevation = 12.dp, shape = CircleShape, spotColor = Color(0x80000000))
+            .clip(CircleShape)
+            .background(Color.White, CircleShape)
+            .clickable(enabled = enabled, onClick = onClick)
+            .padding(horizontal = 20.dp, vertical = 12.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Icon(
+                icon,
+                contentDescription = null,
+                modifier = Modifier.size(20.dp),
+                tint = Color.Black,
+            )
+            Text(
+                text = text,
+                color = Color.Black,
+                style = MaterialTheme.typography.labelLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 15.sp,
+                ),
+            )
+        }
+    }
+}
+
+/**
+ * Segmented filter capsule bar matching the design reference (Running | Installed | Built-in).
+ */
+@Composable
+fun GlassSegmentedBar(
+    options: List<String>,
+    selectedIndex: Int,
+    onSelect: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(44.dp)
+            .clip(CircleShape)
+            .background(Color(0xFF121216), CircleShape)
+            .border(BorderStroke(1.dp, Color(0x24FFFFFF)), CircleShape),
+    ) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            options.forEachIndexed { index, title ->
+                val selected = index == selectedIndex
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .then(
+                            if (selected) {
+                                Modifier
+                                    .clip(CircleShape)
+                                    .background(Color(0xFF380B12), CircleShape)
+                                    .border(BorderStroke(1.dp, Color(0x80FF2A42)), CircleShape)
+                            } else Modifier
+                        )
+                        .clickable(enabled = enabled) { onSelect(index) },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        if (selected) {
+                            Icon(
+                                Icons.Default.Check,
+                                contentDescription = null,
+                                modifier = Modifier.size(15.dp),
+                                tint = LiquidGlass.NeonCrimson,
+                            )
+                        }
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
+                                fontSize = 13.sp,
+                            ),
+                            color = if (selected) Color.White else Color(0x8AFFFFFF),
+                            maxLines = 1,
+                        )
+                    }
+                }
+                if (index < options.size - 1 && !selected && index + 1 != selectedIndex) {
+                    Box(
+                        modifier = Modifier
+                            .width(1.dp)
+                            .height(20.dp)
+                            .background(Color(0x18FFFFFF)),
+                    )
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Capsule Search Bar matching the design reference.
+ */
+@Composable
+fun GlassSearchBar(
+    query: String,
+    onQueryChange: (String) -> Unit,
+    placeholder: String = "Search apps",
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    onClick: (() -> Unit)? = null,
+) {
+    val clickableModifier = if (onClick != null) {
+        Modifier.clickable(enabled = enabled, onClick = onClick)
+    } else Modifier
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(46.dp)
+            .clip(CircleShape)
+            .background(Color(0xFF141418), CircleShape)
+            .border(BorderStroke(1.dp, Color(0x1EFFFFFF)), CircleShape)
+            .then(clickableModifier)
+            .padding(horizontal = 16.dp),
+        contentAlignment = Alignment.CenterStart,
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                Icons.Default.Search,
+                contentDescription = null,
+                modifier = Modifier.size(20.dp),
+                tint = Color(0x80FFFFFF),
+            )
+            Spacer(Modifier.width(12.dp))
+            if (onClick != null) {
+                Text(
+                    text = query.ifEmpty { placeholder },
+                    style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp),
+                    color = if (query.isEmpty()) Color(0x60FFFFFF) else Color.White,
+                    modifier = Modifier.weight(1f),
+                )
+            } else {
+                Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.CenterStart) {
+                    if (query.isEmpty()) {
+                        Text(
+                            text = placeholder,
+                            style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp),
+                            color = Color(0x60FFFFFF),
+                        )
+                    }
+                    BasicTextField(
+                        value = query,
+                        onValueChange = onQueryChange,
+                        singleLine = true,
+                        enabled = enabled,
+                        textStyle = TextStyle(
+                            color = Color.White,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Normal,
+                        ),
+                        cursorBrush = SolidColor(LiquidGlass.NeonCrimson),
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+                if (query.isNotEmpty()) {
+                    Box(
+                        modifier = Modifier
+                            .size(28.dp)
+                            .clip(CircleShape)
+                            .clickable { onQueryChange("") },
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(
+                            Icons.Default.Close,
+                            contentDescription = "Clear",
+                            modifier = Modifier.size(16.dp),
+                            tint = Color(0x80FFFFFF),
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Pure Foundation animated toggle switch matching the design reference.
+ */
+@Composable
+fun GlassSwitch(
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) {
+    val trackWidth = 50.dp
+    val trackHeight = 28.dp
+    val thumbSize = 22.dp
+    val thumbPadding = 3.dp
+
+    val thumbOffset by animateDpAsState(
+        targetValue = if (checked) trackWidth - thumbSize - thumbPadding else thumbPadding,
+        animationSpec = spring(
+            dampingRatio = 0.8f,
+            stiffness = Spring.StiffnessMediumLow,
+        ),
+        label = "switchThumb",
+    )
+
+    val trackColor = when {
+        !enabled -> Color(0xFF1E1E24)
+        checked -> Color(0xFFD61E34)
+        else -> Color(0xFF26262E)
+    }
+
+    val trackBorder = when {
+        !enabled -> BorderStroke(1.dp, Color(0x10FFFFFF))
+        checked -> BorderStroke(1.dp, Color(0xB3FF2A42))
+        else -> BorderStroke(1.dp, Color(0x26FFFFFF))
+    }
+
+    val interactionSource = remember { MutableInteractionSource() }
+
+    Box(
+        modifier = modifier
+            .size(width = trackWidth, height = trackHeight)
+            .clip(CircleShape)
+            .background(trackColor, CircleShape)
+            .border(trackBorder, CircleShape)
+            .then(
+                if (onCheckedChange != null) {
+                    Modifier.clickable(
+                        interactionSource = interactionSource,
+                        indication = null,
+                        enabled = enabled,
+                        onClick = { onCheckedChange(!checked) },
+                    )
+                } else Modifier
+            ),
+        contentAlignment = Alignment.CenterStart,
+    ) {
+        Box(
+            modifier = Modifier
+                .offset(x = thumbOffset)
+                .size(thumbSize)
+                .shadow(elevation = 4.dp, shape = CircleShape)
+                .background(Color.White, CircleShape),
+        )
+    }
+}
+
+/**
+ * Pure Foundation Linear Progress Indicator with vivid crimson gradient.
+ */
+@Composable
+fun GlassLinearProgress(
+    progress: Float,
+    modifier: Modifier = Modifier,
+    trackColor: Color = Color(0xFF1C1C22),
+    progressBrush: Brush = Brush.horizontalGradient(
+        listOf(Color(0xFFFF384E), Color(0xFFD61E34)),
+    ),
+) {
+    val clamped = progress.coerceIn(0f, 1f)
+    Box(
+        modifier = modifier
+            .height(8.dp)
+            .clip(CircleShape)
+            .background(trackColor, CircleShape),
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(clamped)
+                .clip(CircleShape)
+                .background(progressBrush, CircleShape),
+        )
+    }
+}
+
+/**
+ * Glowing pulsing crimson orb indicator for loading states (Apps & Files).
+ */
+@Composable
+fun PulsingOrb(
+    modifier: Modifier = Modifier,
+    size: Dp = 60.dp,
+) {
+    val infiniteTransition = rememberInfiniteTransition(label = "pulsingOrb")
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 0.88f,
+        targetValue = 1.15f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1200, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse,
+        ),
+        label = "orbScale",
+    )
+    val glowAlpha by infiniteTransition.animateFloat(
+        initialValue = 0.35f,
+        targetValue = 0.80f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1200, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse,
+        ),
+        label = "orbGlow",
+    )
+
+    Box(
+        modifier = modifier.size(size * 1.6f),
+        contentAlignment = Alignment.Center,
+    ) {
+        // Outer radiant glow halo
+        Box(
+            modifier = Modifier
+                .size(size * 1.5f * scale)
+                .clip(CircleShape)
+                .background(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            Color(0xFFFF1E36).copy(alpha = 0.35f * glowAlpha),
+                            Color(0xFFFF1E36).copy(alpha = 0.08f * glowAlpha),
+                            Color.Transparent,
+                        ),
+                    ),
+                ),
+        )
+        // Mid glowing sphere
+        Box(
+            modifier = Modifier
+                .size(size * scale)
+                .clip(CircleShape)
+                .background(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            Color(0xFFFF334B),
+                            Color(0xFFE50914),
+                            Color(0xFF6B000C),
+                        ),
+                    ),
+                ),
+        )
+        // Core highlight
+        Box(
+            modifier = Modifier
+                .size(size * 0.45f)
+                .clip(CircleShape)
+                .background(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            Color(0xFFFF808F),
+                            Color.Transparent,
+                        ),
+                    ),
+                )
+                .alpha(glowAlpha),
+        )
+    }
+}
+
+/**
  * Translucent glass chip for filter and selection lists.
  */
 @Composable
@@ -107,12 +516,12 @@ fun GlassChip(
     modifier: Modifier = Modifier,
     leadingIcon: (@Composable () -> Unit)? = null,
     enabled: Boolean = true,
-    shape: Shape = RoundedCornerShape(12.dp),
+    shape: Shape = CircleShape,
 ) {
     val backgroundBrush = when {
         !enabled -> SolidColor(Color(0x06FFFFFF))
-        selected -> SolidColor(Color(0x2400E5FF))
-        else -> SolidColor(Color(0x0CFFFFFF))
+        selected -> SolidColor(Color(0xFF380B12))
+        else -> SolidColor(Color(0xFF141418))
     }
 
     val borderStroke = when {
@@ -123,8 +532,8 @@ fun GlassChip(
 
     val contentColor = when {
         !enabled -> Color(0x50FFFFFF)
-        selected -> LiquidGlass.NeonCyan
-        else -> MaterialTheme.colorScheme.onSurfaceVariant
+        selected -> LiquidGlass.NeonCrimson
+        else -> Color.White
     }
 
     Box(
@@ -133,7 +542,7 @@ fun GlassChip(
             .background(backgroundBrush, shape)
             .then(if (borderStroke != null) Modifier.border(borderStroke, shape) else Modifier)
             .clickable(enabled = enabled, onClick = onClick)
-            .padding(horizontal = 14.dp, vertical = 8.dp),
+            .padding(horizontal = 14.dp, vertical = 7.dp),
         contentAlignment = Alignment.Center,
     ) {
         CompositionLocalProvider(LocalContentColor provides contentColor) {
@@ -149,88 +558,6 @@ fun GlassChip(
                 }
             }
         }
-    }
-}
-
-/**
- * Custom Liquid Glass floating bottom dock container.
- */
-@Composable
-fun GlassDock(
-    shape: Shape,
-    modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit,
-) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(LiquidGlass.DockBackgroundBrush, shape)
-            .border(LiquidGlass.borderStroke(1.dp), shape)
-            .navigationBarsPadding(),
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(64.dp)
-                .padding(horizontal = 4.dp, vertical = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround,
-            content = content,
-        )
-    }
-}
-
-/**
- * Single navigation item inside the [GlassDock].
- */
-@Composable
-fun RowScope.GlassDockItem(
-    selected: Boolean,
-    onClick: () -> Unit,
-    icon: @Composable () -> Unit,
-    label: String,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-) {
-    val selectedColor = LiquidGlass.NeonCyan
-    val unselectedColor = Color(0x8AFFFFFF)
-    val contentColor = if (selected) selectedColor else unselectedColor
-
-    Column(
-        modifier = modifier
-            .weight(1f)
-            .fillMaxHeight()
-            .clip(RoundedCornerShape(12.dp))
-            .clickable(
-                enabled = enabled,
-                onClick = onClick,
-            )
-            .padding(vertical = 4.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-    ) {
-        Box(
-            modifier = Modifier
-                .size(width = 44.dp, height = 26.dp)
-                .background(
-                    color = if (selected) Color(0x2400E5FF) else Color.Transparent,
-                    shape = CircleShape,
-                ),
-            contentAlignment = Alignment.Center,
-        ) {
-            CompositionLocalProvider(LocalContentColor provides contentColor) {
-                icon()
-            }
-        }
-        Spacer(Modifier.height(2.dp))
-        Text(
-            text = label,
-            style = MaterialTheme.typography.labelSmall.copy(
-                fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
-            ),
-            color = contentColor,
-            maxLines = 1,
-        )
     }
 }
 
@@ -263,7 +590,6 @@ fun GlassCard(
 
 /**
  * Translucent smoked obsidian banner for offline/warning/info alerts.
- * Replaces solid Material 3 containers with an elegant liquid glass appearance.
  */
 @Composable
 fun GlassBanner(
@@ -316,3 +642,109 @@ fun GlassBanner(
     }
 }
 
+/**
+ * Custom Liquid Glass floating bottom dock container with animated sliding indicator.
+ */
+@Composable
+fun GlassDock(
+    shape: Shape,
+    modifier: Modifier = Modifier,
+    indicatorIndex: Float? = null,
+    itemCount: Int = 5,
+    content: @Composable RowScope.() -> Unit,
+) {
+    var widthPx by remember { androidx.compose.runtime.mutableIntStateOf(0) }
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .androidx.compose.ui.layout.onSizeChanged { widthPx = it.width }
+            .background(LiquidGlass.DockBackgroundBrush, shape)
+            .border(LiquidGlass.borderStroke(1.dp), shape)
+            .navigationBarsPadding(),
+    ) {
+        if (indicatorIndex != null && widthPx > 0 && itemCount > 0) {
+            val slotWidth = widthPx.toFloat() / itemCount
+            Box(
+                modifier = Modifier
+                    .offset { androidx.compose.ui.unit.IntOffset((indicatorIndex * slotWidth).toInt(), 0) }
+                    .width(with(androidx.compose.ui.platform.LocalDensity.current) { slotWidth.toDp() })
+                    .height(68.dp)
+                    .padding(horizontal = 4.dp, vertical = 6.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(
+                        brush = Brush.verticalGradient(
+                            listOf(Color(0xFF2E0910), Color(0xFF160407)),
+                        ),
+                    )
+                    .border(
+                        BorderStroke(1.dp, Brush.verticalGradient(listOf(Color(0x99FF2A42), Color(0x20FF2A42)))),
+                        RoundedCornerShape(16.dp),
+                    ),
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(68.dp)
+                .padding(horizontal = 4.dp, vertical = 6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround,
+            content = content,
+        )
+    }
+}
+
+/**
+ * Single navigation item inside the [GlassDock] with fluid indicator animation.
+ */
+@Composable
+fun RowScope.GlassDockItem(
+    selected: Boolean,
+    onClick: () -> Unit,
+    icon: @Composable () -> Unit,
+    label: String,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) {
+    val selectedColor = LiquidGlass.NeonCrimson
+    val unselectedColor = Color(0x8AFFFFFF)
+    val contentColor = if (selected) selectedColor else unselectedColor
+
+    Column(
+        modifier = modifier
+            .weight(1f)
+            .fillMaxHeight()
+            .clip(RoundedCornerShape(12.dp))
+            .clickable(
+                enabled = enabled,
+                onClick = onClick,
+            )
+            .padding(vertical = 4.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Box(
+            modifier = Modifier
+                .size(width = 44.dp, height = 26.dp)
+                .background(
+                    color = if (selected) Color(0x28FF2A42) else Color.Transparent,
+                    shape = CircleShape,
+                ),
+            contentAlignment = Alignment.Center,
+        ) {
+            CompositionLocalProvider(LocalContentColor provides contentColor) {
+                icon()
+            }
+        }
+        Spacer(Modifier.height(2.dp))
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelSmall.copy(
+                fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
+                fontSize = 11.sp,
+            ),
+            color = contentColor,
+            maxLines = 1,
+        )
+    }
+}

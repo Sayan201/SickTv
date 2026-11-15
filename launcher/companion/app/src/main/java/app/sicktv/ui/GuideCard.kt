@@ -215,13 +215,13 @@ private fun StepDot(n: Int, done: Boolean, current: Boolean) {
                 Icons.Default.Check,
                 contentDescription = stringResource(R.string.guide_done),
                 modifier = Modifier.size(18.dp),
-                tint = LiquidGlass.NeonCyan,
+                tint = LiquidGlass.NeonCrimson,
             )
         } else {
             Text(
                 "$n",
                 style = MaterialTheme.typography.labelLarge,
-                color = if (current) LiquidGlass.NeonCyan else MaterialTheme.colorScheme.outline,
+                color = if (current) LiquidGlass.NeonCrimson else Color(0x60FFFFFF),
                 fontWeight = if (current) FontWeight.Bold else FontWeight.Normal,
             )
         }

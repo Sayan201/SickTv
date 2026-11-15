@@ -645,11 +645,11 @@ private fun Outcome(
         Box(
             Modifier.size(96.dp)
                 .clip(squircle)
-                .background(if (kind == Verdict.Done) Color(0x2800E5FF) else Color(0x18FFFFFF))
+                .background(if (kind == Verdict.Done) Color(0xFF2E0910) else Color(0x18FFFFFF))
                 .border(if (kind == Verdict.Done) LiquidGlass.activeBorderStroke(1.5.dp) else LiquidGlass.borderStroke(1.dp), squircle),
             contentAlignment = Alignment.Center,
         ) {
-            Icon(if (kind == Verdict.Done) AccessIcons.ShieldOk else AccessIcons.Shield, contentDescription = null, Modifier.size(44.dp), tint = if (kind == Verdict.Done) LiquidGlass.NeonCyan else fg)
+            Icon(if (kind == Verdict.Done) AccessIcons.ShieldOk else AccessIcons.Shield, contentDescription = null, Modifier.size(44.dp), tint = if (kind == Verdict.Done) LiquidGlass.NeonCrimson else fg)
         }
         Text(title, style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center, modifier = Modifier.padding(top = 32.dp))
         Text(text, style = MaterialTheme.typography.bodyLarge, color = c.onSurfaceVariant, textAlign = TextAlign.Center, modifier = Modifier.padding(top = 12.dp))

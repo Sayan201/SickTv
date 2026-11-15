@@ -127,7 +127,7 @@ fun HomeScreenBlock(ui: DeviceUi, actions: DeviceActions, fire: Boolean = false)
 @Composable
 private fun NoDefaultBanner() {
     GlassBanner(
-        icon = { Icon(HubIcons.InfoOutline, contentDescription = null, Modifier.size(20.dp), tint = LiquidGlass.NeonCyan) },
+        icon = { Icon(HubIcons.InfoOutline, contentDescription = null, Modifier.size(20.dp), tint = LiquidGlass.NeonCrimson) },
         title = Copy.NO_DEFAULT.resolve(),
     )
 }

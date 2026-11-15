@@ -318,7 +318,7 @@ internal fun ResultHead(ok: Boolean, title: String, text: String) {
         Box(
             Modifier.size(96.dp)
                 .clip(squircle)
-                .background(if (ok) Color(0x2800E5FF) else c.errorContainer)
+                .background(if (ok) Color(0xFF2E0910) else c.errorContainer)
                 .border(if (ok) LiquidGlass.activeBorderStroke(1.5.dp) else LiquidGlass.borderStroke(1.dp), squircle),
             contentAlignment = Alignment.Center,
         ) {
@@ -326,7 +326,7 @@ internal fun ResultHead(ok: Boolean, title: String, text: String) {
                 if (ok) Icons.Default.Check else Icons.Default.Warning,
                 contentDescription = null,
                 Modifier.size(44.dp),
-                tint = if (ok) LiquidGlass.NeonCyan else c.onErrorContainer,
+                tint = if (ok) LiquidGlass.NeonCrimson else c.onErrorContainer,
             )
         }
         Text(title, style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center, modifier = Modifier.padding(top = 24.dp))

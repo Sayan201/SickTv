@@ -2,7 +2,10 @@
 
 package app.sicktv.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,27 +20,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Warning
-import app.sicktv.ui.theme.GlassChip
-import androidx.compose.material3.ContainedLoadingIndicator
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SegmentedButton
-import androidx.compose.material3.SegmentedButtonDefaults
-import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Stable
@@ -65,11 +58,13 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 import androidx.compose.ui.util.lerp
 import app.sicktv.R
@@ -78,6 +73,10 @@ import app.sicktv.data.DeviceState
 import app.sicktv.data.Snapshot
 import app.sicktv.data.deviceKind
 import app.sicktv.data.resolve
+import app.sicktv.ui.theme.GlassChip
+import app.sicktv.ui.theme.GlassSegmentedBar
+import app.sicktv.ui.theme.LiquidGlass
+import app.sicktv.ui.theme.PulsingOrb
 
 /*
  * The TV's header, shared by the tabs that lead with the TV: the big hero, which collapses as the
@@ -130,7 +129,6 @@ private fun LayoutCoordinates.rectInRoot() = Rect(positionInRoot(), size.toSize(
 @Composable
 internal fun Cookie(device: Device, size: Dp) {
     val kind = deviceKind(device)
-    val c = MaterialTheme.colorScheme
     val on = device.state == DeviceState.Online
     val shape = RoundedCornerShape(size * 0.28f)
     Box(
@@ -139,14 +137,15 @@ internal fun Cookie(device: Device, size: Dp) {
             .clip(shape)
             .background(
                 brush = if (on) Brush.verticalGradient(
-                    listOf(Color(0xFF222228), Color(0xFF121215))
+                    listOf(Color(0xFF1E1214), Color(0xFF120A0C)),
                 ) else Brush.verticalGradient(
-                    listOf(Color(0xFF18181C), Color(0xFF0C0C0E))
+                    listOf(Color(0xFF16161B), Color(0xFF0C0C0E)),
                 ),
                 shape = shape,
             )
             .border(
-                if (on) LiquidGlass.activeBorderStroke(1.dp) else LiquidGlass.borderStroke(1.dp),
+                if (on) BorderStroke(1.dp, Brush.verticalGradient(listOf(Color(0x80FF2A42), Color(0x33FF2A42))))
+                else LiquidGlass.borderStroke(1.dp),
                 shape = shape,
             ),
         contentAlignment = Alignment.Center,
@@ -154,8 +153,8 @@ internal fun Cookie(device: Device, size: Dp) {
         Icon(
             DeviceIcons.of(kind),
             contentDescription = kind.word(),
-            Modifier.size(size / 2),
-            tint = if (on) LiquidGlass.NeonCyan else c.outline,
+            Modifier.size(size * 0.52f),
+            tint = if (on) LiquidGlass.NeonCrimson else Color(0x80FFFFFF),
         )
     }
 }
@@ -183,7 +182,11 @@ fun TvHero(state: UiState, live: Snapshot?, actions: DeviceActions, chips: Boole
                 Box(Modifier.onGloballyPositioned { morph.heroCookie = it.rectInRoot() }) { Cookie(device, 80.dp) }
                 Text(
                     name(device),
-                    style = MaterialTheme.typography.headlineMediumEmphasized,
+                    style = MaterialTheme.typography.headlineMediumEmphasized.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 22.sp,
+                    ),
+                    color = Color.White,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.padding(horizontal = 16.dp).onGloballyPositioned { morph.heroName = it.rectInRoot() },
@@ -191,19 +194,80 @@ fun TvHero(state: UiState, live: Snapshot?, actions: DeviceActions, chips: Boole
             }
             Column(Modifier.graphicsLayer { alpha = detailAlpha(collapse()) }, horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 val made = makerLine(device)
-                if (made.isNotEmpty()) Text(made, style = MaterialTheme.typography.bodyMedium, color = c.onSurfaceVariant)
+                if (made.isNotEmpty()) Text(made, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 13.sp), color = Color(0x8AFFFFFF))
                 val health = live?.let { Copy.health(it, heaviest(it, state.device.apps)) }
-                Surface(
-                    shape = CircleShape,
-                    color = if (health?.ok == false) c.errorContainer else Color(0x18FFFFFF),
-                    border = BorderStroke(1.dp, if (health?.ok == false) c.error else Color(0x28FFFFFF)),
+                val isFine = health?.ok != false && device.state == DeviceState.Online
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Row(Modifier.padding(horizontal = 14.dp, vertical = 6.dp), verticalAlignment = Alignment.CenterVertically) {
-                        if (health != null) {
-                            Icon(if (health.ok) Icons.Default.CheckCircle else Icons.Default.Warning, null, Modifier.size(16.dp), tint = if (health.ok) LiquidGlass.NeonCyan else c.error)
-                        } else StateDot(device.state)
-                        Spacer(Modifier.width(8.dp))
-                        Text((health?.text ?: Copy.state(device.state)).resolve(), style = MaterialTheme.typography.labelLarge)
+                    // Status pill: ✔ Running fine
+                    Box(
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .background(
+                                color = if (isFine) Color(0xFF1F0B0E) else if (health?.ok == false) Color(0xFF38080E) else Color(0xFF141418),
+                                shape = CircleShape,
+                            )
+                            .border(
+                                width = 1.dp,
+                                color = if (isFine) Color(0x66FF2A42) else if (health?.ok == false) LiquidGlass.NeonCrimson else Color(0x28FFFFFF),
+                                shape = CircleShape,
+                            )
+                            .padding(horizontal = 14.dp, vertical = 6.dp),
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            if (health != null) {
+                                Icon(
+                                    if (health.ok) Icons.Default.CheckCircle else Icons.Default.Warning,
+                                    null,
+                                    Modifier.size(15.dp),
+                                    tint = if (health.ok) LiquidGlass.NeonCrimson else c.error,
+                                )
+                            } else StateDot(device.state)
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                (health?.text ?: Copy.state(device.state)).resolve(),
+                                style = MaterialTheme.typography.labelLarge.copy(
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 13.sp,
+                                ),
+                                color = if (isFine) LiquidGlass.NeonCrimson else Color.White,
+                            )
+                        }
+                    }
+
+                    // On Overview (chips = true), if single device, display + Device right beside it
+                    if (chips && state.devices.size <= 1) {
+                        Box(
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .background(Color(0xFF141418), CircleShape)
+                                .border(BorderStroke(1.dp, Color(0x28FFFFFF)), CircleShape)
+                                .clickable(onClick = actions.addDevice)
+                                .padding(horizontal = 14.dp, vertical = 6.dp),
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            ) {
+                                Icon(
+                                    Icons.Default.Add,
+                                    contentDescription = stringResource(R.string.header_add_device_icon),
+                                    modifier = Modifier.size(15.dp),
+                                    tint = Color.White,
+                                )
+                                Text(
+                                    stringResource(R.string.header_add_device_label),
+                                    style = MaterialTheme.typography.labelLarge.copy(
+                                        fontWeight = FontWeight.Medium,
+                                        fontSize = 13.sp,
+                                    ),
+                                    color = Color.White,
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -235,13 +299,14 @@ fun TvBarTitle(device: Device, collapse: () -> Float, morph: HeroMorph, modifier
         Spacer(Modifier.width(12.dp))
         Text(
             name(device),
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+            color = Color.White,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(1f, fill = false).then(landed).onGloballyPositioned { morph.barName = it.rectInRoot() },
         )
         Spacer(Modifier.width(12.dp))
-        Surface(modifier = Modifier.graphicsLayer { alpha = titleAlpha(collapse()) }, shape = CircleShape, color = if (on) c.primaryContainer else c.surfaceContainerHighest, contentColor = if (on) c.onPrimaryContainer else c.onSurfaceVariant) {
+        Surface(modifier = Modifier.graphicsLayer { alpha = titleAlpha(collapse()) }, shape = CircleShape, color = if (on) Color(0xFF1F0B0E) else Color(0xFF16161B), contentColor = if (on) LiquidGlass.NeonCrimson else Color(0x8AFFFFFF)) {
             Row(Modifier.padding(horizontal = 8.dp, vertical = 2.dp), verticalAlignment = Alignment.CenterVertically) {
                 StateDot(device.state)
                 Spacer(Modifier.width(6.dp))
@@ -273,8 +338,8 @@ internal fun HeroMorphOverlay(device: Device, morph: HeroMorph, collapse: () -> 
         Box(Modifier.graphicsLayer { travel(morph.heroCookie, morph.barCookie) }) { Cookie(device, 80.dp) }
         Text(
             name(device),
-            style = MaterialTheme.typography.headlineMediumEmphasized,
-            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.headlineMediumEmphasized.copy(fontWeight = FontWeight.Bold),
+            color = Color.White,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             // As wide as the hero's name, so it cuts off where that one does.
@@ -321,19 +386,20 @@ private fun TvChips(state: UiState, actions: DeviceActions) {
                 modifier = if (d.state == DeviceState.Online || d.loggedOutAt != null) Modifier else Modifier.alpha(0.6f),
             )
         }
-        // Adding a TV sits with the TVs, as the last chip.
-        GlassChip(
-            selected = false,
-            onClick = actions.addDevice,
-            label = { Text(stringResource(R.string.header_add_device_label)) },
-            leadingIcon = { Icon(Icons.Default.Add, contentDescription = stringResource(R.string.header_add_device_icon), Modifier.size(18.dp)) },
-        )
+        // If there are multiple devices, adding a TV sits with the TVs as the last chip
+        if (state.devices.size > 1) {
+            GlassChip(
+                selected = false,
+                onClick = actions.addDevice,
+                label = { Text(stringResource(R.string.header_add_device_label)) },
+                leadingIcon = { Icon(Icons.Default.Add, contentDescription = stringResource(R.string.header_add_device_icon), Modifier.size(18.dp)) },
+            )
+        }
     }
 }
 
 /**
- * A tab's own tabs, as connected buttons with a check on the chosen one. The strip runs edge to
- * edge across the list's side [inset], in [color], so it pins cleanly under the bar once the hero has folded.
+ * A tab's own tabs, built with Foundation GlassSegmentedBar.
  * Whatever is [below] the buttons, such as a search field, pins with them.
  */
 @Composable
@@ -345,19 +411,15 @@ internal fun PinnedSegments(labels: List<String>, selected: Int, color: Color, i
                 val p = m.measure(c.copy(minWidth = c.maxWidth + 2 * side, maxWidth = c.maxWidth + 2 * side))
                 layout(c.maxWidth, p.height) { p.place(-side, 0) }
             }
-            .background(color)
+            .background(Color.Black)
             .padding(horizontal = inset, vertical = 8.dp),
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
-                labels.forEachIndexed { i, label ->
-                    SegmentedButton(
-                        selected = selected == i,
-                        onClick = { onSelect(i) },
-                        shape = SegmentedButtonDefaults.itemShape(i, labels.size),
-                    ) { Text(label) }
-                }
-            }
+            GlassSegmentedBar(
+                options = labels,
+                selectedIndex = selected,
+                onSelect = onSelect,
+            )
             below()
         }
     }
@@ -369,28 +431,25 @@ internal fun PinnedSegments(labels: List<String>, selected: Int, color: Color, i
  */
 @Composable
 internal fun EmptyState(icon: ImageVector, title: String, line: String) {
-    val c = MaterialTheme.colorScheme
     Column(Modifier.fillMaxWidth().padding(top = 96.dp, bottom = 24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Box(Modifier.size(56.dp).clip(CircleShape).background(c.surfaceContainerHighest), contentAlignment = Alignment.Center) {
-            Icon(icon, contentDescription = null, Modifier.size(28.dp), tint = c.onSurfaceVariant)
+        Box(Modifier.size(56.dp).clip(CircleShape).background(Color(0xFF141418)), contentAlignment = Alignment.Center) {
+            Icon(icon, contentDescription = null, Modifier.size(28.dp), tint = Color(0x8AFFFFFF))
         }
         Spacer(Modifier.height(16.dp))
-        Text(title, style = MaterialTheme.typography.titleSmall, textAlign = TextAlign.Center)
+        Text(title, style = MaterialTheme.typography.titleSmall, color = Color.White, textAlign = TextAlign.Center)
         Spacer(Modifier.height(4.dp))
-        Text(line, style = MaterialTheme.typography.bodyMedium, color = c.onSurfaceVariant, textAlign = TextAlign.Center)
+        Text(line, style = MaterialTheme.typography.bodyMedium, color = Color(0x8AFFFFFF), textAlign = TextAlign.Center)
     }
 }
 
-/** Where [EmptyState] would sit, while the TV's app list is still on its way. */
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+/** Where [EmptyState] would sit, while the TV's app list is still on its way, showing the radiant PulsingOrb. */
 @Composable
 internal fun AppsLoading() {
-    Column(Modifier.fillMaxWidth().padding(top = 96.dp, bottom = 24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        ContainedLoadingIndicator(Modifier.size(56.dp))
-        Spacer(Modifier.height(16.dp))
-        Text(Copy.READING_APPS.resolve(), style = MaterialTheme.typography.titleSmall, textAlign = TextAlign.Center)
+    Column(Modifier.fillMaxWidth().padding(top = 72.dp, bottom = 24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        PulsingOrb(size = 56.dp)
+        Spacer(Modifier.height(20.dp))
+        Text(Copy.READING_APPS.resolve(), style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold), color = Color.White, textAlign = TextAlign.Center)
         Spacer(Modifier.height(4.dp))
-        Text(Copy.READING_APPS_LINE.resolve(), style
- = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
+        Text(Copy.READING_APPS_LINE.resolve(), style = MaterialTheme.typography.bodyMedium, color = Color(0x8AFFFFFF), textAlign = TextAlign.Center)
     }
 }

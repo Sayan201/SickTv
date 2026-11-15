@@ -105,7 +105,6 @@ private fun Tile(
     primary: Boolean = false,
     badge: Int? = null,
 ) {
-    val c = MaterialTheme.colorScheme
     val shape = RoundedCornerShape(18.dp)
     val tileBorder = when {
         !enabled -> null
@@ -117,7 +116,7 @@ private fun Tile(
         modifier = modifier
             .background(
                 brush = when {
-                    !enabled -> SolidColor(c.onSurface.copy(alpha = 0.06f))
+                    !enabled -> SolidColor(Color(0x0CFFFFFF))
                     primary -> LiquidGlass.ActiveTileGlassBrush
                     else -> LiquidGlass.TileGlassBrush
                 },
@@ -128,32 +127,39 @@ private fun Tile(
         shape = shape,
         color = Color.Transparent,
         contentColor = when {
-            !enabled -> c.onSurface.copy(alpha = 0.38f)
-            primary -> Color(0xFFEDF2F7)
-            else -> c.onSurface
+            !enabled -> Color(0x60FFFFFF)
+            else -> Color.White
         },
     ) {
         Column(
-            Modifier.padding(vertical = 20.dp, horizontal = 4.dp),
+            Modifier.padding(vertical = 18.dp, horizontal = 4.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(6.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             BadgedBox(
                 badge = {
                     if (badge != null) Badge(
-                        containerColor = LiquidGlass.NeonCyan,
-                        contentColor = Color(0xFF002229),
+                        containerColor = LiquidGlass.NeonCrimson,
+                        contentColor = Color.White,
                     ) { Text(badge.toString()) }
                 },
             ) {
                 Icon(
                     icon,
                     contentDescription = null,
-                    Modifier.size(28.dp),
-                    tint = if (primary) LiquidGlass.NeonCyan else c.onSurfaceVariant,
+                    Modifier.size(26.dp),
+                    tint = if (primary) LiquidGlass.NeonCrimson else Color.White,
                 )
             }
-            Text(label, style = MaterialTheme.typography.labelLarge, maxLines = 1)
+            Text(
+                label,
+                style = MaterialTheme.typography.labelLarge.copy(
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 12.sp,
+                ),
+                color = if (!enabled) Color(0x60FFFFFF) else Color.White,
+                maxLines = 1,
+            )
         }
     }
 }

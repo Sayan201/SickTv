@@ -93,8 +93,8 @@ fun HomeNoteCard(
         modifier = modifier.fillMaxWidth(),
     ) {
         Row {
-            Box(Modifier.size(40.dp).background(Color(0x2400E5FF), CircleShape), contentAlignment = Alignment.Center) {
-                Icon(icon, contentDescription = null, tint = LiquidGlass.NeonCyan, modifier = Modifier.size(24.dp))
+            Box(Modifier.size(40.dp).background(Color(0xFF2E0910), CircleShape), contentAlignment = Alignment.Center) {
+                Icon(icon, contentDescription = null, tint = LiquidGlass.NeonCrimson, modifier = Modifier.size(24.dp))
             }
             Spacer(Modifier.width(16.dp))
             Column(Modifier.weight(1f)) {
