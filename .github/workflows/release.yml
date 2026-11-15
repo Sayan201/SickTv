@@ -126,14 +126,4 @@ jobs:
           files: |
             release-assets/launcher.apk
             release-assets/sicktv-companion.apk
-          body: |
-            ## SickTv
-
-            Official signed Android APK packages for your Android TV and Android phone.
-
-            ### Downloads (2 Apps)
-            - **`launcher.apk`**: SickTv Launcher for Android TV (`com.sayan.tvhome`).
-            - **`sicktv-companion.apk`**: SickTv Companion app for Android phones (`app.sicktv`). Features wireless ADB TV connection, 1-click debloating with device-specific profiles, launcher catalog, and stock launcher restore.
-
-            ---
-            *Signed with project release key for persistent sideloading and verified updates.*
+          body_path: RELEASE_NOTES.md
