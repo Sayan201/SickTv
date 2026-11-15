@@ -22,12 +22,23 @@ import androidx.compose.ui.unit.dp
  * design language.
  */
 object LiquidGlass {
+    // Official Zangetsu Design System Tokens (from Spyou/Zangetsu)
+    val ZangetsuBg = Color(0xFF0B0B0F)
+    val ZangetsuSurface = Color(0xFF16161C)
+    val ZangetsuSurface2 = Color(0xFF20212A)
+    val ZangetsuTextPrimary = Color(0xFFFFFFFF)
+    val ZangetsuTextSecondary = Color(0xFFA7A7B2)
+    val ZangetsuTextTertiary = Color(0xFF6E6E78)
+    val ZangetsuHairline = Color(0x14FFFFFF)
+    val ZangetsuAccent = Color(0xFFFF4D57)
+    val ZangetsuAccentSoft = Color(0x26FF4D57)
+
     // Glass highlight accents - Neon Crimson (Zangetsu aesthetic)
-    val NeonCrimson = Color(0xFFFF2A42)
-    val NeonCrimsonSheen = Color(0x66FF2A42)
-    val NeonCrimsonGlow = Color(0x33FF2A42)
-    val NeonCrimsonSubtle = Color(0x18FF2A42)
-    val NeonCrimsonDark = Color(0xFFE50914)
+    val NeonCrimson = Color(0xFFFF4D57)
+    val NeonCrimsonSheen = Color(0x66FF4D57)
+    val NeonCrimsonGlow = Color(0x33FF4D57)
+    val NeonCrimsonSubtle = Color(0x18FF4D57)
+    val NeonCrimsonDark = Color(0xFFE0001B)
     val CrimsonGlassFill = Color(0xFF22080C)
     val CrimsonGlassFillActive = Color(0xFF380B12)
 
@@ -70,7 +81,7 @@ object LiquidGlass {
     ): BorderStroke = BorderStroke(
         width = width,
         brush = Brush.verticalGradient(
-            colors = listOf(Color(0xE6FF2A42), Color(0x40FF2A42)),
+            colors = listOf(Color(0xE6FF4D57), Color(0x40FF4D57)),
         ),
     )
 
@@ -79,10 +90,10 @@ object LiquidGlass {
      */
     val RemoteLensBrush = Brush.radialGradient(
         colors = listOf(
-            Color(0xFFFF334C),
+            Color(0xFFFF4D62),
             Color(0xFFE0001B),
             Color(0xFF88000E),
-            Color(0xFF4A0007),
+            Color(0xFF420006),
         ),
         radius = 110f,
     )
@@ -92,9 +103,9 @@ object LiquidGlass {
      */
     val DockBackgroundBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xDD18181E),
-            Color(0xF0101014),
-            Color(0xF80A0A0D),
+            Color(0xDD181822),
+            Color(0xEE121217),
+            Color(0xF50B0B0F),
         ),
     )
 
@@ -103,8 +114,8 @@ object LiquidGlass {
      */
     val TileGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xCC181822),
-            Color(0xE0101016),
+            Color(0xB3181822),
+            Color(0xCC101016),
         ),
     )
 
@@ -123,8 +134,8 @@ object LiquidGlass {
      */
     val CardGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xCC16161E),
-            Color(0xE60E0E13),
+            Color(0xB3181822),
+            Color(0xCC101016),
         ),
     )
 }

@@ -351,7 +351,7 @@ fun DeviceTabsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .navigationBarsPadding()
-                        .padding(start = 14.dp, end = 14.dp, bottom = 12.dp),
+                        .padding(start = 12.dp, end = 12.dp, bottom = 12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     GlassDock(
@@ -374,7 +374,7 @@ fun DeviceTabsScreen(
                             )
                         }
                     }
-                    Spacer(Modifier.width(10.dp))
+                    Spacer(Modifier.width(8.dp))
                     RemoteButton(
                         enabled = !offline,
                         onClick = actions.remote,
@@ -855,37 +855,37 @@ internal fun offerLauncherCard(ui: DeviceUi, debloat: DebloatState, fire: Boolea
 private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val rubyBrush = Brush.radialGradient(
         colors = listOf(
-            Color(0xFFFF334C),
+            Color(0xFFFF4D62),
             Color(0xFFE0001B),
             Color(0xFF88000E),
-            Color(0xFF4A0007),
+            Color(0xFF420006),
         ),
-        radius = 110f,
+        radius = 95f,
     )
     val disabledBrush = Brush.verticalGradient(
         colors = listOf(Color(0xFF222228), Color(0xFF141418)),
     )
     val borderStroke = if (enabled) {
         BorderStroke(
-            1.5.dp,
+            0.75.dp,
             Brush.verticalGradient(
-                listOf(Color(0x99FFFFFF), Color(0x60FF2A42), Color(0x20FF2A42)),
+                listOf(Color(0x99FFFFFF), Color(0x60FF4D57), Color(0x20FF4D57)),
             ),
         )
     } else {
-        BorderStroke(1.dp, Color(0x1EFFFFFF))
+        BorderStroke(0.5.dp, Color(0x1EFFFFFF))
     }
 
     Box(
         modifier = modifier
-            .size(60.dp)
+            .size(56.dp)
             .then(
                 if (enabled) {
                     Modifier.shadow(
-                        elevation = 14.dp,
+                        elevation = 12.dp,
                         shape = CircleShape,
-                        spotColor = Color(0xFFFF2A42),
-                        ambientColor = Color(0xFFFF2A42),
+                        spotColor = Color(0xFFFF4D57),
+                        ambientColor = Color(0xFFFF4D57),
                     )
                 } else Modifier,
             )
@@ -908,7 +908,7 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
                     .clip(RoundedCornerShape(topStartPercent = 100, topEndPercent = 100))
                     .background(
                         Brush.verticalGradient(
-                            listOf(Color(0x50FFFFFF), Color(0x00FFFFFF)),
+                            listOf(Color(0x44FFFFFF), Color(0x00FFFFFF)),
                         ),
                     ),
             )
@@ -916,7 +916,7 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
         Icon(
             imageVector = TileIcons.Remote,
             contentDescription = stringResource(R.string.tabs_remote),
-            modifier = Modifier.size(26.dp),
+            modifier = Modifier.size(24.dp),
             tint = if (enabled) Color.White else Color(0x55FFFFFF),
         )
     }

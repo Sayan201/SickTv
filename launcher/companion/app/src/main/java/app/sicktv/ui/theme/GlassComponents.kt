@@ -667,7 +667,7 @@ fun GlassDock(
     var widthPx by remember { mutableIntStateOf(0) }
     Box(
         modifier = modifier
-            .height(60.dp)
+            .height(58.dp)
             .onSizeChanged { widthPx = it.width }
             .shadow(
                 elevation = 16.dp,
@@ -679,9 +679,9 @@ fun GlassDock(
             .background(LiquidGlass.DockBackgroundBrush, shape)
             .border(
                 BorderStroke(
-                    1.dp,
+                    0.75.dp,
                     Brush.verticalGradient(
-                        listOf(Color(0x38FFFFFF), Color(0x0CFFFFFF)),
+                        listOf(Color(0x33FFFFFF), Color(0x10FFFFFF)),
                     ),
                 ),
                 shape,
@@ -701,6 +701,7 @@ fun GlassDock(
             }
             val indicatorWidth = slotWidth + extraWidth
             val scaleY = 1f - (stretchFactor * 0.15f)
+            val indicatorShape = RoundedCornerShape(24.dp)
 
             Box(
                 modifier = Modifier
@@ -708,43 +709,43 @@ fun GlassDock(
                     .width(with(LocalDensity.current) { indicatorWidth.toDp() })
                     .fillMaxHeight()
                     .graphicsLayer { this.scaleY = scaleY }
-                    .padding(horizontal = 4.dp, vertical = 4.dp)
+                    .padding(horizontal = 3.dp, vertical = 3.dp)
                     .shadow(
-                        elevation = (12 + (stretchFactor * 10)).dp,
-                        shape = CircleShape,
-                        spotColor = Color(0xFFFF2A42),
-                        ambientColor = Color(0xFFFF2A42),
+                        elevation = (10 + (stretchFactor * 10)).dp,
+                        shape = indicatorShape,
+                        spotColor = Color(0xFFFF4D57),
+                        ambientColor = Color(0xFFFF4D57),
                     )
-                    .clip(CircleShape)
+                    .clip(indicatorShape)
                     .background(
                         brush = Brush.verticalGradient(
                             listOf(
-                                Color(0xFFFF263E),
-                                Color(0xFFD60018),
-                                Color(0xFF8A000F),
+                                Color(0xFFFF4D57),
+                                Color(0xFFE0001B),
+                                Color(0xFF9E0013),
                             ),
                         ),
                     )
                     .border(
                         BorderStroke(
-                            1.dp,
+                            0.75.dp,
                             Brush.verticalGradient(
-                                listOf(Color(0x99FFFFFF), Color(0x40FF2A42)),
+                                listOf(Color(0x80FFFFFF), Color(0x30FF4D57)),
                             ),
                         ),
-                        CircleShape,
+                        indicatorShape,
                     ),
             ) {
                 // Specular gloss crescent reflection for true liquid glass surface
                 Box(
                     Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.48f)
+                        .fillMaxHeight(0.45f)
                         .align(Alignment.TopCenter)
                         .clip(RoundedCornerShape(topStartPercent = 100, topEndPercent = 100))
                         .background(
                             Brush.verticalGradient(
-                                listOf(Color(0x55FFFFFF), Color.Transparent),
+                                listOf(Color(0x44FFFFFF), Color.Transparent),
                             ),
                         ),
                 )
@@ -764,7 +765,7 @@ fun GlassDock(
 /**
  * Single navigation item inside the [GlassDock] with fluid indicator animation.
  * Follows the Zangetsu styling: pure white icon and text when selected over the red pill,
- * and muted smoked white when unselected, with an animated liquid scale pop.
+ * and crisp white icon with silver text when unselected, with an animated liquid scale pop.
  */
 @Composable
 fun RowScope.GlassDockItem(
@@ -776,15 +777,15 @@ fun RowScope.GlassDockItem(
     enabled: Boolean = true,
 ) {
     val iconScale by animateFloatAsState(
-        targetValue = if (selected) 1.15f else 1.0f,
+        targetValue = if (selected) 1.12f else 1.0f,
         animationSpec = spring(
             dampingRatio = Spring.DampingRatioMediumBouncy,
             stiffness = Spring.StiffnessMedium,
         ),
         label = "dockItemScale",
     )
-    val contentColor = if (selected) Color.White else Color(0x99FFFFFF)
-    val labelColor = if (selected) Color.White else Color(0x80FFFFFF)
+    val contentColor = Color.White
+    val labelColor = if (selected) Color.White else Color(0xFFA7A7B2)
 
     Column(
         modifier = modifier
@@ -807,12 +808,12 @@ fun RowScope.GlassDockItem(
                 icon()
             }
         }
-        Spacer(Modifier.height(2.dp))
+        Spacer(Modifier.height(3.dp))
         Text(
             text = label,
             style = MaterialTheme.typography.labelSmall.copy(
                 fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
-                fontSize = 11.sp,
+                fontSize = 10.5.sp,
             ),
             color = labelColor,
             maxLines = 1,

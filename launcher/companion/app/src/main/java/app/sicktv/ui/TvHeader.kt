@@ -411,7 +411,7 @@ internal fun PinnedSegments(labels: List<String>, selected: Int, color: Color, i
                 val p = m.measure(c.copy(minWidth = c.maxWidth + 2 * side, maxWidth = c.maxWidth + 2 * side))
                 layout(c.maxWidth, p.height) { p.place(-side, 0) }
             }
-            .background(Color.Black)
+            .background(Color(0x99000000))
             .padding(horizontal = inset, vertical = 8.dp),
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {

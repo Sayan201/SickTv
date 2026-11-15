@@ -2,9 +2,11 @@
 
 package app.sicktv.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +15,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -198,25 +203,81 @@ fun FilesBlock(files: FilesUi, now: Long, actions: DeviceActions) {
 
 @Composable
 private fun FileRow(f: TvFile, now: Long, onSave: () -> Unit) {
+    val shape = RoundedCornerShape(16.dp)
     Row(
-        Modifier.fillMaxWidth().clickable(onClick = onSave).padding(vertical = 8.dp),
+        Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp)
+            .clip(shape)
+            .background(
+                Brush.verticalGradient(
+                    listOf(
+                        Color(0xB3181822),
+                        Color(0xCC101016),
+                    ),
+                ),
+                shape,
+            )
+            .border(
+                BorderStroke(0.5.dp, Color(0x1AFFFFFF)),
+                shape,
+            )
+            .clickable(onClick = onSave)
+            .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f)) {
-            Text(f.name, style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.MiddleEllipsis)
+            Text(
+                f.name,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 15.sp,
+                ),
+                color = Color.White,
+                maxLines = 1,
+                overflow = TextOverflow.MiddleEllipsis,
+            )
+            Spacer(Modifier.height(3.dp))
             Text(
                 "${Copy.bytes(f.size).resolve()} · ${Copy.ago(f.modifiedMillis, now).resolve()}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodySmall.copy(
+                    fontSize = 12.sp,
+                ),
+                color = Color(0xFFA7A7B2),
             )
         }
-        TextButton(onClick = onSave) { Text(stringResource(R.string.transfers_save)) }
+        Spacer(Modifier.width(10.dp))
+        Box(
+            modifier = Modifier
+                .clip(CircleShape)
+                .background(Color(0x26FF4D57), CircleShape)
+                .border(BorderStroke(0.5.dp, Color(0x60FF4D57)), CircleShape)
+                .clickable(onClick = onSave)
+                .padding(horizontal = 14.dp, vertical = 6.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(
+                stringResource(R.string.transfers_save),
+                color = Color(0xFFFF4D57),
+                style = MaterialTheme.typography.labelMedium.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 12.sp,
+                ),
+            )
+        }
     }
 }
 
 @Composable
 private fun Muted(text: String) {
-    Text(text, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    Text(
+        text,
+        style = MaterialTheme.typography.bodyMedium.copy(
+            fontSize = 13.sp,
+        ),
+        color = Color(0xFFA7A7B2),
+        modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp),
+    )
 }
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)

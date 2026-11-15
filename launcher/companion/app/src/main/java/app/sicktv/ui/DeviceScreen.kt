@@ -470,14 +470,14 @@ internal fun AppRow(
             AppIcon(app, Modifier.alpha(if (app.enabled || offline) 1f else 0.4f))
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
-                Text(app.label, style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(app.label, style = MaterialTheme.typography.bodyLarge, color = Color.White, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 if (!offline) {
                     Text(
                         app.protectedReason?.let { stringResource(R.string.device_app_protected, it.resolve()) } ?: status,
                         style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = Color(0xFFA7A7B2),
                     )
-                    if (app.homeServiceOff) Text(Copy.SERVICE_OFF.resolve(), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    if (app.homeServiceOff) Text(Copy.SERVICE_OFF.resolve(), style = MaterialTheme.typography.bodySmall, color = Color(0xFFA7A7B2))
                 }
             }
             if (busy && !offline) androidx.compose.material3.LoadingIndicator(Modifier.size(32.dp))
@@ -487,7 +487,7 @@ internal fun AppRow(
         AnimatedVisibility((open || proposed != null) && changeable) {
             Column(Modifier.padding(start = 52.dp, top = 8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 // The label is whatever the app calls itself; the package id is what an action touches.
-                Text(app.packageName, style = SmallNumber, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(app.packageName, style = SmallNumber, color = Color(0xFFA7A7B2))
                 if (proposed == null) {
                     // At most three: Open and Stop, then one remove button. Uninstall for an app the user
                     // installed, Disable for one the TV came with; Turn on takes Open's place while it's off.

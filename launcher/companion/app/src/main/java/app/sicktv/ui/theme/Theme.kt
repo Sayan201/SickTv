@@ -52,25 +52,25 @@ private val LightBrand = lightColorScheme(
 
 // Zangetsu OLED dark theme: Pure OLED Pitch Black canvas, Smoked Obsidian containers, Vivid Neon Crimson accents
 private val DarkBrand = darkColorScheme(
-    primary = Color(0xFFFF2A42),
+    primary = Color(0xFFFF4D57),
     onPrimary = Color(0xFFFFFFFF),
-    primaryContainer = Color(0xFF380B12),
+    primaryContainer = Color(0xFF22080C),
     onPrimaryContainer = Color(0xFFFFDADE),
     inversePrimary = Color(0xFFFFB3BA),
     secondary = Color(0xFFE2B6BA),
     onSecondary = Color(0xFF44191E),
-    secondaryContainer = Color(0xFF141418),
+    secondaryContainer = Color(0xFF16161C),
     onSecondaryContainer = Color(0xFFFFFFFF),
-    tertiary = Color(0xFFFF2A42),
+    tertiary = Color(0xFFFF4D57),
     onTertiary = Color(0xFFFFFFFF),
-    tertiaryContainer = Color(0xFF380B12),
+    tertiaryContainer = Color(0xFF22080C),
     onTertiaryContainer = Color(0xFFFFDADE),
     background = Color(0xFF000000),
     onBackground = Color(0xFFFFFFFF),
-    surface = Color(0xFF000000),
+    surface = Color(0xFF0B0B0F),
     onSurface = Color(0xFFFFFFFF),
-    surfaceVariant = Color(0xFF141418),
-    onSurfaceVariant = Color(0x8AFFFFFF),
+    surfaceVariant = Color(0xFF16161C),
+    onSurfaceVariant = Color(0xFFA7A7B2),
     inverseSurface = Color(0xFFFFFFFF),
     inverseOnSurface = Color(0xFF0B0B0D),
     error = Color(0xFFFF495F),
@@ -80,10 +80,10 @@ private val DarkBrand = darkColorScheme(
     outline = Color(0x28FFFFFF),
     outlineVariant = Color(0x14FFFFFF),
     surfaceBright = Color(0xFF202026),
-    surfaceContainer = Color(0xFF101014),
-    surfaceContainerHigh = Color(0xFF16161B),
-    surfaceContainerHighest = Color(0xFF1E1E24),
-    surfaceContainerLow = Color(0xFF0A0A0D),
+    surfaceContainer = Color(0xFF16161C),
+    surfaceContainerHigh = Color(0xFF20212A),
+    surfaceContainerHighest = Color(0xFF2A2B36),
+    surfaceContainerLow = Color(0xFF0B0B0F),
     surfaceContainerLowest = Color(0xFF000000),
     surfaceDim = Color(0xFF000000),
     primaryFixed = Color(0xFFFFDADE),
@@ -95,7 +95,7 @@ private val DarkBrand = darkColorScheme(
     onSecondaryFixed = Color(0xFF2C1517),
     onSecondaryFixedVariant = Color(0xFF5D3F41),
     tertiaryFixed = Color(0xFFFFDADE),
-    tertiaryFixedDim = Color(0xFFFF2A42),
+    tertiaryFixedDim = Color(0xFFFF4D57),
     onTertiaryFixed = Color(0xFF400008),
     onTertiaryFixedVariant = Color(0xFF730015),
 )
@@ -107,7 +107,7 @@ val SmallNumber = TextStyle(fontSize = 13.sp, lineHeight = 18.sp, fontFeatureSet
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun SickTvTheme(
-    dark: Boolean = isSystemInDarkTheme(),
+    dark: Boolean = true,
     dynamic: Boolean = false,
     content: @Composable () -> Unit,
 ) {
@@ -122,6 +122,10 @@ fun SickTvTheme(
         colorScheme = colors,
         motionScheme = MotionScheme.expressive(),
         typography = Typography(),
-        content = content,
-    )
+    ) {
+        androidx.compose.runtime.CompositionLocalProvider(
+            androidx.compose.material3.LocalContentColor provides (if (dark) Color.White else Color(0xFF211A1A)),
+            content = content,
+        )
+    }
 }
