@@ -95,11 +95,10 @@ jobs:
         working-directory: launcher/companion
         run: |
           chmod +x gradlew
-          ./gradlew --no-daemon :app:assembleGithubRelease --stacktrace 2>&1 | tee build.log || {
-            echo "### Companion Build Failed" >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
-            tail -n 120 build.log >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
+          set -o pipefail
+          ./gradlew --no-daemon :app:assembleGithubRelease --stacktrace 2>&1 | tee /tmp/build.log || {
+            msg=$(tail -n 25 /tmp/build.log | tr '\r\n' '  ')
+            echo "::error title=Companion Build Error::$msg"
             exit 1
           }
 
