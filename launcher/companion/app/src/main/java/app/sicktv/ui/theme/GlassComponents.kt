@@ -7,6 +7,7 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.spring
@@ -64,7 +65,9 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import kotlin.math.abs
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -650,13 +653,14 @@ fun GlassBanner(
 
 /**
  * Custom Liquid Glass floating bottom dock container with animated sliding indicator.
- * Implements the authentic Zangetsu floating capsule design system.
+ * Implements the authentic Zangetsu floating capsule design system with fluid liquid droplet morphing.
  */
 @Composable
 fun GlassDock(
     shape: Shape = CircleShape,
     modifier: Modifier = Modifier,
     indicatorIndex: Float? = null,
+    targetIndex: Float? = null,
     itemCount: Int = 4,
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -685,14 +689,28 @@ fun GlassDock(
     ) {
         if (indicatorIndex != null && widthPx > 0 && itemCount > 0) {
             val slotWidth = widthPx.toFloat() / itemCount
+            val diff = if (targetIndex != null) abs(targetIndex - indicatorIndex) else 0f
+            val stretchFactor = (diff * 0.28f).coerceIn(0f, 0.38f)
+            val extraWidth = slotWidth * stretchFactor
+            val movingRight = targetIndex != null && targetIndex >= indicatorIndex
+            val dynamicOffset = if (stretchFactor > 0.01f) {
+                if (movingRight) (indicatorIndex * slotWidth) - (extraWidth * 0.15f)
+                else (indicatorIndex * slotWidth) - (extraWidth * 0.85f)
+            } else {
+                indicatorIndex * slotWidth
+            }
+            val indicatorWidth = slotWidth + extraWidth
+            val scaleY = 1f - (stretchFactor * 0.15f)
+
             Box(
                 modifier = Modifier
-                    .offset { IntOffset((indicatorIndex * slotWidth).toInt(), 0) }
-                    .width(with(LocalDensity.current) { slotWidth.toDp() })
+                    .offset { IntOffset(dynamicOffset.toInt(), 0) }
+                    .width(with(LocalDensity.current) { indicatorWidth.toDp() })
                     .fillMaxHeight()
+                    .graphicsLayer { this.scaleY = scaleY }
                     .padding(horizontal = 4.dp, vertical = 4.dp)
                     .shadow(
-                        elevation = 12.dp,
+                        elevation = (12 + (stretchFactor * 10)).dp,
                         shape = CircleShape,
                         spotColor = Color(0xFFFF2A42),
                         ambientColor = Color(0xFFFF2A42),
@@ -701,7 +719,7 @@ fun GlassDock(
                     .background(
                         brush = Brush.verticalGradient(
                             listOf(
-                                Color(0xFFFF243C),
+                                Color(0xFFFF263E),
                                 Color(0xFFD60018),
                                 Color(0xFF8A000F),
                             ),
@@ -711,12 +729,26 @@ fun GlassDock(
                         BorderStroke(
                             1.dp,
                             Brush.verticalGradient(
-                                listOf(Color(0x80FFFFFF), Color(0x33FF2A42)),
+                                listOf(Color(0x99FFFFFF), Color(0x40FF2A42)),
                             ),
                         ),
                         CircleShape,
                     ),
-            )
+            ) {
+                // Specular gloss crescent reflection for true liquid glass surface
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.48f)
+                        .align(Alignment.TopCenter)
+                        .clip(RoundedCornerShape(topStartPercent = 100, topEndPercent = 100))
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(Color(0x55FFFFFF), Color.Transparent),
+                            ),
+                        ),
+                )
+            }
         }
         Row(
             modifier = Modifier
@@ -732,7 +764,7 @@ fun GlassDock(
 /**
  * Single navigation item inside the [GlassDock] with fluid indicator animation.
  * Follows the Zangetsu styling: pure white icon and text when selected over the red pill,
- * and muted smoked white when unselected.
+ * and muted smoked white when unselected, with an animated liquid scale pop.
  */
 @Composable
 fun RowScope.GlassDockItem(
@@ -743,6 +775,14 @@ fun RowScope.GlassDockItem(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
+    val iconScale by animateFloatAsState(
+        targetValue = if (selected) 1.15f else 1.0f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMedium,
+        ),
+        label = "dockItemScale",
+    )
     val contentColor = if (selected) Color.White else Color(0x99FFFFFF)
     val labelColor = if (selected) Color.White else Color(0x80FFFFFF)
 
@@ -759,8 +799,13 @@ fun RowScope.GlassDockItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        CompositionLocalProvider(LocalContentColor provides contentColor) {
-            icon()
+        Box(
+            modifier = Modifier.scale(iconScale),
+            contentAlignment = Alignment.Center,
+        ) {
+            CompositionLocalProvider(LocalContentColor provides contentColor) {
+                icon()
+            }
         }
         Spacer(Modifier.height(2.dp))
         Text(

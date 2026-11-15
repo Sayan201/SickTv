@@ -99,12 +99,12 @@ object LiquidGlass {
     )
 
     /**
-     * Tile background brush for normal action tiles.
+     * Tile background brush for normal action tiles with translucent frosted glass.
      */
     val TileGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xFF16161B),
-            Color(0xFF0F0F13),
+            Color(0xCC181822),
+            Color(0xE0101016),
         ),
     )
 
@@ -113,8 +113,8 @@ object LiquidGlass {
      */
     val ActiveTileGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xFF2D0B12),
-            Color(0xFF160508),
+            Color(0xDD3A0D16),
+            Color(0xEE1C060A),
         ),
     )
 
@@ -123,8 +123,8 @@ object LiquidGlass {
      */
     val CardGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xFF141418),
-            Color(0xFF0C0C0F),
+            Color(0xCC16161E),
+            Color(0xE60E0E13),
         ),
     )
 }

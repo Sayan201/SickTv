@@ -10,6 +10,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.foundation.layout.Arrangement
@@ -84,6 +85,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -109,12 +111,15 @@ import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.PathParser
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -256,8 +261,49 @@ fun DeviceTabsScreen(
         list.scrollToItem(0)
     }
 
-    Box {
+    var prevTab by remember { mutableStateOf(tab) }
+    var tabTransitionProgress by remember { mutableFloatStateOf(1f) }
+    LaunchedEffect(tab) {
+        if (tab != prevTab) {
+            prevTab = tab
+            tabTransitionProgress = 0f
+            androidx.compose.animation.core.animate(
+                initialValue = 0f,
+                targetValue = 1f,
+                animationSpec = androidx.compose.animation.core.spring(
+                    dampingRatio = 0.85f,
+                    stiffness = androidx.compose.animation.core.Spring.StiffnessMediumLow,
+                ),
+            ) { value, _ ->
+                tabTransitionProgress = value
+            }
+        }
+    }
+
+    Box(Modifier.fillMaxSize()) {
+        // Zangetsu Wallpaper background
+        Image(
+            painter = painterResource(R.drawable.bg_wallpaper),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop,
+        )
+        // Dark translucent overlay to give pure OLED contrast
+        Box(
+            Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.verticalGradient(
+                        listOf(
+                            Color(0xCC000000),
+                            Color(0x8A000000),
+                            Color(0xB3000000),
+                        ),
+                    ),
+                ),
+        )
         Scaffold(
+            containerColor = Color.Transparent,
             // Lifted so a snackbar message isn't hidden behind the floating dock.
             snackbarHost = { SnackbarHost(snackbar, Modifier.padding(bottom = 76.dp)) },
             // Install on Apps and upload on Files as crisp white GlassFab; the Remote has its own button in the bar.
@@ -276,7 +322,7 @@ fun DeviceTabsScreen(
                         // Each tab shows the TV big below, and in the bar once it has scrolled under it.
                         title = { TvBarTitle(device, collapse = { collapse }, morph = morph) },
                         colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = Color.Black,
+                            containerColor = Color.Transparent,
                             titleContentColor = Color.White,
                             actionIconContentColor = Color(0xCCFFFFFF),
                         ),
@@ -296,7 +342,7 @@ fun DeviceTabsScreen(
                 val animatedTabIdx by androidx.compose.animation.core.animateFloatAsState(
                     targetValue = targetTabIdx.toFloat(),
                     animationSpec = androidx.compose.animation.core.spring(
-                        dampingRatio = 0.78f,
+                        dampingRatio = 0.72f,
                         stiffness = androidx.compose.animation.core.Spring.StiffnessMediumLow,
                     ),
                     label = "tabGlide",
@@ -311,6 +357,7 @@ fun DeviceTabsScreen(
                     GlassDock(
                         shape = CircleShape,
                         indicatorIndex = animatedTabIdx,
+                        targetIndex = targetTabIdx.toFloat(),
                         itemCount = 4,
                         modifier = Modifier.weight(1f),
                     ) {
@@ -353,7 +400,13 @@ fun DeviceTabsScreen(
                 null
             }
             LazyColumn(
-                Modifier.fillMaxSize().padding(pad)
+                Modifier
+                    .fillMaxSize()
+                    .padding(pad)
+                    .graphicsLayer {
+                        alpha = tabTransitionProgress
+                        translationY = (1f - tabTransitionProgress) * 16.dp.toPx()
+                    }
                     // Sideways swipes step through Running, Installed and Built-in, as the buttons do.
                     .then(if (tab == TvTab.Apps && !searching) Modifier.swipeTabs(appsTab.ordinal, AppsTab.entries.size) { appsTab = AppsTab.entries[it] } else Modifier),
                 state = list,
