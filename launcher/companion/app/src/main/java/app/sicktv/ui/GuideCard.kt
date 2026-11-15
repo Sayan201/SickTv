@@ -23,14 +23,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import app.sicktv.ui.theme.GlassButton
+import app.sicktv.ui.theme.GlassChip
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -118,28 +117,14 @@ val brands = listOf(
 fun BrandChips(brand: TvBrand, onPick: (TvBrand) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(stringResource(R.string.guide_pick_tv), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             brands.forEach { b ->
                 val isSelected = b == brand
-                FilterChip(
+                GlassChip(
                     selected = isSelected,
                     onClick = { onPick(b) },
                     label = { Text(stringResource(b.name)) },
-                    leadingIcon = if (isSelected) ({ Icon(Icons.Default.Check, null, Modifier.size(18.dp)) }) else null,
-                    shape = RoundedCornerShape(12.dp),
-                    colors = FilterChipDefaults.filterChipColors(
-                        containerColor = Color(0x0CFFFFFF),
-                        labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        selectedContainerColor = Color(0x2400E5FF),
-                        selectedLabelColor = LiquidGlass.NeonCyan,
-                        selectedLeadingIconColor = LiquidGlass.NeonCyan,
-                    ),
-                    border = FilterChipDefaults.filterChipBorder(
-                        enabled = true,
-                        selected = isSelected,
-                        borderColor = Color(0x18FFFFFF),
-                        selectedBorderColor = LiquidGlass.NeonCyan.copy(alpha = 0.6f),
-                    ),
+                    leadingIcon = if (isSelected) ({ Icon(Icons.Default.Check, null, Modifier.size(16.dp)) }) else null,
                 )
             }
         }
@@ -183,15 +168,11 @@ fun GuideSteps(brand: TvBrand, step: Int, onStep: (Int) -> Unit, findTvs: @Compo
                         i == step -> {
                             Text(marked(body), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             Row(Modifier.padding(top = 12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Button(
+                                GlassButton(
                                     onClick = { onStep(i + 1) },
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = Color.White,
-                                        contentColor = Color(0xFF0B1018),
-                                    ),
-                                    shape = CircleShape,
+                                    primary = true,
                                 ) {
-                                    Text(stringResource(R.string.guide_done_next), fontWeight = FontWeight.SemiBold)
+                                    Text(stringResource(R.string.guide_done_next))
                                 }
                                 if (i > 0) {
                                     TextButton(
@@ -268,15 +249,11 @@ fun HelpDialog(brand: TvBrand, onAddByIp: () -> Unit, onDismiss: () -> Unit) {
             }
         },
         confirmButton = {
-            Button(
+            GlassButton(
                 onClick = { onDismiss(); onAddByIp() },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                    contentColor = Color(0xFF0B1018),
-                ),
-                shape = CircleShape,
+                primary = true,
             ) {
-                Text(stringResource(R.string.guide_add_by_ip), fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.guide_add_by_ip))
             }
         },
         dismissButton = {

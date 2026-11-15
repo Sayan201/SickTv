@@ -54,7 +54,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
@@ -63,9 +62,8 @@ import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.ShortNavigationBar
-import androidx.compose.material3.ShortNavigationBarItem
-import androidx.compose.material3.ShortNavigationBarItemDefaults
+import app.sicktv.ui.theme.GlassDock
+import app.sicktv.ui.theme.GlassDockItem
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -279,40 +277,28 @@ fun DeviceTabsScreen(
             bottomBar = {
                 // The Remote sits in the middle of the bar on every tab: an action, never a selected tab. Its round
                 // button sits in a notch cut into the bar's top edge, and is the same action as the label slot under it.
-                // The bar's own container is clear, so the notched shape behind it is what shows.
-                Box(
-                    Modifier
-                        .background(LiquidGlass.DockBackgroundBrush, NotchedBarShape)
-                        .border(LiquidGlass.borderStroke(1.dp), NotchedBarShape)
-                ) {
-                    val navColors = ShortNavigationBarItemDefaults.colors(
-                        selectedIconColor = LiquidGlass.NeonCyan,
-                        selectedTextColor = LiquidGlass.NeonCyan,
-                        indicatorColor = Color(0x2400E5FF),
-                        unselectedIconColor = Color(0x8AFFFFFF),
-                        unselectedTextColor = Color(0x8AFFFFFF),
-                    )
-                    ShortNavigationBar(containerColor = Color.Transparent) {
+                Box {
+                    GlassDock(shape = NotchedBarShape) {
                         TvTab.entries.forEach { t ->
-                            if (t == TvTab.Files) ShortNavigationBarItem(
-                                selected = false,
-                                onClick = actions.remote,
-                                icon = { Spacer(Modifier.size(24.dp)) },
-                                label = { Text(stringResource(R.string.tabs_remote)) },
-                                enabled = !offline,
-                                colors = navColors,
-                                modifier = Modifier.testTag("barRemote"),
-                            )
-                            ShortNavigationBarItem(
+                            if (t == TvTab.Files) {
+                                GlassDockItem(
+                                    selected = false,
+                                    onClick = actions.remote,
+                                    icon = { Spacer(Modifier.size(24.dp)) },
+                                    label = stringResource(R.string.tabs_remote),
+                                    enabled = !offline,
+                                    modifier = Modifier.testTag("barRemote"),
+                                )
+                            }
+                            GlassDockItem(
                                 selected = tab == t,
                                 onClick = {
                                     // Leaving Apps closes the search, so the list isn't still filtered on return.
                                     if (t != TvTab.Apps && searching) closeSearch()
                                     tab = t
                                 },
-                                icon = { Icon(t.icon(), contentDescription = null) },
-                                label = { Text(stringResource(t.label)) },
-                                colors = navColors,
+                                icon = { Icon(t.icon(), contentDescription = null, Modifier.size(22.dp)) },
+                                label = stringResource(t.label),
                             )
                         }
                     }

@@ -8,9 +8,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.text.font.FontWeight
 import app.sicktv.ui.theme.LiquidGlass
+import app.sicktv.ui.theme.GlassButton
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,7 +38,6 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
@@ -190,11 +189,17 @@ fun DebloatScreen(
             Surface(tonalElevation = 3.dp, modifier = Modifier.imePadding()) {
                 Box(Modifier.fillMaxWidth().navigationBarsPadding().padding(16.dp)) {
                     if (searching) {
-                        Button(onClick = use, enabled = marked != null, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.lists_use_this)) }
+                        GlassButton(
+                            onClick = use,
+                            enabled = marked != null,
+                            primary = true,
+                            modifier = Modifier.fillMaxWidth(),
+                        ) { Text(stringResource(R.string.lists_use_this)) }
                     } else {
-                        Button(
+                        GlassButton(
                             onClick = { confirming = true },
                             enabled = groups != null && ticked.isNotEmpty() && !busy,
+                            primary = true,
                             modifier = Modifier.fillMaxWidth(),
                         ) { Text(pluralStringResource(R.plurals.lists_disable_apps, ticked.size, ticked.size)) }
                     }
@@ -394,16 +399,12 @@ private fun HelpAddCard(onHelpAdd: () -> Unit) {
                     stringResource(R.string.lists_help_add_text),
                     style = MaterialTheme.typography.bodyMedium,
                 )
-                Button(
+                GlassButton(
                     onClick = onHelpAdd,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White,
-                        contentColor = Color(0xFF0B1018),
-                    ),
-                    shape = CircleShape,
+                    primary = true,
                     modifier = Modifier.align(Alignment.End).padding(top = 8.dp),
                 ) {
-                    Text(stringResource(R.string.lists_help_add_button), fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.lists_help_add_button))
                 }
             }
         }
@@ -461,16 +462,12 @@ internal fun DisableDialog(apps: List<Suggested>, onDisable: () -> Unit, onDismi
             }
         },
         confirmButton = {
-            Button(
+            GlassButton(
                 onClick = onDisable,
                 enabled = enabled,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                    contentColor = Color(0xFF0B1018),
-                ),
-                shape = CircleShape,
+                primary = true,
             ) {
-                Text(stringResource(R.string.lists_disable_yes), fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.lists_disable_yes))
             }
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.lists_cancel)) } },

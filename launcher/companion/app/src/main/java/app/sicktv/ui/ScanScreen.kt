@@ -26,6 +26,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.graphics.Color
 import app.sicktv.ui.theme.LiquidGlass
+import app.sicktv.ui.theme.GlassButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
@@ -212,13 +213,9 @@ private fun FoundTvs(scan: ScanUi, now: Long, onRescan: () -> Unit, onPick: (Sca
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
-                    Button(
+                    GlassButton(
                         onClick = { onPick(hit) },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.White,
-                            contentColor = Color(0xFF0B1018),
-                        ),
-                        shape = CircleShape,
+                        primary = true,
                     ) {
                         Text(
                             when (row) {
@@ -226,7 +223,6 @@ private fun FoundTvs(scan: ScanUi, now: Long, onRescan: () -> Unit, onPick: (Sca
                                 RowState.NotAllowed, is RowState.Unreachable -> stringResource(R.string.scan_try_again)
                                 else -> stringResource(R.string.scan_continue)
                             },
-                            fontWeight = FontWeight.SemiBold,
                         )
                     }
                 }
@@ -272,16 +268,10 @@ private fun FoundTvs(scan: ScanUi, now: Long, onRescan: () -> Unit, onPick: (Sca
             }
         }
         // Until a TV turns up, Rescan stays in one place; it waits out a scan rather than throw its probes away.
-        if (scan.hits.isEmpty()) Button(
+        if (scan.hits.isEmpty()) GlassButton(
             onClick = onRescan,
             enabled = !scan.scanning,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0x18FFFFFF),
-                contentColor = MaterialTheme.colorScheme.onSurface,
-                disabledContainerColor = Color(0x0CFFFFFF),
-                disabledContentColor = MaterialTheme.colorScheme.outline,
-            ),
-            shape = CircleShape,
+            primary = false,
         ) {
             Icon(Icons.Default.Refresh, null, Modifier.size(18.dp))
             Spacer(Modifier.width(8.dp))
@@ -317,15 +307,11 @@ private fun OffWifi(modifier: Modifier, onOpenWifi: () -> Unit, onAddByIp: () ->
             textAlign = TextAlign.Center,
         )
         Spacer(Modifier.height(4.dp))
-        Button(
+        GlassButton(
             onClick = onOpenWifi,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White,
-                contentColor = Color(0xFF0B1018),
-            ),
-            shape = CircleShape,
+            primary = true,
         ) {
-            Text(stringResource(R.string.scan_open_wifi), fontWeight = FontWeight.SemiBold)
+            Text(stringResource(R.string.scan_open_wifi))
         }
         // VPNs and odd setups can still reach a TV by its address.
         TextButton(onClick = onAddByIp) { Text(stringResource(R.string.scan_add_by_ip)) }
@@ -358,13 +344,9 @@ private fun AddByIpDialog(subnet: String?, onDismiss: () -> Unit, onSubmit: (Str
             }
         },
         confirmButton = {
-            Button(
+            GlassButton(
                 onClick = { error = onSubmit(text) },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                    contentColor = Color(0xFF0B1018),
-                ),
-                shape = CircleShape,
+                primary = true,
             ) { Text(stringResource(R.string.scan_connect)) }
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.scan_cancel)) } },

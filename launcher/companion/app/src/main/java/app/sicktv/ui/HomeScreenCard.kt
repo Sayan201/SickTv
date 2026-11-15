@@ -14,9 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FilledTonalButton
+import app.sicktv.ui.theme.GlassButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -103,14 +101,10 @@ fun HomeScreenBlock(ui: DeviceUi, actions: DeviceActions, fire: Boolean = false)
         Column(Modifier.fillMaxWidth().padding(top = 16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(Copy.CHANGE_HOME.resolve(), style = MaterialTheme.typography.bodyLarge)
             Text(Copy.CHANGE_HOME_TEXT.resolve(), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Button(
+            GlassButton(
                 onClick = actions.installLauncher,
                 enabled = !locked,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0x18FFFFFF),
-                    contentColor = MaterialTheme.colorScheme.onSurface,
-                ),
-                shape = CircleShape,
+                primary = false,
             ) { Text(Copy.CHANGE_HOME.resolve()) }
         }
     }
@@ -186,29 +180,19 @@ private fun LauncherRow(app: AppInfo, move: Action?, locked: Boolean, onMove: (A
         val serviceOn = app.home && app.homeServiceOff
         if (move != null || serviceOn || app.removable) {
             Row(Modifier.padding(start = 52.dp, top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                if (move != null) Button(
+                if (move != null) GlassButton(
                     onClick = { onMove(move) },
                     enabled = !locked,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0x18FFFFFF),
-                        contentColor = MaterialTheme.colorScheme.onSurface,
-                        disabledContainerColor = Color(0x0CFFFFFF),
-                        disabledContentColor = MaterialTheme.colorScheme.outline,
-                    ),
-                    shape = CircleShape,
+                    primary = false,
                 ) {
                     Text((if (move == Action.HomeBack) Copy.RESTORE_STOCK_HOME else Copy.MAKE_HOME).resolve())
                 }
-                if (serviceOn) Button(
+                if (serviceOn) GlassButton(
                     onClick = { turningOn = true },
                     enabled = !locked,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White,
-                        contentColor = Color(0xFF0B1018),
-                    ),
-                    shape = CircleShape,
+                    primary = true,
                 ) {
-                    Text(Copy.TURN_ON.resolve(), fontWeight = FontWeight.SemiBold)
+                    Text(Copy.TURN_ON.resolve())
                 }
                 if (app.removable) TextButton(onClick = onUninstall, enabled = !locked) { Text(Copy.button(Action.Uninstall).resolve()) }
             }
@@ -249,16 +233,12 @@ private fun MakeHomeDialog(app: AppInfo, action: Action, current: AppInfo?, apps
         title = { Text(Copy.makeHomeTitle(app.label).resolve()) },
         text = { Text(text) },
         confirmButton = {
-            Button(
+            GlassButton(
                 onClick = if (asks) ({ askService = true }) else actions.confirm,
                 enabled = !locked,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                    contentColor = Color(0xFF0B1018),
-                ),
-                shape = CircleShape,
+                primary = true,
             ) {
-                Text(Copy.MAKE_HOME.resolve(), fontWeight = FontWeight.SemiBold)
+                Text(Copy.MAKE_HOME.resolve())
             }
         },
         dismissButton = { TextButton(onClick = actions.cancel) { Text(stringResource(R.string.screen_cancel)) } },

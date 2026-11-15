@@ -26,10 +26,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material3.AssistChip
+import app.sicktv.ui.theme.GlassChip
 import androidx.compose.material3.ContainedLoadingIndicator
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
@@ -306,7 +305,7 @@ private fun TvChips(state: UiState, actions: DeviceActions) {
         itemVerticalAlignment = Alignment.CenterVertically,
     ) {
         if (state.devices.size > 1) state.devices.forEach { d ->
-            FilterChip(
+            GlassChip(
                 selected = d.id == state.selectedId,
                 onClick = { actions.select(d.id) },
                 label = { Text(name(d), maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.widthIn(max = 104.dp)) },
@@ -323,7 +322,12 @@ private fun TvChips(state: UiState, actions: DeviceActions) {
             )
         }
         // Adding a TV sits with the TVs, as the last chip.
-        AssistChip(onClick = actions.addDevice, label = { Text(stringResource(R.string.header_add_device_label)) }, leadingIcon = { Icon(Icons.Default.Add, contentDescription = stringResource(R.string.header_add_device_icon), Modifier.size(18.dp)) })
+        GlassChip(
+            selected = false,
+            onClick = actions.addDevice,
+            label = { Text(stringResource(R.string.header_add_device_label)) },
+            leadingIcon = { Icon(Icons.Default.Add, contentDescription = stringResource(R.string.header_add_device_icon), Modifier.size(18.dp)) },
+        )
     }
 }
 
