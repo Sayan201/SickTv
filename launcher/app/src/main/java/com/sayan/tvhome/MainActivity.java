@@ -39,6 +39,7 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.net.Uri;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -65,6 +66,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,8 +86,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -939,12 +943,14 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     }
 
     private void onWifiPillClicked() {
-        if (isWifiConnected() && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            showWifiNamePermissionDialog();
-            return;
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            boolean alreadyRequested = getPreferences(MODE_PRIVATE).getBoolean("wifi_ssid_permission_requested", false);
+            if (!alreadyRequested) {
+                showWifiNamePermissionDialog();
+                return;
+            }
         }
-        openNetworkPill();
+        showWifiMenu();
     }
 
     private boolean isWifiConnected() {
@@ -1023,7 +1029,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (requestCode == WEATHER_LOCATION_REQUEST) refreshWeather(true);
         if (requestCode == WIFI_SSID_LOCATION_REQUEST) {
             updateWifiLabel();
-            openNetworkPill();
+            showWifiMenu();
         }
     }
 
@@ -2551,6 +2557,10 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     }
 
     private PopupWindow glassPopup(View panel, int width) {
+        if (openPopup != null) {
+            try { openPopup.dismiss(); } catch (Exception ignored) {}
+            openPopup = null;
+        }
         final PopupWindow popup = new PopupWindow(panel, width, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));   // needed for Back to dismiss
         popup.setOutsideTouchable(true);
@@ -2641,6 +2651,169 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             popup.dismiss();
             action.run();
         });
+        rows.addView(row);
+    }
+
+    /** Dropdown menu under the Wi-Fi pill: current connected Wi-Fi followed by available networks. */
+    private void showWifiMenu() {
+        View anchor = findViewById(R.id.btnWifi);
+        if (anchor == null) return;
+        View panel = getLayoutInflater().inflate(R.layout.popup_wifi, root, false);
+        LinearLayout rows = panel.findViewById(R.id.rows);
+
+        int width = Math.max(anchor.getWidth(), (int) (260 * density));
+        final PopupWindow popup = glassPopup(panel, width);
+
+        WifiManager wm = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        boolean isWifi = false, isEthernet = false;
+        if (cm != null) {
+            for (Network net : cm.getAllNetworks()) {
+                NetworkCapabilities caps = cm.getNetworkCapabilities(net);
+                if (caps != null && caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {
+                    if (caps.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) isEthernet = true;
+                    if (caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) isWifi = true;
+                }
+            }
+        }
+
+        String connectedSsid = null;
+        if (isWifi && wm != null) {
+            WifiInfo info = wm.getConnectionInfo();
+            if (info != null && info.getSSID() != null) {
+                String s = info.getSSID().replace("\"", "").trim();
+                if (!s.isEmpty() && !s.contains("unknown") && !s.equals("0x")) {
+                    connectedSsid = s;
+                }
+            }
+        }
+
+        // Top row: current active connection
+        if (isEthernet) {
+            addWifiRow(rows, popup, R.drawable.ic_ethernet, getString(R.string.ethernet), false, true,
+                    getString(R.string.connected), () -> open(systemIntent(Settings.ACTION_WIFI_SETTINGS)));
+        } else if (isWifi) {
+            String title = connectedSsid != null ? connectedSsid : getString(R.string.wifi);
+            addWifiRow(rows, popup, R.drawable.ic_wifi, title, false, true,
+                    getString(R.string.connected), () -> open(systemIntent(Settings.ACTION_WIFI_SETTINGS)));
+        } else {
+            addWifiRow(rows, popup, R.drawable.ic_wifi, getString(R.string.offline), false, false,
+                    null, () -> open(systemIntent(Settings.ACTION_WIFI_SETTINGS)));
+        }
+
+        // Available networks
+        boolean hasLocation = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        List<ScanResult> scanResults = null;
+        if (wm != null && hasLocation) {
+            try {
+                wm.startScan();
+            } catch (Exception ignored) {
+            }
+            try {
+                scanResults = wm.getScanResults();
+            } catch (Exception ignored) {
+            }
+        }
+
+        if (rows.getChildCount() > 0) addSeparator(rows);
+
+        if (!hasLocation) {
+            addWifiRow(rows, popup, R.drawable.ic_wifi, getString(R.string.wifi_name_permission_title), false, false,
+                    getString(R.string.enable), this::showWifiNamePermissionDialog);
+        } else if (scanResults != null && !scanResults.isEmpty()) {
+            Map<String, ScanResult> unique = new LinkedHashMap<>();
+            for (ScanResult r : scanResults) {
+                if (r == null || r.SSID == null) continue;
+                String s = r.SSID.replace("\"", "").trim();
+                if (s.isEmpty() || s.contains("unknown") || s.equals("0x")) continue;
+                if (connectedSsid != null && s.equalsIgnoreCase(connectedSsid)) continue;
+                ScanResult existing = unique.get(s);
+                if (existing == null || r.level > existing.level) {
+                    unique.put(s, r);
+                }
+            }
+            List<ScanResult> list = new ArrayList<>(unique.values());
+            Collections.sort(list, (a, b) -> Integer.compare(b.level, a.level));
+            for (ScanResult sr : list) {
+                String name = sr.SSID.replace("\"", "").trim();
+                boolean secured = sr.capabilities != null && (
+                        sr.capabilities.contains("WEP") || sr.capabilities.contains("WPA") ||
+                        sr.capabilities.contains("EAP") || sr.capabilities.contains("PSK") ||
+                        sr.capabilities.contains("SAE"));
+                addWifiRow(rows, popup, R.drawable.ic_wifi, name, secured, false, null,
+                        () -> open(systemIntent(Settings.ACTION_WIFI_SETTINGS)));
+            }
+            if (list.isEmpty()) {
+                addWifiRow(rows, popup, R.drawable.ic_wifi, getString(R.string.no_networks_found), false, false, null, null);
+            }
+        } else {
+            addWifiRow(rows, popup, R.drawable.ic_wifi, getString(R.string.no_networks_found), false, false, null, null);
+        }
+
+        // Bottom action: Wi-Fi settings
+        if (rows.getChildCount() > 0) addSeparator(rows);
+        addWifiRow(rows, popup, R.drawable.ic_settings, getString(R.string.wifi_settings), false, false, null,
+                () -> open(systemIntent(Settings.ACTION_WIFI_SETTINGS)));
+
+        // Constrain height if the list is long so it fits on screen and scrolls smoothly
+        panel.measure(View.MeasureSpec.makeMeasureSpec((int) (320 * density), View.MeasureSpec.AT_MOST),
+                View.MeasureSpec.UNSPECIFIED);
+        View scroll = panel.findViewById(R.id.scroll);
+        if (scroll != null && panel.getMeasuredHeight() > (int) (340 * density)) {
+            ViewGroup.LayoutParams lp = scroll.getLayoutParams();
+            lp.height = (int) (300 * density);
+            scroll.setLayoutParams(lp);
+            panel.measure(View.MeasureSpec.makeMeasureSpec((int) (320 * density), View.MeasureSpec.AT_MOST),
+                    View.MeasureSpec.UNSPECIFIED);
+        }
+
+        popup.setWidth(Math.max((int) (260 * density), Math.min(panel.getMeasuredWidth(), (int) (360 * density))));
+        int alignment = getResources().getBoolean(R.bool.rtl_menu_bar) ? Gravity.START : Gravity.END;
+        dropIn(popup, panel, anchor, alignment);
+        if (rows.getChildCount() > 0) {
+            rows.getChildAt(0).requestFocus();
+        }
+    }
+
+    private void addWifiRow(LinearLayout rows, PopupWindow popup, int iconRes, String title,
+                            boolean isSecured, boolean isConnected, String statusText, Runnable action) {
+        View row = getLayoutInflater().inflate(R.layout.item_wifi, rows, false);
+        ImageView iconView = row.findViewById(R.id.icon);
+        if (iconRes != 0) {
+            iconView.setImageResource(iconRes);
+            iconView.setVisibility(View.VISIBLE);
+        } else {
+            iconView.setVisibility(View.GONE);
+        }
+        TextView titleView = row.findViewById(R.id.title);
+        titleView.setText(title);
+
+        ImageView lockView = row.findViewById(R.id.lock);
+        lockView.setVisibility(isSecured ? View.VISIBLE : View.GONE);
+
+        View dotView = row.findViewById(R.id.dot);
+        dotView.setVisibility(isConnected ? View.VISIBLE : View.GONE);
+
+        TextView statusView = row.findViewById(R.id.status);
+        if (statusText != null && !statusText.isEmpty()) {
+            statusView.setText(statusText);
+            statusView.setVisibility(View.VISIBLE);
+        } else {
+            statusView.setVisibility(View.GONE);
+        }
+
+        if (action != null) {
+            row.setFocusable(true);
+            row.setClickable(true);
+            row.setOnClickListener(v -> {
+                popup.dismiss();
+                action.run();
+            });
+        } else {
+            row.setFocusable(false);
+            row.setClickable(false);
+        }
         rows.addView(row);
     }
 

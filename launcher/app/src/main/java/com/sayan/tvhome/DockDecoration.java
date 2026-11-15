@@ -19,11 +19,11 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
     private final int dockSize;
     private final float density;
     private final float radius;
+    private final Paint shadow = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint backplate = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint fill = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint specular = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint rim = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Paint glow = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final RectF bounds = new RectF();
 
     DockDecoration(int dockSize, float density) {
@@ -31,11 +31,10 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
         this.density = density;
         this.radius = 22f * density;
 
-        rim.setStyle(Paint.Style.STROKE);
-        rim.setStrokeWidth(1.2f * density);
-        rim.setColor(0x4DFFFFFF);
+        shadow.setStyle(Paint.Style.FILL);
 
-        glow.setStyle(Paint.Style.STROKE);
+        rim.setStyle(Paint.Style.STROKE);
+        rim.setStrokeWidth(1.0f * density);
     }
 
     @Override
@@ -79,7 +78,7 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
 
         if (!found) return;
 
-        // Insets around the dock cards to form the macOS-like capsule dock
+        // Insets around the dock cards to form the macOS/Zangetsu-like capsule dock
         float padH = 16f * density;
         float padV = 10f * density;
         bounds.set(minLeft - padH, minTop - padV, maxRight + padH, maxBottom + padV);
@@ -89,40 +88,37 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
         if (bounds.right > maxAllowed) bounds.right = maxAllowed;
         float capsuleRadius = Math.min(bounds.height() / 2f, 26f * density);
 
-        // Translucent obsidian backplate for physical glass refraction & depth
-        backplate.setShader(new LinearGradient(0, bounds.top, 0, bounds.bottom,
-                0x4D0C101A, 0x3805070D, Shader.TileMode.CLAMP));
-
-        // Translucent liquid glass gradient fill
-        fill.setShader(new LinearGradient(0, bounds.top, 0, bounds.bottom,
-                0x33FFFFFF, 0x14FFFFFF, Shader.TileMode.CLAMP));
-
-        // Specular sheen across top 40%
-        specular.setShader(new LinearGradient(0, bounds.top, 0, bounds.top + bounds.height() * 0.40f,
-                0x50FFFFFF, 0x00FFFFFF, Shader.TileMode.CLAMP));
-
-        // Outer ambient glow / shadow
-        for (int i = 1; i <= 2; i++) {
-            glow.setStrokeWidth(i * 2.5f * density);
-            glow.setColor((0x15 / i) << 24 | 0xFFFFFF);
-            float o = i * density;
-            c.drawRoundRect(bounds.left - o, bounds.top - o, bounds.right + o, bounds.bottom + o,
-                    capsuleRadius + o, capsuleRadius + o, glow);
+        // 1. Soft multi-layered ambient drop shadow underneath (elevates and grounds the liquid glass tray)
+        for (int step = 3; step >= 1; step--) {
+            shadow.setColor(step == 1 ? 0x38000000 : (step == 2 ? 0x22000000 : 0x0E000000));
+            float spread = step * 2.5f * density;
+            float offsetY = (step * 2f + 1f) * density;
+            c.drawRoundRect(bounds.left - spread * 0.5f, bounds.top + offsetY - spread * 0.2f,
+                    bounds.right + spread * 0.5f, bounds.bottom + offsetY + spread,
+                    capsuleRadius + spread * 0.5f, capsuleRadius + spread * 0.5f, shadow);
         }
 
-        // Obsidian backplate
+        // 2. Translucent obsidian backplate for physical glass refraction & dark depth (Zangetsu smoked glass)
+        backplate.setShader(new LinearGradient(0, bounds.top, 0, bounds.bottom,
+                0x520A0E18, 0x3805070E, Shader.TileMode.CLAMP));
         c.drawRoundRect(bounds, capsuleRadius, capsuleRadius, backplate);
 
-        // Base glass slab
+        // 3. Translucent liquid glass gradient fill (frosted white dispersion)
+        fill.setShader(new LinearGradient(0, bounds.top, 0, bounds.bottom,
+                0x28FFFFFF, 0x0EFFFFFF, Shader.TileMode.CLAMP));
         c.drawRoundRect(bounds, capsuleRadius, capsuleRadius, fill);
 
-        // Top specular reflection
+        // 4. Specular sheen across top 35% (Fresnel light reflection)
+        specular.setShader(new LinearGradient(0, bounds.top, 0, bounds.top + bounds.height() * 0.35f,
+                0x48FFFFFF, 0x00FFFFFF, Shader.TileMode.CLAMP));
         c.save();
-        c.clipRect(bounds.left, bounds.top, bounds.right, bounds.top + bounds.height() * 0.40f);
+        c.clipRect(bounds.left, bounds.top, bounds.right, bounds.top + bounds.height() * 0.35f);
         c.drawRoundRect(bounds, capsuleRadius, capsuleRadius, specular);
         c.restore();
 
-        // Crisp glass rim
+        // 5. Crisp luminous glass rim stroke with vertical light falloff
+        rim.setShader(new LinearGradient(0, bounds.top, 0, bounds.bottom,
+                0x59FFFFFF, 0x24FFFFFF, Shader.TileMode.CLAMP));
         c.drawRoundRect(bounds, capsuleRadius, capsuleRadius, rim);
     }
 }

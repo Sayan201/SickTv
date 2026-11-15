@@ -115,4 +115,6 @@
     <string name="screensaver_preview">תצוגה מקדימה של שומר מסך</string>
     <string name="screensaver_settings">הגדרות שומר מסך של הטלוויזיה</string>
     <string name="screensaver_idle_state">שומר מסך פעיל: %1$s</string>
+    <string name="available_networks">רשתות זמינות</string>
+    <string name="no_networks_found">לא נמצאו רשתות נוספות</string>
 </resources>

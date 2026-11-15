@@ -117,4 +117,6 @@
     <string name="screensaver_preview">Preview screensaver</string>
     <string name="screensaver_settings">TV screensaver settings</string>
     <string name="screensaver_idle_state">Ambient screensaver: %1$s</string>
+    <string name="available_networks">Available networks</string>
+    <string name="no_networks_found">No other networks found</string>
 </resources>

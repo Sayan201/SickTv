@@ -2,26 +2,39 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_focused="true">
         <layer-list>
+            <!-- Smoked obsidian glass base -->
             <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
                 <shape android:shape="rectangle">
                     <gradient
                         android:angle="270"
-                        android:startColor="#4DFFFFFF"
-                        android:centerColor="#30FFFFFF"
-                        android:endColor="#1CFFFFFF" />
+                        android:startColor="#550A0E18"
+                        android:endColor="#3A05070E" />
                     <corners android:radius="20dp" />
                 </shape>
             </item>
+            <!-- Illuminated liquid glass lens fill -->
             <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
                 <shape android:shape="rectangle">
                     <gradient
                         android:angle="270"
-                        android:startColor="#40FFFFFF"
-                        android:centerColor="#10FFFFFF"
+                        android:startColor="#59FFFFFF"
+                        android:centerColor="#38FFFFFF"
+                        android:endColor="#20FFFFFF" />
+                    <corners android:radius="20dp" />
+                </shape>
+            </item>
+            <!-- Specular highlight sheen -->
+            <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
+                <shape android:shape="rectangle">
+                    <gradient
+                        android:angle="270"
+                        android:startColor="#50FFFFFF"
+                        android:centerColor="#14FFFFFF"
                         android:endColor="#00FFFFFF" />
                     <corners android:radius="20dp" />
                 </shape>
             </item>
+            <!-- Crisp glowing white rim stroke -->
             <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
                 <shape android:shape="rectangle">
                     <stroke android:width="1.5dp" android:color="#FFFFFFFF" />
@@ -32,21 +45,56 @@
     </item>
     <!-- Reorder button while reorder mode is on (focus is on the tiles then). -->
     <item android:state_activated="true">
-        <shape android:shape="rectangle">
-            <solid android:color="#40FFFFFF" />
-            <stroke android:width="1.5dp" android:color="#E6FFFFFF" />
-            <corners android:radius="21dp" />
-        </shape>
-    </item>
-    <item>
         <layer-list>
             <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
                 <shape android:shape="rectangle">
                     <gradient
                         android:angle="270"
-                        android:startColor="#2EFFFFFF"
-                        android:endColor="#14FFFFFF" />
-                    <stroke android:width="1dp" android:color="#38FFFFFF" />
+                        android:startColor="#50FFFFFF"
+                        android:endColor="#30FFFFFF" />
+                    <stroke android:width="1.5dp" android:color="#E6FFFFFF" />
+                    <corners android:radius="20dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <!-- Smoked obsidian glass base for physical depth -->
+            <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
+                <shape android:shape="rectangle">
+                    <gradient
+                        android:angle="270"
+                        android:startColor="#400A0E18"
+                        android:endColor="#2405070E" />
+                    <corners android:radius="20dp" />
+                </shape>
+            </item>
+            <!-- Frosted liquid glass fill -->
+            <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
+                <shape android:shape="rectangle">
+                    <gradient
+                        android:angle="270"
+                        android:startColor="#26FFFFFF"
+                        android:endColor="#0EFFFFFF" />
+                    <corners android:radius="20dp" />
+                </shape>
+            </item>
+            <!-- Top specular reflection sheen -->
+            <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
+                <shape android:shape="rectangle">
+                    <gradient
+                        android:angle="270"
+                        android:startColor="#30FFFFFF"
+                        android:centerColor="#08FFFFFF"
+                        android:endColor="#00FFFFFF" />
+                    <corners android:radius="20dp" />
+                </shape>
+            </item>
+            <!-- Crisp glass rim stroke -->
+            <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
+                <shape android:shape="rectangle">
+                    <stroke android:width="1dp" android:color="#3DFFFFFF" />
                     <corners android:radius="20dp" />
                 </shape>
             </item>
