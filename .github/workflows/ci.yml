@@ -53,8 +53,16 @@ jobs:
           chmod +x gradlew
           set -o pipefail
           ./gradlew --no-daemon :app:assembleGithubRelease --stacktrace 2>&1 | tee /tmp/build.log || {
-            msg=$(tail -n 25 /tmp/build.log | tr '\r\n' '  ')
-            echo "::error title=Companion Build Error::$msg"
+            python3 -c "
+with open('/tmp/build.log') as f:
+    text = f.read()
+idx = text.find('* What went wrong:')
+if idx != -1:
+    chunk = text[idx:idx+1500].replace('\n', ' ').replace('\r', '')
+    print(f'::error title=What Went Wrong::{chunk}')
+else:
+    print('::error title=Tail::' + ' '.join(text.splitlines()[-20:]))
+"
             exit 1
           }
       - name: Original launcher stays small
