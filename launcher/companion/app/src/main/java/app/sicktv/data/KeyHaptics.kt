@@ -27,7 +27,7 @@ class KeyHaptics(private val file: File) {
 
     @get:Synchronized @set:Synchronized
     var wallpaper: String
-        get() = props().getProperty("wallpaper") ?: "zangetsu"
+        get() = props().getProperty("wallpaper") ?: "nebula"
         set(w) = store { setProperty("wallpaper", w) }
 
     private fun store(change: Properties.() -> Unit) {

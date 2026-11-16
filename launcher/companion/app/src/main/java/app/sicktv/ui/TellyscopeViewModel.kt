@@ -351,8 +351,8 @@ data class UiState(
     val report: ReportUi? = null,
     /** When each TV's History was last opened, by id. */
     val historySeen: Map<String, Long> = emptyMap(),
-    /** The companion background wallpaper style (zangetsu, nebula, aurora). */
-    val wallpaper: String = "zangetsu",
+    /** The companion background wallpaper style (nebula, zangetsu, aurora). */
+    val wallpaper: String = "nebula",
 ) {
     /** The selected TV has a change since its History was last opened: ⋮ shows a dot. */
     val historyNew: Boolean get() = selectedId?.let { id -> device.history.any { it.at > (historySeen[id] ?: 0L) } } == true

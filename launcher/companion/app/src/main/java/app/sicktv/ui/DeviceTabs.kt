@@ -301,9 +301,9 @@ fun DeviceTabsScreen(
     Box(Modifier.fillMaxSize()) {
         // Dynamic companion wallpaper background with thick optical glass morphing
         val wallpaperRes = when (state.wallpaper) {
-            "nebula" -> R.drawable.bg_wallpaper_nebula
+            "zangetsu" -> R.drawable.bg_wallpaper
             "aurora" -> R.drawable.bg_wallpaper_aurora
-            else -> R.drawable.bg_wallpaper
+            else -> R.drawable.bg_wallpaper_nebula
         }
         Image(
             painter = painterResource(wallpaperRes),

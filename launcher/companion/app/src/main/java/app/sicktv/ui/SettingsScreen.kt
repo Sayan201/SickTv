@@ -111,7 +111,7 @@ fun SettingsScreen(
     back: () -> Unit,
     keyHaptics: Boolean = true,
     onKeyHaptics: (Boolean) -> Unit = {},
-    wallpaper: String = "zangetsu",
+    wallpaper: String = "nebula",
     onWallpaper: (String) -> Unit = {},
     onReport: () -> Unit = {},
     onWhatsNew: () -> Unit = {},
@@ -340,24 +340,24 @@ private fun WallpaperSelectorCard(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 WallpaperTile(
-                    name = stringResource(R.string.wallpaper_zangetsu),
-                    gradient = Brush.linearGradient(
-                        listOf(Color(0xFF0F0B0E), Color(0xFF281016), Color(0xFF13090C)),
-                    ),
-                    accent = LiquidGlass.NeonCrimson,
-                    selected = current != "nebula" && current != "aurora",
-                    modifier = Modifier.weight(1f),
-                    onClick = { onSelect("zangetsu") },
-                )
-                WallpaperTile(
                     name = stringResource(R.string.wallpaper_nebula),
                     gradient = Brush.linearGradient(
                         listOf(Color(0xFF0D0A24), Color(0xFF3B154D), Color(0xFF160A29)),
                     ),
                     accent = Color(0xFFB347FF),
-                    selected = current == "nebula",
+                    selected = current == "nebula" || (current != "zangetsu" && current != "aurora"),
                     modifier = Modifier.weight(1f),
                     onClick = { onSelect("nebula") },
+                )
+                WallpaperTile(
+                    name = stringResource(R.string.wallpaper_zangetsu),
+                    gradient = Brush.linearGradient(
+                        listOf(Color(0xFF0F0B0E), Color(0xFF281016), Color(0xFF13090C)),
+                    ),
+                    accent = LiquidGlass.NeonCrimson,
+                    selected = current == "zangetsu",
+                    modifier = Modifier.weight(1f),
+                    onClick = { onSelect("zangetsu") },
                 )
                 WallpaperTile(
                     name = stringResource(R.string.wallpaper_aurora),
