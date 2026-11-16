@@ -397,7 +397,7 @@ private fun WallpaperTile(
             .border(border, RoundedCornerShape(12.dp))
             .clickable(onClick = onClick)
             .padding(8.dp),
-        horizontalAlignment = Alignment.CenterVertically,
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Box(
