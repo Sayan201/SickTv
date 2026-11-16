@@ -63,9 +63,9 @@ object LiquidGlass {
      * Vertical hairline specular border: soft reflection on top, subtle transparency at bottom.
      */
     fun borderStroke(
-        width: Dp = 1.dp,
-        topColor: Color = Color(0x75FFFFFF),
-        bottomColor: Color = Color(0x12FFFFFF),
+        width: Dp = 0.75.dp,
+        topColor: Color = Color(0x24FFFFFF),
+        bottomColor: Color = Color(0x06FFFFFF),
     ): BorderStroke = BorderStroke(
         width = width,
         brush = Brush.verticalGradient(
@@ -89,12 +89,12 @@ object LiquidGlass {
      * Crystal hairline border matching the physical glass reflections in GlassDock.
      */
     val CrystalRimBorder = BorderStroke(
-        1.dp,
+        0.75.dp,
         Brush.verticalGradient(
             listOf(
-                Color(0x80FFFFFF),
                 Color(0x25FFFFFF),
                 Color(0x0EFFFFFF),
+                Color(0x04FFFFFF),
             ),
         ),
     )
@@ -166,9 +166,9 @@ object LiquidGlass {
      */
     val TileGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0x551E1E2C),
-            Color(0x65141422),
-            Color(0x750A0A14),
+            Color(0x22FFFFFF),
+            Color(0x10FFFFFF),
+            Color(0x14000000),
         ),
     )
 
@@ -184,15 +184,14 @@ object LiquidGlass {
     )
 
     /**
-     * Card background brush: crystal translucent smoked obsidian acrylic with smooth optical depth.
+     * Card background brush: ultra-translucent frosted crystal acrylic with smooth optical depth.
      * Incorporates luminous crystal reflection at top curve seamlessly into translucent smoked body.
      */
     val CardGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0x5A242436),
-            Color(0x461A1A28),
-            Color(0x5410101C),
-            Color(0x640A0A12),
+            Color(0x24FFFFFF),
+            Color(0x10FFFFFF),
+            Color(0x16000000),
         ),
     )
 }
@@ -202,9 +201,9 @@ object LiquidGlass {
  */
 fun Modifier.liquidGlass(
     shape: Shape = RoundedCornerShape(16.dp),
-    borderWidth: Dp = 1.dp,
-    borderColorTop: Color = Color(0x38FFFFFF),
-    borderColorBottom: Color = Color(0x0EFFFFFF),
+    borderWidth: Dp = 0.75.dp,
+    borderColorTop: Color = Color(0x24FFFFFF),
+    borderColorBottom: Color = Color(0x06FFFFFF),
     backgroundBrush: Brush = LiquidGlass.CardGlassBrush,
 ): Modifier = this
     .clip(shape)

@@ -36,6 +36,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import app.sicktv.ui.theme.GlassCard
 import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -142,9 +143,9 @@ fun SettingsScreen(
                 WallpaperSelectorCard(current = wallpaper, onSelect = onWallpaper)
             }
             item {
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
-                    border = LiquidGlass.borderStroke(),
+                GlassCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(0.dp),
                 ) {
                     if (checkUpdates != null) Row(
                         Modifier.fillMaxWidth()
@@ -223,9 +224,9 @@ fun SettingsScreen(
                 }
             }
             if (advanced) item {
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
-                    border = LiquidGlass.borderStroke(),
+                GlassCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(0.dp),
                 ) {
                     ListsFrom(listSource, onOpen = { open(CLEANYOURTV) })
                     HorizontalDivider(color = MaterialTheme.colorScheme.surface)
@@ -319,14 +320,11 @@ private fun WallpaperSelectorCard(
     current: String,
     onSelect: (String) -> Unit,
 ) {
-    Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
-        border = LiquidGlass.borderStroke(),
+    GlassCard(
+        modifier = Modifier.fillMaxWidth(),
     ) {
         Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+            Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             Column {

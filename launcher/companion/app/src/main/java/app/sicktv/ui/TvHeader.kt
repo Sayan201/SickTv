@@ -43,7 +43,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
@@ -140,7 +139,7 @@ internal fun Cookie(device: Device, size: Dp) {
                 brush = if (on) Brush.verticalGradient(
                     listOf(Color(0x70FF2A42), Color(0x55E0001B), Color(0x6088000E)),
                 ) else Brush.verticalGradient(
-                    listOf(Color(0x551E1E2C), Color(0x65141422), Color(0x750A0A14)),
+                    listOf(Color(0x22FFFFFF), Color(0x10FFFFFF), Color(0x14000000)),
                 ),
                 shape = shape,
             )
@@ -206,7 +205,6 @@ fun TvHero(state: UiState, live: Snapshot?, actions: DeviceActions, chips: Boole
                     // Status pill: ✔ Running fine
                     Box(
                         modifier = Modifier
-                            .shadow(elevation = 6.dp, shape = CircleShape, spotColor = Color(0x40000000))
                             .clip(CircleShape)
                             .background(
                                 brush = if (isFine) Brush.verticalGradient(listOf(Color(0x65FF2A42), Color(0x50E0001B), Color(0x5538080E)))
@@ -248,7 +246,6 @@ fun TvHero(state: UiState, live: Snapshot?, actions: DeviceActions, chips: Boole
                     if (chips && state.devices.size <= 1) {
                         Box(
                             modifier = Modifier
-                                .shadow(elevation = 6.dp, shape = CircleShape, spotColor = Color(0x40000000))
                                 .clip(CircleShape)
                                 .background(LiquidGlass.DockBackgroundBrush, CircleShape)
                                 .border(LiquidGlass.DockHairlineBorder, CircleShape)

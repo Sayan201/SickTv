@@ -878,7 +878,7 @@ private fun SearchPill(enabled: Boolean, onClick: () -> Unit) {
         shape = shape,
         color = Color.Transparent,
         contentColor = Color.White,
-        shadowElevation = 6.dp,
+        shadowElevation = 0.dp,
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 16.dp),

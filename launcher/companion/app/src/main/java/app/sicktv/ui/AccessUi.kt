@@ -39,6 +39,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import app.sicktv.ui.theme.GlassCard
 import app.sicktv.ui.theme.LiquidGlass
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
@@ -245,13 +246,10 @@ fun AccessWarning(access: TvAccess, actions: AccessActions, onWho: () -> Unit, s
 fun ConnectedDevicesCard(peripherals: List<Peripheral>, startOpen: Boolean = false) {
     val c = MaterialTheme.colorScheme
     var open by rememberSaveable { mutableStateOf(startOpen) }
-    Card(
-        colors = CardDefaults.cardColors(containerColor = c.surfaceContainerLow),
-        shape = MaterialTheme.shapes.large,
-        border = LiquidGlass.borderStroke(),
+    GlassCard(
         modifier = Modifier.fillMaxWidth().animateContentSize().testTag("connectedDevices"),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp),
     ) {
-        Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 8.dp)) {
             Text(Copy.DEVICES_TITLE.resolve(), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(bottom = 4.dp))
             if (peripherals.isEmpty()) {
                 Text(Copy.NO_DEVICES.resolve(), style = MaterialTheme.typography.bodyMedium, color = c.onSurfaceVariant, modifier = Modifier.padding(vertical = 8.dp))
@@ -270,7 +268,6 @@ fun ConnectedDevicesCard(peripherals: List<Peripheral>, startOpen: Boolean = fal
             }
         }
     }
-}
 
 private const val COLLAPSED_ROWS = 3
 

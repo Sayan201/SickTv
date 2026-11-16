@@ -314,8 +314,8 @@ fun GlassSearchBar(
             .fillMaxWidth()
             .height(46.dp)
             .clip(CircleShape)
-            .background(Color(0xFF141418), CircleShape)
-            .border(BorderStroke(1.dp, Color(0x1EFFFFFF)), CircleShape)
+            .background(LiquidGlass.TileGlassBrush, CircleShape)
+            .border(LiquidGlass.borderStroke(0.75.dp), CircleShape)
             .then(clickableModifier)
             .padding(horizontal = 16.dp),
         contentAlignment = Alignment.CenterStart,
@@ -638,7 +638,7 @@ fun GlassCard(
             shape = shape,
             color = Color.Transparent,
             contentColor = Color.White,
-            shadowElevation = 8.dp,
+            shadowElevation = 0.dp,
         ) {
             Column(
                 modifier = Modifier.padding(contentPadding),
@@ -651,7 +651,7 @@ fun GlassCard(
             shape = shape,
             color = Color.Transparent,
             contentColor = Color.White,
-            shadowElevation = 8.dp,
+            shadowElevation = 0.dp,
         ) {
             Column(
                 modifier = Modifier.padding(contentPadding),
@@ -672,7 +672,7 @@ fun GlassBanner(
     message: String? = null,
     action: (@Composable () -> Unit)? = null,
     shape: Shape = RoundedCornerShape(20.dp),
-    border: BorderStroke = LiquidGlass.borderStroke(1.dp),
+    border: BorderStroke = LiquidGlass.CrystalRimBorder,
 ) {
     Box(
         modifier = modifier
