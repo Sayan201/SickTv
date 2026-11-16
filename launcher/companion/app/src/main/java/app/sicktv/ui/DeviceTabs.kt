@@ -204,6 +204,7 @@ fun DeviceTabsScreen(
     LaunchedEffect(tab) { onTab(tab) }
     var searching by rememberSaveable { mutableStateOf(false) }
     var appsTab by rememberSaveable { mutableStateOf(AppsTab.Running) }
+    var appsFilesSubTab by rememberSaveable { mutableIntStateOf(0) }
     val q = state.query.trim().lowercase()
     val offline = device.state != DeviceState.Online
     // Off Wi-Fi the phone is what's cut off, so the empty tabs say so rather than blame the TV.
@@ -235,7 +236,6 @@ fun DeviceTabsScreen(
     }
     // The tabs share one list, so each opens at the top with its hero, not where the last one was left.
     var shown by rememberSaveable { mutableStateOf(tab) }
-    var appsFilesSubTab by rememberSaveable { mutableIntStateOf(0) }
     var gate by rememberSaveable { mutableStateOf(false) }
     if (gate) {
         val toApps = { gate = false; tab = TvTab.Apps }

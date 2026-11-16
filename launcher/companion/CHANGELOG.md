@@ -15,6 +15,16 @@ fails CI until this file has a section for its version.
 
 ## Unreleased
 
+## 1.0.0 — 2026-11-16
+
+- **New:** Interactive wallpaper selector in Settings with Obsidian, Cosmic Nebula, and Deep Aurora styles.
+- **New:** Unified Apps & Files tab with smooth sub-navigation and file management.
+- **New:** Dedicated TV Launcher menu tab to manage installed launchers, toggle defaults, and browse preferred launcher alternatives.
+- **New:** Synced 481 supported TV device debloat lists from CleanYourTv.
+- **New:** Zangetsu-style 3D liquid glass dock lens indicator with fluid physics and refraction effects.
+- **Improved:** Crisp high-contrast typography, frosted translucent glass cards, and edge-to-edge immersive backdrop.
+- **Fixed:** Scope order of apps/files sub-tab state preventing companion release compilation.
+
 ## 0.16.0 — 2026-11-06
 
 - **New:** The Remote has an Apps key that shows the streaming apps installed on the TV. [#373](../../pull/373), [#384](../../pull/384)
