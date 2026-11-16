@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "id": "candy-android-tv-dvb",
+  "name": "CANDY Android TV DVB",
+  "tested": {
+    "os": "Android TV 14",
+    "sdk": 34,
+    "build": "UKNV.260408.001"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Content recognition and retail demo",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin",
+          "note": "Anoki ACR opt-in / recognition"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail demo"
+        }
+      ]
+    },
+    {
+      "title": "Haier apps, auto-install and the boot-time app manager",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.haier.hanyang",
+          "note": "Haier auto-install stub"
+        },
+        {
+          "pkg": "com.cvte.haier.tv.appmanager",
+          "note": "boot receiver: re-enabled disabled apps at every boot until this was off"
+        },
+        {
+          "pkg": "com.haier.apps",
+          "note": "Haier apps promo"
+        },
+        {
+          "pkg": "com.haier.apps.evoSmart"
+        },
+        {
+          "pkg": "ru.haier.evo"
+        },
+        {
+          "pkg": "com.haierubic.usmartdevice",
+          "note": "Haier smart-device service"
+        },
+        {
+          "pkg": "com.haier.tvhousekeeper",
+          "note": "\"TV housekeeper\" cleaner"
+        },
+        {
+          "pkg": "com.mcontent",
+          "note": "content feed"
+        }
+      ]
+    },
+    {
+      "title": "Partner setup and stock-home customisation",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.mediatek.android.leanbacklauncher.partnercustomizer",
+          "note": "the stock home's Wi-Fi icon went with it"
+        }
+      ]
+    },
+    {
+      "title": "Google extras",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        }
+      ]
+    },
+    {
+      "title": "Bundled browser",
+      "packages": [
+        {
+          "pkg": "com.tcl.browser"
+        }
+      ]
+    },
+    {
+      "title": "The owner's choices on this set (disabled here, left to you):",
+      "packages": [
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "YouTube Music"
+        },
+        {
+          "pkg": "com.google.android.tts",
+          "optional": true,
+          "note": "Google text-to-speech: Assistant answers become text only"
+        }
+      ]
+    },
+    {
+      "title": "plain disable with the app manager off, so left commented:",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "optional": true,
+          "note": "recommendation and ad rows"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "optional": true
+        },
+        {
+          "pkg": "com.haier.launcher.haiermatrix",
+          "optional": true,
+          "note": "Haier/Zeasn content launcher, not the system Home"
+        },
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix, the owner's choice"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/candy-android-tv-dvb/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

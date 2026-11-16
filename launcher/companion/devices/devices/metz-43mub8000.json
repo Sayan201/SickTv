@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "id": "metz-43mub8000",
+  "name": "Metz 43MUB8000",
+  "tested": {
+    "os": "Android TV 9",
+    "sdk": 28,
+    "build": "flavor"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry and bug reports",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.tv.bugreportsender"
+        }
+      ]
+    },
+    {
+      "title": "Skyworth retail demo and manual",
+      "packages": [
+        {
+          "pkg": "com.smartdevice.demonow",
+          "note": "retail store demo"
+        },
+        {
+          "pkg": "com.Smartdevice.emanual",
+          "note": "on-screen e-manual"
+        }
+      ]
+    },
+    {
+      "title": "Partner hooks and the Leanback launcher, which is installed but never Home here",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.SW",
+          "note": "Play auto-install config for partner apps"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.partnercustomizer",
+          "note": "partner rows for the Leanback launcher"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.recommendations",
+          "note": "recommendations for the Leanback launcher"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher",
+          "note": "restore.sh turns it back on as a stock launcher"
+        }
+      ]
+    },
+    {
+      "title": "Stock home extras",
+      "packages": [
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "ambient screensaver; launcher/ has its own clock screensaver"
+        }
+      ]
+    },
+    {
+      "title": "Android leftovers a TV does not use; TV Settings still opened afterwards",
+      "packages": [
+        {
+          "pkg": "com.android.printspooler",
+          "note": "printing"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "first-setup initializer"
+        },
+        {
+          "pkg": "com.android.settings.intelligence",
+          "note": "Settings search suggestions"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "Google Calendar sync"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.contacts",
+          "note": "Google Contacts sync"
+        }
+      ]
+    },
+    {
+      "title": "Stock home recommendation rows: disable after the new launcher owns Home. Disabled after the reboot check,",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvkids",
+          "optional": true,
+          "note": "YouTube Kids"
+        },
+        {
+          "pkg": "com.disney.disneyplus",
+          "optional": true,
+          "note": "Disney+"
+        },
+        {
+          "pkg": "tv.pluto.android",
+          "optional": true,
+          "note": "Pluto TV (registers a TV input of its own, no hardware)"
+        },
+        {
+          "pkg": "com.haystack.android",
+          "optional": true,
+          "note": "Haystack News (registers a TV input of its own, no hardware)"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant / voice search (remote mic button)"
+        },
+        {
+          "pkg": "com.google.android.speech.pumpkin",
+          "optional": true,
+          "note": "offline voice actions, only used by the Assistant"
+        },
+        {
+          "pkg": "com.google.android.tv.remote.service",
+          "optional": true,
+          "note": "Android TV phone remote app support"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "optional": true,
+          "note": "Google Play Movies & TV"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "optional": true,
+          "note": "Google Play Games"
+        },
+        {
+          "pkg": "com.google.android.music",
+          "optional": true,
+          "note": "Google Play Music, shut down in 2020"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "optional": true,
+          "note": "TalkBack screen reader"
+        },
+        {
+          "pkg": "com.google.android.tts",
+          "optional": true,
+          "note": "Google text-to-speech (the screen reader needs it)"
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.tvlauncher",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/metz-43mub8000/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

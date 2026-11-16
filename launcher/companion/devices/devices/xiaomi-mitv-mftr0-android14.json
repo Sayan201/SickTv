@@ -1,0 +1,136 @@
+{
+  "schema": 1,
+  "id": "xiaomi-mitv-mftr0-android14",
+  "name": "Xiaomi MiTV-MFTR0",
+  "tested": {
+    "os": "Android 14 (HyperOS TV 3, CN build)",
+    "sdk": 34,
+    "build": "OS3.0.101.0.UFTMATV"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Xiaomi telemetry / ads / push",
+      "packages": [
+        {
+          "pkg": "com.miui.tv.analytics",
+          "note": "TV usage statistics"
+        },
+        {
+          "pkg": "com.miui.analytics",
+          "note": "usage analytics"
+        },
+        {
+          "pkg": "com.xiaomi.tvqs",
+          "note": "quality/performance reporting"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.tvpush.tvpushservice",
+          "note": "push ads/notifications"
+        },
+        {
+          "pkg": "com.mitv.overseaservice",
+          "note": "overseas ad-service partner helper (OS3)"
+        },
+        {
+          "pkg": "com.miui.hybrid.tv",
+          "note": "hybrid runtime container"
+        },
+        {
+          "pkg": "com.xm.webcontent",
+          "note": "webview container for promotions"
+        },
+        {
+          "pkg": "com.mitv.shoplugin",
+          "note": "TV Taobao shopping plugin"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.shop",
+          "note": "Xiaomi store"
+        },
+        {
+          "pkg": "com.duokan.videodaily",
+          "note": "short-video promos, bundles the Mi ad SDK"
+        },
+        {
+          "pkg": "com.xiaomi.gamecenter.sdk.service.mibox",
+          "note": "game center SDK"
+        },
+        {
+          "pkg": "com.android.adservices.api",
+          "note": "AOSP ad-services module (OS3/Android 14)"
+        },
+        {
+          "pkg": "com.android.ext.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps",
+      "packages": [
+        {
+          "pkg": "com.emotn.browser",
+          "note": "Emotn browser preload"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.calendar"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.health"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.healthdiagnosis"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.karaoke.service"
+        },
+        {
+          "pkg": "com.xiaomi.screenrecorder"
+        },
+        {
+          "pkg": "com.xiaomi.tweather",
+          "note": "weather provider; also feeds the Hyper screensaver"
+        },
+        {
+          "pkg": "com.mitv.gallery"
+        },
+        {
+          "pkg": "com.xiaomi.tv.gallery",
+          "note": "\"Pictorial\" wallpaper app"
+        }
+      ]
+    },
+    {
+      "title": "Mi Home + cleaner",
+      "packages": [
+        {
+          "pkg": "com.xiaomi.smarthome.tv"
+        },
+        {
+          "pkg": "com.mitv.toolhouse"
+        }
+      ]
+    },
+    {
+      "title": "Screensaver ads (same carrier as ASTR0/MFFU0, verified by package state on this build)",
+      "packages": [
+        {
+          "pkg": "com.xiaomi.mitv.hyper.screensaver",
+          "note": "HyperOS screensaver Activity; see README.md here"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/xiaomi-mitv-mftr0-android14/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

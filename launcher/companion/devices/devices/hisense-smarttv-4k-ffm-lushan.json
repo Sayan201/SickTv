@@ -1,0 +1,181 @@
+{
+  "schema": 1,
+  "id": "hisense-smarttv-4k-ffm-lushan",
+  "name": "Hisense SmartTV 4K FFM",
+  "tested": {
+    "os": "Google TV 12",
+    "sdk": 31,
+    "build": "STT2.230929.001.092"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Hisense telemetry",
+      "packages": [
+        {
+          "pkg": "com.vt.tv.evservice",
+          "note": "viewing-data (ACR) service"
+        }
+      ]
+    },
+    {
+      "title": "Google tracking and feedback",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner referral tracking"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "crash/feedback uploader"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync, unused on a TV"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps",
+      "packages": [
+        {
+          "pkg": "com.hisense.odinbrowser",
+          "note": "Hisense browser"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.vt.hishow",
+          "note": "\"Family Moment\" screensaver and photo content"
+        },
+        {
+          "pkg": "com.haystack.android",
+          "note": "Haystack News (second unit): recommendation cards, a live channel input"
+        }
+      ]
+    },
+    {
+      "title": "Hisense content feeds (second unit, US firmware)",
+      "packages": [
+        {
+          "pkg": "net.vidaatv.hisense.android.tv",
+          "note": "VIDAA Channels, free ad-supported channels"
+        },
+        {
+          "pkg": "com.vidaa.oemtabcontentprovider",
+          "note": "VIDAA content provider for the stock home's rows"
+        }
+      ]
+    },
+    {
+      "title": "Store/hotel demo mode and the first-time setup flow (setup already complete)",
+      "packages": [
+        {
+          "pkg": "com.vt.storemode"
+        },
+        {
+          "pkg": "com.vt.fte"
+        }
+      ]
+    },
+    {
+      "title": "Streaming apps and voice, off by choice (comment out any you use)",
+      "packages": [
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.iqiyi.i18n.tv",
+          "note": "iQIYI"
+        },
+        {
+          "pkg": "com.mercadolibre.android.mplay_tv",
+          "note": "Mercado Play"
+        },
+        {
+          "pkg": "com.wbd.stream",
+          "note": "HBO Max"
+        },
+        {
+          "pkg": "com.vt.alexa",
+          "note": "Hisense Alexa (Google Assistant is kept)"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV app (Play Movies) (second unit)"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvunplugged",
+          "optional": true,
+          "note": "YouTube TV (second unit); a subscription service, kept on in the shared list"
+        },
+        {
+          "pkg": "com.tubitv",
+          "note": "Tubi (second unit)"
+        },
+        {
+          "pkg": "tv.pluto.android",
+          "note": "Pluto TV (second unit)"
+        },
+        {
+          "pkg": "com.roku.web.trc",
+          "note": "The Roku Channel (second unit)"
+        },
+        {
+          "pkg": "com.fubo.firetv.screen",
+          "optional": true,
+          "note": "Fubo (second unit); a subscription service, kept on in the shared list"
+        }
+      ]
+    },
+    {
+      "title": "Sharing and screensaver: the second unit disabled these by choice, the first kept them. Uncomment any",
+      "packages": [
+        {
+          "pkg": "com.vt.tv.dlna",
+          "optional": true,
+          "note": "DLNA media sharing (only a boot receiver)"
+        },
+        {
+          "pkg": "com.vt.tv.mobiledeviceconnectiontips",
+          "optional": true,
+          "note": "Miracast / screen-sharing receiver (WifiDisplayService) and its tips"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "optional": true,
+          "note": "Google ambient screensaver; point screensaver_components elsewhere after"
+        }
+      ]
+    },
+    {
+      "title": "Hisense device assistant: a cleaner with a boot receiver (cache clean, \"turbo mode\")",
+      "packages": [
+        {
+          "pkg": "com.vt.tv.protector"
+        }
+      ]
+    },
+    {
+      "title": "On the second unit the connected network was owned by android.uid.system and only an older saved network",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/hisense-smarttv-4k-ffm-lushan/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

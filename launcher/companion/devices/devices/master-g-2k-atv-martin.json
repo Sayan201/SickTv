@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "id": "master-g-2k-atv-martin",
+  "name": "Master-G Android TV 2K",
+  "tested": {
+    "os": "Android TV 14",
+    "sdk": 34,
+    "build": "UKNV.260502.001"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "---- Android 14 ad, personalisation and federated-learning services ----",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api",
+          "note": "Privacy Sandbox ad services"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services",
+          "note": "on-device ad personalisation"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services",
+          "note": "federated learning for the above"
+        }
+      ]
+    },
+    {
+      "title": "---- Preloaded apps nobody asked for ----",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/master-g-2k-atv-martin/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "schema": 1,
+  "id": "haier-hra962x2",
+  "name": "Haier HRA962X2",
+  "tested": {
+    "os": "Android TV 9",
+    "sdk": 28,
+    "build": "PPR1.180610.011.20220314"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "YunOS advertising and telemetry",
+      "packages": [
+        {
+          "pkg": "com.yunos.advert.service"
+        },
+        {
+          "pkg": "com.yunos.adoplayer.service",
+          "note": "the \"Yun Huabao\" ad screensaver content"
+        },
+        {
+          "pkg": "com.yunos.tv.probe"
+        },
+        {
+          "pkg": "com.yunos.ottauthclient"
+        },
+        {
+          "pkg": "com.aliyun.uuid"
+        },
+        {
+          "pkg": "com.alira.info"
+        },
+        {
+          "pkg": "com.haier.activeuser"
+        },
+        {
+          "pkg": "com.haier.tv.idst"
+        }
+      ]
+    },
+    {
+      "title": "Haier promos, retail and webview ad shells",
+      "packages": [
+        {
+          "pkg": "com.app.webapplication",
+          "note": "Rendanheyi webview shell"
+        },
+        {
+          "pkg": "com.haier.tv.downloadapk",
+          "note": "silently installs pushed preloads"
+        },
+        {
+          "pkg": "com.haier.yushuo"
+        },
+        {
+          "pkg": "com.haier.tv.modelintroduction"
+        },
+        {
+          "pkg": "com.haier.tv.speakingtest"
+        }
+      ]
+    },
+    {
+      "title": "Aligenie voice assistant (remote voice button goes quiet)",
+      "packages": [
+        {
+          "pkg": "com.alibaba.ailabs.genievision"
+        },
+        {
+          "pkg": "com.yunos.tv.alitvasr"
+        },
+        {
+          "pkg": "com.haier.tv.intelligentvoice"
+        },
+        {
+          "pkg": "com.haier.voicehelper"
+        },
+        {
+          "pkg": "com.haier.aitv",
+          "note": "Aligenie content app pushed by the updater"
+        }
+      ]
+    },
+    {
+      "title": "Casting",
+      "packages": [
+        {
+          "pkg": "com.yunos.tv.airplayserver",
+          "note": "AirPlay receiver; Chromecast/Miracast unaffected by this line alone"
+        },
+        {
+          "pkg": "com.droidlogic.miracast",
+          "note": "Miracast receiver"
+        }
+      ]
+    },
+    {
+      "title": "Haier U+ IoT",
+      "packages": [
+        {
+          "pkg": "com.haier.uhome.uplustv"
+        },
+        {
+          "pkg": "com.haier.uhome.messageboard"
+        },
+        {
+          "pkg": "com.haier.uhome.push"
+        },
+        {
+          "pkg": "com.haierubic.usmartdevice"
+        },
+        {
+          "pkg": "com.haier.tv.iotprovider"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded content nobody asked for",
+      "packages": [
+        {
+          "pkg": "com.yunos.tv.edu"
+        },
+        {
+          "pkg": "com.yunos.music"
+        },
+        {
+          "pkg": "com.yunos.tv.bluray"
+        },
+        {
+          "pkg": "com.yunos.tv.offline_downloader"
+        },
+        {
+          "pkg": "com.haier.tv.kidsmode"
+        },
+        {
+          "pkg": "com.audiocn.karaoke.micmanager",
+          "note": "karaoke microphone manager"
+        },
+        {
+          "pkg": "com.tv.gesturehaier",
+          "note": "hand-gesture control"
+        },
+        {
+          "pkg": "com.nibiru.play",
+          "note": "VR video player"
+        },
+        {
+          "pkg": "com.nibiru.alipaytv"
+        },
+        {
+          "pkg": "com.haier.tv.hm",
+          "note": "pushed Haier content app"
+        },
+        {
+          "pkg": "com.haier.haiertv.ims",
+          "note": "pushed Haier content app"
+        }
+      ]
+    },
+    {
+      "title": "System tools replaced by the launcher",
+      "packages": [
+        {
+          "pkg": "com.yunos.tvmgr",
+          "note": "\"Security Manager\" cleaner app"
+        }
+      ]
+    },
+    {
+      "title": "Firmware updater (see header)",
+      "packages": [
+        {
+          "pkg": "com.yunos.osupdate"
+        }
+      ]
+    },
+    {
+      "title": "Disable them only if your launcher build answers yunostv_homeshell://start_home (see README.md);",
+      "packages": [
+        {
+          "pkg": "com.youku.taitan.tv",
+          "optional": true,
+          "note": "Youku stock home with sponsored rows"
+        },
+        {
+          "pkg": "com.yunos.tv.homeshell",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/haier-hra962x2/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "id": "jvc-4k-smart-tv-elliniko",
+  "name": "JVC 4K Smart TV",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKN4.250714.142"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Tracking, ads, feedback",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.controller",
+          "note": "Anoki ACR: automatic content recognition of what is on screen"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Google feedback reporter"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner/OEM attribution"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "auto-install stub that preloads apps at setup"
+        }
+      ]
+    },
+    {
+      "title": "Not tested here; the Siragon list on the same board disables them:",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.federatedcompute.services",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent",
+          "optional": true
+        },
+        {
+          "pkg": "com.mediatek.tv.launcher.partner",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Demo and preloads",
+      "packages": [
+        {
+          "pkg": "com.mediatek.tv.retaildemo",
+          "note": "store demo loop"
+        },
+        {
+          "pkg": "com.electronic.manual",
+          "note": "on-screen user manual"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        }
+      ]
+    },
+    {
+      "title": "Ambient screensaver with suggestions; the basic screensaver takes over",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.dreamx"
+        }
+      ]
+    },
+    {
+      "title": "Voice assistant, off by choice: the remote's mic button and voice search stop working",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss"
+        }
+      ]
+    },
+    {
+      "title": "Setup wizard: answers HOME ahead of the new launcher on Google TV (see the header before disabling)",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/jvc-4k-smart-tv-elliniko/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

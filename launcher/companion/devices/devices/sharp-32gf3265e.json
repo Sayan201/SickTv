@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "id": "sharp-32gf3265e",
+  "name": "Sharp 32GF3265E",
+  "tested": {
+    "os": "Google TV 11",
+    "sdk": 30,
+    "build": "RTM9.241015.004"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Google TV telemetry, feedback, activation and partner services",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.android.settings.intelligence"
+        },
+        {
+          "pkg": "com.smartdevice.recordactivation"
+        },
+        {
+          "pkg": "com.smartdevice.aftersale"
+        }
+      ]
+    },
+    {
+      "title": "Preinstalled streaming, video and game hubs (already off on the test unit)",
+      "packages": [
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.youtube.tv",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "optional": true
+        },
+        {
+          "pkg": "com.smartdevice.recommendation",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Skyworth/Coocaa retail demo, cleaner, app manager, e-manual",
+      "packages": [
+        {
+          "pkg": "com.coocaa.demonow.lightining"
+        },
+        {
+          "pkg": "fusion.android.tv.demo"
+        },
+        {
+          "pkg": "com.smartdevice.dailymanage"
+        },
+        {
+          "pkg": "com.smartdevice.myapp"
+        },
+        {
+          "pkg": "com.Smartdevice.emanual"
+        }
+      ]
+    },
+    {
+      "title": "Background services and unused utilities",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.nbu.smartconnect.tv"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx"
+        },
+        {
+          "pkg": "com.esaba.downloader",
+          "optional": true,
+          "note": "a sideloaded app on this set (owner's choice)"
+        }
+      ]
+    },
+    {
+      "title": "Accessibility talkback (already off on the test unit)",
+      "packages": [
+        {
+          "pkg": "com.google.android.marvin.talkback"
+        }
+      ]
+    },
+    {
+      "title": "Google TV setup wizard - disable only after the new launcher is Home",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "Stock Google TV launcher, disabled by launcher/build-and-install.sh once com.gathin.tvhome owns Home",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.launcherx"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sharp-32gf3265e/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

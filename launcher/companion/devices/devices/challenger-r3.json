@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "id": "challenger-r3",
+  "name": "Challenger R3",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTT7.220427.001"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry and feedback",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        }
+      ]
+    },
+    {
+      "title": "Content rows and recommendations",
+      "packages": [
+        {
+          "pkg": "com.apps.channels",
+          "note": "\"S-Channel\" content rows on Home"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "recommendation rows of the stock Home"
+        }
+      ]
+    },
+    {
+      "title": "Extras and duplicates",
+      "packages": [
+        {
+          "pkg": "com.apps.wifihotspot",
+          "note": "TV as a Wi-Fi hotspot"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.android.gallery3d"
+        },
+        {
+          "pkg": "com.seraphic.hbbtv.app",
+          "note": "HbbTV browser"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "Google ambient screensaver"
+        }
+      ]
+    },
+    {
+      "title": "Factory tools: only disabled, never started",
+      "packages": [
+        {
+          "pkg": "com.apps.factory.ui"
+        },
+        {
+          "pkg": "com.realtek.factorytools"
+        }
+      ]
+    },
+    {
+      "title": "Personal choice: voice assistants (comment out to keep them)",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google Assistant"
+        },
+        {
+          "pkg": "com.apps.wwalexa",
+          "note": "Alexa"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/challenger-r3/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

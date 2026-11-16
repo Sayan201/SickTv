@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "id": "philips-75pus8505",
+  "name": "Philips 75PUS8505/12 / 58PUS8555/12",
+  "tested": {
+    "os": "Android TV 12",
+    "sdk": 31,
+    "build": "STT2.230526.001"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "that the storage monitor's 10-minute pass now logs \"TvStorageCULLogger: Binder NOT available\"",
+      "packages": [
+        {
+          "pkg": "org.droidtv.candeebug",
+          "note": "\"DAC\" analytics uploader, INTERNET, ~40 MB resident"
+        },
+        {
+          "pkg": "org.droidtv.gel",
+          "note": "metrics collector sharing candeebug's process"
+        },
+        {
+          "pkg": "org.droidtv.usagelogger",
+          "note": "\"UsageLogger\": remote keypress logging (LogKeySvc), INTERNET, ~40 MB"
+        }
+      ]
+    },
+    {
+      "title": "Philips content promos and the app gallery. Nothing persistent binds these; nettvrecommender is",
+      "packages": [
+        {
+          "pkg": "org.droidtv.nettvrecommender",
+          "note": "\"Nejlepší tipy\" (Top Picks) content promotion row, INTERNET, ~35 MB"
+        },
+        {
+          "pkg": "org.droidtv.recommendation",
+          "note": "its headless backend, ~38 MB; disable the row above first"
+        },
+        {
+          "pkg": "org.droidtv.nettv.market",
+          "note": "\"Kolekce Philips TV\" (Philips TV Collection) app storefront, ~34 MB"
+        },
+        {
+          "pkg": "org.droidtv.android.fitness",
+          "note": "Fitness Buddy, a /data app; not running, removes the tile"
+        }
+      ]
+    },
+    {
+      "title": "too; with demome disabled it logs \"iDemo null\" at the same 30 s pace instead and its 10-minute",
+      "packages": [
+        {
+          "pkg": "org.droidtv.sticker",
+          "note": "e-sticker and shop banners, reacts to USB and inactivity events, ~32 MB"
+        },
+        {
+          "pkg": "org.droidtv.demome",
+          "note": "\"Nabídka Ukázky\" (Demo me) shop loop, ~33 MB"
+        }
+      ]
+    },
+    {
+      "title": "Google telemetry and first-setup leftovers. None was running, so no memory is freed; they just",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Market Feedback Agent: crash and feedback reports to Google"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner referrer / attribution"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "runs once at first setup, nothing afterwards"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "Google Calendar sync; no calendar app on this TV"
+        }
+      ]
+    },
+    {
+      "title": "settings put secure assistant com.google.android.katniss/.search.serviceapi.KatnissVoiceInteractionService",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google Assistant and voice search, ~110 MB in two processes; kills the remote's mic button and voice search in YouTube and Play Store"
+        },
+        {
+          "pkg": "org.droidtv.amazonalexa",
+          "note": "Alexa bridge, ~33 MB; nothing bound it on this unit"
+        }
+      ]
+    },
+    {
+      "title": "\"AudioOutService: PlayFi Enabled\" logged during boot, as examples/philips-tpm191e and",
+      "packages": [
+        {
+          "pkg": "com.phorus.playfi.tv",
+          "optional": true,
+          "note": "\"play-fi\" app and its ProxyService, ~40 MB; re-enabled at boot, see above"
+        },
+        {
+          "pkg": "com.phorus.playfi.softap",
+          "note": "soft access point for setting up Play-Fi speakers, ~25 MB"
+        }
+      ]
+    },
+    {
+      "title": "/system/product/app) with a Play Store update in /data, so Settings only offers \"uninstall",
+      "packages": [
+        {
+          "pkg": "com.apple.atve.androidtv.appletv",
+          "note": "Apple TV"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music"
+        }
+      ]
+    },
+    {
+      "title": "an injected KEYCODE_HOME and the remote's Home key landed there. tvrecommendations also owns the system",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher",
+          "optional": true,
+          "note": "disabled by launcher/build-and-install.sh (or by hand) once the new launcher has started; ~140 MB resident"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "\"Android TV Core Services\": recommendation rows, notification panel, ~65 MB"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/philips-75pus8505/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

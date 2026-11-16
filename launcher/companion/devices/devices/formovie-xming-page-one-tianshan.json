@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "id": "formovie-xming-page-one-tianshan",
+  "name": "Formovie XMing Page One projector",
+  "tested": {
+    "os": "Google TV (Android 11)",
+    "sdk": 30,
+    "build": "build"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Google telemetry and partner auto-installs",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "Google RLZ attribution pings"
+        },
+        {
+          "pkg": "android.autoinstalls.config.fomovie",
+          "note": "Play auto-install of partner apps (sic, \"fomovie\")"
+        },
+        {
+          "pkg": "com.google.android.apps.nbu.smartconnect.tv",
+          "note": "Google data meter / VPN client"
+        }
+      ]
+    },
+    {
+      "title": "Unused system services",
+      "packages": [
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.android.htmlviewer"
+        },
+        {
+          "pkg": "com.android.wallpaperbackup"
+        },
+        {
+          "pkg": "com.android.sharedstoragebackup"
+        },
+        {
+          "pkg": "com.android.backupconfirm"
+        },
+        {
+          "pkg": "com.android.hotspot2.osulogin"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "Ambient Mode screensaver"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded Google apps nobody asked for",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/formovie-xming-page-one-tianshan/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "id": "tcl-32s6200",
+  "name": "TCL 32S6200",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "AR2101"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "TCL account, promos and content",
+      "packages": [
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account; re-enabled at every boot (see notes)"
+        },
+        {
+          "pkg": "com.tcl.guard",
+          "note": "TGuard cleaner"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "note": "promo rows on the stock home"
+        },
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "TCL web-video portal; came back once in four days (notes)"
+        },
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "store-demo sticker"
+        },
+        {
+          "pkg": "android.autoinstalls.config.tcl.device",
+          "note": "partner-app auto installer config"
+        }
+      ]
+    },
+    {
+      "title": "Google extras",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "note": "first-run wizard; owns no Wi-Fi here (notes)"
+        }
+      ]
+    },
+    {
+      "title": "Off by choice on this unit: comment out what you use",
+      "packages": [
+        {
+          "pkg": "com.google.android.tts",
+          "note": "Google text-to-speech"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "TalkBack"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "photo screensaver, swap it first (notes)"
+        },
+        {
+          "pkg": "com.tcl.ui_mediaCenter",
+          "note": "USB media player, together with the next three"
+        },
+        {
+          "pkg": "com.tcl.audioplayer"
+        },
+        {
+          "pkg": "com.tcl.videoplayer"
+        },
+        {
+          "pkg": "com.tcl.imageplayer"
+        },
+        {
+          "pkg": "tv.wuaki.apptv",
+          "optional": true,
+          "note": "Rakuten TV: disabled here but re-enabled at every boot"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Cast receiver: kept for casting from a phone"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "voice search: kept, with tv.remote.service and tv.assistant"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-32s6200/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

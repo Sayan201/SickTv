@@ -1,0 +1,318 @@
+{
+  "schema": 1,
+  "id": "sony-bravia-4k-vh1",
+  "name": "Sony BRAVIA 4K VH1",
+  "tested": {
+    "os": "Google TV 12",
+    "sdk": 31,
+    "build": "BRAVIA_VH1_EU-user"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "ACR viewing tracker",
+      "packages": [
+        {
+          "pkg": "tv.samba.ssm",
+          "note": "Samba TV fingerprints what's on screen"
+        },
+        {
+          "pkg": "tv.samba.ssm.ui"
+        }
+      ]
+    },
+    {
+      "title": "telemetry and remote support",
+      "packages": [
+        {
+          "pkg": "com.qterics.da.product"
+        },
+        {
+          "pkg": "com.sony.dtv.da.service"
+        },
+        {
+          "pkg": "com.sonyericsson.idd.agent"
+        },
+        {
+          "pkg": "com.sony.dtv.sonybugreportsys"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        }
+      ]
+    },
+    {
+      "title": "demo / shop / hotel mode",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.demosupport"
+        },
+        {
+          "pkg": "com.sony.dtv.demosystemsupport"
+        },
+        {
+          "pkg": "com.sony.dtv.multiscreendemo"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.hotelmode"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.softap"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.rs232csupport"
+        }
+      ]
+    },
+    {
+      "title": "Sony promos, Select, help and partner install config",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.promos"
+        },
+        {
+          "pkg": "com.sony.dtv.sonyselect"
+        },
+        {
+          "pkg": "com.sony.dtv.sonytab"
+        },
+        {
+          "pkg": "com.sony.dtv.customersupport",
+          "note": "Help tile"
+        },
+        {
+          "pkg": "com.sony.dtv.smarthelp"
+        },
+        {
+          "pkg": "com.sony.dtv.helpguidecontents"
+        },
+        {
+          "pkg": "com.sony.dtv.accessibility.tutorial"
+        },
+        {
+          "pkg": "android.autoinstalls.config.sony.bravia"
+        }
+      ]
+    },
+    {
+      "title": "Sony extras unused on this set",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.homekit"
+        },
+        {
+          "pkg": "com.sony.dtv.livingfit"
+        },
+        {
+          "pkg": "com.sony.dtv.osat.music"
+        },
+        {
+          "pkg": "com.sony.dtv.gestureapp"
+        },
+        {
+          "pkg": "com.spocky.projengmenu",
+          "note": "engineering / project menu"
+        }
+      ]
+    },
+    {
+      "title": "Google rows and preloads",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.google.android.backdrop"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.videos"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.youview.poa",
+          "optional": true,
+          "note": "KEPT on UK sets: Freeview Play, which hosts BBC iPlayer, ITVX, Channel 4 and 5."
+        }
+      ]
+    },
+    {
+      "title": "Stock leanback Home (CleanYourTV owns HOME)",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher"
+        }
+      ]
+    },
+    {
+      "title": "Off by owner's choice (re-enable if you use them)",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google Assistant voice"
+        },
+        {
+          "pkg": "com.netflix.ninja"
+        },
+        {
+          "pkg": "com.netflix.partner.ncm"
+        }
+      ]
+    },
+    {
+      "title": "XBR-65X900H (BRAVIA_VH1_UC, build S159): Sony IoT, usage agents, BRAVIA CAM (no camera on X900H) and Vewd",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.seeds.iot",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.seeds.iot.remotestart",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.seeds.auth",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.usercontext",
+          "optional": true,
+          "note": "usage agent"
+        },
+        {
+          "pkg": "com.sony.dtv.lastaccess",
+          "optional": true,
+          "note": "usage agent"
+        },
+        {
+          "pkg": "com.sony.dtv.ecodashboard",
+          "optional": true,
+          "note": "Eco dashboard"
+        },
+        {
+          "pkg": "com.sony.dtv.sonyloglevelsettingsys",
+          "optional": true
+        },
+        {
+          "pkg": "com.vewd.core.service",
+          "optional": true,
+          "note": "Vewd (Opera TV) HTML5 store service"
+        },
+        {
+          "pkg": "com.sony.dtv.sensingcamera.fwupdate",
+          "optional": true,
+          "note": "BRAVIA CAM firmware updater"
+        },
+        {
+          "pkg": "com.sony.dtv.sensingcamera.settings",
+          "optional": true,
+          "note": "BRAVIA CAM settings"
+        },
+        {
+          "pkg": "com.sony.dtv.sensingfusionservice",
+          "optional": true,
+          "note": "BRAVIA CAM sensing service"
+        },
+        {
+          "pkg": "com.sony.dtv.distancealert",
+          "optional": true,
+          "note": "BRAVIA CAM viewing distance alert"
+        }
+      ]
+    },
+    {
+      "title": "XBR-65X900H (BRAVIA_VH1_UC, build S159): hotel/B2B Node.js and pro-mode stack",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.b2b.noderuntime.normal",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.noderuntime.privilege",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.noderuntimeextension.bpk",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.noderuntimeextension.node_20_11_1",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.prosettings",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.adminpassword",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.deviceadminsettings",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.importexport",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.frameworkextension",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.webappruntimedrm",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "XBR-65X900H (BRAVIA_VH1_UC, build S159): DLNA renderer/server (Chromecast and AirPlay are separate) and calendar/contacts providers",
+      "packages": [
+        {
+          "pkg": "com.sonyericsson.dlna",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.huey.dlna.module",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.huey.dlna.renderersettings",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.providers.calendar",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.providers.contacts",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.providers.userdictionary",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sony-bravia-4k-vh1/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

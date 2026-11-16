@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "id": "sharp-2k-eu",
+  "name": "SHARP 2K EU Android TV",
+  "tested": {
+    "os": "Android TV 14",
+    "sdk": 34,
+    "build": "UKNV.260324.001"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "com.google.android.tv.remote.service com.google.android.inputmethod.latin",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast, kept by choice"
+        }
+      ]
+    },
+    {
+      "title": "com.express.at.factory.factorymanager com.express.fac.test com.at.factory.androidtvaidlservice",
+      "packages": [
+        {
+          "pkg": "mediatek.factorymenu.ui",
+          "optional": true
+        },
+        {
+          "pkg": "com.cltv.fast",
+          "optional": true,
+          "note": "Freeview/CLTV kept; hide from grid via theme if unused"
+        },
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin",
+          "note": "automatic content recognition"
+        },
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.mediatek.android.leanbacklauncher.partnercustomizer"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail demo mode"
+        },
+        {
+          "pkg": "com.mediatek.androidbox",
+          "note": "WFDSinkTest / Wi-Fi Display test"
+        },
+        {
+          "pkg": "umc.com.emanual",
+          "note": "on-screen e-manual"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies & TV"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music, unused"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "ambient screensaver"
+        },
+        {
+          "pkg": "com.android.settings.intelligence"
+        },
+        {
+          "pkg": "com.android.healthconnect.controller"
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        }
+      ]
+    },
+    {
+      "title": "4. Voice, off by choice",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google Assistant / voice search and mic button"
+        }
+      ]
+    },
+    {
+      "title": "5. Stock launcher and setup wizard — ONLY after the new launcher is Home. If ADB is on Wi-Fi,",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        },
+        {
+          "pkg": "com.google.android.tvlauncher"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sharp-2k-eu/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

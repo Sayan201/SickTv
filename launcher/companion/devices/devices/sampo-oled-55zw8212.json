@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "id": "sampo-oled-55zw8212",
+  "name": "SAMPO OLED-55ZW8212",
+  "tested": {
+    "os": "Google TV 11",
+    "sdk": 30,
+    "build": "RTMA.250416.068"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Batch 1: Skyworth telemetry",
+      "packages": [
+        {
+          "pkg": "com.smartdevice.recordactivation"
+        },
+        {
+          "pkg": "com.smartdevice.aftersale"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        }
+      ]
+    },
+    {
+      "title": "Batch 1: Skyworth content and ads",
+      "packages": [
+        {
+          "pkg": "com.smartdevice.recommendation",
+          "note": "DailyPlay recommendations and mail notifications"
+        },
+        {
+          "pkg": "com.smartdevice.leanbacklauncher.customizer",
+          "note": "injects rows into the stock home screen"
+        }
+      ]
+    },
+    {
+      "title": "Batch 1: store demo and factory (never started, only disabled)",
+      "packages": [
+        {
+          "pkg": "com.coocaa.demonow.lightining"
+        },
+        {
+          "pkg": "fusion.android.tv.demo"
+        },
+        {
+          "pkg": "com.smartdevice.factory"
+        },
+        {
+          "pkg": "mediatek.factorymenu.ui"
+        }
+      ]
+    },
+    {
+      "title": "Batch 2: background services nobody asked for",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.nbu.smartconnect.tv",
+          "note": "Google Smart Connect (data-saver VPN for emerging markets)"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "Play auto-install of promoted apps"
+        }
+      ]
+    },
+    {
+      "title": "Batch 2: preloads (owner opted out)",
+      "packages": [
+        {
+          "pkg": "com.Smartdevice.emanual"
+        },
+        {
+          "pkg": "org.liskovsoft.androidtv.rukeyboard",
+          "optional": true,
+          "note": "Russian keyboard, not the active IME (Gboard is); lists never disable a keyboard"
+        },
+        {
+          "pkg": "com.tianci.localmedia",
+          "note": "Skyworth USB media player"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV / Play Movies store"
+        }
+      ]
+    },
+    {
+      "title": "Batch 3: streaming and casting the owner does not use (Chromecast and Assistant are kept)",
+      "packages": [
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video, off on the tested set by the owner's choice"
+        },
+        {
+          "pkg": "com.smartdevice.dtv.icast",
+          "note": "CastPlay: AirPlay / DLNA receiver, starts at boot"
+        },
+        {
+          "pkg": "com.mediatek.androidbox",
+          "note": "Miracast sink (WFDSinkTest), starts at boot"
+        }
+      ]
+    },
+    {
+      "title": "(set-home-activity said Success, Home still resolved to it). Wi-Fi checked first: owned by",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.launcherx",
+          "optional": true,
+          "note": "launcher/build-and-install.sh disables it once Home has moved"
+        }
+      ]
+    },
+    {
+      "title": "settings put secure screensaver_default_component com.gathin.tvhome/.ClockDream",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.dreamx"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sampo-oled-55zw8212/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

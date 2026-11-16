@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "id": "sharp-aquos-tve19c",
+  "name": "Sharp AQUOS-TVE19C and TVE19A",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTOB.250721.001"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Tracking and ads",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.controller",
+          "note": "Anoki ACR: watches what you watch, for ads"
+        },
+        {
+          "pkg": "com.cltv.fast",
+          "optional": true,
+          "note": "ad-supported FAST channels (middleware; keep unless you never use them)"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "store demo mode"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Google crash/telemetry reporting"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps (owner's choice)",
+      "packages": [
+        {
+          "pkg": "com.mediatek.dmp.mediaplayer",
+          "note": "DLNA/USB \"Digitalmedia Player\""
+        },
+        {
+          "pkg": "umc.com.emanual",
+          "note": "Sharp on-screen manual"
+        }
+      ]
+    },
+    {
+      "title": "Unused streaming apps - this set has these off (owner's choice)",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true
+        },
+        {
+          "pkg": "com.mediatek.partner.netflix",
+          "optional": true,
+          "note": "Netflix partner service; the remote's Netflix"
+        }
+      ]
+    },
+    {
+      "title": "button (KEYCODE_STEM_1) can be remapped, see README.md",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos",
+          "optional": true,
+          "note": "Google TV / Play Movies (the TVE19A unit disabled it)"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Preload on the TVE19A unit (disabled there)",
+      "packages": [
+        {
+          "pkg": "com.rma.speedtesttv",
+          "optional": true,
+          "note": "Speedtest"
+        }
+      ]
+    },
+    {
+      "title": "Google services (owner's choice; Chromecast built-in was kept)",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Assistant / voice search"
+        },
+        {
+          "pkg": "com.google.android.apps.nbu.smartconnect.tv"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "ambient mode screensaver with promoted content"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher and its recommendation rows, replaced by launcher/",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sharp-aquos-tve19c/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

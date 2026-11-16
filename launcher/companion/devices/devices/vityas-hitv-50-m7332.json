@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "id": "vityas-hitv-50-m7332",
+  "name": "Vityas Hi TV 50",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "build"
+  },
+  "launcher": "com.kgzn.mslauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "telemetry and ad/store bridges",
+      "packages": [
+        {
+          "pkg": "com.kgzn.inforeport",
+          "note": "vendor reporting service (INTERNET, boot receiver)"
+        },
+        {
+          "pkg": "com.zeasn.deviceportal.asdprovider.ktc",
+          "note": "Zeasn ad/store ecosystem provider (boot receiver)"
+        },
+        {
+          "pkg": "cn.kgzn.asp.vstoresubclient",
+          "note": "\"vstore\" app-store bridge (INTERNET, READ_PHONE_STATE)"
+        },
+        {
+          "pkg": "com.example.android.bluetoothlegatt",
+          "note": "leftover AOSP BLE sample app"
+        }
+      ]
+    },
+    {
+      "title": "vendor extras the owner declined",
+      "packages": [
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization",
+          "note": "vendor disclaimer screen at boot"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google voice assistant for TV"
+        },
+        {
+          "pkg": "com.kgzn.castscreen",
+          "note": "vendor screen share (RECORD_AUDIO, CAMERA, location)"
+        },
+        {
+          "pkg": "com.kgzn.castscreen.overlay",
+          "note": "its overlay helper"
+        }
+      ]
+    },
+    {
+      "title": "preloaded streaming apps the owner does not use",
+      "packages": [
+        {
+          "pkg": "ru.rt.video.app.tv",
+          "note": "Wink"
+        },
+        {
+          "pkg": "com.vk.tv",
+          "note": "VK Video"
+        },
+        {
+          "pkg": "ru.more.play",
+          "note": "More Play"
+        }
+      ]
+    },
+    {
+      "title": "setup wizards, factory packages and boot cosmetics (disable after the new launcher is Home)",
+      "packages": [
+        {
+          "pkg": "com.kgzn.oobe",
+          "note": "vendor out-of-box setup wizard"
+        },
+        {
+          "pkg": "com.mediatek.wwtv.setupwizard",
+          "note": "MTK TV setup wizard"
+        },
+        {
+          "pkg": "kgzn.factorymenu.ui",
+          "note": "factory menu"
+        },
+        {
+          "pkg": "mediatek.factorymenu.ui",
+          "note": "factory menu"
+        },
+        {
+          "pkg": "com.kgzn.tv.factory",
+          "note": "vendor factory app"
+        },
+        {
+          "pkg": "com.kgzn.serialport",
+          "note": "serial-port service holding INTERNET and LOCATION"
+        },
+        {
+          "pkg": "com.mediatek.bootvideo",
+          "note": "boot video"
+        },
+        {
+          "pkg": "com.mediatek.loadingequalizer",
+          "note": "boot loading animation"
+        },
+        {
+          "pkg": "com.kgzn.mslauncher",
+          "note": "stock home; tools/disable.sh skips it until another launcher answers HOME"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/vityas-hitv-50-m7332/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

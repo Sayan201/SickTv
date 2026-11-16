@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "id": "telekom-tv-sdmc-dv8519b",
+  "name": "Magyar Telekom TV box",
+  "tested": {
+    "os": "Android TV 12",
+    "sdk": 31,
+    "build": "TelekomTV"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Google telemetry and clutter",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "off on this set by choice"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "off on this set by choice"
+        }
+      ]
+    },
+    {
+      "title": "Screensavers",
+      "packages": [
+        {
+          "pkg": "com.google.android.backdrop"
+        },
+        {
+          "pkg": "com.android.dreams.basic"
+        }
+      ]
+    },
+    {
+      "title": "Calendar: nothing on a TV box uses it",
+      "packages": [
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.android.providers.calendar"
+        }
+      ]
+    },
+    {
+      "title": "SDMC partner auto-installs (can push vendor apps back)",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.sdmc"
+        }
+      ]
+    },
+    {
+      "title": "Telekom extras",
+      "packages": [
+        {
+          "pkg": "hu.telekom.ttvtester",
+          "note": "Telekom TV tester utility"
+        },
+        {
+          "pkg": "com.dt.onetv.selfcare",
+          "note": "self-care app"
+        },
+        {
+          "pkg": "com.tataelxsi.icx",
+          "note": "iCX device management + telemetry (Firebase, Kinesis)"
+        }
+      ]
+    },
+    {
+      "title": "Telekom TV app: live TV, guide, recordings, and the stock Home. It is the only live-TV app, so KEEP it",
+      "packages": [
+        {
+          "pkg": "com.telekom.onetv.tv",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/telekom-tv-sdmc-dv8519b/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

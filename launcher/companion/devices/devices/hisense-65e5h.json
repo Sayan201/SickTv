@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "id": "hisense-65e5h",
+  "name": "Hisense 65E5H / 85U7G PRO",
+  "tested": {
+    "os": "Android 9",
+    "sdk": 28,
+    "build": "PPR2.180905.006.A1"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry, reporting and the vendor push channel",
+      "packages": [
+        {
+          "pkg": "com.hisense.hitv.das",
+          "note": "DasApp telemetry"
+        },
+        {
+          "pkg": "com.hisense.platformreport",
+          "note": "usage/telemetry reporting, BootReceiver"
+        },
+        {
+          "pkg": "com.hisense.logupload",
+          "note": "log uploader"
+        },
+        {
+          "pkg": "com.hisense.service.hproxy",
+          "note": "network poller service"
+        },
+        {
+          "pkg": "com.hisense.service.message",
+          "note": "HiMsgService vendor push channel"
+        }
+      ]
+    },
+    {
+      "title": "Advertising and content feeds",
+      "packages": [
+        {
+          "pkg": "com.hisense.business.ad",
+          "note": "ad SDK (Alibaba Baichuan + CIBN shopping)"
+        },
+        {
+          "pkg": "com.hisense.service.ad",
+          "note": "ad service"
+        },
+        {
+          "pkg": "com.hisense.tv.weather",
+          "note": "weather/content feed card"
+        }
+      ]
+    },
+    {
+      "title": "Store demo, hotel, factory and first-run leftovers",
+      "packages": [
+        {
+          "pkg": "com.hisense.demonstrate",
+          "note": "store demo reels"
+        },
+        {
+          "pkg": "com.hisense.hotelmenu",
+          "note": "hotel mode"
+        },
+        {
+          "pkg": "com.hisense.autotest",
+          "note": "factory autotest app (never launch it)"
+        },
+        {
+          "pkg": "com.hisense.electronictutorial",
+          "note": "e-manual"
+        },
+        {
+          "pkg": "com.hisense.ar.baike",
+          "note": "AR encyclopedia"
+        },
+        {
+          "pkg": "com.jamdeo.tv.fte",
+          "note": "first-run wizard, already completed"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded content nobody asked for",
+      "packages": [
+        {
+          "pkg": "com.hisense.tv.videoconference",
+          "note": "video conferencing"
+        },
+        {
+          "pkg": "com.hisense.tv.videochat.social",
+          "note": "preloaded video chat"
+        },
+        {
+          "pkg": "com.hisense.tv.fitmirror",
+          "note": "fitness mirror"
+        },
+        {
+          "pkg": "com.hisense.tv.foodmanage",
+          "note": "recipe app"
+        },
+        {
+          "pkg": "com.jamdeo.calendar",
+          "note": "vendor calendar"
+        }
+      ]
+    },
+    {
+      "title": "Screensaver ad surface and AOSP leftovers",
+      "packages": [
+        {
+          "pkg": "com.jamdeo.screensaver",
+          "note": "vendor ad screensaver"
+        },
+        {
+          "pkg": "com.android.dreams.basic",
+          "note": "AOSP fallback screensaver"
+        },
+        {
+          "pkg": "com.android.printspooler",
+          "note": "no printing on a TV"
+        },
+        {
+          "pkg": "com.android.wallpaperbackup",
+          "note": "AOSP leftover"
+        }
+      ]
+    },
+    {
+      "title": "System-uid extras (platform signed, separate packages; reboot-checked)",
+      "packages": [
+        {
+          "pkg": "com.hisense.smartimages",
+          "note": "HiSmartImage AI photo recognition"
+        },
+        {
+          "pkg": "com.hisense.tv.familyalbum",
+          "note": "family album"
+        },
+        {
+          "pkg": "com.hisense.tv.familycloud",
+          "note": "family cloud"
+        },
+        {
+          "pkg": "com.hisense.familymessage",
+          "note": "family message board"
+        },
+        {
+          "pkg": "com.hisense.singlelisten",
+          "note": "SingleListen"
+        },
+        {
+          "pkg": "com.speech.enchatroom",
+          "note": "voice chat room"
+        }
+      ]
+    },
+    {
+      "title": "a service with no launcher icon (its MainActivity has no CATEGORY_LAUNCHER), so it never shows in",
+      "packages": [
+        {
+          "pkg": "com.audiocn.karaoke.micmanager",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/hisense-65e5h/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

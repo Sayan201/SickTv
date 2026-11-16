@@ -1,0 +1,166 @@
+{
+  "schema": 1,
+  "id": "panasonic-4ktv-3mup",
+  "name": "Panasonic 4KTV-3MUP / TH-65MX660DX",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKR1.260308"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry, ads and auto-installs",
+      "packages": [
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        },
+        {
+          "pkg": "com.apps.mk.wd",
+          "note": "boot receiver with ad-click activities"
+        },
+        {
+          "pkg": "android.autoinstalls.config.scbc.device",
+          "note": "Play auto-installs of partner apps"
+        }
+      ]
+    },
+    {
+      "title": "Background services a TV does not need",
+      "packages": [
+        {
+          "pkg": "com.android.healthconnect.controller"
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore"
+        },
+        {
+          "pkg": "com.apps.wifihotspot"
+        },
+        {
+          "pkg": "com.android.dreams.basic"
+        },
+        {
+          "pkg": "com.android.htmlviewer"
+        },
+        {
+          "pkg": "com.android.backupconfirm"
+        },
+        {
+          "pkg": "com.android.sharedstoragebackup"
+        },
+        {
+          "pkg": "com.android.wallpaperbackup"
+        },
+        {
+          "pkg": "com.android.providers.calendar"
+        }
+      ]
+    },
+    {
+      "title": "Not used (owner's choice)",
+      "packages": [
+        {
+          "pkg": "com.disney.disneyplus"
+        },
+        {
+          "pkg": "com.chocolabs.app.chocotv.tv"
+        },
+        {
+          "pkg": "tv.twitch.android.app"
+        },
+        {
+          "pkg": "jp.or.nhk.nhkworld.tv"
+        },
+        {
+          "pkg": "com.apps.usbmediaplayer"
+        }
+      ]
+    },
+    {
+      "title": "commented out until the HDMI inputs are checked with them off (the Taiwan unit never ran them)",
+      "packages": [
+        {
+          "pkg": "com.android.captiveportallogin",
+          "optional": true,
+          "note": "hotel/café Wi-Fi sign-in page: re-enable if you need one"
+        },
+        {
+          "pkg": "com.android.certinstaller",
+          "optional": true,
+          "note": "installing CA or Wi-Fi certificates by hand"
+        },
+        {
+          "pkg": "com.android.companiondevicemanager",
+          "optional": true,
+          "note": "companion-app pairing dialogs"
+        },
+        {
+          "pkg": "com.android.dynsystem",
+          "optional": true,
+          "note": "Dynamic System Updates (GSI testing)"
+        },
+        {
+          "pkg": "com.android.localtransport",
+          "optional": true,
+          "note": "local backup transport"
+        },
+        {
+          "pkg": "com.android.managedprovisioning",
+          "optional": true,
+          "note": "work-profile / device-owner setup"
+        },
+        {
+          "pkg": "com.android.pacprocessor",
+          "optional": true,
+          "note": "proxy auto-config: re-enable if your network uses a PAC proxy"
+        },
+        {
+          "pkg": "com.android.providers.contacts",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.se",
+          "optional": true,
+          "note": "Secure Element service"
+        },
+        {
+          "pkg": "com.android.vpndialogs",
+          "optional": true,
+          "note": "VPN consent dialogs: re-enable before setting up a VPN app"
+        },
+        {
+          "pkg": "com.android.wallpaper.livepicker",
+          "optional": true
+        },
+        {
+          "pkg": "com.apps.plugins",
+          "optional": true
+        },
+        {
+          "pkg": "com.mk.tv.systemserver",
+          "optional": true
+        },
+        {
+          "pkg": "com.realtek.leanbacklauncher.partnercustomizer",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/panasonic-4ktv-3mup/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

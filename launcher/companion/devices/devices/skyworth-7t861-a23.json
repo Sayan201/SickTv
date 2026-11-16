@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "id": "skyworth-7t861-a23",
+  "name": "Skyworth 7T861_A23",
+  "tested": {
+    "os": "Coocaa OS / Android 10",
+    "sdk": 29,
+    "build": "QQ2A.200305.004.A1"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "cloud ad pushes, app/storage scanning, and stock theme resources (the guide line below is optional):",
+      "packages": [
+        {
+          "pkg": "com.skyworth.device",
+          "note": "Device information and location reporting (SensorsData analytics)"
+        },
+        {
+          "pkg": "com.tianci.de",
+          "note": "Tianci Data Engine daemons listening for package changes"
+        },
+        {
+          "pkg": "com.tianci.ad",
+          "note": "Tianci advertising cloud push receiver"
+        },
+        {
+          "pkg": "com.coocaa.tvmanager",
+          "note": "CooCaa content recommendation and app scanning manager; also scans USB/storage, so re-enable it if USB drives stop showing up"
+        }
+      ]
+    },
+    {
+      "title": "Optional: this set has the EPG guide off; it is TV middleware, so it stays on here",
+      "packages": [
+        {
+          "pkg": "com.coocaa.guide",
+          "optional": true,
+          "note": "Boot guide & EPG program guide / push receiver"
+        },
+        {
+          "pkg": "com.coocaa.theme_package_ccos_nine",
+          "note": "Stock Coocaa OS theme package (GoldenFaith)"
+        }
+      ]
+    },
+    {
+      "title": "and external karaoke microphone companion; com.loostone.tuning keeps system audio working:",
+      "packages": [
+        {
+          "pkg": "com.skyworth.angel.voice",
+          "optional": true,
+          "note": "Skyworth XiaoWei AI voice assistant"
+        },
+        {
+          "pkg": "com.skyworth.microphone",
+          "optional": true,
+          "note": "Skyworth karaoke and external microphone manager"
+        }
+      ]
+    },
+    {
+      "title": "Other optional telemetry and apps (commented out by default):",
+      "packages": [
+        {
+          "pkg": "com.skyworth.performance.monitors",
+          "optional": true,
+          "note": "Performance monitors and telemetry"
+        },
+        {
+          "pkg": "com.skyworth.testtime",
+          "optional": true,
+          "note": "Factory testing timer"
+        },
+        {
+          "pkg": "com.skyworthdigital.stb.dataprovider",
+          "optional": true,
+          "note": "STB diagnostics data provider"
+        }
+      ]
+    },
+    {
+      "title": "Firmware updater (kept enabled by default; uncomment to disable OTA updates)",
+      "packages": [
+        {
+          "pkg": "com.coocaa.os.upgrade",
+          "optional": true,
+          "note": "CooCaa OS system OTA updater"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded content and stores (optional to disable)",
+      "packages": [
+        {
+          "pkg": "com.coocaa.tvpitv",
+          "optional": true,
+          "note": "CooCaa Live TV preloaded streaming"
+        },
+        {
+          "pkg": "com.tianci.appstore",
+          "optional": true,
+          "note": "Tianci app store"
+        },
+        {
+          "pkg": "com.skyworth.skymarket",
+          "optional": true,
+          "note": "Skyworth market"
+        },
+        {
+          "pkg": "com.coocaa.app_browser",
+          "optional": true,
+          "note": "CooCaa built-in browser"
+        }
+      ]
+    },
+    {
+      "title": "Factory and tuning tools",
+      "packages": [
+        {
+          "pkg": "com.coocaa.factory",
+          "optional": true,
+          "note": "Factory menu test package (do not launch)"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/skyworth-7t861-a23/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

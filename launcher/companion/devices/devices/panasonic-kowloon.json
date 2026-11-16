@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "id": "panasonic-kowloon",
+  "name": "Panasonic Google TV LCD",
+  "tested": {
+    "os": "Android 14",
+    "sdk": 34,
+    "build": "UKNV.260416.001."
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Streaming and music apps, off by choice",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "note": "Netflix"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.disney.disneyplus",
+          "note": "Disney+"
+        },
+        {
+          "pkg": "com.viaplay.android",
+          "note": "Viaplay"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        }
+      ]
+    },
+    {
+      "title": "Android ad services and on-device personalisation (second unit; both accepted pm disable-user)",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        }
+      ]
+    },
+    {
+      "title": "Telemetry and feedback (second unit)",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Google feedback reports"
+        },
+        {
+          "pkg": "com.vestel.vestelreporter",
+          "note": "Vestel usage reporter"
+        }
+      ]
+    },
+    {
+      "title": "Retail and setup leftovers (second unit)",
+      "packages": [
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail demo mode"
+        },
+        {
+          "pkg": "com.vestel.easysatelliteinstallation",
+          "optional": true,
+          "note": "satellite setup wizard; the second unit uses the aerial only, untested with a dish"
+        }
+      ]
+    },
+    {
+      "title": "Accessibility, off by choice (second unit)",
+      "packages": [
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "optional": true,
+          "note": "TalkBack screen reader; the second unit has it off by choice, uncomment if you never use it"
+        }
+      ]
+    },
+    {
+      "title": "Ethernet only (second unit): the setup wizard owns the saved Wi-Fi, see the header; keep it on Wi-Fi",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Telemetry and feedback (third unit)",
+      "packages": [
+        {
+          "pkg": "com.android.tv.feedbackconsent",
+          "note": "the \"send diagnostic reports\" consent screen"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner setup leftovers"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services",
+          "note": "federated learning / on-device personalisation"
+        }
+      ]
+    },
+    {
+      "title": "Setup and backup leftovers (third unit)",
+      "packages": [
+        {
+          "pkg": "com.android.htmlviewer",
+          "note": "internal HTML viewer"
+        },
+        {
+          "pkg": "com.android.backupconfirm",
+          "note": "backup confirmation dialogs"
+        },
+        {
+          "pkg": "com.android.sharedstoragebackup",
+          "note": "shared-storage backup transport"
+        },
+        {
+          "pkg": "com.android.wallpaperbackup",
+          "note": "wallpaper backup transport"
+        },
+        {
+          "pkg": "com.android.cameraextensions",
+          "note": "camera extensions; the set has no camera"
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore",
+          "note": "Health Connect backup transport"
+        },
+        {
+          "pkg": "com.android.hotspot2.osulogin",
+          "note": "Passpoint / Hotspot 2.0 web login"
+        }
+      ]
+    },
+    {
+      "title": "Screensaver (third unit): the basic daydream is off, the Google one (com.google.android.apps.tv.dreamx) stays",
+      "packages": [
+        {
+          "pkg": "com.android.dreams.basic"
+        }
+      ]
+    },
+    {
+      "title": "Calendar on a TV nobody signs in to (third unit; the provider is one the tools allow)",
+      "packages": [
+        {
+          "pkg": "com.android.providers.calendar"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        }
+      ]
+    },
+    {
+      "title": "Apps the third unit does not use",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos",
+          "optional": true,
+          "note": "Google TV movies and rentals  (off on the third unit by the owner's choice)"
+        },
+        {
+          "pkg": "com.hbo.hbonow",
+          "optional": true,
+          "note": "HBO Max  (off on the third unit by the owner's choice)"
+        },
+        {
+          "pkg": "com.vestel.tv.eib",
+          "note": "the on-screen e-manual (its label was confirmed on screen)"
+        },
+        {
+          "pkg": "com.vewd.core.browser",
+          "note": "the Vewd browser"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/panasonic-kowloon/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "id": "sony-bravia-vu2",
+  "name": "Sony BRAVIA VU2",
+  "tested": {
+    "os": "Android TV 11, 14",
+    "sdk": 30,
+    "build": "RTT7.210923.001"
+  },
+  "launcher": "com.android.tv",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry, attribution and retail demo",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Google feedback reporter"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner install attribution"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "runs once after first setup"
+        },
+        {
+          "pkg": "com.sony.dtv.multiscreendemo",
+          "note": "retail demo mode (this build's name for com.sony.dtv.demo)"
+        }
+      ]
+    },
+    {
+      "title": "Unused system apps",
+      "packages": [
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync"
+        },
+        {
+          "pkg": "com.android.providers.calendar",
+          "note": "calendar storage (one of the allowed providers)"
+        },
+        {
+          "pkg": "com.android.printspooler",
+          "note": "printing"
+        },
+        {
+          "pkg": "com.android.camera2",
+          "note": "camera app; the set has no camera"
+        },
+        {
+          "pkg": "com.android.gallery3d",
+          "note": "legacy photo viewer"
+        },
+        {
+          "pkg": "com.android.wallpaper.livepicker",
+          "note": "live wallpaper picker"
+        }
+      ]
+    },
+    {
+      "title": "Off by choice",
+      "packages": [
+        {
+          "pkg": "com.google.android.tts",
+          "note": "Google text-to-speech (large; the TalkBack screen reader has no voice without it)"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies & TV (second unit; the first had it off already)"
+        },
+        {
+          "pkg": "com.graymatrix.did",
+          "optional": true,
+          "note": "ZEE5"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "Ambient screensaver; set the launcher's clock first:"
+        }
+      ]
+    },
+    {
+      "title": "(tools/disable.sh skips the launcher until another app is Home)",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sony-bravia-vu2/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "id": "daewoo-50dm62ua-finch",
+  "name": "Daewoo 50DM62UA",
+  "tested": {
+    "os": "Android TV 14",
+    "sdk": 34,
+    "build": null
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Vestel telemetry, logging, cleaner and user manual",
+      "packages": [
+        {
+          "pkg": "com.vestel.vestelreporter"
+        },
+        {
+          "pkg": "com.vestel.smartlogger"
+        },
+        {
+          "pkg": "com.vestel.tv.speedup"
+        },
+        {
+          "pkg": "com.vestel.tv.eib"
+        },
+        {
+          "pkg": "android.autoinstalls.config.vestel.malin"
+        }
+      ]
+    },
+    {
+      "title": "Google ads, personalisation and feedback",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        }
+      ]
+    },
+    {
+      "title": "Dead weight on TV",
+      "packages": [
+        {
+          "pkg": "com.android.healthconnect.controller"
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore"
+        },
+        {
+          "pkg": "com.android.managedprovisioning"
+        },
+        {
+          "pkg": "com.android.dynsystem"
+        },
+        {
+          "pkg": "com.android.cts.ctsshim"
+        },
+        {
+          "pkg": "com.android.cts.priv.ctsshim"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.android.htmlviewer"
+        },
+        {
+          "pkg": "com.android.backupconfirm"
+        },
+        {
+          "pkg": "com.android.se"
+        }
+      ]
+    },
+    {
+      "title": "Unused apps (user preference)",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        }
+      ]
+    },
+    {
+      "title": "This set has these off; uncomment if you don't use them",
+      "packages": [
+        {
+          "pkg": "com.vestel.smartcenter",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true
+        },
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.youtube.tv",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/daewoo-50dm62ua-finch/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

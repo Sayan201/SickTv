@@ -5,22 +5,29 @@ package app.sicktv.ui
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Share
@@ -43,6 +50,9 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -100,6 +110,8 @@ fun SettingsScreen(
     back: () -> Unit,
     keyHaptics: Boolean = true,
     onKeyHaptics: (Boolean) -> Unit = {},
+    wallpaper: String = "zangetsu",
+    onWallpaper: (String) -> Unit = {},
     onReport: () -> Unit = {},
     onWhatsNew: () -> Unit = {},
     snackbar: SnackbarHostState = remember { SnackbarHostState() },
@@ -126,6 +138,9 @@ fun SettingsScreen(
             contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
+            item {
+                WallpaperSelectorCard(current = wallpaper, onSelect = onWallpaper)
+            }
             item {
                 Card(
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
@@ -298,3 +313,126 @@ private fun SourceDialog(source: String?, onSave: (String?) -> Unit, onDismiss: 
         dismissButton = if (source == null) ({ TextButton(onClick = onDismiss) { Text(stringResource(R.string.settings_cancel)) } }) else null,
     )
 }
+
+@Composable
+private fun WallpaperSelectorCard(
+    current: String,
+    onSelect: (String) -> Unit,
+) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+        border = LiquidGlass.borderStroke(),
+    ) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp),
+        ) {
+            Column {
+                Text(stringResource(R.string.settings_wallpaper), style = MaterialTheme.typography.titleSmall)
+                Text(
+                    stringResource(R.string.settings_wallpaper_desc),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                WallpaperTile(
+                    name = stringResource(R.string.wallpaper_zangetsu),
+                    gradient = Brush.linearGradient(
+                        listOf(Color(0xFF0F0B0E), Color(0xFF281016), Color(0xFF13090C)),
+                    ),
+                    accent = LiquidGlass.NeonCrimson,
+                    selected = current != "nebula" && current != "aurora",
+                    modifier = Modifier.weight(1f),
+                    onClick = { onSelect("zangetsu") },
+                )
+                WallpaperTile(
+                    name = stringResource(R.string.wallpaper_nebula),
+                    gradient = Brush.linearGradient(
+                        listOf(Color(0xFF0D0A24), Color(0xFF3B154D), Color(0xFF160A29)),
+                    ),
+                    accent = Color(0xFFB347FF),
+                    selected = current == "nebula",
+                    modifier = Modifier.weight(1f),
+                    onClick = { onSelect("nebula") },
+                )
+                WallpaperTile(
+                    name = stringResource(R.string.wallpaper_aurora),
+                    gradient = Brush.linearGradient(
+                        listOf(Color(0xFF05171C), Color(0xFF0B3338), Color(0xFF081C20)),
+                    ),
+                    accent = Color(0xFF00FFCC),
+                    selected = current == "aurora",
+                    modifier = Modifier.weight(1f),
+                    onClick = { onSelect("aurora") },
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun WallpaperTile(
+    name: String,
+    gradient: Brush,
+    accent: Color,
+    selected: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
+    val border = if (selected) {
+        androidx.compose.foundation.BorderStroke(2.dp, accent)
+    } else {
+        androidx.compose.foundation.BorderStroke(1.dp, Color(0x2BFFFFFF))
+    }
+    Column(
+        modifier = modifier
+            .clip(RoundedCornerShape(12.dp))
+            .background(Color(0x1F141416))
+            .border(border, RoundedCornerShape(12.dp))
+            .clickable(onClick = onClick)
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterVertically,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(gradient)
+                .border(1.dp, Color(0x33FFFFFF), RoundedCornerShape(8.dp)),
+            contentAlignment = Alignment.Center,
+        ) {
+            if (selected) {
+                Box(
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clip(CircleShape)
+                        .background(accent),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        Icons.Default.Check,
+                        contentDescription = null,
+                        tint = Color.Black,
+                        modifier = Modifier.size(16.dp),
+                    )
+                }
+            }
+        }
+        Text(
+            name,
+            style = MaterialTheme.typography.labelSmall,
+            fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
+            color = if (selected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant,
+            maxLines = 1,
+        )
+    }
+}
+

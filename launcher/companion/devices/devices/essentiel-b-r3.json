@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "id": "essentiel-b-r3",
+  "name": "Essentiel b R3",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTT7.230810.001"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Google extras nobody asked for",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV movies and shows"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "screensaver"
+        }
+      ]
+    },
+    {
+      "title": "Voice assistant, cast and HbbTV (chosen by the owner; re-enable what you use)",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Assistant / voice search"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "note": "Chromecast built-in"
+        },
+        {
+          "pkg": "com.apps.scast"
+        },
+        {
+          "pkg": "com.creative.fastscreen.tv",
+          "note": "FastCast"
+        },
+        {
+          "pkg": "com.seraphic.hbbtv.app",
+          "note": "HbbTV"
+        },
+        {
+          "pkg": "com.seraphic.webview",
+          "note": "HbbTV's own WebView"
+        }
+      ]
+    },
+    {
+      "title": "Unused system apps and demo services",
+      "packages": [
+        {
+          "pkg": "com.android.gallery3d"
+        },
+        {
+          "pkg": "com.android.htmlviewer"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.android.wallpaper.livepicker"
+        },
+        {
+          "pkg": "com.mk.tv.meeting.service",
+          "note": "digital-signage accessibility service"
+        }
+      ]
+    },
+    {
+      "title": "Stock Google TV launcher, replaced by launcher/",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/essentiel-b-r3/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

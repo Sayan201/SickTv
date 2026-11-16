@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "id": "durabrand-durat32isdb",
+  "name": "Durabrand DB Android TV 4K",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTM6.230109.232"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Retail demo and Haier store promos",
+      "packages": [
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "HRetailDisplay_2K store demo"
+        },
+        {
+          "pkg": "com.haier.apps",
+          "note": "store shortcuts"
+        },
+        {
+          "pkg": "com.haier.apps.evoSmart",
+          "note": "store / partner promo"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization",
+          "optional": true,
+          "note": "store disclaimer: disabled in the first owner report, not on this set"
+        }
+      ]
+    },
+    {
+      "title": "Haier cleaner",
+      "packages": [
+        {
+          "pkg": "com.haier.tvhousekeeper",
+          "note": "\"TV Assistant\" cleaner (/product/app/TV_Assistant)"
+        }
+      ]
+    },
+    {
+      "title": "Google apps and services a TV does not use",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music, off by choice"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync"
+        },
+        {
+          "pkg": "com.android.printspooler",
+          "note": "printing"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/durabrand-durat32isdb/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

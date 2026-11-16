@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "id": "sony-bravia-4k-ur3",
+  "name": "Sony BRAVIA 4K UR3 / KD-55X8000H / KD-65A8 / XBR-55A8H / KD-43XH8196",
+  "tested": {
+    "os": "Android TV 10",
+    "sdk": 29,
+    "build": "BRAVIA_UR3_EU-user"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "tracking / ads / recommendations",
+      "packages": [
+        {
+          "pkg": "tv.samba.ssm",
+          "note": "Samba TV (ACR viewing data)"
+        },
+        {
+          "pkg": "com.qterics.da.product"
+        },
+        {
+          "pkg": "com.sony.dtv.da.service"
+        },
+        {
+          "pkg": "com.sonyericsson.idd.agent"
+        },
+        {
+          "pkg": "com.sony.dtv.promos",
+          "note": "EU build; absent on TW (KD-55X8000H)"
+        },
+        {
+          "pkg": "com.sony.dtv.sonyselect"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "only the stock launcher uses it"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.tv.bugreportsender",
+          "note": "confirmed on TW (KD-55X8000H)"
+        }
+      ]
+    },
+    {
+      "title": "demo / shop mode",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.demosupport"
+        },
+        {
+          "pkg": "com.sony.dtv.demosystemsupport"
+        },
+        {
+          "pkg": "com.sony.dtv.multiscreendemo"
+        }
+      ]
+    },
+    {
+      "title": "voice assistant (removes the remote's mic search; skip these three to keep it)",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss"
+        },
+        {
+          "pkg": "com.google.android.tv.assistant"
+        },
+        {
+          "pkg": "com.sony.dtv.assistantadapter"
+        }
+      ]
+    },
+    {
+      "title": "preloaded apps, disabled by choice (com.apple.atve.sony.appletv kept here — used as a dock app)",
+      "packages": [
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.videos"
+        }
+      ]
+    },
+    {
+      "title": "KD-65A8 (#2717), disabled and reboot-checked there; one evening of use so far. The first two were",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.usercontext",
+          "optional": true,
+          "note": "user context providers; also KD-43XH8196"
+        },
+        {
+          "pkg": "com.sony.dtv.sonybugreportsys",
+          "optional": true,
+          "note": "Sony bug-report/log uploader; also KD-43XH8196"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.hotelmode",
+          "optional": true,
+          "note": "hotel mode"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.rs232csupport",
+          "optional": true,
+          "note": "RS-232 control for hotel installs"
+        },
+        {
+          "pkg": "com.sony.dtv.recservice",
+          "optional": true,
+          "note": "USB recording of broadcast TV (also a DLNA receiver for recordings)"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "optional": true,
+          "note": "Ambient screensaver: point screensaver_components and"
+        }
+      ]
+    },
+    {
+      "title": "# com.android.dreams.basic/.Colors rather than the static ClockDream)",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.videoframeserver",
+          "optional": true,
+          "note": "reads Samba TV data and the EPG; INTERNET"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast built-in"
+        },
+        {
+          "pkg": "com.sony.dtv.airplayapp",
+          "optional": true,
+          "note": "AirPlay receiver (persistent)"
+        },
+        {
+          "pkg": "com.sony.dtv.homekit",
+          "optional": true,
+          "note": "HomeKit (persistent)"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sony-bravia-4k-ur3/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

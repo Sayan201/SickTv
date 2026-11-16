@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "id": "hotack-l018",
+  "name": "HOTACK L018 Smart Projector",
+  "tested": {
+    "os": "Android 11",
+    "sdk": 30,
+    "build": "Projector.20260530.1707"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Ads, analytics and cleaners",
+      "packages": [
+        {
+          "pkg": "com.hotack.screensaversdk",
+          "note": "ad screensaver: zeasn ad SDK and sensorsdata analytics"
+        },
+        {
+          "pkg": "com.htc.clearmemory",
+          "note": "memory cleaner"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps",
+      "packages": [
+        {
+          "pkg": "com.android.music"
+        },
+        {
+          "pkg": "com.mobisystems.office",
+          "note": "Office suite"
+        },
+        {
+          "pkg": "com.htc.storeos",
+          "note": "HTC app store"
+        },
+        {
+          "pkg": "com.android.egg"
+        },
+        {
+          "pkg": "com.android.htmlviewer"
+        }
+      ]
+    },
+    {
+      "title": "Printing",
+      "packages": [
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.android.bips"
+        },
+        {
+          "pkg": "com.android.printservice.recommendation"
+        }
+      ]
+    },
+    {
+      "title": "Casting and screen mirroring; re-enable the ones you cast with",
+      "packages": [
+        {
+          "pkg": "com.mphotool.airplay",
+          "note": "AirPlay receiver"
+        },
+        {
+          "pkg": "com.mphotool.dlna",
+          "note": "DLNA receiver"
+        },
+        {
+          "pkg": "com.mphotool.usbcastserver",
+          "note": "USB cast"
+        },
+        {
+          "pkg": "com.softwinner.miracastReceiver",
+          "note": "Miracast"
+        },
+        {
+          "pkg": "com.htc.samescreen",
+          "note": "htc_cast mirroring"
+        },
+        {
+          "pkg": "com.toofifi.lineserver",
+          "note": "USB cast daemon"
+        },
+        {
+          "pkg": "com.android.toofifi",
+          "note": "FeituHtc cast receiver hub (welcome autostart, PIN)"
+        }
+      ]
+    },
+    {
+      "title": "Voice assistant",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google voice search; the firmware re-enables it at every boot"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/hotack-l018/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

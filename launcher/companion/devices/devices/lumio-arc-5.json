@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "id": "lumio-arc-5",
+  "name": "Lumio Arc 5 Projector",
+  "tested": {
+    "os": "Google TV",
+    "sdk": null,
+    "build": "build"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Google feedback and telemetry",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        }
+      ]
+    },
+    {
+      "title": "Unused system services",
+      "packages": [
+        {
+          "pkg": "com.android.htmlviewer"
+        },
+        {
+          "pkg": "com.android.wallpaperbackup"
+        },
+        {
+          "pkg": "com.android.sharedstoragebackup"
+        },
+        {
+          "pkg": "com.android.backupconfirm"
+        },
+        {
+          "pkg": "com.android.hotspot2.osulogin"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        }
+      ]
+    },
+    {
+      "title": "Privacy Sandbox / ad attribution",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        }
+      ]
+    },
+    {
+      "title": "Health Connect (not used on a projector)",
+      "packages": [
+        {
+          "pkg": "com.android.healthconnect.controller"
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore"
+        }
+      ]
+    },
+    {
+      "title": "Google preloads",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Demo and customization preloads",
+      "packages": [
+        {
+          "pkg": "fusion.android.tv.demo"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/lumio-arc-5/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

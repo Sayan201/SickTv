@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "id": "tcl-g06-us-google-tv",
+  "name": "TCL Smart TV",
+  "tested": {
+    "os": "Google TV 11",
+    "sdk": 30,
+    "build": "AR2101"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Batch 1: TCL promos, popups and telemetry; Google partner plumbing",
+      "packages": [
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "store-demo sticker"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "note": "promo rows (see KEEP note on #2138)"
+        },
+        {
+          "pkg": "com.tcl.messagebox",
+          "note": "TCL messages/popups"
+        },
+        {
+          "pkg": "com.tcl.dashboard",
+          "note": "TCL Home panel; the remote's dashboard button goes dead with it"
+        },
+        {
+          "pkg": "com.tcl.useragreement"
+        },
+        {
+          "pkg": "com.tcl.guard",
+          "note": "TGuard cleaner"
+        },
+        {
+          "pkg": "com.tcl.copydatatotv",
+          "note": "copy-data utility"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "optional": true,
+          "note": "TCL account, switched back on at every boot (idle)"
+        },
+        {
+          "pkg": "com.tcl.smartalexa",
+          "optional": true,
+          "note": "Alexa bridge, switched back on at every boot (idle)"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner attribution"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.google.android.apps.nbu.smartconnect.tv",
+          "note": "data-saver VPN"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "partner auto-installs"
+        }
+      ]
+    },
+    {
+      "title": "Batch 2: preloads, off by the owner's choice",
+      "packages": [
+        {
+          "pkg": "com.tcl.channelplus",
+          "note": "TCL Live FAST channels (a Live TV input)"
+        },
+        {
+          "pkg": "com.tcl.tv.tclchannel",
+          "note": "TCL Channel; the remote's TCL Channel button goes dead with it"
+        },
+        {
+          "pkg": "com.tcl.tv.plus",
+          "note": "TCL TV+ free channels"
+        },
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix; the remote's Netflix button goes dead with it; an owner's app, kept on in the shared list; this set has it off"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "TalkBack"
+        },
+        {
+          "pkg": "com.tcl.t_solo",
+          "note": "Bluetooth \"listen alone\""
+        }
+      ]
+    },
+    {
+      "title": "Batch 3: launcher handover. It owned the Wi-Fi saved at setup on this unit: forget the network and join it",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-g06-us-google-tv/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

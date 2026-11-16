@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "id": "mecool-km2-plus",
+  "name": "MECOOL KM2 Plus",
+  "tested": {
+    "os": "Android TV 14",
+    "sdk": 34,
+    "build": null
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Stock recommendations and ads",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/mecool-km2-plus/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

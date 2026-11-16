@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "id": "aiwa-ai-pont-sa",
+  "name": "AIWA AI PONT SA",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKNV.260603.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Content recognition (reports what is on screen)",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx"
+        }
+      ]
+    },
+    {
+      "title": "Partner auto-installs and feedback",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "already disabled on the test set"
+        },
+        {
+          "pkg": "com.homwee.store"
+        },
+        {
+          "pkg": "com.homwee.help"
+        },
+        {
+          "pkg": "com.homwee.upgrade",
+          "note": "vendor app updater, not firmware"
+        },
+        {
+          "pkg": "com.homwee.multiscreenshare"
+        },
+        {
+          "pkg": "com.homwee.mmp.screenshare"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "microphone / Assistant"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "note": "Chromecast built-in"
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher, replaced by launcher/. Left to launcher/build-and-install.sh,",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.launcherx",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/aiwa-ai-pont-sa/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

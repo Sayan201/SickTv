@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "continental-edison-celed50sav222b6",
+  "name": "Continental Edison CELED50SAV222B6",
+  "tested": {
+    "os": "Android TV 14",
+    "sdk": 34,
+    "build": "UKNV.260425.001."
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry and ad services",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin",
+          "note": "automatic content recognition (ACR)"
+        },
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        }
+      ]
+    },
+    {
+      "title": "Content rows and partner tweaks on the stock home",
+      "packages": [
+        {
+          "pkg": "com.mediatek.android.leanbacklauncher.partnercustomizer"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps, demos and unused services",
+      "packages": [
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail demo mode"
+        },
+        {
+          "pkg": "com.mediatek.androidbox",
+          "note": "WFDSinkTest, Wi-Fi Display test app"
+        },
+        {
+          "pkg": "com.expressluck.tvhelpmanual",
+          "note": "on-screen manual"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization",
+          "note": "vendor disclaimer screen"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync, no calendar app on a TV"
+        }
+      ]
+    },
+    {
+      "title": "Optional, by choice: disabled on the tested set because the owner does not use voice; it turns off the",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/continental-edison-celed50sav222b6/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

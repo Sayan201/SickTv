@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "id": "toshiba-shandao-atv11",
+  "name": "Toshiba Android TV",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": null
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Google apps the owner turned off",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies & TV"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music"
+        }
+      ]
+    },
+    {
+      "title": "Streaming: this set has it off; uncomment only if you don't use it",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/toshiba-shandao-atv11/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

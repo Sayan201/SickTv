@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "id": "formovie-theater-koroli",
+  "name": "Formovie Theater",
+  "tested": {
+    "os": "Android TV 11 (Google TV home)",
+    "sdk": 30,
+    "build": "RTMA.250416.128"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Google telemetry and feedback",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "Google RLZ attribution pings"
+        }
+      ]
+    },
+    {
+      "title": "Play auto-install of partner apps (sic, \"fomovie\", the same spelling as on the hanlla list)",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.fomovie"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/formovie-theater-koroli/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

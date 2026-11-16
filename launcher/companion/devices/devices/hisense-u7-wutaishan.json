@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "id": "hisense-u7-wutaishan",
+  "name": "Hisense U7 / 55U7SG",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKN6.251123.001.049."
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Tracking",
+      "packages": [
+        {
+          "pkg": "com.vt.tv.evservice",
+          "note": "Vtp_ACR, viewing-data content recognition"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner referral tracking"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "Google TV partner auto-installs (PAI)"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "crash/feedback uploader"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync, unused on a TV"
+        }
+      ]
+    },
+    {
+      "title": "Hisense content and preloads",
+      "packages": [
+        {
+          "pkg": "com.vidaa.oemtabcontentprovider",
+          "note": "the Hisense tab on the Google TV home, starts at boot"
+        },
+        {
+          "pkg": "net.vidaatv.hisense.android.tv",
+          "note": "VIDAA Channels+, starts at boot"
+        },
+        {
+          "pkg": "com.vt.hishow",
+          "note": "\"Family Moment\" photo screensaver and content"
+        }
+      ]
+    },
+    {
+      "title": "Demo, hotel and first-time setup modes",
+      "packages": [
+        {
+          "pkg": "com.vt.storemode"
+        },
+        {
+          "pkg": "com.vt.tv.b2b",
+          "note": "hotel/business mode, starts at boot"
+        },
+        {
+          "pkg": "com.vt.fte",
+          "note": "first-time setup hooks for the setup wizard"
+        }
+      ]
+    },
+    {
+      "title": "Off by choice",
+      "packages": [
+        {
+          "pkg": "com.vt.tv.protector",
+          "note": "DeviceAssistant: cache cleaner and \"turbo mode\", starts at boot"
+        },
+        {
+          "pkg": "com.vt.alexa",
+          "note": "HiAlexa (Google Assistant is kept)"
+        },
+        {
+          "pkg": "com.vt.tv.dlna",
+          "note": "DLNA media renderer, starts at boot"
+        },
+        {
+          "pkg": "com.vt.tv.ai_sense",
+          "note": "Vtp_AiCamera, Hisense's USB AI camera. The hengshan list warns"
+        }
+      ]
+    },
+    {
+      "title": "Google TV's setup wizard. Its RecoveryActivity claims HOME and beats the new launcher once launcherx is",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "note": "setup wizard; owns the saved Wi-Fi, AirPlay stops without it"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/hisense-u7-wutaishan/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

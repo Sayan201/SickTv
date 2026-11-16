@@ -1,0 +1,144 @@
+{
+  "schema": 1,
+  "id": "philips-55pos9002",
+  "name": "Philips 55POS9002/12 OLED",
+  "tested": {
+    "os": "Android TV 8.0",
+    "sdk": 26,
+    "build": "TPM171E_R.107.001.143.000"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Google feedback, tutorials and recommendation rows (same as philips-55pus7503)",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Market Feedback Agent"
+        },
+        {
+          "pkg": "com.google.android.tvtutorials",
+          "note": "Android TV first-run tutorials"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "Android TV recommendations/content rows"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.recommendations",
+          "note": "needs TVINPUT_ALLOW=1, see header"
+        }
+      ]
+    },
+    {
+      "title": "Philips promotion and telemetry",
+      "packages": [
+        {
+          "pkg": "org.droidtv.demome",
+          "note": "Retail/store demonstration app; needs TVINPUT_ALLOW=1"
+        },
+        {
+          "pkg": "org.droidtv.nettvrecommender",
+          "note": "Philips NetTV / Top Picks recommendation row"
+        },
+        {
+          "pkg": "org.droidtv.usagelogger",
+          "note": "Boot stats, remote keypress counts, panel telemetry; needs TVINPUT_ALLOW=1"
+        },
+        {
+          "pkg": "org.droidtv.candeebug",
+          "note": "\"DAC\" analytics uploader"
+        },
+        {
+          "pkg": "org.droidtv.gel",
+          "note": "\"GEL\" metrics collector, runs inside the candeebug process"
+        },
+        {
+          "pkg": "org.droidtv.tv.frameworklogger",
+          "note": "Reboot reasons and firmware-install records to the Philips logger"
+        },
+        {
+          "pkg": "tv.inscape.tvclient.inscapeacr",
+          "note": "\"Inscape\" ACR client: identifies what is on screen, HDMI included"
+        },
+        {
+          "pkg": "org.droidtv.sticker",
+          "note": "Feature promo stickers and banners (StickerActivity, BannerActivity)"
+        },
+        {
+          "pkg": "org.droidtv.twittershare",
+          "note": "Twitter share sheet (SocialResolverActivity)"
+        }
+      ]
+    },
+    {
+      "title": "Philips NetTV app store (pre-Android web app platform; Play Store replaces it)",
+      "packages": [
+        {
+          "pkg": "org.droidtv.nettv.market",
+          "note": "NetTV app gallery"
+        },
+        {
+          "pkg": "org.droidtv.nettvapps",
+          "note": "\"NetTvApps\" manager"
+        },
+        {
+          "pkg": "org.droidtv.nettv_launcherapp",
+          "note": "NetTV app launcher entry"
+        },
+        {
+          "pkg": "org.droidtv.nettvregistration",
+          "note": "Philips account registration for NetTV"
+        },
+        {
+          "pkg": "com.opera.sdk.example",
+          "note": "Opera TV SDK sample app (leanback entry, no use)"
+        }
+      ]
+    },
+    {
+      "title": "Preinstalled Google apps whose service is gone or that nobody needs on a TV",
+      "packages": [
+        {
+          "pkg": "com.google.android.music",
+          "note": "Google Play Music (service discontinued)"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Google Play Games"
+        }
+      ]
+    },
+    {
+      "title": "Off by choice on this set; uncomment the ones you don't use",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix (its remote button can open another app: README.md)"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "optional": true,
+          "note": "Google Play Movies & TV"
+        },
+        {
+          "pkg": "org.droidtv.amazonalexa",
+          "optional": true,
+          "note": "Alexa"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/philips-55pos9002/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "id": "sankey-smart2ktvse",
+  "name": "Sankey SMART2KTVSE",
+  "tested": {
+    "os": "Android TV 13",
+    "sdk": 33,
+    "build": null
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Whale OS specific services",
+      "packages": [
+        {
+          "pkg": "com.zeasn.whaletrackservice",
+          "note": "Tracking/telemetry service"
+        },
+        {
+          "pkg": "com.zeasn.whaleservice",
+          "note": "Core Whale OS service"
+        },
+        {
+          "pkg": "com.zeasn.tokenapp",
+          "note": "Token management"
+        },
+        {
+          "pkg": "com.zeasn.hotelmodelservice",
+          "note": "Hotel mode (not needed for home use)"
+        },
+        {
+          "pkg": "com.zeasn.deviceportal.asdprovider.certified",
+          "note": "Device portal"
+        },
+        {
+          "pkg": "com.zeasn.tv.cast",
+          "note": "Casting bloat (not the system cast)"
+        },
+        {
+          "pkg": "com.zeasn.livetv",
+          "optional": true,
+          "note": "Live TV service: keep it. Disabling it gives \"No Signal\" on every input (HDMI included)"
+        },
+        {
+          "pkg": "com.zeasn.whaleos.settings",
+          "note": "Whale OS settings overlay"
+        }
+      ]
+    },
+    {
+      "title": "Factory/test apps",
+      "packages": [
+        {
+          "pkg": "com.hikeen.factorymenu",
+          "note": "Factory menu (MENU+1147 does NOT work on SMART2KTVSE)"
+        },
+        {
+          "pkg": "com.hikeen.factoryautomation",
+          "note": "Factory automation"
+        },
+        {
+          "pkg": "com.hikeen.middleware.server",
+          "note": "Middleware server"
+        }
+      ]
+    },
+    {
+      "title": "Voice assistant and runtime",
+      "packages": [
+        {
+          "pkg": "com.whaletv.aivoice",
+          "note": "AI voice assistant"
+        },
+        {
+          "pkg": "com.whaletv.web.app_runtime",
+          "note": "Web app runtime"
+        }
+      ]
+    },
+    {
+      "title": "Android ad services",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api",
+          "note": "Android ad services"
+        }
+      ]
+    },
+    {
+      "title": "Camera app: this set has none. Disabled by hand on that unit, not by this list;",
+      "packages": [
+        {
+          "pkg": "com.android.camera2",
+          "optional": true,
+          "note": "Camera (a system app: pm disable-user works, pm uninstall fails with DELETE_FAILED_INTERNAL_ERROR)"
+        }
+      ]
+    },
+    {
+      "title": "Unknown services",
+      "packages": [
+        {
+          "pkg": "com.mirakulo.astrotv.service",
+          "note": "Ginga interactive TV for ISDB-Tb broadcasts; disabling only turns broadcast interactivity off"
+        }
+      ]
+    },
+    {
+      "title": "System updaters (disable to prevent bloat from returning)",
+      "packages": [
+        {
+          "pkg": "com.droidlogic.updater",
+          "note": "OTA updater"
+        },
+        {
+          "pkg": "com.droidlogic.appinstall",
+          "note": "App installer service"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher (disabled after CleanYourTV launcher is installed)",
+      "packages": [
+        {
+          "pkg": "com.whaletv.launcher",
+          "note": "Original Whale TV launcher"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sankey-smart2ktvse/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

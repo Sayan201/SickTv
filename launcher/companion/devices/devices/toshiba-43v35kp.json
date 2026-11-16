@@ -1,0 +1,199 @@
+{
+  "schema": 1,
+  "id": "toshiba-43v35kp",
+  "name": "Toshiba 43V35KP",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTMA.250416.097"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "--- Silent installs and partner promo rows ---",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.hisense.hayward",
+          "note": "silently installs promoted apps"
+        },
+        {
+          "pkg": "com.mediatek.android.leanbacklauncher.partnercustomizer",
+          "note": "partner promo rows on the stock launcher"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "recommendation / sponsored rows (see header)"
+        }
+      ]
+    },
+    {
+      "title": "--- Manufacturer telemetry and analytics ---",
+      "packages": [
+        {
+          "pkg": "com.cvte.tv.infoprovider",
+          "note": "CVTE device-info and telemetry service"
+        }
+      ]
+    },
+    {
+      "title": "--- Store demo and setup leftovers ---",
+      "packages": [
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail/shop demo mode"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization",
+          "note": "first-setup disclaimer popup"
+        },
+        {
+          "pkg": "com.mediatek.wwtv.setupwizard",
+          "note": "TV setup wizard (setup already done)"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "one-time first-boot initialiser"
+        }
+      ]
+    },
+    {
+      "title": "--- Factory / production apps ---",
+      "packages": [
+        {
+          "pkg": "com.at.factory.androidtvaidlservice",
+          "note": "factory AIDL service bridge"
+        },
+        {
+          "pkg": "com.at.factory.factorymanager",
+          "note": "factory package manager (see header; leave enabled if unsure)"
+        },
+        {
+          "pkg": "com.cvte.tv.at",
+          "note": "CVTE factory auto-test client"
+        },
+        {
+          "pkg": "com.cvte.tv.fac.menu",
+          "note": "CVTE factory menu"
+        },
+        {
+          "pkg": "com.cvte.tv.hisensefac",
+          "note": "Hisense factory tool"
+        },
+        {
+          "pkg": "com.cvte.tv.fac.aging",
+          "note": "burn-in / aging test"
+        },
+        {
+          "pkg": "mediatek.factorymenu.ui",
+          "note": "MediaTek factory menu UI"
+        }
+      ]
+    },
+    {
+      "title": "--- Google telemetry, tracking and partner services ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "crash/feedback uploader to Google"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner/OEM attribution and RLZ pings"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync, on a TV"
+        },
+        {
+          "pkg": "com.google.android.sss.authbridge",
+          "note": "Google sign-in auth bridge service (no UI)"
+        }
+      ]
+    },
+    {
+      "title": "--- Second Home claimant ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "--- OEM browser preload ---",
+      "packages": [
+        {
+          "pkg": "com.tcl.browser",
+          "note": "TCL-supplied browser (not used on Toshiba)"
+        }
+      ]
+    },
+    {
+      "title": "--- Ambient screensaver (safe once launcher owns Home) ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "ambient photo screensaver; replaced by ClockDream"
+        }
+      ]
+    },
+    {
+      "title": "--- Preloaded streaming app (India / JioTV, not relevant on EU market) ---",
+      "packages": [
+        {
+          "pkg": "com.jio.media.stb.ondemand",
+          "note": "JioTV / JioHotstar India streaming"
+        }
+      ]
+    },
+    {
+      "title": "--- Off by choice on this set (keep what you use) ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.tts",
+          "optional": true,
+          "note": "Google TTS — disabled here, but TTS then stops"
+        }
+      ]
+    },
+    {
+      "title": "# working; keep it if you use voice or screen reader",
+      "packages": [
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "YouTube Music (factory-disabled; not in this list)"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "optional": true,
+          "note": "Play Games (factory-disabled; not in this list)"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "optional": true,
+          "note": "TalkBack (factory-disabled; not in this list)"
+        },
+        {
+          "pkg": "com.his.tv.user.rus_apk",
+          "optional": true,
+          "note": "Russian regional APK (factory-disabled; not in this list)"
+        }
+      ]
+    },
+    {
+      "title": "--- Stock launcher: disabled by launcher/build-and-install.sh, not by this list ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/toshiba-43v35kp/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

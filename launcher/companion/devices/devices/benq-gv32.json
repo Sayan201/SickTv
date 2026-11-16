@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "id": "benq-gv32",
+  "name": "BenQ GV32 portable projector",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKNV.260626.001"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Batch 1: telemetry, ads and partner plumbing",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api",
+          "note": "Android ad services (Topics, attribution)"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "Google partner attribution pings"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization",
+          "note": "setup-only disclaimer screen"
+        }
+      ]
+    },
+    {
+      "title": "Batch 2: preloaded / unused apps (owner's choice)",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.instagram.airwave"
+        },
+        {
+          "pkg": "com.sdmc.implayer",
+          "optional": true,
+          "note": "USB media player; asks for TV_INPUT_HARDWARE, see header"
+        }
+      ]
+    },
+    {
+      "title": "once launcherx is off. It owned the Wi-Fi saved at setup on this unit: forget the network and join it again",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/benq-gv32/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

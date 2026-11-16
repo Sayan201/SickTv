@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "id": "salora-smart24tv",
+  "name": "Salora SMART24TV / Hitachi 32HAK4258",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTOC.250820.001."
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "--- Vestel telemetry and junk ---",
+      "packages": [
+        {
+          "pkg": "com.vestel.vestelreporter",
+          "note": "Vestel analytics/telemetry uploader"
+        },
+        {
+          "pkg": "com.vestel.tv.speedup",
+          "note": "\"speed up\" cleaner"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization",
+          "note": "MStar setup disclaimer popup"
+        },
+        {
+          "pkg": "android.autoinstalls.config.vestel.cosmos",
+          "note": "partner auto-preinstall config"
+        },
+        {
+          "pkg": "com.vestel.tv.eib",
+          "note": "E-User Manual viewer: one activity, no services or receivers"
+        }
+      ]
+    },
+    {
+      "title": "--- Google services nobody asked for ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "crash/feedback uploader to Google"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync, on a TV"
+        },
+        {
+          "pkg": "com.android.providers.calendar",
+          "note": "calendar storage, on a TV"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies / Google TV storefront"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.mediatek.tv.freeviewplay",
+          "note": "UK Freeview Play integration, dead weight in Italy"
+        }
+      ]
+    },
+    {
+      "title": "--- Owner's checklist choices: keep any you use ---",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "YouTube Music"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant / voice search (remote mic button)"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast built-in"
+        },
+        {
+          "pkg": "com.mediatek.wwtv.mediaplayer",
+          "optional": true,
+          "note": "USB media player"
+        }
+      ]
+    },
+    {
+      "title": "--- Stock launcher content, disabled after launcher/build-and-install.sh took Home ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "recommendation rows for the stock launcher"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.partnercustomizer",
+          "note": "partner/sponsored rows for the stock launcher"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "ambient photo screensaver (launcher's clock replaces it)"
+        }
+      ]
+    },
+    {
+      "title": "--- Stock launcher: tools/disable.sh skips it until another app answers HOME ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher",
+          "note": "disable LAST, after launcher/build-and-install.sh"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/salora-smart24tv/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

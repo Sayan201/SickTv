@@ -334,11 +334,13 @@ fun SickTvApp(vm: SickTvViewModel) {
             checkUpdates = state.checkUpdates,
             alphaBuild = state.alphaBuild,
             onCheckUpdates = vm::setCheckUpdates,
+            back = { settings = false },
             keyHaptics = state.keyHaptics,
             onKeyHaptics = vm::setKeyHaptics,
+            wallpaper = state.wallpaper,
+            onWallpaper = vm::setWallpaper,
             onReport = { vm.openReport(ReportKind.Problem) },
             onWhatsNew = { whatsNew = true },
-            back = { settings = false },
             snackbar = snackbar,
         )
     } else if (state.device.launcher != null) {

@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "id": "tcl-55s450g",
+  "name": "TCL 55S450G",
+  "tested": {
+    "os": "Google TV 11",
+    "sdk": 30,
+    "build": "RP1A.200622.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "---- TCL and Google telemetry ----",
+      "packages": [
+        {
+          "pkg": "com.tcl.bi",
+          "note": "TCL BI analytics"
+        },
+        {
+          "pkg": "com.tcl.xian.StartandroidService",
+          "note": "background reporting service"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "crash / feedback reporting"
+        }
+      ]
+    },
+    {
+      "title": "---- TCL and Google content, ads and recommendation rows ----",
+      "packages": [
+        {
+          "pkg": "com.tcl.dashboard",
+          "note": "TCL dashboard / promo backend"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "note": "partner customisation, promo rows"
+        },
+        {
+          "pkg": "com.tcl.messagebox",
+          "note": "TCL message / promo box"
+        },
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "sticker overlay"
+        },
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "TCL web-video portal"
+        },
+        {
+          "pkg": "com.tcl.tv.tclchannel",
+          "note": "TCL Channel"
+        },
+        {
+          "pkg": "com.tcl.tv.plus",
+          "note": "TCL+"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV Movies; the priced row is launcherx"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "silently installs partner apps"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner-app attribution"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "one-time setup leftovers"
+        }
+      ]
+    },
+    {
+      "title": "---- Background services and preloaded extras ----",
+      "packages": [
+        {
+          "pkg": "com.tcl.guard",
+          "note": "TCL online support"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account sign-in; on AR11 a 43C641 rebooted on every standby wake with it off (#3533), so re-enable it if this set does"
+        },
+        {
+          "pkg": "com.tcl.ocean.instructions",
+          "note": "e-manual"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync, no calendar on a TV"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.tcl.gallery",
+          "note": "TCL photo gallery"
+        }
+      ]
+    },
+    {
+      "title": "---- Off by choice: voice assistants not used ----",
+      "packages": [
+        {
+          "pkg": "com.tcl.smartalexa",
+          "note": "Alexa bridge"
+        },
+        {
+          "pkg": "com.tcl.assistant",
+          "note": "TCL voice assistant"
+        }
+      ]
+    },
+    {
+      "title": "---- Google TV first-run wizard: claims HOME once launcherx is off ----",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "settings put secure screensaver_components com.google.android.apps.tv.dreamx/.service.Backdrop",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.dreamx"
+        }
+      ]
+    },
+    {
+      "title": "---- Stock Google TV home, after com.gathin.tvhome is Home ----",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.launcherx"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-55s450g/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "id": "tcl-es560",
+  "name": "TCL ES560, likely 32ES560",
+  "tested": {
+    "os": "Android TV 9",
+    "sdk": 28,
+    "build": "PPR2.180905.006.A1"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry and feedback",
+      "packages": [
+        {
+          "pkg": "com.tcl.bi",
+          "note": "TCL analytics / telemetry service"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.tv.bugreportsender"
+        }
+      ]
+    },
+    {
+      "title": "Content rows, promos and auto-installs",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.recommendations",
+          "note": "disabled cleanly here, no TVINPUT_ALLOW needed"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "note": "TCL promo rows / T-key content"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer.resource"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.partnerwidget"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.partnercustomizer"
+        },
+        {
+          "pkg": "android.autoinstalls.config.tcl.device",
+          "note": "Play auto-installs of partner apps; disabled cleanly here"
+        },
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "retail demo stickers"
+        },
+        {
+          "pkg": "com.tcl.cyberui",
+          "note": "\"TCL Channel\" content app; was enabled on this unit"
+        }
+      ]
+    },
+    {
+      "title": "TCL extras",
+      "packages": [
+        {
+          "pkg": "com.tcl.appmarket2",
+          "note": "TCL app store (Google Play Store stays)"
+        },
+        {
+          "pkg": "com.tcl.tvweishi",
+          "note": "\"cleaner\" service"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account; the firmware turns it back on (see header)"
+        },
+        {
+          "pkg": "com.tcl.copydatatotv",
+          "note": "phone-to-TV copy helper, starts at boot"
+        },
+        {
+          "pkg": "com.tcl.common.terminalmanagerplus",
+          "note": "TCL device-management service, watches package installs"
+        },
+        {
+          "pkg": "com.tcl.useragreement",
+          "note": "one-time terms screen"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps",
+      "packages": [
+        {
+          "pkg": "com.google.android.music",
+          "note": "Play Music, discontinued"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.android.gallery3d",
+          "note": "old AOSP gallery"
+        },
+        {
+          "pkg": "com.android.wallpaper.livepicker"
+        }
+      ]
+    },
+    {
+      "title": "tools/tv.py 'settings put secure screensaver_components com.gathin.tvhome/.ClockDream'",
+      "packages": [
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "Ambient Mode screensaver"
+        },
+        {
+          "pkg": "com.android.dreams.basic"
+        },
+        {
+          "pkg": "com.google.android.tts",
+          "note": "Google text-to-speech; re-enable if someone needs it"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "screen reader; re-enable if someone needs it"
+        }
+      ]
+    },
+    {
+      "title": "Off by choice on this unit, kept for everyone else. Uncomment what you don't use:",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant / voice search"
+        },
+        {
+          "pkg": "com.google.android.speech.pumpkin",
+          "optional": true,
+          "note": "offline hotword, unused once katniss is off"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast receiver"
+        },
+        {
+          "pkg": "com.tcl.browser",
+          "optional": true,
+          "note": "TCL T-Browser"
+        },
+        {
+          "pkg": "com.tcl.ui_mediaCenter",
+          "optional": true,
+          "note": "TCL Media Center (USB photos/videos/music)"
+        },
+        {
+          "pkg": "com.tiktok.tv",
+          "optional": true,
+          "note": "TikTok, installed on this unit"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-es560/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

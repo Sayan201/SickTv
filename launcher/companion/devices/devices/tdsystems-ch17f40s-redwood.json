@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "id": "tdsystems-ch17f40s-redwood",
+  "name": "TD Systems",
+  "tested": {
+    "os": "Android 14",
+    "sdk": 34,
+    "build": "UKNV.260514.001"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Homwee store, ads, cleaners and installers",
+      "packages": [
+        {
+          "pkg": "com.homwee.aipont"
+        },
+        {
+          "pkg": "com.homwee.store"
+        },
+        {
+          "pkg": "com.homwee.help"
+        },
+        {
+          "pkg": "com.homwee.chinstallapk"
+        },
+        {
+          "pkg": "com.homwee.chtvmanager"
+        },
+        {
+          "pkg": "android.autoinstalls.config.homwee"
+        },
+        {
+          "pkg": "com.homwee.alexacontrol"
+        },
+        {
+          "pkg": "com.homwee.mmp.screenshare"
+        },
+        {
+          "pkg": "com.homwee.multiscreenshare"
+        }
+      ]
+    },
+    {
+      "title": "Telemetry, content recognition and Google partner setup",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.healthconnect.controller"
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore"
+        }
+      ]
+    },
+    {
+      "title": "Content recommendations & FAST channels",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.cltv.fast",
+          "optional": true,
+          "note": "this set has it off; TV middleware, commented out for shared lists"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded unused media / games apps",
+      "packages": [
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher (replaced by launcher/ and disabled after new launcher takeover)",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tdsystems-ch17f40s-redwood/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

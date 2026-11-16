@@ -1,0 +1,165 @@
+{
+  "schema": 1,
+  "id": "acer-ar32hdigu2841at",
+  "name": "Acer AR32HDIGU2841AT 32\" HD",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKR1.260612"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "SCBC / Google telemetry and feedback",
+      "packages": [
+        {
+          "pkg": "com.apps.function.gdpr",
+          "note": "SCBC data consent agent"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Google feedback bug reporter"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent",
+          "note": "TV feedback consent dialog (persists across cold boots)"
+        }
+      ]
+    },
+    {
+      "title": "Partner setup, auto-installs and ad boot receivers",
+      "packages": [
+        {
+          "pkg": "com.apps.mk.wd",
+          "note": "boot receiver with ClickAd/ClickApp/ClickChannel activities (persists across cold boots)"
+        },
+        {
+          "pkg": "android.autoinstalls.config.scbc.device",
+          "note": "Play store auto-installs of partner apps (persists across cold boots)"
+        },
+        {
+          "pkg": "com.realtek.leanbacklauncher.partnercustomizer",
+          "note": "partner config injecting rows/apps into home screen (persists across cold boots)"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "Google partner setup wizard client"
+        }
+      ]
+    },
+    {
+      "title": "OEM background bloat, demo and signage",
+      "packages": [
+        {
+          "pkg": "com.apps.esticker",
+          "note": "ShowService overlay, demo stickers"
+        },
+        {
+          "pkg": "com.apps.esticker3",
+          "note": "in-store feature sticker animation"
+        },
+        {
+          "pkg": "com.apps.biz.mt",
+          "note": "MOKA background telemetry service"
+        },
+        {
+          "pkg": "com.apps.biz.ds",
+          "note": "MOKA digital signage service"
+        },
+        {
+          "pkg": "com.apps.tvmanager",
+          "note": "background memory cleaner / app auto-start manager"
+        },
+        {
+          "pkg": "com.mk.tv.meeting.service",
+          "note": "MOKA enterprise meeting service"
+        },
+        {
+          "pkg": "com.apps.wifihotspot",
+          "note": "Wi-Fi hotspot toggle not needed on a TV (persists across cold boots)"
+        },
+        {
+          "pkg": "com.apps.function.audiolink",
+          "note": "Bluetooth audio receiver / link service"
+        },
+        {
+          "pkg": "com.mk.tv.timeclock",
+          "note": "on-screen clock overlay service"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "ambient mode screensaver"
+        }
+      ]
+    },
+    {
+      "title": "Casting and games (disabled by user choice)",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "note": "Chromecast built-in receiver"
+        },
+        {
+          "pkg": "com.creative.fastscreen.tv",
+          "note": "FastCast / Miracast screen mirroring"
+        },
+        {
+          "pkg": "com.apps.scast",
+          "note": "SCast screen receiver"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Google Play Games app & sync"
+        }
+      ]
+    },
+    {
+      "title": "Firmware updaters (kept enabled by default; disabled on author's TV by choice)",
+      "packages": [
+        {
+          "pkg": "com.apps.ota",
+          "optional": true,
+          "note": "MOKA system OTA updater"
+        },
+        {
+          "pkg": "com.apps.authota",
+          "optional": true,
+          "note": "authenticated OTA check service"
+        },
+        {
+          "pkg": "com.realsil.ota",
+          "optional": true,
+          "note": "Realtek Bluetooth remote OTA updater"
+        },
+        {
+          "pkg": "com.google.android.tv.dfuservice",
+          "optional": true,
+          "note": "Google TV accessory firmware update service"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded media apps (disabled by user choice)",
+      "packages": [
+        {
+          "pkg": "com.mxtech.videoplayer.television",
+          "note": "preloaded MX Player TV edition (persists across cold boots)"
+        },
+        {
+          "pkg": "com.apps.usbmediaplayer",
+          "note": "stock MOKA USB media player app (persists across cold boots)"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music stub app"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/acer-ar32hdigu2841at/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

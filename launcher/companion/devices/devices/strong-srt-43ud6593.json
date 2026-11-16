@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "id": "strong-srt-43ud6593",
+  "name": "STRONG SRT 43UD6593",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTMA.250416.196"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Batch 1: telemetry, ads and recommendation rows",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.controller",
+          "note": "Anoki automatic content recognition"
+        },
+        {
+          "pkg": "com.homwee.aipont",
+          "note": "AI PONT brand portal and its recommendation channels"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "android.autoinstalls.config.homwee",
+          "note": "partner-app auto-installs"
+        }
+      ]
+    },
+    {
+      "title": "Batch 2: vendor and preloaded apps",
+      "packages": [
+        {
+          "pkg": "com.homwee.store"
+        },
+        {
+          "pkg": "com.homwee.help"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google Play Movies & TV"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher, replaced by launcher/. Left to launcher/build-and-install.sh, which disables it only",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/strong-srt-43ud6593/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

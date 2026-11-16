@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "id": "coocaa-p9-projector",
+  "name": "Coocaa P9 projector",
+  "tested": {
+    "os": "Android 9 (Coocaa OS)",
+    "sdk": 28,
+    "build": "PPR2.180905.006.A1"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Ads / telemetry / tracking",
+      "packages": [
+        {
+          "pkg": "com.tianci.ad",
+          "note": "Coocaa ad SDK (boot/shutdown/screensaver ads)"
+        },
+        {
+          "pkg": "com.tianci.push",
+          "note": "background push notifications"
+        },
+        {
+          "pkg": "com.tianci.autoinstaller",
+          "note": "silent background app installer"
+        },
+        {
+          "pkg": "com.coocaa.sysreport",
+          "note": "telemetry & usage reporting"
+        },
+        {
+          "pkg": "com.coocaa.messageprovider",
+          "note": "promotional popup messages"
+        },
+        {
+          "pkg": "com.coocaa.screensaver",
+          "note": "vendor screensaver with ad engine"
+        }
+      ]
+    },
+    {
+      "title": "Vendor bloat / browser / guide",
+      "packages": [
+        {
+          "pkg": "com.coocaa.app_browser",
+          "note": "bundled lightweight browser"
+        },
+        {
+          "pkg": "com.coocaa.mitee.tv",
+          "note": "kids streaming channel"
+        },
+        {
+          "pkg": "com.coocaa.miitee.guard",
+          "note": "kids guard daemon"
+        },
+        {
+          "pkg": "com.coocaa.tvmanager",
+          "note": "cleaner / memory manager"
+        },
+        {
+          "pkg": "com.coocaa.guide",
+          "note": "boot guide & EPG pusher"
+        }
+      ]
+    },
+    {
+      "title": "Stores / theme packages",
+      "packages": [
+        {
+          "pkg": "com.tianci.appstore",
+          "note": "stock store with recommendations (Dangbei Market kept)"
+        },
+        {
+          "pkg": "com.coocaa.os.thememanager",
+          "note": "theme store"
+        },
+        {
+          "pkg": "com.coocaa.theme_package_starry_night",
+          "note": "preloaded starry night theme"
+        },
+        {
+          "pkg": "com.coocaa.theme_world_cup",
+          "note": "preloaded world cup theme"
+        }
+      ]
+    },
+    {
+      "title": "Voice assistant (optional)",
+      "packages": [
+        {
+          "pkg": "com.skyworth.angel.voice",
+          "note": "Skyworth voice assistant"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/coocaa-p9-projector/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

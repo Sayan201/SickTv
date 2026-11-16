@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "id": "tcl-43s5k",
+  "name": "TCL 43S5K / 32V5C",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKN2.241110.001"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "entries verified on this unit (exact match with pm list packages -d) are:",
+      "packages": [
+        {
+          "pkg": "com.tcl.messagebox",
+          "optional": true
+        },
+        {
+          "pkg": "com.tcl.logkit",
+          "optional": true
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "optional": true
+        },
+        {
+          "pkg": "com.tcl.browser",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Batch 1: TCL tracking, ads and auto-installs",
+      "packages": [
+        {
+          "pkg": "com.tcl.ttvs",
+          "optional": true,
+          "note": "TCL analytics AND the firmware updater: kept on so updates arrive (#322)"
+        },
+        {
+          "pkg": "com.tcl.messagebox",
+          "note": "TCL push messages and promos; carries an org.tcl.ttvs receiver"
+        },
+        {
+          "pkg": "com.tcl.logkit",
+          "note": "log capture and upload"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "optional": true,
+          "note": "keep: tvlauncher.widget provider for com.mediatek.tv.service (#2138)"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "silently installs partner apps"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner attribution (RLZ pings)"
+        }
+      ]
+    },
+    {
+      "title": "Batch 2: preloaded apps and extras not used on this unit",
+      "packages": [
+        {
+          "pkg": "com.tcl.browser",
+          "note": "TCL \"BrowseHere\" browser and web-video portal"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "[43S5K ONLY]"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google Assistant voice (mic button), about 63 MB; off by choice; [43S5K ONLY]"
+        },
+        {
+          "pkg": "com.mediatek.MtkDemo",
+          "note": "MediaTek demo app; on one AU10 unit and the AU13 unit; disable.sh skips it (TV_INPUT_HARDWARE)"
+        }
+      ]
+    },
+    {
+      "title": "32V5C: the saved network survived disabling setupwraith without that step here; verify the owner on",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "undo with 'settings delete secure screensaver_components')",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "Google TV Ambient mode screensaver (promos)"
+        }
+      ]
+    },
+    {
+      "title": "Brazilian unit only: partner apps preloaded on the Brazilian firmware, disabled there by choice. The Indian",
+      "packages": [
+        {
+          "pkg": "br.com.claro.now.smarttvclient",
+          "optional": true,
+          "note": "Claro TV+"
+        },
+        {
+          "pkg": "com.mercadolibre.android.mplay_tv",
+          "optional": true,
+          "note": "Mercado Play"
+        },
+        {
+          "pkg": "com.tcl.guard",
+          "optional": true,
+          "note": "TGuard: TCL cleaner and app manager, starts at boot (BootStartReceiver)"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "optional": true,
+          "note": "store demo player"
+        }
+      ]
+    },
+    {
+      "title": "Android 14's Privacy Sandbox (ad topics worked out on the TV), disabled on the 32V51C on 2026-10-27 after",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.federatedcompute.services",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-43s5k/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "schema": 1,
+  "id": "tcl-g03-google-tv",
+  "name": "TCL Smart TV Pro",
+  "tested": {
+    "os": "Google TV 11",
+    "sdk": 30,
+    "build": "RP1A.200622.001"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "---- 1. TCL and Google telemetry ----",
+      "packages": [
+        {
+          "pkg": "com.tcl.ttvs",
+          "optional": true,
+          "note": "TCL BI / awareness / identifier services and T-Cast; off on the 65P735 (AR11), left on in the shared list"
+        },
+        {
+          "pkg": "com.tcl.bi",
+          "note": "TCL BI analytics"
+        },
+        {
+          "pkg": "com.tcl.logkit",
+          "note": "log capture and upload"
+        },
+        {
+          "pkg": "com.tcl.xian.StartandroidService",
+          "optional": true,
+          "note": "background reporting service; off on the tested units, but TCL's updater needs it (see header), so it stays on"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "crash / feedback reporting"
+        }
+      ]
+    },
+    {
+      "title": "---- 2. TCL and Google content, ads and recommendation rows ----",
+      "packages": [
+        {
+          "pkg": "com.tcl.dashboard",
+          "note": "TCL dashboard / promo backend"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "note": "partner customisation channel, promo rows"
+        },
+        {
+          "pkg": "com.tcl.messagebox",
+          "note": "TCL message / promo box"
+        },
+        {
+          "pkg": "com.tcl.overseasappshow",
+          "note": "\"recommended apps\" showcase"
+        },
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "sticker / emoji overlay"
+        },
+        {
+          "pkg": "com.tcl.tv.tclhome_passive",
+          "note": "pushes TCL content to the home screen at boot"
+        },
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "TCL web-video recommendation portal"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "silently installs partner apps"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner-app attribution"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "one-time setup leftovers"
+        }
+      ]
+    },
+    {
+      "title": "---- 3. Background services and preloaded extras ----",
+      "packages": [
+        {
+          "pkg": "com.tcl.guard",
+          "note": "TCL online support"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account sign-in nags; the 43C641 (AR11) on this same G03_4K_GB / R51MT05 board reboots on waking from standby with it off (#3533), so re-enable it if this set does"
+        },
+        {
+          "pkg": "com.tcl.ocean.instructions",
+          "note": "e-manual"
+        },
+        {
+          "pkg": "com.tcl.android.webview",
+          "note": "TCL WebView; com.google.android.webview stays the provider"
+        },
+        {
+          "pkg": "org.chromium.webview_shell",
+          "note": "WebView test shell"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync, no calendar on a TV"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.tcl.gallery",
+          "note": "TCL photo gallery"
+        },
+        {
+          "pkg": "com.tcl.hearaid",
+          "optional": true,
+          "note": "hearing test / volume adaptation; off on the 65P735 (AR11), left on in the shared list"
+        },
+        {
+          "pkg": "com.tcl.magiconnectfree",
+          "optional": true,
+          "note": "TCL phone sharing app; off on the 65P735 (AR11), left on in the shared list"
+        },
+        {
+          "pkg": "com.google.android.apps.nbu.smartconnect.tv",
+          "optional": true,
+          "note": "Google \"smart connect\" nearby service; off on the 65P735 (AR11), left on in the shared list"
+        },
+        {
+          "pkg": "com.tcl.t_solo",
+          "optional": true,
+          "note": "Bluetooth \"Listen alone\"; off on the 65P735 (AR11), but on AR09 it holds TV_INPUT_HARDWARE (50S546), so it stays on"
+        }
+      ]
+    },
+    {
+      "title": "---- 4. Off by choice: streaming apps and TCL extras (comment out what you use) ----",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "note": "Netflix (the remote's Netflix button then opens nothing)"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV / Play Movies"
+        },
+        {
+          "pkg": "com.tcl.ui_mediaCenter",
+          "note": "USB media player; re-enable to play media from USB drives"
+        },
+        {
+          "pkg": "com.tcl.gamebar",
+          "note": "game mode / VRR overlay for consoles"
+        },
+        {
+          "pkg": "com.tcl.channelplus",
+          "note": "TCL Live FAST channels"
+        },
+        {
+          "pkg": "com.tcl.browser",
+          "note": "TCL web browser; removes the \"BrowseHere\" row from the stock home"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "optional": true,
+          "note": "TalkBack screen reader; off on the 65P735, but it is an accessibility service, so it stays on unless nobody needs it"
+        }
+      ]
+    },
+    {
+      "title": "---- 5. Off by choice: voice, casting, mirroring (comment out what you use) ----",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google search / voice (the remote's mic button)"
+        },
+        {
+          "pkg": "com.google.android.tv.assistant",
+          "note": "Google Assistant for TV"
+        },
+        {
+          "pkg": "com.tcl.assistant",
+          "note": "TCL voice assistant"
+        },
+        {
+          "pkg": "com.tcl.smartalexa",
+          "note": "Alexa bridge"
+        },
+        {
+          "pkg": "com.tcl.micmanager",
+          "note": "remote microphone manager"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "note": "Chromecast receiver"
+        },
+        {
+          "pkg": "com.tcl.miracast",
+          "note": "Miracast screen mirroring"
+        },
+        {
+          "pkg": "com.tcl.MultiScreenInteraction_TV",
+          "note": "T-Cast / MagiConnect phone link"
+        }
+      ]
+    },
+    {
+      "title": "---- 6. Google TV first-run wizard: claims HOME once launcherx is off (read the Wi-Fi note above) ----",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "Back to Google's: settings put secure screensaver_components com.google.android.apps.tv.dreamx/.service.Backdrop",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.dreamx"
+        },
+        {
+          "pkg": "com.tcl.versionUpdateApp",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-g03-google-tv/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

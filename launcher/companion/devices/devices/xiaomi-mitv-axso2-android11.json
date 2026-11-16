@@ -1,0 +1,178 @@
+{
+  "schema": 1,
+  "id": "xiaomi-mitv-axso2-android11",
+  "name": "Xiaomi MiTV-AXSO2",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTT0.211201.001.1150."
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Xiaomi + Google telemetry",
+      "packages": [
+        {
+          "pkg": "com.miui.tv.analytics",
+          "note": "TV usage statistics"
+        },
+        {
+          "pkg": "com.xiaomi.statistic",
+          "note": "statistics upload"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Google feedback reporter"
+        },
+        {
+          "pkg": "com.xiaomi.tvqs.overseas",
+          "note": "\"TV Quality Service\" log and crash uploader, see the notes"
+        }
+      ]
+    },
+    {
+      "title": "PatchWall, content rows, sponsored rows, partner auto-installs",
+      "packages": [
+        {
+          "pkg": "com.mitv.tvhome.atv",
+          "note": "PatchWall; the remote's PatchWall button does nothing once it is off"
+        },
+        {
+          "pkg": "com.mitv.tvhome.michannel",
+          "note": "Mi Channel rows"
+        },
+        {
+          "pkg": "com.mitv.tvhome.mitvplus",
+          "note": "Mi TV+ ad-funded channels"
+        },
+        {
+          "pkg": "com.xm.webcontent",
+          "note": "webview container for promotions"
+        },
+        {
+          "pkg": "com.xiaomi.floatingframe",
+          "note": "floating promo overlay"
+        },
+        {
+          "pkg": "co.sensara.tv.mitv",
+          "note": "Sensara partner TV guide (sponsored show recommendations)"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "stock launcher rows; also feeds its notification panel, see the sign-in note"
+        },
+        {
+          "pkg": "android.autoinstalls.config.xiaomi.amelie",
+          "note": "Play auto-install of partner apps"
+        },
+        {
+          "pkg": "android.autoinstalls.config.xioami.dangal",
+          "note": "Play auto-install of partner apps (sic, \"xioami\")"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "Google partner setup: partner-app attribution"
+        }
+      ]
+    },
+    {
+      "title": "Xiaomi extras and preloads",
+      "packages": [
+        {
+          "pkg": "com.xiaomi.mitv.tvmanager",
+          "note": "\"TV Manager\" cleaner"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.handbook",
+          "note": "user handbook"
+        },
+        {
+          "pkg": "com.xiaomo.tv.milegal",
+          "note": "static legal / privacy text screens"
+        },
+        {
+          "pkg": "com.xiaomi.mimusic2",
+          "note": "Mi Music"
+        },
+        {
+          "pkg": "com.mitv.gallery",
+          "note": "Mi Gallery"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies & TV; its two TV inputs are stock-launcher previews, not HDMI"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.xiaomitv.sonyliv",
+          "note": "old SonyLIV partner copy PatchWall pushed in 2021; the Play Store app com.sonyliv stays"
+        },
+        {
+          "pkg": "com.android.printspooler",
+          "note": "printing"
+        },
+        {
+          "pkg": "com.android.dreams.basic",
+          "note": "basic screensaver; the Mi screensaver (com.mitv.dream) is the active one"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "screen reader: keep it if anyone in the house uses it"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Assistant and voice search; the remote's mic button does nothing once it is off"
+        },
+        {
+          "pkg": "com.xiaomi.wfdsinkhelperservice",
+          "optional": true,
+          "note": "Miracast sink helper"
+        },
+        {
+          "pkg": "com.mitv.milinkservice",
+          "optional": true,
+          "note": "Mi Cast (MiLink)"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.smartshare",
+          "optional": true,
+          "note": "Miracast and MiPlay receiver (WfdActivity)"
+        },
+        {
+          "pkg": "com.aha.mitv",
+          "optional": true,
+          "note": "Aha, which PatchWall pushed in 2021"
+        },
+        {
+          "pkg": "com.mxtech.videoplayer.ad",
+          "optional": true,
+          "note": "MX Player"
+        },
+        {
+          "pkg": "com.mxtech.videoplayer.television",
+          "optional": true,
+          "note": "MX Player TV, which the firmware updater installed in February 2025"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true
+        },
+        {
+          "pkg": "com.xiaomi.mitv.updateservice",
+          "optional": true,
+          "note": "Xiaomi firmware updater"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/xiaomi-mitv-axso2-android11/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

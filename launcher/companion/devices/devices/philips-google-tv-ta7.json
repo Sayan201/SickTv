@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "id": "philips-google-tv-ta7",
+  "name": "Philips Google TV TA7",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UTT1.250308.001."
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Batch 1: telemetry and attribution",
+      "packages": [
+        {
+          "pkg": "org.droidtv.candeebug",
+          "note": "TP Vision \"DAC\" analytics: CollectionService, boot receiver, ~55 MB resident"
+        },
+        {
+          "pkg": "org.droidtv.gel",
+          "note": "TP Vision metrics GatheringService, shares candeebug's cache provider"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner referrer / RLZ ping"
+        },
+        {
+          "pkg": "android.autoinstalls.config.tpv.device",
+          "note": "Play auto-install of TPV partner apps"
+        },
+        {
+          "pkg": "com.android.adservices.api",
+          "note": "Privacy Sandbox ad services (third unit)"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services",
+          "note": "(third unit)"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services",
+          "note": "(third unit)"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent",
+          "note": "(third unit)"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "(third unit)"
+        }
+      ]
+    },
+    {
+      "title": "Batch 2: manufacturer content and popups",
+      "packages": [
+        {
+          "pkg": "com.mediatek.opapp",
+          "note": "European satellite operator apps (Canal Digitaal, HD+, Skylink...), unused in Brazil"
+        },
+        {
+          "pkg": "org.droidtv.consentcmpapp",
+          "note": "TP Vision ad-consent (CMP) screen"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization",
+          "note": "disclaimer popup"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail store demo, RetailDialogReceiver (third unit)"
+        }
+      ]
+    },
+    {
+      "title": "Batch 3: background extras",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "runs once at first setup"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "no calendar app on a TV"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.android.healthconnect.controller",
+          "note": "Health Connect, nothing on a TV uses it (third unit)"
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore",
+          "note": "(third unit)"
+        }
+      ]
+    },
+    {
+      "title": "Batch 4: by owner's choice (not used)",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV films/shop app"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "note": "Chromecast built-in, ~75 MB resident"
+        }
+      ]
+    },
+    {
+      "title": "The third unit kept Netflix, Prime Video and Chromecast (comment those lines out if you use them) and",
+      "packages": [
+        {
+          "pkg": "com.spotify.tv.android",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true
+        },
+        {
+          "pkg": "com.nero.swiftlink.mirror.tv",
+          "optional": true,
+          "note": "\"1001 TVs\" phone-mirroring receiver, preinstalled"
+        }
+      ]
+    },
+    {
+      "title": "setupwraith goes first: its RecoveryActivity (HOME priority 1) otherwise takes Home. Check",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.launcherx"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/philips-google-tv-ta7/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

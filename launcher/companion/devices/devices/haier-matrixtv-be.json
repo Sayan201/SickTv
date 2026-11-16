@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "id": "haier-matrixtv-be",
+  "name": "Haier MatrixTV BE",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKNV.260313.001."
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "",
+      "packages": [
+        {
+          "pkg": "com.haierubic.usmartdevice",
+          "note": "Haier smart-device / IoT service, unused by owner"
+        },
+        {
+          "pkg": "com.haier.apps",
+          "note": "Haier content/promo app"
+        },
+        {
+          "pkg": "com.haier.emanual",
+          "note": "on-TV manual"
+        },
+        {
+          "pkg": "com.haier.launcher.haiermatrix",
+          "note": "Haier TV+ / Zeasn launcher, not Google TV Home; re-enabled itself after one reboot"
+        },
+        {
+          "pkg": "com.mediatek.androidbox",
+          "optional": true,
+          "note": "HaiCast/Miracast, unused by owner; off on the owner's set; uncomment if you never mirror a screen"
+        },
+        {
+          "pkg": "com.mediatek.android.leanbacklauncher.partnercustomizer",
+          "note": "partner rows on stock Home"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "usage feedback"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail demo"
+        }
+      ]
+    },
+    {
+      "title": "Google TV setup recovery claims HOME alongside the stock launcher. Disable only after",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/haier-matrixtv-be/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

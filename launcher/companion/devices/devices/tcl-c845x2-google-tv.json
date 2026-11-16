@@ -1,0 +1,220 @@
+{
+  "schema": 1,
+  "id": "tcl-c845x2-google-tv",
+  "name": "TCL 55C845X2 / 75C845X2, UK/Europe",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "V8-0012T01-LF1V667"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "TCL tracking and analytics",
+      "packages": [
+        {
+          "pkg": "com.tcl.ttvs",
+          "note": "Samba TV ACR viewing tracking, TCL \"BI\" analytics, Alexa core, T-Cast"
+        },
+        {
+          "pkg": "com.tcl.logkit",
+          "note": "log capture and upload"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account sign-in nags"
+        }
+      ]
+    },
+    {
+      "title": "TCL content, ads and promos",
+      "packages": [
+        {
+          "pkg": "com.tcl.channelplus",
+          "note": "TCL Live FAST channels"
+        },
+        {
+          "pkg": "com.tcl.tv.tclhome_passive",
+          "note": "pushes TCL content to the home screen at boot"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "note": "TCL tweaks to Google TV home rows"
+        },
+        {
+          "pkg": "com.tcl.interactive",
+          "note": "TCL TIAS background service"
+        },
+        {
+          "pkg": "com.tcl.messagebox",
+          "note": "TCL push messages and promos"
+        },
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "TCL movie/show recommendation browser"
+        }
+      ]
+    },
+    {
+      "title": "Retail demo / hotel mode",
+      "packages": [
+        {
+          "pkg": "com.tcl.exhibit"
+        },
+        {
+          "pkg": "com.tcl.esticker"
+        },
+        {
+          "pkg": "com.tcl.hotelmenu"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps and services",
+      "packages": [
+        {
+          "pkg": "com.tcl.ocean.instructions",
+          "note": "e-manual"
+        },
+        {
+          "pkg": "com.tcl.repairguide"
+        },
+        {
+          "pkg": "com.tcl.smartalexa",
+          "note": "Alexa"
+        },
+        {
+          "pkg": "com.tcl.guard",
+          "note": "TCL \"cleaner\" / app manager"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "silently installs partner apps"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner attribution"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google Play Movies & TV / Google TV app (movies you bought now play in YouTube)"
+        },
+        {
+          "pkg": "au.com.stan.and",
+          "note": "Stan"
+        }
+      ]
+    },
+    {
+      "title": "Off by choice on this unit (casting, mirroring and extras not used here)",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast"
+        },
+        {
+          "pkg": "com.tcl.airplay2",
+          "optional": true,
+          "note": "AirPlay, together with the next two lines"
+        },
+        {
+          "pkg": "com.mediatek.AirplayAPK",
+          "optional": true
+        },
+        {
+          "pkg": "com.mediatek.airplaydaemon",
+          "optional": true
+        },
+        {
+          "pkg": "com.tcl.miracast",
+          "note": "Miracast screen mirroring"
+        },
+        {
+          "pkg": "com.tcl.magiconnectfree",
+          "note": "TCL T-Cast / Magiconnect phone mirroring"
+        },
+        {
+          "pkg": "com.tcl.gamebar",
+          "optional": true,
+          "note": "game mode / VRR overlay for consoles"
+        },
+        {
+          "pkg": "com.tcl.ui_mediaCenter",
+          "note": "USB media player"
+        },
+        {
+          "pkg": "com.tcl.gallery",
+          "note": "USB photo gallery + TCL screensaver"
+        },
+        {
+          "pkg": "com.tcl.UpdatePeripheral",
+          "note": "TCL soundbar firmware updates"
+        },
+        {
+          "pkg": "com.google.android.youtube.tv",
+          "note": "YouTube (this owner uses SmartTube); comment out to keep it"
+        }
+      ]
+    },
+    {
+      "title": "Needed for the custom launcher. Disable only AFTER launcher/ is installed and set as Home:",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "ambient screensaver (promos); switch screensaver_components first"
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        },
+        {
+          "pkg": "com.spocky.projengmenu",
+          "optional": true,
+          "note": "Projectivy Launcher: installed by the owner, not a preload; left out of the shared list"
+        },
+        {
+          "pkg": "com.google.android.tv.remote.service",
+          "optional": true,
+          "note": "phone-app remote AND the BT remote's mic button (see above)"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant voice (mic button)"
+        },
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix, together with the next line"
+        },
+        {
+          "pkg": "com.netflix.tokenmanager",
+          "optional": true
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-c845x2-google-tv/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

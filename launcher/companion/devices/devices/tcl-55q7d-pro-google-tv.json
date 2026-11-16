@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "id": "tcl-55q7d-pro-google-tv",
+  "name": "TCL 55Q7D Pro and 50QM8B",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UTT2.250416.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "TCL pushes, account, retail and hotel demo",
+      "packages": [
+        {
+          "pkg": "com.tcl.dashboard",
+          "note": "TCL Home panel and its promotions"
+        },
+        {
+          "pkg": "com.tcl.messagebox",
+          "note": "TCL pushed messages and promos"
+        },
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "retail-demo sticker"
+        },
+        {
+          "pkg": "com.tcl.exhibit",
+          "note": "store demo mode"
+        },
+        {
+          "pkg": "com.tcl.tv.tclhome_passive",
+          "note": "TCL content pushed to the home screen at boot"
+        },
+        {
+          "pkg": "com.tcl.ocean.instructions",
+          "note": "on-TV manual and tips overlay"
+        },
+        {
+          "pkg": "com.tcl.repairguide",
+          "note": "TCL self-diagnosis app"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account sign-in"
+        },
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "TCL movie/show recommendation browser"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "note": "TCL regional preload customiser"
+        }
+      ]
+    },
+    {
+      "title": "Telemetry, diagnostics and unused TCL extras",
+      "packages": [
+        {
+          "pkg": "com.tcl.logkit",
+          "note": "log capture service"
+        },
+        {
+          "pkg": "com.tcl.guard",
+          "note": "TCL \"cleaner\" / app manager, retried by the system when it is on"
+        },
+        {
+          "pkg": "com.tcl.hearaid",
+          "note": "hearing test / accessibility helper, unused"
+        },
+        {
+          "pkg": "com.tcl.eva",
+          "note": "TCL voice layer; Katniss handles the Assistant"
+        },
+        {
+          "pkg": "com.tcl.t_solo",
+          "note": "Bluetooth \"listen alone\" speaker mode, unused"
+        },
+        {
+          "pkg": "com.tcl.interactive",
+          "note": "TCL source/HbbTV overlay; the Source key still works without it here"
+        },
+        {
+          "pkg": "com.tcl.UpdatePeripheral",
+          "note": "peripheral firmware helper (remote/dongles), not the TV OTA"
+        }
+      ]
+    },
+    {
+      "title": "Android 14 ad, privacy and on-device learning services",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        }
+      ]
+    },
+    {
+      "title": "Google extras this set does not need",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "first boot only, long done"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "no Google calendar on this TV"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "photo screensaver"
+        }
+      ]
+    },
+    {
+      "title": "Duplicate webviews (com.google.android.webview is the active one) and printing",
+      "packages": [
+        {
+          "pkg": "com.tcl.android.webview"
+        },
+        {
+          "pkg": "com.mediatek.support.webview"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.launcherx"
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "note": "setup wizard; its RecoveryActivity takes Home when launcherx is off"
+        },
+        {
+          "pkg": "com.tcl.smartalexa",
+          "optional": true,
+          "note": "TCL's Alexa; the owner uses neither Alexa nor TCL's voice layer, Katniss kept"
+        },
+        {
+          "pkg": "com.tcl.ui_mediaCenter",
+          "optional": true,
+          "note": "TCL's media player for USB drives; the owner plays nothing from USB"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-55q7d-pro-google-tv/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

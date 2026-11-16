@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "id": "dexp-a651",
+  "name": "DEXP A651",
+  "tested": {
+    "os": "Android TV 14",
+    "sdk": 34,
+    "build": "UKNV.260518.001"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry, ads and recommendation rows",
+      "packages": [
+        {
+          "pkg": "com.cltv.fast",
+          "optional": true,
+          "note": "TV middleware, re-enabled by the firmware at boot; this set has it off"
+        },
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin",
+          "note": "Anoki automatic content recognition opt-in"
+        },
+        {
+          "pkg": "com.homwee.aipont",
+          "note": "AI PONT brand portal"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "RLZ partner-attribution pings at boot"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent",
+          "note": "feedback report consent screen"
+        }
+      ]
+    },
+    {
+      "title": "Vendor apps",
+      "packages": [
+        {
+          "pkg": "com.homwee.store"
+        },
+        {
+          "pkg": "com.homwee.help"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.videos"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "Ambient screensaver, replaced by the launcher's Clock"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        }
+      ]
+    },
+    {
+      "title": "Personal choice: the streaming apps and Chromecast stay on; uncomment the ones you never use",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast built-in"
+        },
+        {
+          "pkg": "com.homwee.alexacontrol",
+          "note": "Alexa"
+        },
+        {
+          "pkg": "com.google.android.youtube.tv",
+          "optional": true
+        },
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant (the mic button stops working); kept on the tested set"
+        },
+        {
+          "pkg": "com.homwee.multiscreenshare",
+          "optional": true,
+          "note": "Multi-Screen Share; kept on the tested set"
+        },
+        {
+          "pkg": "com.homwee.mmp.screenshare",
+          "optional": true
+        },
+        {
+          "pkg": "com.changhong.inface.net.wfd",
+          "optional": true,
+          "note": "Miracast"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher, replaced by launcher/. Left to launcher/build-and-install.sh, which disables it only",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/dexp-a651/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

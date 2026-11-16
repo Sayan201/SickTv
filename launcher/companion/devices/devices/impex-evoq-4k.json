@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "id": "impex-evoq-4k",
+  "name": "Impex evoQ 4K",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKN3.250415.053"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry, ACR and ad services",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.controller",
+          "note": "Anoki automatic content recognition, boot receiver"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "Play partner auto-installs"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "RLZ partner-attribution pings"
+        }
+      ]
+    },
+    {
+      "title": "Changhong / Homwee store and help",
+      "packages": [
+        {
+          "pkg": "com.homwee.store",
+          "note": "Changhong app-store service"
+        },
+        {
+          "pkg": "com.homwee.help",
+          "note": "e-manual"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps and services",
+      "packages": [
+        {
+          "pkg": "tv.mopa.ginga",
+          "note": "Brazilian Ginga interactive TV, not used in India"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        }
+      ]
+    },
+    {
+      "title": "Streaming apps not used in this home (by choice; keep the ones you use)",
+      "packages": [
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.apple.atve.androidtv.appletv"
+        },
+        {
+          "pkg": "com.graymatrix.did",
+          "note": "ZEE5"
+        },
+        {
+          "pkg": "com.jio.media.stb.ondemand"
+        },
+        {
+          "pkg": "tv.airtel.xstream.tvapp"
+        }
+      ]
+    },
+    {
+      "title": "Features not used in this home (by choice)",
+      "packages": [
+        {
+          "pkg": "com.mediatek.miracast",
+          "note": "Miracast screen-mirroring receiver"
+        },
+        {
+          "pkg": "com.audiocn.karaoke.global.micmanager",
+          "note": "karaoke microphone app"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "Google ambient screensaver; the basic screensaver stays"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "re-enable if you use the screen reader"
+        }
+      ]
+    },
+    {
+      "title": "Google TV setup wizard: forget and re-join the Wi-Fi first (see above)",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/impex-evoq-4k/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

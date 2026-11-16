@@ -351,6 +351,8 @@ data class UiState(
     val report: ReportUi? = null,
     /** When each TV's History was last opened, by id. */
     val historySeen: Map<String, Long> = emptyMap(),
+    /** The companion background wallpaper style (zangetsu, nebula, aurora). */
+    val wallpaper: String = "zangetsu",
 ) {
     /** The selected TV has a change since its History was last opened: ⋮ shows a dot. */
     val historyNew: Boolean get() = selectedId?.let { id -> device.history.any { it.at > (historySeen[id] ?: 0L) } } == true
@@ -531,7 +533,7 @@ class SickTvViewModel(
             viewModelScope.launch(Dispatchers.IO) { _state.update { it.copy(checkUpdates = u.enabled, alphaBuild = u.alpha) } }
         }
         keyHaptics?.let { k ->
-            viewModelScope.launch(Dispatchers.IO) { _state.update { it.copy(keyHaptics = k.on, screenOffTip = !k.screenOffTipSeen, touchpad = k.touchpad) } }
+            viewModelScope.launch(Dispatchers.IO) { _state.update { it.copy(keyHaptics = k.on, screenOffTip = !k.screenOffTipSeen, touchpad = k.touchpad, wallpaper = k.wallpaper) } }
         }
         gates?.let { g ->
             viewModelScope.launch(Dispatchers.IO) { _state.update { it.copy(debloatGate = DEBLOAT_GATE !in g.folded()) } }
@@ -1973,6 +1975,12 @@ class SickTvViewModel(
     fun setTouchpad(on: Boolean) {
         _state.update { it.copy(touchpad = on) }
         viewModelScope.launch(Dispatchers.IO) { keyHaptics?.touchpad = on }
+    }
+
+    /** The companion background wallpaper style ("zangetsu", "nebula", "aurora"). */
+    fun setWallpaper(w: String) {
+        _state.update { it.copy(wallpaper = w) }
+        viewModelScope.launch(Dispatchers.IO) { keyHaptics?.wallpaper = w }
     }
 
     /** Disables the ticked suggestions one by one, each recorded in History with its own undo; Debloat shows how far. */

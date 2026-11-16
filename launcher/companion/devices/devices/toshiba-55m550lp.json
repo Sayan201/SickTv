@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "id": "toshiba-55m550lp",
+  "name": "Toshiba 55M550LP",
+  "tested": {
+    "os": "Android 11 (SDK 30)",
+    "sdk": 30,
+    "build": "RTT2.220118.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Retail / store demo",
+      "packages": [
+        {
+          "pkg": "com.hisense.storemode"
+        },
+        {
+          "pkg": "fusion.android.tv.demo"
+        }
+      ]
+    },
+    {
+      "title": "First-time experience (setup already complete)",
+      "packages": [
+        {
+          "pkg": "com.hisense.fte"
+        }
+      ]
+    },
+    {
+      "title": "Google partner auto-install stub (silent partner app installs)",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai"
+        }
+      ]
+    },
+    {
+      "title": "On-screen disclaimer app",
+      "packages": [
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization"
+        }
+      ]
+    },
+    {
+      "title": "Google partner referral tracking and the crash/feedback uploader",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        }
+      ]
+    },
+    {
+      "title": "Wi-Fi network: check `dumpsys wifi | grep -o 'cname=[^ ]*'` first, and if the network the TV is connected to",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "--- Owner's checklist choices: this set had these off; uncomment only what you don't use ---",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.wbd.stream",
+          "optional": true,
+          "note": "Max"
+        },
+        {
+          "pkg": "in.startv.hotstar.dplus.tv",
+          "optional": true,
+          "note": "Disney+ Hotstar"
+        },
+        {
+          "pkg": "com.iqiyi.i18n.tv",
+          "optional": true,
+          "note": "iQIYI"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "optional": true,
+          "note": "Google TV Movies storefront"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "optional": true,
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.hisense.hibrowser",
+          "optional": true,
+          "note": "HiBrowser (Hisense web browser)"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant (the remote's mic button)"
+        },
+        {
+          "pkg": "com.google.android.tv.assistant",
+          "optional": true,
+          "note": "Assistant LED/voice service (LedService)"
+        },
+        {
+          "pkg": "com.hisense.alexa",
+          "optional": true,
+          "note": "Alexa"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast built-in"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/toshiba-55m550lp/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

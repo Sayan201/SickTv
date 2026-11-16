@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "id": "alwtniet-hy320-mini",
+  "name": "Alwtniet HY320 Mini projector",
+  "tested": {
+    "os": "Android 11",
+    "sdk": 30,
+    "build": "UI_Veng.projector.20250117.194417"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "HTC ad overlay, telemetry and app store",
+      "packages": [
+        {
+          "pkg": "com.htc.expandsdk",
+          "note": "starts at boot, draws over apps (SYSTEM_ALERT_WINDOW) and uses the internet"
+        },
+        {
+          "pkg": "com.htc.eventuploadservice",
+          "note": "usage/event uploader"
+        },
+        {
+          "pkg": "com.htc.storeos",
+          "note": "HTC app store"
+        }
+      ]
+    },
+    {
+      "title": "droppers and adware, so this owner chose no silent firmware changes. Re-enable all three to check",
+      "packages": [
+        {
+          "pkg": "com.htc.htcotaupdate",
+          "optional": true
+        },
+        {
+          "pkg": "com.softwinner.update",
+          "optional": true,
+          "note": "Allwinner OTA"
+        },
+        {
+          "pkg": "android.rockchip.update.service",
+          "optional": true,
+          "note": "Rockchip updater left in this Allwinner image"
+        }
+      ]
+    },
+    {
+      "title": "Factory and burn-in test apps",
+      "packages": [
+        {
+          "pkg": "com.htc.hyk_test"
+        },
+        {
+          "pkg": "com.softwinner.agingdragonbox"
+        },
+        {
+          "pkg": "com.softwinner.dragonbox"
+        },
+        {
+          "pkg": "com.softwinner.dragonatt"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded store for another brand's devices",
+      "packages": [
+        {
+          "pkg": "com.huawei.appmarket",
+          "note": "Huawei AppGallery, installed in the user partition on this unit"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/alwtniet-hy320-mini/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

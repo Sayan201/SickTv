@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "id": "tcl-tc8000-ay30a2",
+  "name": "TCL tc8000_ay30a2",
+  "tested": {
+    "os": "Android 11",
+    "sdk": 30,
+    "build": "RQ3A.210705.001.2024101221"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "TCL ads, telemetry, logging, silent install",
+      "packages": [
+        {
+          "pkg": "com.tcl.bootadservice"
+        },
+        {
+          "pkg": "com.tcl.bi"
+        },
+        {
+          "pkg": "com.tcl.logkit"
+        },
+        {
+          "pkg": "com.tcl.c2dm.client"
+        },
+        {
+          "pkg": "android.autoinstalls.config.tcl.device"
+        },
+        {
+          "pkg": "com.tcl.recognize.service",
+          "note": "channel recognition; its own class is AdActionDispatcher"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded TCL content",
+      "packages": [
+        {
+          "pkg": "com.tcl.ffkaraoke"
+        },
+        {
+          "pkg": "com.audiocn.karaoke.micmanager"
+        },
+        {
+          "pkg": "com.tcl.ffeducation"
+        },
+        {
+          "pkg": "com.tcl.playskill",
+          "note": "usage tips"
+        },
+        {
+          "pkg": "com.tcl.appreciate.art",
+          "note": "art screensaver, VIP upsell"
+        },
+        {
+          "pkg": "com.tcl.browser"
+        },
+        {
+          "pkg": "com.tcl.common.weather"
+        },
+        {
+          "pkg": "com.tcl.wholenetsearch"
+        },
+        {
+          "pkg": "com.tcl.useragreement"
+        },
+        {
+          "pkg": "com.tcl.gamebar"
+        },
+        {
+          "pkg": "com.tcl.repairguide"
+        },
+        {
+          "pkg": "com.tcl.vod"
+        },
+        {
+          "pkg": "com.tcl.tliveplay"
+        },
+        {
+          "pkg": "com.tcl.weixin"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "optional": true,
+          "note": "TCL account"
+        },
+        {
+          "pkg": "com.tcl.appmarket2",
+          "optional": true,
+          "note": "TCL app store (当贝市场 can install apps instead)"
+        },
+        {
+          "pkg": "com.tcl.guard",
+          "optional": true,
+          "note": "电视卫士; also the USB APK installer"
+        },
+        {
+          "pkg": "com.tcl.ui_mediaCenter",
+          "optional": true,
+          "note": "USB playback"
+        },
+        {
+          "pkg": "com.tcl.t_solo",
+          "optional": true,
+          "note": "蓝牙单独听"
+        },
+        {
+          "pkg": "com.tcl.MultiScreenInteraction_TV",
+          "optional": true,
+          "note": "多屏互动 / phone push"
+        },
+        {
+          "pkg": "com.tcl.walleve",
+          "optional": true,
+          "note": "小T voice assistant (also an accessibility service)"
+        },
+        {
+          "pkg": "com.kookong.tvplus",
+          "optional": true,
+          "note": "机顶盒设置, IR learning for a set-top box"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-tc8000-ay30a2/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

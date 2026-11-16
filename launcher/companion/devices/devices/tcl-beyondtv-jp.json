@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "id": "tcl-beyondtv-jp",
+  "name": "TCL 50P8S",
+  "tested": {
+    "os": "Android TV 9",
+    "sdk": 28,
+    "build": "PPR1.180610.011"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "keeps them for key handling; not tested off here). If firmware updates stop arriving, re-enable com.tcl.bi",
+      "packages": [
+        {
+          "pkg": "com.tcl.bi",
+          "note": "TCL BI analytics"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "\"send feedback\""
+        },
+        {
+          "pkg": "com.google.android.tv.bugreportsender",
+          "note": "bug report uploader"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "one-time setup leftovers"
+        },
+        {
+          "pkg": "android.autoinstalls.config.tcl.device",
+          "note": "partner-app auto installer"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "home-screen recommendation rows"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.recommendations"
+        },
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "retail demo stickers"
+        },
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "\"TCL CHANNEL\" content feed"
+        },
+        {
+          "pkg": "com.tcl.copydatatotv",
+          "note": "phone-to-TV copy helper, starts at boot"
+        },
+        {
+          "pkg": "com.tcl.eletronicpolicy",
+          "note": "e-warranty/policy screen; boot and screen on/off receivers"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies & TV"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.google.android.music",
+          "note": "Play Music, a discontinued service"
+        },
+        {
+          "pkg": "com.android.printspooler",
+          "note": "print spooler"
+        },
+        {
+          "pkg": "com.tcl.MultiScreenInteraction_TV",
+          "optional": true,
+          "note": "MagiConnect phone link (off on the tested set by choice; uncomment if unused)"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner attribution (RLZ pings); Play Store checked afterwards"
+        },
+        {
+          "pkg": "air.jp.co.fujitv.fodviewer.tv",
+          "optional": true,
+          "note": "FOD"
+        },
+        {
+          "pkg": "jp.happyon.android",
+          "optional": true,
+          "note": "Hulu (Japan)"
+        },
+        {
+          "pkg": "jp.unext.tv.player",
+          "optional": true,
+          "note": "U-NEXT"
+        },
+        {
+          "pkg": "tv.abema",
+          "optional": true,
+          "note": "ABEMA (registers a TV input for its own live channels)"
+        },
+        {
+          "pkg": "jp.ne.docomo.lemino.androidtv",
+          "optional": true,
+          "note": "Lemino"
+        },
+        {
+          "pkg": "jp.co.rakuten.nba.tv.android",
+          "optional": true,
+          "note": "Rakuten NBA"
+        },
+        {
+          "pkg": "com.disney.disneyplus",
+          "optional": true,
+          "note": "Disney+"
+        },
+        {
+          "pkg": "tv.twitch.android.app",
+          "optional": true,
+          "note": "Twitch"
+        }
+      ]
+    },
+    {
+      "title": "5. After the launcher is installed and the clock screensaver is set",
+      "packages": [
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "Ambient Mode screensaver"
+        },
+        {
+          "pkg": "com.tcl.tvweishi",
+          "note": "TCL \"TV Guard\" cleaner (installer service; Play Store unaffected)"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-beyondtv-jp/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "schema": 1,
+  "id": "chihi-hx-p30",
+  "name": "Chihi HX P30 projector",
+  "tested": {
+    "os": "Android 11",
+    "sdk": 30,
+    "build": "H713M-android11-v1.0"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Ads, cleaners, vendor junk",
+      "packages": [
+        {
+          "pkg": "com.example.testad"
+        },
+        {
+          "pkg": "com.dd.bugreport"
+        },
+        {
+          "pkg": "com.hx.appcleaner"
+        },
+        {
+          "pkg": "com.hx.httpspeedtest"
+        },
+        {
+          "pkg": "com.hx.usermanual"
+        },
+        {
+          "pkg": "com.hx.devicemonitor"
+        },
+        {
+          "pkg": "com.hx.httpvideotest"
+        },
+        {
+          "pkg": "com.hx.videotest"
+        },
+        {
+          "pkg": "com.hx.apkbridge"
+        },
+        {
+          "pkg": "com.chihihx.store"
+        }
+      ]
+    },
+    {
+      "title": "this set has these off; enable for others only if you don't use them",
+      "packages": [
+        {
+          "pkg": "com.chihihx.launcher.upgrade",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Factory / burn-in (disable only; do not launch)",
+      "packages": [
+        {
+          "pkg": "com.hx.projectortest"
+        },
+        {
+          "pkg": "com.hxdevicetest"
+        },
+        {
+          "pkg": "com.softwinner.tv.factorymenu"
+        },
+        {
+          "pkg": "com.softwinner.dragonbox"
+        },
+        {
+          "pkg": "com.softwinner.dragonatt"
+        },
+        {
+          "pkg": "com.softwinner.agingdragonbox"
+        }
+      ]
+    },
+    {
+      "title": "Owner declined: Netflix, Assistant, cast/mirror, Chrome, MX Player, Aptoide",
+      "packages": [
+        {
+          "pkg": "com.netflix.mediaclient",
+          "optional": true
+        },
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.katniss"
+        },
+        {
+          "pkg": "com.softwinner.miracastReceiver"
+        },
+        {
+          "pkg": "com.apowersoft.mirror.tv"
+        },
+        {
+          "pkg": "com.allwinnertech.platinum.media"
+        },
+        {
+          "pkg": "com.android.chrome"
+        },
+        {
+          "pkg": "com.mxtech.videoplayer.ad"
+        },
+        {
+          "pkg": "cm.aptoidetv.pt"
+        }
+      ]
+    },
+    {
+      "title": "Softwinner extras (no tuner; themes/logs/screenshot)",
+      "packages": [
+        {
+          "pkg": "com.softwinner.awlivetv",
+          "optional": true
+        },
+        {
+          "pkg": "com.softwinner.awlogsettings"
+        },
+        {
+          "pkg": "com.softwinner.screenshot"
+        },
+        {
+          "pkg": "com.softwinner.theme.color"
+        },
+        {
+          "pkg": "com.softwinner.theme.icon"
+        },
+        {
+          "pkg": "com.softwinner.ImageParser"
+        },
+        {
+          "pkg": "com.softwinner.settingsassist"
+        },
+        {
+          "pkg": "com.softwinner.settingssetup",
+          "optional": true,
+          "note": "leave; needed before factory reset"
+        },
+        {
+          "pkg": "com.softwinner.provision",
+          "optional": true,
+          "note": "leave; needed before factory reset"
+        }
+      ]
+    },
+    {
+      "title": "Google / AOSP leftovers",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.google.android.apps.searchlite.overlay"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer"
+        },
+        {
+          "pkg": "com.android.onetimeinitializer"
+        },
+        {
+          "pkg": "com.android.music"
+        },
+        {
+          "pkg": "com.android.musicfx"
+        },
+        {
+          "pkg": "com.android.egg"
+        },
+        {
+          "pkg": "com.android.htmlviewer"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.android.bips"
+        },
+        {
+          "pkg": "com.android.printservice.recommendation"
+        },
+        {
+          "pkg": "com.android.dreams.basic"
+        },
+        {
+          "pkg": "com.android.dreams.web"
+        },
+        {
+          "pkg": "com.android.wallpaperbackup"
+        },
+        {
+          "pkg": "com.android.wallpapercropper"
+        },
+        {
+          "pkg": "com.android.soundpicker"
+        },
+        {
+          "pkg": "com.android.calculator2"
+        },
+        {
+          "pkg": "com.android.camera2"
+        },
+        {
+          "pkg": "com.android.gallery3d"
+        },
+        {
+          "pkg": "com.android.cellbroadcastreceiver"
+        },
+        {
+          "pkg": "com.android.cellbroadcastservice"
+        },
+        {
+          "pkg": "com.android.providers.userdictionary"
+        },
+        {
+          "pkg": "com.android.providers.blockednumber"
+        },
+        {
+          "pkg": "com.android.simappdialog"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/chihi-hx-p30/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

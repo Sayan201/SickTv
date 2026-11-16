@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "id": "sharp-aquos-tvx19b",
+  "name": "SHARP AQUOS-TVX19B",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "v3000"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "--- Manufacturer telemetry, ACR, retail demo and preloads ---",
+      "packages": [
+        {
+          "pkg": "com.sharplabs.dmt.aas.analyticsservice",
+          "note": "Sharp analytics telemetry"
+        },
+        {
+          "pkg": "tv.anoki.acr.controller",
+          "note": "Anoki ACR (content recognition)"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail demo mode"
+        },
+        {
+          "pkg": "jp.co.sharp.av.android.epopdemo",
+          "note": "Sharp e-pop retail demo"
+        },
+        {
+          "pkg": "azan.android.av.sharp.co.jp",
+          "note": "preloaded Azan app"
+        }
+      ]
+    },
+    {
+      "title": "--- Google feedback ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        }
+      ]
+    },
+    {
+      "title": "--- Unused Google / Android services (off by choice; all still installed) ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies & TV"
+        },
+        {
+          "pkg": "com.google.android.music",
+          "note": "Play Music"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync"
+        },
+        {
+          "pkg": "com.android.printspooler",
+          "note": "print service"
+        },
+        {
+          "pkg": "com.android.dreams.basic",
+          "note": "basic daydream"
+        }
+      ]
+    },
+    {
+      "title": "reports the replacement launcher with isDefault=true, also after a reboot - but verify",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sharp-aquos-tvx19b/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

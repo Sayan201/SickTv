@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "id": "sony-xr-85x90l-cn",
+  "name": "Sony BRAVIA XR-85X90L",
+  "tested": {
+    "os": "Google TV 12",
+    "sdk": 31,
+    "build": "BRAVIA_VH22_M_CN-user"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Batch 1: Sony telemetry, analytics, demo mode",
+      "packages": [
+        {
+          "pkg": "com.sonyericsson.idd.agent",
+          "note": "Sony IDD usage-data agent"
+        },
+        {
+          "pkg": "com.sony.dtv.usercontext",
+          "note": "user context providers"
+        },
+        {
+          "pkg": "com.sony.dtv.da.service",
+          "note": "remote-support session service"
+        },
+        {
+          "pkg": "com.qterics.da.product",
+          "note": "Qterics device agent"
+        },
+        {
+          "pkg": "com.sony.dtv.sonybugreportsys",
+          "note": "bug report collector"
+        },
+        {
+          "pkg": "com.sony.dtv.demosupport",
+          "note": "retail demo mode"
+        },
+        {
+          "pkg": "com.sony.dtv.demosystemsupport"
+        },
+        {
+          "pkg": "com.sony.dtv.multiscreendemo"
+        }
+      ]
+    },
+    {
+      "title": "Batch 2: CN content apps; this set has them off by the owner's choice (kept: Tencent, Mango, Migu,",
+      "packages": [
+        {
+          "pkg": "com.jd.smartservicetwo",
+          "optional": true,
+          "note": "JD smart services"
+        },
+        {
+          "pkg": "com.newtv.login",
+          "optional": true,
+          "note": "NewTV (CCTV future TV)"
+        },
+        {
+          "pkg": "com.newtv.cboxtv",
+          "optional": true
+        },
+        {
+          "pkg": "com.cibn.tv",
+          "optional": true,
+          "note": "CIBN"
+        },
+        {
+          "pkg": "com.gitvdemo.video",
+          "optional": true,
+          "note": "GITV"
+        }
+      ]
+    },
+    {
+      "title": "Batch 3: the CN stock launcher, AFTER another launcher (here Emotn UI, already on the set)",
+      "packages": [
+        {
+          "pkg": "com.dangbei.TVHomeLauncher",
+          "note": "CN stock home (Dangbei)"
+        },
+        {
+          "pkg": "com.dangbei.lerad.videoposter",
+          "note": "Dangbei home's poster component"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sony-xr-85x90l-cn/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

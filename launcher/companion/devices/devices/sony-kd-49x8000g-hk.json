@@ -1,0 +1,323 @@
+{
+  "schema": 1,
+  "id": "sony-kd-49x8000g-hk",
+  "name": "Sony BRAVIA KD-49X8000G",
+  "tested": {
+    "os": "Android TV 9",
+    "sdk": 28,
+    "build": "BRAVIA_ATV3_4K_HK-user"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "ACR viewing tracker",
+      "packages": [
+        {
+          "pkg": "tv.samba.ssm",
+          "note": "Samba TV fingerprints what's on screen"
+        }
+      ]
+    },
+    {
+      "title": "Sony and Google content, ads, and promos",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.sonyselect",
+          "note": "Sony Select app store/promo tile"
+        },
+        {
+          "pkg": "com.sony.dtv.sonyselect.overlay"
+        },
+        {
+          "pkg": "com.sony.dtv.discovery",
+          "note": "Sony Discover content bar"
+        },
+        {
+          "pkg": "com.sony.dtv.bivlinfo",
+          "note": "BIVL content service list (feeds Discover)"
+        },
+        {
+          "pkg": "com.sony.dtv.tvlaunchercustomizer",
+          "note": "Sony tweaks to the stock home rows"
+        },
+        {
+          "pkg": "com.sony.dtv.tvlaunchercustomizer.overlay.apporder"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "recommendation rows for the stock launcher"
+        },
+        {
+          "pkg": "android.autoinstalls.config.sony.bravia",
+          "note": "Play auto-install of partner apps"
+        }
+      ]
+    },
+    {
+      "title": "Retail demo",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.demomode"
+        },
+        {
+          "pkg": "com.sony.dtv.demosupport"
+        },
+        {
+          "pkg": "com.sony.dtv.multiscreendemo"
+        }
+      ]
+    },
+    {
+      "title": "Telemetry, remote support, logging and diagnostics",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.da.service",
+          "note": "Sony device agent / remote support"
+        },
+        {
+          "pkg": "com.qterics.da.product",
+          "note": "Qterics device agent"
+        },
+        {
+          "pkg": "com.sony.dtv.sonybugreportsys"
+        },
+        {
+          "pkg": "com.google.android.tv.bugreportsender"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.mediatek.agent",
+          "note": "MediaTek diagnostics agent"
+        },
+        {
+          "pkg": "com.mediatek.dmagent",
+          "note": "MediaTek device management agent"
+        },
+        {
+          "pkg": "com.sony.dtv.sonyloglevelsettingsys",
+          "note": "system log level daemon"
+        },
+        {
+          "pkg": "com.sony.dtv.sonyloglevelsettingvnd",
+          "note": "vendor log level daemon"
+        }
+      ]
+    },
+    {
+      "title": "Commercial and B2B services",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.b2b.vendorprotocol",
+          "note": "SDDP Control4 broadcast service"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.rs232csupport",
+          "note": "RS232 serial control"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.hotelmode"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.noderuntime.normal"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.noderuntime.privilege"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.frameworkextension"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.prosettings"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.importexport"
+        },
+        {
+          "pkg": "com.sony.dtv.b2b.webappruntimedrm"
+        }
+      ]
+    },
+    {
+      "title": "Broadcast and unused extensions",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.browser.webappruntimeextension"
+        },
+        {
+          "pkg": "com.sony.dtv.tuningconfirmation_dvbt"
+        },
+        {
+          "pkg": "com.sony.dtv.serviceinformation"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps",
+      "packages": [
+        {
+          "pkg": "com.sony.dtv.customersupport",
+          "note": "Help tile"
+        },
+        {
+          "pkg": "com.sony.dtv.smarthelp"
+        },
+        {
+          "pkg": "com.sony.dtv.imanual",
+          "note": "i-Manual"
+        }
+      ]
+    },
+    {
+      "title": "this set has these off; uncomment if you don't use them",
+      "packages": [
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "not used, YouTube (video) is kept"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "optional": true,
+          "note": "Google Play Movies, not used"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "optional": true,
+          "note": "Play Games, not used"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "ambient screensaver"
+        }
+      ]
+    },
+    {
+      "title": "this set has these off; uncomment if you don't use them",
+      "packages": [
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video, not used"
+        },
+        {
+          "pkg": "com.mgtv.tv.intl",
+          "optional": true,
+          "note": "Mango TV"
+        },
+        {
+          "pkg": "tw.com.gamer.android.animad",
+          "optional": true,
+          "note": "Taiwan anime streaming app (Gamer/動畫瘋)"
+        },
+        {
+          "pkg": "tunein.player",
+          "optional": true,
+          "note": "TuneIn Radio"
+        }
+      ]
+    },
+    {
+      "title": "OEM apps that don't belong to this Sony line",
+      "packages": [
+        {
+          "pkg": "com.benq.instaqlive",
+          "note": "BenQ InstaQ Live screencast companion"
+        },
+        {
+          "pkg": "com.aospstudio.tvsearch",
+          "note": "third-party search overlay"
+        },
+        {
+          "pkg": "com.tcl.browser",
+          "note": "TCL-branded browser; the Sony HbbTV browser stays"
+        }
+      ]
+    },
+    {
+      "title": "Screen mirroring and DLNA, superseded by Chromecast built-in (kept)",
+      "packages": [
+        {
+          "pkg": "screnmirroring.com",
+          "note": "Screen mirroring (Miracast)"
+        },
+        {
+          "pkg": "com.nero.swiftlink.mirror.tv",
+          "note": "Nero SwiftLink mirroring"
+        },
+        {
+          "pkg": "com.smartdevice.tv.aircast",
+          "note": "AirCast mirroring"
+        },
+        {
+          "pkg": "com.sony.dtv.networkapp.wifidirect"
+        },
+        {
+          "pkg": "com.sony.huey.dlna.module",
+          "note": "DLNA renderer"
+        },
+        {
+          "pkg": "com.sony.huey.dlna.renderersettings"
+        },
+        {
+          "pkg": "com.sonyericsson.dlna"
+        },
+        {
+          "pkg": "com.sony.dtv.scrums.action",
+          "optional": true,
+          "note": "Action Menu overlay & remote button (TvDotAction.apk)"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast built-in, kept for iPad casting"
+        },
+        {
+          "pkg": "com.sony.dtv.smartmediaapp",
+          "optional": true,
+          "note": "Media Player, plays files from USB"
+        },
+        {
+          "pkg": "com.sony.dtv.osat.music",
+          "optional": true,
+          "note": "plays music from USB"
+        },
+        {
+          "pkg": "com.google.android.tv.remote.service",
+          "optional": true,
+          "note": "Android TV phone-app remote"
+        },
+        {
+          "pkg": "com.sony.dtv.systemupdate",
+          "optional": true,
+          "note": "Sony system firmware updater"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant, kept for the remote's mic button"
+        },
+        {
+          "pkg": "com.sony.dtv.browser.webappruntime",
+          "optional": true,
+          "note": "HbbTV / interactive broadcast red-button browser"
+        },
+        {
+          "pkg": "com.sony.dtv.browser.ceb",
+          "optional": true
+        },
+        {
+          "pkg": "com.sony.dtv.browser.webappservice",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sony-kd-49x8000g-hk/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

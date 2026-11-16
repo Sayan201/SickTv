@@ -1,0 +1,188 @@
+{
+  "schema": 1,
+  "id": "tcl-32s5400a",
+  "name": "TCL 32S5400A",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "AR2101"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "TCL account, promos and content",
+      "packages": [
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account; may be re-enabled by the system at boot"
+        },
+        {
+          "pkg": "com.tcl.guard",
+          "note": "TGuard cleaner/support"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "note": "promo rows on the stock home"
+        },
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "TCL web-video portal"
+        },
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "store-demo sticker (already off on this unit)"
+        },
+        {
+          "pkg": "com.tcl.audioplayer"
+        },
+        {
+          "pkg": "com.tcl.imageplayer"
+        },
+        {
+          "pkg": "com.tcl.copydatatotv",
+          "note": "already off on this unit"
+        }
+      ]
+    },
+    {
+      "title": "Google extras",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        }
+      ]
+    },
+    {
+      "title": "Regional preloads not used on this unit",
+      "packages": [
+        {
+          "pkg": "com.sonyliv"
+        },
+        {
+          "pkg": "com.yupptv.scope.tvapp"
+        }
+      ]
+    },
+    {
+      "title": "Firmware updater: kept, as on the 40S5400A; uncomment to stay on this build",
+      "packages": [
+        {
+          "pkg": "com.tcl.ttvs",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "",
+      "packages": [
+        {
+          "pkg": "au.com.stan.and",
+          "optional": true
+        },
+        {
+          "pkg": "tv.wuaki.apptv",
+          "optional": true
+        },
+        {
+          "pkg": "com.tcl.keyhelp",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Uncomment what you do not use:",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.tcl.device",
+          "optional": true,
+          "note": "partner-app auto installer config (in the tcl-40s5400a list)"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "optional": true,
+          "note": "sponsored rows on the stock home"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant / voice search: the mic button stops working"
+        },
+        {
+          "pkg": "com.google.android.tv.assistant",
+          "optional": true,
+          "note": "disable together with katniss"
+        },
+        {
+          "pkg": "com.tcl.micmanager",
+          "optional": true,
+          "note": "remote microphone manager; together with katniss"
+        },
+        {
+          "pkg": "com.google.android.tv.remote.service",
+          "optional": true,
+          "note": "Google TV phone-app remote (casting does not need it)"
+        },
+        {
+          "pkg": "com.tcl.ui_mediaCenter",
+          "optional": true,
+          "note": "USB media player, together with com.tcl.videoplayer"
+        },
+        {
+          "pkg": "com.tcl.videoplayer",
+          "optional": true,
+          "note": "(com.tcl.audioplayer and com.tcl.imageplayer are in the list above)"
+        },
+        {
+          "pkg": "com.tcl.t_solo",
+          "optional": true,
+          "note": "T-Solo: TV sound on Bluetooth headphones only"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "optional": true,
+          "note": "photo screensaver; screensaver_components was already"
+        }
+      ]
+    },
+    {
+      "title": "# com.android.dreams.basic/.Colors on this unit",
+      "packages": [
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "optional": true,
+          "note": "TalkBack"
+        },
+        {
+          "pkg": "com.google.android.tts",
+          "optional": true,
+          "note": "Google text-to-speech, together with TalkBack"
+        },
+        {
+          "pkg": "com.tcl.dashboard",
+          "optional": true,
+          "note": "TCL Home panel, gift box and promo messages; kept above as a"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-32s5400a/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "id": "hisense-hismart-2k-atv4-hamamatsucho",
+  "name": "Hisense HiSmart 2K ATV4",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTO6.250817.001"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Group 1: telemetry",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.controller",
+          "note": "ACR viewing-habits tracker (priv-app, boot receiver)"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Google feedback / crash reports"
+        }
+      ]
+    },
+    {
+      "title": "Group 2: ads, recommendation rows, partner storefronts, retail demo",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "recommendation rows of the stock launcher"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.partnercustomizer",
+          "note": "partner promo rows (see the note above)"
+        },
+        {
+          "pkg": "android.autoinstalls.config.hisense.laoshan",
+          "note": "silent partner-app auto-install configuration"
+        },
+        {
+          "pkg": "com.cvte.startpartnertv",
+          "note": "CVTE partner showcase app"
+        },
+        {
+          "pkg": "com.cvte.startpartnertvvod",
+          "note": "CVTE partner VOD storefront"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail / store demo mode"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization",
+          "note": "store disclaimer screen"
+        }
+      ]
+    },
+    {
+      "title": "Group 3: background services",
+      "packages": [
+        {
+          "pkg": "com.android.printspooler",
+          "note": "printing framework"
+        }
+      ]
+    },
+    {
+      "title": "Group 4: preloaded apps, off by the owner's choice: comment out any you use",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google Play Movies & TV (also a TvInputService for previews)"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Google Play Games"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "Ambient screensaver (the launcher has a clock screensaver)"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant: the remote's mic button stops working"
+        },
+        {
+          "pkg": "com.sonyliv",
+          "optional": true,
+          "note": "Sony LIV"
+        },
+        {
+          "pkg": "com.viacom18.tv.voot",
+          "optional": true,
+          "note": "JioCinema"
+        },
+        {
+          "pkg": "com.graymatrix.did",
+          "optional": true,
+          "note": "ZEE5 (also a TvInputService for its own channels)"
+        },
+        {
+          "pkg": "com.jio.media.stb.ondemand",
+          "optional": true,
+          "note": "Jio On Demand"
+        },
+        {
+          "pkg": "com.balaji.alt",
+          "optional": true,
+          "note": "ALTT"
+        },
+        {
+          "pkg": "com.eros.now",
+          "optional": true,
+          "note": "Eros Now"
+        },
+        {
+          "pkg": "com.hungama.movies.tv",
+          "optional": true,
+          "note": "Hungama"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/hisense-hismart-2k-atv4-hamamatsucho/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

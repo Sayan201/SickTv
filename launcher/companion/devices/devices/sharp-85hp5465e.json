@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "id": "sharp-85hp5465e",
+  "name": "SHARP 85HP5465E",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "build"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "--- Tracking, partner rows and store demo ---",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin",
+          "note": "Anoki ACR: automatic content recognition (viewing tracking)"
+        },
+        {
+          "pkg": "com.mediatek.tv.launcher.partner",
+          "note": "partner rows for the stock launcher"
+        },
+        {
+          "pkg": "com.mediatek.tv.retaildemo",
+          "note": "store/demo mode"
+        },
+        {
+          "pkg": "com.mtc.emanual",
+          "optional": true,
+          "note": "on-screen manual; firmware re-enables it at every boot"
+        }
+      ]
+    },
+    {
+      "title": "--- Apps the owner does not use (off by choice; all still installed) ---",
+      "packages": [
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Disable only after installing and verifying the new launcher, and after the Wi-Fi step above!",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "note": "first-run wizard; claims HOME. Re-enable before a factory reset"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.launcherx",
+          "note": "stock Google TV home"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sharp-85hp5465e/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

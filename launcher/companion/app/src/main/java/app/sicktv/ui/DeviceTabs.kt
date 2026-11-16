@@ -48,6 +48,7 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Badge
@@ -69,6 +70,7 @@ import androidx.compose.material3.Scaffold
 import app.sicktv.ui.theme.GlassDock
 import app.sicktv.ui.theme.GlassDockItem
 import app.sicktv.ui.theme.GlassCard
+import app.sicktv.ui.theme.GlassButton
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -145,7 +147,12 @@ import kotlin.math.atan2
 import kotlin.math.sqrt
 
 /** The TV page's destinations, one job each, in the bottom bar. */
-enum class TvTab(@StringRes val label: Int) { Overview(R.string.tabs_overview), Apps(R.string.tabs_apps), Files(R.string.tabs_files), Tweaks(R.string.tabs_tweaks) }
+enum class TvTab(@StringRes val label: Int) {
+    Overview(R.string.tabs_overview),
+    Apps(R.string.tabs_apps_files),
+    Launcher(R.string.tabs_launcher),
+    Tweaks(R.string.tabs_tweaks),
+}
 
 internal object TabIcons {
     val Apps = icon(
@@ -153,6 +160,10 @@ internal object TabIcons {
         "M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z",
     )
     val Folder = icon("Folder", "M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z")
+    val Launcher = icon(
+        "Launcher",
+        "M9.19 6.35c-2.04 2.29-3.44 5.58-3.57 5.89l4.14 4.14c.31-.13 3.6-1.53 5.89-3.57C17.5 11 19 8.27 19.34 4.66c-3.61.34-6.34 1.84-10.15 1.69zm5.95 2.12c-.78.78-2.05.78-2.83 0s-.78-2.05 0-2.83 2.05-.78 2.83 0 .78 2.05 0 2.83zM2.81 14.19l3 3-.71.71c-.78.78-2.05.78-2.83 0l.54-.71zm18.38-11.38c-.39-.39-1.02-.39-1.41 0l-1.41 1.41 2.83 2.83 1.41-1.41c.39-.39.39-1.02 0-1.41l-1.42-1.42z",
+    )
     val Tune = icon(
         "Tune",
         "M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z",
@@ -166,7 +177,7 @@ internal object TabIcons {
 private fun TvTab.icon() = when (this) {
     TvTab.Overview -> Icons.Default.Home
     TvTab.Apps -> TabIcons.Apps
-    TvTab.Files -> TabIcons.Folder
+    TvTab.Launcher -> TabIcons.Launcher
     TvTab.Tweaks -> TabIcons.Tune
 }
 
@@ -214,7 +225,7 @@ fun DeviceTabsScreen(
     val folder by rememberUpdatedState(ui.files.folder)
     LaunchedEffect(list) {
         snapshotFlow { list.layoutInfo }.collect { info ->
-            val content = listOf(tab, appsTab, folder, searching, info.totalItemsCount)
+            val content = listOf(tab, appsFilesSubTab, appsTab, folder, searching, info.totalItemsCount)
             if (content != measuredFor) { measuredFor = content; tail = 0 }
             val items = info.visibleItemsInfo
             val hero = items.firstOrNull { it.key == "hero" } ?: return@collect
@@ -224,6 +235,7 @@ fun DeviceTabsScreen(
     }
     // The tabs share one list, so each opens at the top with its hero, not where the last one was left.
     var shown by rememberSaveable { mutableStateOf(tab) }
+    var appsFilesSubTab by rememberSaveable { mutableIntStateOf(0) }
     var gate by rememberSaveable { mutableStateOf(false) }
     if (gate) {
         val toApps = { gate = false; tab = TvTab.Apps }
@@ -237,13 +249,13 @@ fun DeviceTabsScreen(
         )
     }
     // Each tab refreshes what it shows at its own rate: Overview and Apps (Running, sorted by RAM) need
-    // memory per app only, Files and Tweaks no processes at all.
+    // memory per app only, Launcher and Tweaks no processes at all.
     DisposableEffect(tab, device.id) {
         actions.showStats(
             when (tab) {
                 TvTab.Overview -> StatsProfile.OVERVIEW
                 TvTab.Apps -> StatsProfile.APPS
-                TvTab.Files, TvTab.Tweaks -> StatsProfile.OTHER
+                TvTab.Launcher, TvTab.Tweaks -> StatsProfile.OTHER
             },
         )
         onDispose { actions.showStats(StatsProfile.OTHER) }
@@ -281,9 +293,14 @@ fun DeviceTabsScreen(
     }
 
     Box(Modifier.fillMaxSize()) {
-        // Zangetsu Wallpaper background
+        // Dynamic companion wallpaper background
+        val wallpaperRes = when (state.wallpaper) {
+            "nebula" -> R.drawable.bg_wallpaper_nebula
+            "aurora" -> R.drawable.bg_wallpaper_aurora
+            else -> R.drawable.bg_wallpaper
+        }
         Image(
-            painter = painterResource(R.drawable.bg_wallpaper),
+            painter = painterResource(wallpaperRes),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
@@ -306,11 +323,19 @@ fun DeviceTabsScreen(
             containerColor = Color.Transparent,
             // Lifted so a snackbar message isn't hidden behind the floating dock.
             snackbarHost = { SnackbarHost(snackbar, Modifier.padding(bottom = 76.dp)) },
-            // Install on Apps and upload on Files as crisp white GlassFab; the Remote has its own button in the bar.
+            // Install on Apps and upload on Files as crisp white GlassFab; Launcher has install shortcut
             floatingActionButton = {
                 if (!offline) when (tab) {
-                    TvTab.Apps -> app.sicktv.ui.theme.GlassFab(onClick = actions.pickApp, icon = Icons.Default.Add, text = stringResource(R.string.tabs_install_app))
-                    TvTab.Files -> app.sicktv.ui.theme.GlassFab(onClick = { actions.pickFile(ui.files.folder) }, icon = TileIcons.Upload, text = stringResource(R.string.tabs_upload_files))
+                    TvTab.Apps -> {
+                        if (appsFilesSubTab == 0) {
+                            app.sicktv.ui.theme.GlassFab(onClick = actions.pickApp, icon = Icons.Default.Add, text = stringResource(R.string.tabs_install_app))
+                        } else {
+                            app.sicktv.ui.theme.GlassFab(onClick = { actions.pickFile(ui.files.folder) }, icon = TileIcons.Upload, text = stringResource(R.string.tabs_upload_files))
+                        }
+                    }
+                    TvTab.Launcher -> {
+                        app.sicktv.ui.theme.GlassFab(onClick = actions.installLauncher, icon = Icons.Default.Add, text = stringResource(R.string.launcher_install_preferred))
+                    }
                     else -> {}
                 }
             },
@@ -331,12 +356,12 @@ fun DeviceTabsScreen(
                 }
             },
             bottomBar = {
-                // The floating Zangetsu dock capsule (Overview, Apps, Files, Tweaks)
+                // The floating Zangetsu dock capsule (Overview, Apps, Launcher, Tweaks)
                 // paired with the standalone floating 3D Ruby Remote Orb on the right.
                 val targetTabIdx = when (tab) {
                     TvTab.Overview -> 0
                     TvTab.Apps -> 1
-                    TvTab.Files -> 2
+                    TvTab.Launcher -> 2
                     TvTab.Tweaks -> 3
                 }
                 val animatedTabIdx by androidx.compose.animation.core.animateFloatAsState(
@@ -408,7 +433,7 @@ fun DeviceTabsScreen(
                         translationY = (1f - tabTransitionProgress) * 16.dp.toPx()
                     }
                     // Sideways swipes step through Running, Installed and Built-in, as the buttons do.
-                    .then(if (tab == TvTab.Apps && !searching) Modifier.swipeTabs(appsTab.ordinal, AppsTab.entries.size) { appsTab = AppsTab.entries[it] } else Modifier),
+                    .then(if (tab == TvTab.Apps && appsFilesSubTab == 0 && !searching) Modifier.swipeTabs(appsTab.ordinal, AppsTab.entries.size) { appsTab = AppsTab.entries[it] } else Modifier),
                 state = list,
                 // Content scrolls under the floating liquid glass dock, with bottom padding clearing the dock at rest
                 contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = pad.calculateBottomPadding() + 16.dp),
@@ -470,74 +495,105 @@ fun DeviceTabsScreen(
                         item { AndroidCard(state, snap, offline, onUpdates = actions.checkUpdates) }
                     }
                     TvTab.Apps -> {
-                        fun rows(apps: List<AppInfo>) = items(apps, key = { it.packageName }) { app ->
-                            AppRow(app, procs, ui.pending, ui.busy == app.packageName, actions, locked = ui.busy != null, toHomeScreen = { if (searching) closeSearch(); tab = TvTab.Tweaks }, offline = offline, onScreen = ui.snapshot?.onScreen)
-                        }
-                        // Until the first read lands, an empty list means "not yet", not "none".
-                        val loading = ui.appsLoading && !offline
-                        if (searching) {
-                            // One flat list of every matching app, whichever button it sits under; each row says
-                            // whether it's running, off or protected.
-                            if (found.isEmpty()) item { if (loading) AppsLoading() else EmptyLine(q) }
-                            rows(found)
-                        } else {
-                            tvStore(device, ui.apps)?.let { store -> item(key = "store") { StoreCard(store, offline, locked = ui.busy != null, actions) } }
-                            stickyHeader(key = "appsTabs") {
+                        if (!searching) {
+                            stickyHeader(key = "appsFilesSegment") {
                                 PinnedSegments(
-                                    AppsTab.entries.map { stringResource(it.label) }, appsTab.ordinal,
-                                    lerp(MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.surfaceContainer, collapse), inset = 16.dp,
-                                    below = { SearchPill(enabled = !offline) { searching = true } },
-                                ) { appsTab = AppsTab.entries[it] }
+                                    listOf(stringResource(R.string.tabs_apps), stringResource(R.string.tabs_files)),
+                                    appsFilesSubTab,
+                                    lerp(MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.surfaceContainer, collapse),
+                                    inset = 16.dp,
+                                ) { appsFilesSubTab = it }
                             }
-                            if (split != null) {
-                                if (split.apps.isEmpty() && split.system.isEmpty()) item {
-                                    // Away, the TV can't say what it has, rather than it has nothing.
-                                    when {
-                                        loading -> AppsLoading()
-                                        offline || (appsTab == AppsTab.Running && live == null) -> EmptyState(
-                                            awayIcon, awayTitle,
-                                            when {
-                                                offWifi -> Copy.OFF_WIFI_LINE
-                                                appsTab == AppsTab.Running -> Copy.RUNNING_OFFLINE
-                                                else -> Copy.APPS_OFFLINE
-                                            }.resolve(),
-                                        )
-                                        else -> EmptyLine(q)
+                        }
+                        if (appsFilesSubTab == 0) {
+                            fun rows(apps: List<AppInfo>) = items(apps, key = { it.packageName }) { app ->
+                                AppRow(app, procs, ui.pending, ui.busy == app.packageName, actions, locked = ui.busy != null, toHomeScreen = { if (searching) closeSearch(); tab = TvTab.Launcher }, offline = offline, onScreen = ui.snapshot?.onScreen)
+                            }
+                            // Until the first read lands, an empty list means "not yet", not "none".
+                            val loading = ui.appsLoading && !offline
+                            if (searching) {
+                                // One flat list of every matching app, whichever button it sits under; each row says
+                                // whether it's running, off or protected.
+                                if (found.isEmpty()) item { if (loading) AppsLoading() else EmptyLine(q) }
+                                rows(found)
+                            } else {
+                                tvStore(device, ui.apps)?.let { store -> item(key = "store") { StoreCard(store, offline, locked = ui.busy != null, actions) } }
+                                item(key = "appsSubTabs") {
+                                    PinnedSegments(
+                                        AppsTab.entries.map { stringResource(it.label) }, appsTab.ordinal,
+                                        Color.Transparent, inset = 0.dp,
+                                        below = { SearchPill(enabled = !offline) { searching = true } },
+                                    ) { appsTab = AppsTab.entries[it] }
+                                }
+                                if (split != null) {
+                                    if (split.apps.isEmpty() && split.system.isEmpty()) item {
+                                        // Away, the TV can't say what it has, rather than it has nothing.
+                                        when {
+                                            loading -> AppsLoading()
+                                            offline || (appsTab == AppsTab.Running && live == null) -> EmptyState(
+                                                awayIcon, awayTitle,
+                                                when {
+                                                    offWifi -> Copy.OFF_WIFI_LINE
+                                                    appsTab == AppsTab.Running -> Copy.RUNNING_OFFLINE
+                                                    else -> Copy.APPS_OFFLINE
+                                                }.resolve(),
+                                            )
+                                            else -> EmptyLine(q)
+                                        }
+                                    }
+                                    rows(split.apps)
+                                    if (split.system.isNotEmpty()) {
+                                        val folded = appsTab in state.foldedSystem
+                                        item(key = "system") { SystemHeader(split.system.size, folded) { actions.foldSystem(appsTab, it) } }
+                                        if (!folded) rows(split.system)
                                     }
                                 }
-                                rows(split.apps)
-                                if (split.system.isNotEmpty()) {
-                                    val folded = appsTab in state.foldedSystem
-                                    item(key = "system") { SystemHeader(split.system.size, folded) { actions.foldSystem(appsTab, it) } }
-                                    if (!folded) rows(split.system)
+                            }
+                        } else {
+                            item(key = "folders") {
+                                PinnedSegments(
+                                    TvFolder.entries.map { Copy.folder(it).resolve() },
+                                    ui.files.folder.ordinal,
+                                    Color.Transparent,
+                                    inset = 0.dp,
+                                ) {
+                                    if (!offline) actions.folder(TvFolder.entries[it])
                                 }
+                            }
+                            val folder = ui.files.folder
+                            when {
+                                offline -> item { EmptyState(awayIcon, awayTitle, if (offWifi) Copy.OFF_WIFI_LINE.resolve() else stringResource(R.string.tabs_files_offline)) }
+                                ui.files.error == null && ui.files.list?.isEmpty() == true -> item {
+                                    EmptyState(
+                                        if (folder == TvFolder.MOVIES) TileIcons.Movie else TabIcons.Folder,
+                                        stringResource(R.string.tabs_folder_empty, Copy.folder(folder).resolve()),
+                                        stringResource(R.string.tabs_folder_empty_line),
+                                    )
+                                }
+                                else -> item { FilesBlock(ui.files, state.clock(), actions) }
                             }
                         }
                     }
-                    TvTab.Files -> {
-                        // Pinned under the bar once the hero has folded into it, like the Apps tabs.
-                        stickyHeader(key = "folders") {
-                            PinnedSegments(TvFolder.entries.map { Copy.folder(it).resolve() }, ui.files.folder.ordinal, lerp(MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.surfaceContainer, collapse), inset = 16.dp) {
-                                if (!offline) actions.folder(TvFolder.entries[it])
+                    TvTab.Launcher -> {
+                        if (offline) {
+                            item { EmptyState(awayIcon, awayTitle, if (offWifi) Copy.OFF_WIFI_LINE.resolve() else stringResource(R.string.tabs_tweaks_offline)) }
+                        } else {
+                            item(key = "launcherHeader") {
+                                LauncherHubHeader()
                             }
-                        }
-                        val folder = ui.files.folder
-                        when {
-                            offline -> item { EmptyState(awayIcon, awayTitle, if (offWifi) Copy.OFF_WIFI_LINE.resolve() else stringResource(R.string.tabs_files_offline)) }
-                            ui.files.error == null && ui.files.list?.isEmpty() == true -> item {
-                                EmptyState(
-                                    if (folder == TvFolder.MOVIES) TileIcons.Movie else TabIcons.Folder,
-                                    stringResource(R.string.tabs_folder_empty, Copy.folder(folder).resolve()),
-                                    stringResource(R.string.tabs_folder_empty_line),
-                                )
+                            item(key = "installedLaunchers") {
+                                Panel(stringResource(R.string.launcher_installed_section)) {
+                                    HomeScreenBlock(ui, actions, fire)
+                                }
                             }
-                            else -> item { FilesBlock(ui.files, state.clock(), actions) }
+                            item(key = "preferredLauncher") {
+                                PreferredLauncherCard(onInstall = actions.installLauncher)
+                            }
                         }
                     }
                     TvTab.Tweaks -> {
                         if (offline) item { EmptyState(awayIcon, awayTitle, if (offWifi) Copy.OFF_WIFI_LINE.resolve() else stringResource(R.string.tabs_tweaks_offline)) }
                         else {
-                            if (homeLaunchers(ui.apps).isNotEmpty()) item { Panel(Copy.HOME_SCREEN.resolve()) { HomeScreenBlock(ui, actions, fire) } }
                             item { Panel(Copy.TWEAKS.resolve()) { TweaksBlock(ui, actions) } }
                         }
                     }
@@ -567,6 +623,93 @@ private fun Panel(title: String, body: @Composable () -> Unit) {
 @Composable
 private fun Muted(text: String) {
     Text(text, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+}
+
+@Composable
+private fun LauncherHubHeader() {
+    GlassCard(Modifier.fillMaxWidth()) {
+        Row(
+            Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(
+                        Brush.radialGradient(
+                            listOf(Color(0xFFE50914), Color(0xFF6B040A)),
+                        ),
+                    ),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    TabIcons.Launcher,
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(26.dp),
+                )
+            }
+            Spacer(Modifier.width(16.dp))
+            Column(Modifier.weight(1f)) {
+                Text(
+                    stringResource(R.string.launcher_menu_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                )
+                Text(
+                    stringResource(R.string.launcher_menu_desc),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun PreferredLauncherCard(onInstall: () -> Unit) {
+    GlassCard(Modifier.fillMaxWidth()) {
+        Column(
+            Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    Icons.Default.Star,
+                    contentDescription = null,
+                    tint = LiquidGlass.NeonCrimson,
+                    modifier = Modifier.size(20.dp),
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    stringResource(R.string.launcher_preferred_card_title),
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                )
+            }
+            Text(
+                stringResource(R.string.launcher_preferred_card_desc),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            GlassButton(
+                onClick = onInstall,
+                primary = true,
+                modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+            ) {
+                Icon(
+                    TabIcons.Launcher,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp),
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(stringResource(R.string.launcher_browse_button))
+            }
+        }
+    }
 }
 
 /**

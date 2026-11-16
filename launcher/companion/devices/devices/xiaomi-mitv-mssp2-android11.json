@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "id": "xiaomi-mitv-mssp2-android11",
+  "name": "Xiaomi MiTV-MSSP2",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTT2.211214.001.933"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Xiaomi + Google telemetry",
+      "packages": [
+        {
+          "pkg": "com.miui.tv.analytics"
+        },
+        {
+          "pkg": "com.xiaomi.statistic"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "Google partner setup / RLZ pings"
+        }
+      ]
+    },
+    {
+      "title": "PatchWall, content rows, sponsored rows",
+      "packages": [
+        {
+          "pkg": "com.mitv.tvhome.atv",
+          "note": "PatchWall; an updater install re-enables it"
+        },
+        {
+          "pkg": "com.mitv.tvhome.michannel",
+          "note": "Mi Channel rows"
+        },
+        {
+          "pkg": "com.mitv.tvhome.mitvplus",
+          "note": "Mi TV+ ad-funded channels; an updater install re-enables it"
+        },
+        {
+          "pkg": "com.xm.webcontent"
+        },
+        {
+          "pkg": "android.autoinstalls.config.xiaomi.amelie",
+          "note": "Play auto-install of partner apps"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.xiaomi.floatingframe",
+          "note": "floating promo overlay"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail demo mode"
+        },
+        {
+          "pkg": "com.xiaomo.tv.milegal",
+          "note": "Xiaomi legal / privacy screens"
+        }
+      ]
+    },
+    {
+      "title": "Preloads",
+      "packages": [
+        {
+          "pkg": "com.xiaomi.mitv.tvmanager",
+          "note": "TV Manager cleaner"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV / Play Movies"
+        },
+        {
+          "pkg": "com.xiaomi.mimusic2",
+          "note": "Mi Music"
+        },
+        {
+          "pkg": "com.mitv.gallery",
+          "note": "Mi Gallery"
+        },
+        {
+          "pkg": "com.mitv.videoplayer",
+          "note": "Mi video player; VLC opens video files instead"
+        },
+        {
+          "pkg": "com.epic.docubay",
+          "note": "DocuBay, partner preinstall"
+        }
+      ]
+    },
+    {
+      "title": "Streaming apps: kept by this owner; disable the ones you don't use",
+      "packages": [
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "YouTube Music"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/xiaomi-mitv-mssp2-android11/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

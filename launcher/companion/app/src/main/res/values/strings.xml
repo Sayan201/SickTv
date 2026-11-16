@@ -879,10 +879,24 @@
     <string name="tabs_overview">Overview</string>
     <string name="tabs_apps">Apps</string>
     <string name="tabs_files">Files</string>
+    <string name="tabs_apps_files">Apps &amp; Files</string>
+    <string name="tabs_launcher">Launcher</string>
     <string name="tabs_tweaks">Tweaks</string>
     <string name="tabs_remote">Remote</string>
     <string name="tabs_install_app">Install app</string>
     <string name="tabs_upload_files">Upload files</string>
+    <string name="settings_wallpaper">Companion Wallpaper</string>
+    <string name="settings_wallpaper_desc">Select your preferred liquid glass background</string>
+    <string name="wallpaper_zangetsu">Zangetsu Obsidian</string>
+    <string name="wallpaper_nebula">Cosmic Nebula</string>
+    <string name="wallpaper_aurora">Deep Aurora</string>
+    <string name="launcher_menu_title">TV Launchers</string>
+    <string name="launcher_menu_desc">Manage default home screen and install preferred launchers</string>
+    <string name="launcher_installed_section">Installed Launchers</string>
+    <string name="launcher_install_preferred">Install launcher</string>
+    <string name="launcher_preferred_card_title">Clean &amp; Fast Home Screen</string>
+    <string name="launcher_preferred_card_desc">Replace bloated TV interfaces with SickTv Launcher, CleanYourTv, Projectivy, or FLauncher. Zero ads, instant boot, and total customization.</string>
+    <string name="launcher_browse_button">Browse Launcher Catalog</string>
     <!-- Fills "As of %1$s" on the storage card when the TV was never seen -->
     <string name="tabs_last_visit">the last visit</string>
     <string name="tabs_files_offline">Connect to the TV to see its files.</string>

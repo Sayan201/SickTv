@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "id": "benq-qs02",
+  "name": "BenQ QS02 Android TV stick for BenQ projectors",
+  "tested": {
+    "os": "Android TV 14",
+    "sdk": 34,
+    "build": "UKG3.250826.001.20260310"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Content, ads and promos",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.sdmc",
+          "note": "silently installs partner apps (PLAY_AUTO_INSTALL)"
+        },
+        {
+          "pkg": "com.benq.notification",
+          "note": "BenQ push messages and promos; a notification listener"
+        },
+        {
+          "pkg": "com.sdmc.leakbackcustomer",
+          "note": "tvlauncher partner configuration and a partner widget"
+        }
+      ]
+    },
+    {
+      "title": "Tracking",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api",
+          "note": "Android ad services (Topics, attribution)"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps",
+      "packages": [
+        {
+          "pkg": "com.jio.media.stb.ondemand",
+          "optional": true,
+          "note": "JioCinema; this set has it off, uncomment if you don't use it"
+        },
+        {
+          "pkg": "com.benq.appsmanager",
+          "note": "BenQ Apps Manager (app store)"
+        },
+        {
+          "pkg": "com.benq.dashboard",
+          "note": "BenQ Dashboard (notification sender with a tile)"
+        }
+      ]
+    },
+    {
+      "title": "Optional, not tested on this unit: uncomment what you don't use",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "optional": true,
+          "note": "recommendation rows for the stock home screen"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "optional": true,
+          "note": "Google partner attribution pings"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant voice"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/benq-qs02/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

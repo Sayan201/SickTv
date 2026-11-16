@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "id": "noblex-dr55x9500",
+  "name": "Noblex DR55X9500",
+  "tested": {
+    "os": "Android TV 11 (Google TV home)",
+    "sdk": 30,
+    "build": "RTT2.220103.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "--- Batch 1: telemetry and after-sale",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "RLZ partner-attribution pings, boot receiver"
+        },
+        {
+          "pkg": "com.google.android.apps.nbu.smartconnect.tv",
+          "note": "Google background data service, boot receiver"
+        },
+        {
+          "pkg": "com.smartdevice.aftersale",
+          "note": "boot + network receivers, can install APKs"
+        },
+        {
+          "pkg": "com.smartdevice.dailymanage",
+          "note": "boot service, no documented purpose"
+        }
+      ]
+    },
+    {
+      "title": "--- Batch 2: voice (by choice; the remote's mic button stops working)",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss"
+        },
+        {
+          "pkg": "com.google.android.tv.assistant"
+        }
+      ]
+    },
+    {
+      "title": "--- Batch 3: Skyworth content, auto-installs, retail demos",
+      "packages": [
+        {
+          "pkg": "com.smartdevice.leanbacklauncher.customizer",
+          "note": "partner config that injects rows into the home screen"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "Play auto-installs of partner apps"
+        },
+        {
+          "pkg": "com.smartdevice.epopplayer",
+          "note": "ePop shop demo player"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "shop demo player"
+        },
+        {
+          "pkg": "com.coocaa.demonow.lightining",
+          "note": "\"Demo Now\" retail mode"
+        },
+        {
+          "pkg": "com.Smartdevice.emanual",
+          "note": "on-screen manual"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization",
+          "note": "retail legal-disclaimer dialogs"
+        }
+      ]
+    },
+    {
+      "title": "--- Batch 4: Google preloads",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "Google TV ambient screensaver"
+        }
+      ]
+    },
+    {
+      "title": "--- Batch 5: Miracast / DLNA (by choice; Chromecast kept)",
+      "packages": [
+        {
+          "pkg": "com.smartdevice.dtv.icast"
+        },
+        {
+          "pkg": "com.mediatek.androidbox"
+        }
+      ]
+    },
+    {
+      "title": "--- Handover, only once launcher/ owns Home (build-and-install.sh does launcherx itself)",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.launcherx",
+          "note": "stock Google TV home"
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "note": "RecoveryActivity otherwise steals Home; it owned the setup Wi-Fi (see README.md)"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/noblex-dr55x9500/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

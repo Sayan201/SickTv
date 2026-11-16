@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "id": "xiaomi-mitv-mssp1",
+  "name": "Xiaomi MiTV-MSSP1",
+  "tested": {
+    "os": "Android TV 9",
+    "sdk": 28,
+    "build": "PI.5925"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Xiaomi telemetry",
+      "packages": [
+        {
+          "pkg": "com.miui.tv.analytics"
+        },
+        {
+          "pkg": "com.xiaomi.statistic"
+        }
+      ]
+    },
+    {
+      "title": "PatchWall and Xiaomi content add-ons",
+      "packages": [
+        {
+          "pkg": "com.mitv.tvhome.atv"
+        },
+        {
+          "pkg": "com.mitv.tvhome.michannel"
+        },
+        {
+          "pkg": "com.xm.webcontent"
+        },
+        {
+          "pkg": "com.xiaomi.floatingframe"
+        }
+      ]
+    },
+    {
+      "title": "Stock-home recommendation feeds",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.recommendations"
+        }
+      ]
+    },
+    {
+      "title": "Error-report and feedback uploaders (pure telemetry, nothing user-facing)",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.tv.bugreportsender"
+        }
+      ]
+    },
+    {
+      "title": "Partner auto-installer: pushes sponsored apps through Play on fresh accounts",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.xiaomi.amelie"
+        }
+      ]
+    },
+    {
+      "title": "`settings put secure screensaver_components`, or tools/theme.sh) — otherwise the screensaver",
+      "packages": [
+        {
+          "pkg": "com.google.android.backdrop"
+        },
+        {
+          "pkg": "com.mitv.dream"
+        }
+      ]
+    },
+    {
+      "title": "Xiaomi \"TV Manager\" rocket-cleaner app",
+      "packages": [
+        {
+          "pkg": "com.xiaomi.mitv.tvmanager"
+        }
+      ]
+    },
+    {
+      "title": "Preinstalled Google apps that reinstall freely from Play whenever wanted",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.videos"
+        },
+        {
+          "pkg": "org.chromium.webview_shell"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        }
+      ]
+    },
+    {
+      "title": "Xiaomi media leftovers and accessibility suite. The gallery doubles as the photo screensaver,",
+      "packages": [
+        {
+          "pkg": "com.xiaomi.mimusic2"
+        },
+        {
+          "pkg": "com.mitv.gallery"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback"
+        }
+      ]
+    },
+    {
+      "title": "Mi TV+ content add-on (also on the Mi TV 4A list)",
+      "packages": [
+        {
+          "pkg": "com.mitv.tvhome.mitvplus"
+        }
+      ]
+    },
+    {
+      "title": "AOSP colour screensaver; reassign the screensaver first, as with the two above",
+      "packages": [
+        {
+          "pkg": "com.android.dreams.basic"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/xiaomi-mitv-mssp1/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

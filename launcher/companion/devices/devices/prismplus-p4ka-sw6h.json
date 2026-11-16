@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "id": "prismplus-p4ka-sw6h",
+  "name": "PRISM+ P4KA 4K AI TV",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTT2.220103.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "--- Skyworth retail / demo / junk ---",
+      "packages": [
+        {
+          "pkg": "com.coocaa.demonow.lightining"
+        },
+        {
+          "pkg": "com.smartdevice.epopplayer"
+        },
+        {
+          "pkg": "com.smartdevice.aftersale"
+        },
+        {
+          "pkg": "com.smartdevice.dailymanage"
+        },
+        {
+          "pkg": "com.smartdevice.dailyshortcut"
+        },
+        {
+          "pkg": "com.smartdevice.myapp"
+        },
+        {
+          "pkg": "com.tianci.localmedia"
+        }
+      ]
+    },
+    {
+      "title": "--- factory / service / manuals ---",
+      "packages": [
+        {
+          "pkg": "com.smartdevice.factory"
+        },
+        {
+          "pkg": "mediatek.factorymenu.ui"
+        },
+        {
+          "pkg": "com.Smartdevice.emanual"
+        },
+        {
+          "pkg": "fusion.android.tv.demo"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization"
+        }
+      ]
+    },
+    {
+      "title": "--- Google, non-voice, non-cast, non-OTA ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "--- stock launcher; firmware re-enables it at every boot, check.py --fix disables it again ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.launcherx"
+        }
+      ]
+    },
+    {
+      "title": "--- sideload seen on this unit, owner may still want it: not disabled ---",
+      "packages": [
+        {
+          "pkg": "org.liskovsoft.androidtv.rukeyboard",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "com.google.android.apps.mediashell    (Chromecast receiver)",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "com.mediatek.tv.service, com.mediatek.tvinput, com.smartdevice.livetv (Live TV + inputs)",
+      "packages": [
+        {
+          "pkg": "com.dolby.android.audio.service",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/prismplus-p4ka-sw6h/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

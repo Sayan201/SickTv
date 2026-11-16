@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "id": "hisense-smarttv-4k-ffm-android11",
+  "name": "Hisense SmartTV 4K FFM",
+  "tested": {
+    "os": "Android 11 (SDK 30)",
+    "sdk": 30,
+    "build": "RTT2.220118.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Retail / store demo",
+      "packages": [
+        {
+          "pkg": "com.hisense.storemode"
+        },
+        {
+          "pkg": "fusion.android.tv.demo"
+        }
+      ]
+    },
+    {
+      "title": "First-time experience (setup already complete)",
+      "packages": [
+        {
+          "pkg": "com.hisense.fte"
+        }
+      ]
+    },
+    {
+      "title": "Google partner auto-install stub (silent partner app installs)",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai"
+        }
+      ]
+    },
+    {
+      "title": "On-screen disclaimer app (removed from the app grid)",
+      "packages": [
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization"
+        }
+      ]
+    },
+    {
+      "title": "set only an unused saved network belonged to it (the active one was owned by android.uid.system), so",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "back on the second unit), not yet lived with for days. Hisense ACR (\"Enhanced Viewing\" content",
+      "packages": [
+        {
+          "pkg": "com.hisense.evservice",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "the hengshan list; partner referral tracking, as on the lushan and hengshan lists; the crash and feedback",
+      "packages": [
+        {
+          "pkg": "com.vidaa.oemtabcontentprovider",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/hisense-smarttv-4k-ffm-android11/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

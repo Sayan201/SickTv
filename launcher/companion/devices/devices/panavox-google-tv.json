@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "id": "panavox-google-tv",
+  "name": "PANAVOX Google TV",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": null
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry, ACR and tracking",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "Applies settings the manufacturer agreed with Google"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Collects and sends error reports and optional screenshots"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent",
+          "note": "Consent screen for automatic diagnostic logs and bug reports"
+        },
+        {
+          "pkg": "com.android.adservices.api",
+          "note": "Core of Android's Privacy Sandbox ad system"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services",
+          "note": "On-device personalised recommendations for apps"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services",
+          "note": "Federated Compute service"
+        },
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin",
+          "note": "Commercial ACR and ad telemetry client"
+        }
+      ]
+    },
+    {
+      "title": "Not used",
+      "packages": [
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "Demo mode"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.launcherx"
+        }
+      ]
+    },
+    {
+      "title": "TV setup wizard",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded extras, optional",
+      "packages": [
+        {
+          "pkg": "com.mediatek.androidbox",
+          "note": "Wi-Fi display sink"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "Google screensaver"
+        }
+      ]
+    },
+    {
+      "title": "Unused on a television",
+      "packages": [
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "Google Calendar sync"
+        },
+        {
+          "pkg": "com.android.providers.calendar",
+          "note": "Calendar storage"
+        },
+        {
+          "pkg": "com.android.providers.contacts",
+          "note": "Contacts storage"
+        },
+        {
+          "pkg": "com.mediatek.android.leanbacklauncher.partnercustomizer",
+          "note": "Partner customizer"
+        },
+        {
+          "pkg": "com.cltv.hybrid",
+          "optional": true,
+          "note": "TV middleware, kept on in shared lists (this set has it off)"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Voice search and Google Assistant"
+        }
+      ]
+    },
+    {
+      "title": "Google extras",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "Google's screen reader"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "note": "Cast"
+        },
+        {
+          "pkg": "com.google.android.tts",
+          "note": "Text-to-speech"
+        },
+        {
+          "pkg": "com.google.android.tv.remote.service",
+          "note": "Control the TV from a phone (carries the mic, #1441; see the header)"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/panavox-google-tv/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

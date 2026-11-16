@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "id": "tcl-50dp660",
+  "name": "TCL 50DP660 / L49C2US",
+  "tested": {
+    "os": "Android TV 8.0",
+    "sdk": 26,
+    "build": "V8-T658T01-LF1V602"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Stock launcher and its recommendation rows, replaced by launcher/",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.recommendations"
+        }
+      ]
+    },
+    {
+      "title": "Google media and voice - this set has no microphone",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Assistant / voice search, runs two processes"
+        },
+        {
+          "pkg": "com.google.android.speech.pumpkin",
+          "note": "speech recognition engine, see the note at the bottom"
+        }
+      ]
+    },
+    {
+      "title": "TCL content, mirroring, updaters and bundled players",
+      "packages": [
+        {
+          "pkg": "com.tcl.MultiScreenInteraction_TV",
+          "note": "MagiConnect screen mirroring"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "note": "\"T-Channel\" content tiles on the stock home"
+        },
+        {
+          "pkg": "com.tcl.smartalexa",
+          "note": "Alexa bridge, persistent - see the note at the bottom"
+        },
+        {
+          "pkg": "com.tcl.versionUpdateApp",
+          "note": "OTA updater; re-enable to check for firmware updates"
+        },
+        {
+          "pkg": "com.tcl.ui_mediaCenter",
+          "note": "media centre plus USB scanning"
+        },
+        {
+          "pkg": "com.tcl.xian.StartandroidService",
+          "note": "TCL start-up service"
+        },
+        {
+          "pkg": "com.tcl.appmarket2",
+          "note": "TCL app store (21.2 MB APK)"
+        },
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "retail demo stickers"
+        },
+        {
+          "pkg": "com.tcl.tvweishi",
+          "note": "\"cleaner\" widget"
+        },
+        {
+          "pkg": "com.tcl.m",
+          "note": "MenuHelp"
+        },
+        {
+          "pkg": "com.tcl.eletronicpolicy",
+          "note": "e-warranty sheet"
+        },
+        {
+          "pkg": "com.tcl.videoplayer"
+        },
+        {
+          "pkg": "com.tcl.audioplayer"
+        },
+        {
+          "pkg": "com.tcl.imageplayer"
+        },
+        {
+          "pkg": "com.tcl.pvr.pvrplayer"
+        }
+      ]
+    },
+    {
+      "title": "ODM leftovers and third-party preloads",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.tcl.device"
+        },
+        {
+          "pkg": "com.example.copydatatotv",
+          "note": "factory test app, persistent"
+        },
+        {
+          "pkg": "com.example.tvcapture",
+          "note": "factory test app"
+        },
+        {
+          "pkg": "tv.wuaki.apptv",
+          "note": "Rakuten TV"
+        }
+      ]
+    },
+    {
+      "title": "L49C2US (V570), tested on one unit; uncomment to disable:",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "optional": true,
+          "note": "setup wizard; disabling it costs phone Cast pairing"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher",
+          "optional": true,
+          "note": "legacy Leanback launcher stub"
+        },
+        {
+          "pkg": "com.google.android.inputmethod.pinyin",
+          "optional": true,
+          "note": "Google Pinyin Chinese IME (com.tcl.inputmethod.international is English)"
+        },
+        {
+          "pkg": "com.iqt.iqqijni.tv.gp.pro",
+          "optional": true,
+          "note": "iQQi Chinese IME (com.tcl.inputmethod.international is English)"
+        },
+        {
+          "pkg": "com.google.android.music",
+          "optional": true,
+          "note": "Google Play Music (defunct)"
+        },
+        {
+          "pkg": "com.google.android.tvtutorials",
+          "optional": true,
+          "note": "TV tutorials"
+        },
+        {
+          "pkg": "com.google.android.tv.bugreportsender",
+          "optional": true,
+          "note": "Bug report sender"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "optional": true,
+          "note": "Google feedback"
+        },
+        {
+          "pkg": "com.google.android.tts",
+          "optional": true,
+          "note": "Google TTS engine; re-enable if you use TalkBack"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "optional": true,
+          "note": "TalkBack screen reader"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "optional": true,
+          "note": "Calendar sync adapter"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.contacts",
+          "optional": true,
+          "note": "Contacts sync adapter"
+        },
+        {
+          "pkg": "com.android.providers.calendar",
+          "optional": true,
+          "note": "Calendar storage provider"
+        },
+        {
+          "pkg": "com.android.providers.contacts",
+          "optional": true,
+          "note": "Contacts storage provider"
+        },
+        {
+          "pkg": "com.android.providers.userdictionary",
+          "optional": true,
+          "note": "User dictionary provider"
+        },
+        {
+          "pkg": "com.google.android.backuptransport",
+          "optional": true,
+          "note": "Google cloud backup transport"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "optional": true,
+          "note": "Google one-time initializer"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "optional": true,
+          "note": "Google partner setup"
+        },
+        {
+          "pkg": "com.android.dreams.basic",
+          "optional": true,
+          "note": "Basic Colors screensaver"
+        },
+        {
+          "pkg": "com.android.printspooler",
+          "optional": true,
+          "note": "Print spooler service"
+        },
+        {
+          "pkg": "com.google.android.sss",
+          "optional": true,
+          "note": "Second Screen Setup"
+        },
+        {
+          "pkg": "com.google.android.sss.authbridge",
+          "optional": true,
+          "note": "Second Screen Setup auth bridge"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "optional": true,
+          "note": "Chromecast Ambient / Backdrop screensaver"
+        },
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix preload"
+        },
+        {
+          "pkg": "com.mediatek.partner.netflix",
+          "optional": true,
+          "note": "MediaTek Netflix launch service"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-50dp660/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

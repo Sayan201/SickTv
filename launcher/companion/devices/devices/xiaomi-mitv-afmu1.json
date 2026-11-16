@@ -1,0 +1,202 @@
+{
+  "schema": 1,
+  "id": "xiaomi-mitv-afmu1",
+  "name": "Xiaomi TV Stick 4K 2nd gen",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKG3.250826.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "problem; uncomment the ones you are happy to lose. The Assistant line costs voice search, and the four after",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant voice search"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast built-in"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.smartshare",
+          "optional": true,
+          "note": "Xiaomi screen share"
+        },
+        {
+          "pkg": "com.xiaomi.wfdsinkhelperservice",
+          "optional": true,
+          "note": "Miracast sink helper"
+        },
+        {
+          "pkg": "com.xiaomi.mi_connect_service",
+          "optional": true,
+          "note": "Mi Connect"
+        },
+        {
+          "pkg": "com.google.android.tv.remote.service",
+          "optional": true,
+          "note": "phone remote"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "optional": true,
+          "note": "Google ambient screensaver (switch to the Clock dream first)"
+        }
+      ]
+    },
+    {
+      "title": "Streaming apps, kept enabled: uncomment the ones you never use (Netflix and Prime Video are already off at",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.youtube.tv",
+          "optional": true,
+          "note": "stays enabled on both units"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Telemetry and feedback",
+      "packages": [
+        {
+          "pkg": "com.miui.tv.analytics"
+        },
+        {
+          "pkg": "com.xiaomi.statistic"
+        },
+        {
+          "pkg": "com.xiaomi.tvqs.overseas.y24",
+          "note": "Xiaomi quality-stats uploader and quick panel"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        }
+      ]
+    },
+    {
+      "title": "Ad personalisation (Privacy Sandbox and on-device ad services): one unit only",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        }
+      ]
+    },
+    {
+      "title": "PatchWall, content rows, promos, auto-installs",
+      "packages": [
+        {
+          "pkg": "com.mitv.tvhome.atv",
+          "note": "one unit only; already off at the firmware level on the other"
+        },
+        {
+          "pkg": "com.mitv.tvhome.michannel",
+          "note": "one unit only; already off at the firmware level on the other"
+        },
+        {
+          "pkg": "com.mitv.tvhome.mitvplus",
+          "note": "one unit only"
+        },
+        {
+          "pkg": "com.mitv.tvhome.oemtab"
+        },
+        {
+          "pkg": "com.xm.webcontent",
+          "note": "Xiaomi promo web pages"
+        },
+        {
+          "pkg": "android.autoinstalls.config.soc.amlogic",
+          "note": "Amlogic partner auto-installs"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps and services not needed on a stick",
+      "packages": [
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "one unit only; the firmware removed it for user 0 after the first reboot"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "one unit only; already off at the firmware level on the other"
+        },
+        {
+          "pkg": "com.mitv.videoplayer",
+          "note": "Mi video player"
+        },
+        {
+          "pkg": "com.android.printspooler",
+          "note": "printing"
+        },
+        {
+          "pkg": "com.netflix.tokenmanager",
+          "note": "Netflix sign-in token, Netflix itself is already off"
+        },
+        {
+          "pkg": "com.android.providers.contacts",
+          "note": "contacts, nothing on a TV uses it"
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.updateservice",
+          "optional": true,
+          "note": "kept: firmware updates. One owner disabled it (no updates were offered); uncomment to do the same"
+        },
+        {
+          "pkg": "com.xiaomi.android.tvsetup.partnercustomizer",
+          "optional": true,
+          "note": "third unit only, one day: Xiaomi first-run wizard and region pages (see \"Leave alone\" above)"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "optional": true,
+          "note": "third unit only, one day: Google partner setup, RLZ install ping"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher and setup wizard, replaced by launcher/ (see notes above)",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.launcherx",
+          "note": "build-and-install.sh also disables it, after Home has moved"
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/xiaomi-mitv-afmu1/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "id": "master-g-2k-smart-tv-jordanfarias",
+  "name": "Master-G 2K Smart TV",
+  "tested": {
+    "os": "Google TV (Android 14, SDK 34)",
+    "sdk": 34,
+    "build": "UKR9.250818.041"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "---- Stock launcher & setup handover ----",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.launcherx",
+          "note": "Stock Google TV launcher"
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "note": "Initial setup recovery activity"
+        }
+      ]
+    },
+    {
+      "title": "---- Android 14 ad, personalisation and federated-learning services ----",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api",
+          "note": "Privacy Sandbox ad services"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services",
+          "note": "On-device ad personalisation"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services",
+          "note": "Federated learning for the above"
+        }
+      ]
+    },
+    {
+      "title": "---- Preloaded apps ----",
+      "packages": [
+        {
+          "pkg": "com.electronic.manual",
+          "note": "On-TV electronic manual"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/master-g-2k-smart-tv-jordanfarias/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

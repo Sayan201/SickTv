@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "id": "nokia-atv-r2",
+  "name": "Nokia ATV R2",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTT7.220308.001"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Google apps nobody asked for on a TV",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV / Play Movies & TV app"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "Google Calendar sync adapter"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "TalkBack screen reader (see the note above)"
+        }
+      ]
+    },
+    {
+      "title": "Content rows, screensaver and promos",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "recommendation rows on the stock Home"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "Ambient-mode screensaver (see the note above)"
+        },
+        {
+          "pkg": "com.apps.eshow",
+          "note": "vendor \"E-SHOW\" app (the name suggests a shop-display mode)"
+        },
+        {
+          "pkg": "com.apps.esticker",
+          "note": "vendor \"E-Sticker\" app, purpose unclear"
+        }
+      ]
+    },
+    {
+      "title": "Background services",
+      "packages": [
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.apps.wifihotspot",
+          "note": "TV as a Wi-Fi hotspot"
+        }
+      ]
+    },
+    {
+      "title": "Switched off on 2026-11-04 and fine after a restart, but not yet lived with for several days, so left",
+      "packages": [
+        {
+          "pkg": "com.apps.function.gdpr",
+          "optional": true,
+          "note": "SCBC data-consent agent"
+        },
+        {
+          "pkg": "com.apps.channels",
+          "optional": true,
+          "note": "\"S-Channel\" content rows on Home"
+        },
+        {
+          "pkg": "android.autoinstalls.config.scbc.device",
+          "optional": true,
+          "note": "Play auto-installs of partner apps"
+        },
+        {
+          "pkg": "com.apps.networkspeed",
+          "optional": true,
+          "note": "speed-test app"
+        },
+        {
+          "pkg": "com.apps.timeclock",
+          "optional": true,
+          "note": "WorldClock"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/nokia-atv-r2/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

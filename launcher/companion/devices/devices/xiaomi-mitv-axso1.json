@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "id": "xiaomi-mitv-axso1",
+  "name": "Xiaomi MiTV-AXSO1",
+  "tested": {
+    "os": "Android TV 9",
+    "sdk": 28,
+    "build": "PI.6157."
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Xiaomi + Google telemetry",
+      "packages": [
+        {
+          "pkg": "com.miui.tv.analytics"
+        },
+        {
+          "pkg": "com.xiaomi.statistic"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.tv.bugreportsender"
+        }
+      ]
+    },
+    {
+      "title": "PatchWall, content rows, sponsored rows, partner auto-installs",
+      "packages": [
+        {
+          "pkg": "com.mitv.tvhome.atv"
+        },
+        {
+          "pkg": "com.xm.webcontent"
+        },
+        {
+          "pkg": "com.xiaomi.floatingframe"
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher.recommendations"
+        },
+        {
+          "pkg": "android.autoinstalls.config.xioami.dangal",
+          "note": "Play auto-install of partner apps (sic, \"xioami\")"
+        },
+        {
+          "pkg": "com.mitv.tvhome.mitvplus",
+          "note": "Mi TV+ sponsored live channels"
+        },
+        {
+          "pkg": "com.sonyliv",
+          "optional": true
+        },
+        {
+          "pkg": "com.graymatrix.did",
+          "optional": true,
+          "note": "ZEE5"
+        },
+        {
+          "pkg": "com.lionsgateplay.videoapp",
+          "optional": true
+        },
+        {
+          "pkg": "com.tv9news",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "optional": true,
+          "note": "Play Movies & TV"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "optional": true
+        },
+        {
+          "pkg": "com.xiaomi.mimusic2",
+          "optional": true
+        },
+        {
+          "pkg": "com.mitv.gallery",
+          "optional": true,
+          "note": "Mi Gallery"
+        },
+        {
+          "pkg": "com.xiaomi.smarthome.tv.global4",
+          "optional": true,
+          "note": "Mi Home"
+        }
+      ]
+    },
+    {
+      "title": "Xiaomi background services",
+      "packages": [
+        {
+          "pkg": "com.xiaomi.mitv.tvmanager",
+          "note": "\"TV Manager\" cleaner"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.handbook"
+        },
+        {
+          "pkg": "com.xiaomo.tv.milegal",
+          "note": "static legal / privacy text screens"
+        },
+        {
+          "pkg": "com.mitv.dream",
+          "note": "Mi screensaver (\"WallPaper\" tile); Google Ambient mode (backdrop) is the screensaver"
+        },
+        {
+          "pkg": "com.mitv.videoplayer",
+          "note": "Mi video player, with Firebase analytics"
+        }
+      ]
+    },
+    {
+      "title": "Google background extras a TV doesn't need",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "Google partner setup / RLZ pings"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync, no calendar app on a TV"
+        },
+        {
+          "pkg": "com.android.providers.calendar",
+          "note": "calendar provider"
+        },
+        {
+          "pkg": "com.google.android.leanbacklauncher",
+          "note": "old Android TV launcher; stays disabled after a reboot here, unlike AXSO0"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.speech.pumpkin",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true
+        },
+        {
+          "pkg": "com.mitv.milinkservice",
+          "optional": true,
+          "note": "Mi Cast"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.smartshare",
+          "optional": true
+        },
+        {
+          "pkg": "com.xiaomi.wfdsinkhelperservice",
+          "optional": true,
+          "note": "Miracast sink"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/xiaomi-mitv-axso1/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

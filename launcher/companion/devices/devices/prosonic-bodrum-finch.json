@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "id": "prosonic-bodrum-finch",
+  "name": "Prosonic Android TV",
+  "tested": {
+    "os": "Android TV 14",
+    "sdk": 34,
+    "build": "UKNV.260428.001"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Vestel telemetry, logging and \"cleaner\"",
+      "packages": [
+        {
+          "pkg": "com.vestel.vestelreporter"
+        },
+        {
+          "pkg": "com.vestel.smartlogger"
+        },
+        {
+          "pkg": "com.vestel.tv.speedup"
+        },
+        {
+          "pkg": "com.vestel.smartcenter"
+        },
+        {
+          "pkg": "android.autoinstalls.config.vestel.malin",
+          "note": "Vestel auto-install stub (preloads apps at setup)"
+        }
+      ]
+    },
+    {
+      "title": "Google ads, personalisation and feedback",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        }
+      ]
+    },
+    {
+      "title": "above points at (the same batch brought ANT+, Meet and Google TV). Off on this set; left commented so a shared",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.disney.disneyplus",
+          "optional": true,
+          "note": "Disney+"
+        },
+        {
+          "pkg": "com.hbo.hbonow",
+          "optional": true,
+          "note": "HBO Max"
+        },
+        {
+          "pkg": "com.viaplay.android",
+          "optional": true,
+          "note": "Viaplay"
+        },
+        {
+          "pkg": "com.spotify.tv.android",
+          "optional": true,
+          "note": "Spotify"
+        },
+        {
+          "pkg": "tv.twitch.android.app",
+          "optional": true,
+          "note": "Twitch"
+        },
+        {
+          "pkg": "dk.dr.tvplayer",
+          "optional": true,
+          "note": "DR TV"
+        },
+        {
+          "pkg": "dk.yousee.tv.leanback",
+          "optional": true,
+          "note": "YouSee; also claims HOME"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "YouTube Music"
+        }
+      ]
+    },
+    {
+      "title": "Google apps not used here",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV / Play Movies store"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.google.android.apps.tachyon",
+          "note": "Google Meet / Duo"
+        }
+      ]
+    },
+    {
+      "title": "Off on this set by the owner's choice; uncomment to disable. Google Assistant and voice search is the",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Google Assistant and voice search"
+        }
+      ]
+    },
+    {
+      "title": "Dead weight on a TV",
+      "packages": [
+        {
+          "pkg": "com.dsi.ant.plugins.antplus",
+          "note": "ANT+ fitness sensors"
+        },
+        {
+          "pkg": "com.dsi.ant.service.socket"
+        },
+        {
+          "pkg": "com.android.healthconnect.controller"
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore"
+        },
+        {
+          "pkg": "com.android.managedprovisioning"
+        },
+        {
+          "pkg": "com.android.dynsystem"
+        },
+        {
+          "pkg": "com.android.cts.ctsshim"
+        },
+        {
+          "pkg": "com.android.cts.priv.ctsshim"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.android.htmlviewer"
+        },
+        {
+          "pkg": "com.android.backupconfirm"
+        },
+        {
+          "pkg": "com.android.se",
+          "note": "Secure Element; the TV has no NFC or eSIM"
+        }
+      ]
+    },
+    {
+      "title": "MediaTek extras",
+      "packages": [
+        {
+          "pkg": "com.mediatek.wwtv.mediaplayer",
+          "note": "MMP, the USB media player; not a TvInputService here."
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/prosonic-bodrum-finch/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

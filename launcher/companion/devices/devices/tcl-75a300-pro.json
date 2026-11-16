@@ -1,0 +1,196 @@
+{
+  "schema": 1,
+  "id": "tcl-75a300-pro",
+  "name": "TCL 75A300 Pro",
+  "tested": {
+    "os": "Google TV 12",
+    "sdk": 31,
+    "build": "STT2.221228.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "TCL promos, demo, telemetry and account",
+      "packages": [
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "retail-demo sticker"
+        },
+        {
+          "pkg": "com.tcl.exhibit",
+          "optional": true,
+          "note": "NOT a store demo here: the A300's art mode and the Art button (second unit)"
+        },
+        {
+          "pkg": "com.tcl.tv.tclhome_passive",
+          "note": "TCL content pushed to the home screen at boot"
+        },
+        {
+          "pkg": "com.tcl.messagebox",
+          "note": "TCL pushed messages and promos"
+        },
+        {
+          "pkg": "com.tcl.logkit",
+          "note": "log capture"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account"
+        },
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "TCL movie/show recommendation browser"
+        },
+        {
+          "pkg": "com.tcl.ocean.instructions",
+          "note": "on-TV manual"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer"
+        },
+        {
+          "pkg": "com.tcl.guard",
+          "note": "TCL \"cleaner\". On a G08 EU set the system retried its service every 5 s"
+        }
+      ]
+    },
+    {
+      "title": "once it was off (tcl-g08-eu-android12); re-enable it if logcat shows that",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.android.dynsystem"
+        },
+        {
+          "pkg": "com.android.settings.intelligence"
+        }
+      ]
+    },
+    {
+      "title": "Off by choice",
+      "packages": [
+        {
+          "pkg": "com.tcl.smartalexa",
+          "note": "Alexa"
+        },
+        {
+          "pkg": "com.tcl.gamebar",
+          "note": "game bar overlay"
+        },
+        {
+          "pkg": "com.tcl.hearaid",
+          "note": "hearing test / accessibility helper"
+        },
+        {
+          "pkg": "com.tcl.t_solo",
+          "note": "Bluetooth \"listen alone\""
+        },
+        {
+          "pkg": "com.tcl.magiconnectfree",
+          "note": "TCL phone-to-TV app"
+        },
+        {
+          "pkg": "com.tcl.miracast",
+          "note": "screen mirroring sink"
+        },
+        {
+          "pkg": "tv.mopa.ginga",
+          "note": "Ginga interactive TV middleware (Brazil)"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "note": "Chromecast built-in: skip it to keep casting"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "voice search: skip it to keep the mic button"
+        },
+        {
+          "pkg": "com.google.android.tv.remote.service",
+          "note": "Google TV phone remote"
+        },
+        {
+          "pkg": "com.google.android.tts"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "TalkBack screen reader: keep it if anyone uses it"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "photo screensaver"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV / Play Movies storefront"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.inputmethod.latin",
+          "note": "Gboard. Off on this set; check `ime list -s` shows another keyboard first,"
+        }
+      ]
+    },
+    {
+      "title": "Setup wizard: disable only after re-joining Wi-Fi in Settings if setupwraith saved it (see tcl-55a300w)",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher, off once the new launcher is Home (build-and-install.sh does this)",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.launcherx"
+        }
+      ]
+    },
+    {
+      "title": "Disabled 31 October 2026: one reboot so far, no days of use yet",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "partner auto-installs; needed a manual pm disable-user here"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.tcl.dashboard",
+          "note": "TCL Home panel and its promos"
+        },
+        {
+          "pkg": "com.tcl.eva"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-75a300-pro/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "id": "philips-77oled810",
+  "name": "Philips 77OLED810/12",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKN2.241117.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Ambilight, native AirPlay, com.mediatek.dialservice, and the owner's streaming apps (YouTube, Prime Video,",
+      "packages": [
+        {
+          "pkg": "org.droidtv.candeebug",
+          "note": "\"DAC\" analytics uploader"
+        },
+        {
+          "pkg": "org.droidtv.gel",
+          "note": "metrics collector in candeebug's process"
+        },
+        {
+          "pkg": "org.droidtv.tv.frameworklogger",
+          "note": "hands reboot reasons and firmware-install records to the Philips logger"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Market Feedback Agent"
+        },
+        {
+          "pkg": "tv.samba.ssm",
+          "note": "Samba TV ACR (identifies what is on screen)"
+        }
+      ]
+    },
+    {
+      "title": "Batch 2: promos and first-setup leftovers",
+      "packages": [
+        {
+          "pkg": "com.tpv.nftgallery",
+          "note": "\"NFT Collection\" art gallery app"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner referrer / attribution"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "runs once at first setup"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "org.droidtv.amazonalexa",
+          "note": "Alexa bridge"
+        },
+        {
+          "pkg": "com.phorus.playfi.tv",
+          "note": "Play-Fi app; stayed disabled across reboots on this build"
+        },
+        {
+          "pkg": "com.phorus.playfi.softap",
+          "note": "Play-Fi soft access point helper"
+        },
+        {
+          "pkg": "org.droidtv.ipcontrol",
+          "note": "LAN control (volume, Ambilight). NOT the JointSpace API, that is org.droidtv.xtv"
+        },
+        {
+          "pkg": "io.mimi.sdk.service",
+          "note": "Mimi sound personalisation service (io.mimi.tvapp was off from the factory)"
+        },
+        {
+          "pkg": "org.droidtv.astrahdplus",
+          "note": "HD+ German satellite operator app; keep it if you subscribe"
+        },
+        {
+          "pkg": "org.droidtv.m7opapp",
+          "note": "M7 satellite operator promo; keep it if you use one of those operators"
+        },
+        {
+          "pkg": "org.droidtv.control4app",
+          "note": "Control4 smart-home integration (four packages)"
+        },
+        {
+          "pkg": "org.droidtv.control4adapterservice"
+        },
+        {
+          "pkg": "org.droidtv.control4sddp"
+        },
+        {
+          "pkg": "org.droidtv.control4UcService"
+        },
+        {
+          "pkg": "org.droidtv.matter",
+          "note": "Philips Matter bridge"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "Google Calendar sync; no calendar app is installed"
+        },
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix: off on this set"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "YouTube Music: off on this set"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Assistant and voice search: off on this set"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "optional": true,
+          "note": "TalkBack screen reader: off on this set; keep it if anyone needs it"
+        }
+      ]
+    },
+    {
+      "title": "Wi-Fi network, which Android deletes when it is disabled (check dumpsys wifi | grep -o 'cname=[^ ]*' and",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "Batch 5: after the new launcher owns Home (a provider under a live stock launcher would kill it)",
+      "packages": [
+        {
+          "pkg": "org.droidtv.oemtabprovider",
+          "note": "\"Philips\" tab of the Google TV home screen (promos)"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/philips-77oled810/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

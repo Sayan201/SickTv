@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "id": "dexp-65uhg2",
+  "name": "DEXP 65UHG2",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKNV.260704.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Retail demo / store display",
+      "packages": [
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "/system_ext/app/HKC_RetailDisplay"
+        },
+        {
+          "pkg": "fusion.android.tv.demo2",
+          "note": "/system_ext/app/HKC_RetailDisplay_polytron"
+        }
+      ]
+    },
+    {
+      "title": "Factory and service menus (CVTE/MediaTek test builds; none of them serves a TV input)",
+      "packages": [
+        {
+          "pkg": "com.cvte.tv.hkcfac",
+          "note": "HKC_FACTORY_AT"
+        },
+        {
+          "pkg": "com.at.factory.factorymanager",
+          "note": "HKC_FactoryManager"
+        },
+        {
+          "pkg": "com.at.factory.androidtvaidlservice"
+        },
+        {
+          "pkg": "mediatek.factorymenu.ui"
+        },
+        {
+          "pkg": "com.cvte.tv.at"
+        }
+      ]
+    },
+    {
+      "title": "Hotel mode",
+      "packages": [
+        {
+          "pkg": "com.cvte.tv.hotel",
+          "note": "HKC_AnTv"
+        }
+      ]
+    },
+    {
+      "title": "ACR: content recognition, fingerprints what is on screen",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin",
+          "note": "/system/priv-app/AnokiAcrOptin"
+        }
+      ]
+    },
+    {
+      "title": "Tests and leftovers",
+      "packages": [
+        {
+          "pkg": "com.mediatek.androidbox",
+          "note": "WFDSinkTest, Wi-Fi Display sink test"
+        },
+        {
+          "pkg": "com.hkc.tv.hkc_help",
+          "note": "HKC_Help"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization"
+        }
+      ]
+    },
+    {
+      "title": "Feedback and telemetry prompts",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        }
+      ]
+    },
+    {
+      "title": "Google ad services: candidate, listed for another Google TV 14 set in this repo but not tried on this",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "note": "its RecoveryActivity otherwise takes Home (priority 1)"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.launcherx"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "optional": true,
+          "note": "Play Games, unused here"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "optional": true,
+          "note": "Google TV movies and shows"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "YouTube Music"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "optional": true,
+          "note": "ambient mode / screensaver"
+        },
+        {
+          "pkg": "com.mediatek.android.leanbacklauncher.partnercustomizer",
+          "optional": true,
+          "note": "partner rows; reports say disabling it"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/dexp-65uhg2/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

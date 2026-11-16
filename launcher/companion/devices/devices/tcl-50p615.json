@@ -1,0 +1,210 @@
+{
+  "schema": 1,
+  "id": "tcl-50p615",
+  "name": "TCL 50P615",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "PPR1.180610.011"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "com.tcl.tv com.tcl.tvinput                          # Live TV, tuner, HDMI",
+      "packages": [
+        {
+          "pkg": "com.tcl.keycustomfunctionservice",
+          "optional": true,
+          "note": "remote key handling, fallback home"
+        },
+        {
+          "pkg": "com.tcl.inputmethod.international",
+          "optional": true,
+          "note": "default keyboard"
+        }
+      ]
+    },
+    {
+      "title": "com.tcl.settings com.tcl.initsetup com.tcl.factory.view com.tcl.providers.config",
+      "packages": [
+        {
+          "pkg": "com.tcl.xian.StartandroidService",
+          "optional": true,
+          "note": "device authentication"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "optional": true,
+          "note": "carries the remote's TKey activity"
+        }
+      ]
+    },
+    {
+      "title": "com.tcl.systemserver com.tcl.autopair               # system service, BT remote pairing",
+      "packages": [
+        {
+          "pkg": "com.tvos",
+          "optional": true,
+          "note": "tvos framework resources"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast (kept by choice)"
+        }
+      ]
+    },
+    {
+      "title": "com.tcl.miracast com.tcl.MultiScreenInteraction_TV  # Miracast / MagiConnect (kept by choice)",
+      "packages": [
+        {
+          "pkg": "com.tcl.versionUpdateApp",
+          "optional": true,
+          "note": "TCL OTA updater (kept by choice; can re-enable"
+        }
+      ]
+    },
+    {
+      "title": "# TCL Channel by updating it, see above)",
+      "packages": [
+        {
+          "pkg": "com.google.android.tv.remote.service",
+          "optional": true,
+          "note": "Google TV phone-app remote (kept by choice;"
+        }
+      ]
+    },
+    {
+      "title": "# disabled at first, re-enabled later)",
+      "packages": [
+        {
+          "pkg": "com.tcl.bi",
+          "note": "TCL BI analytics"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "\"send feedback\""
+        },
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "home-screen recommendation rows"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner-app attribution"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "one-time setup leftovers"
+        },
+        {
+          "pkg": "android.autoinstalls.config.tcl.device",
+          "note": "partner-app auto installer"
+        },
+        {
+          "pkg": "com.tcl.overseasappshow",
+          "note": "promo/app-show service; re-enables partner packages at boot"
+        },
+        {
+          "pkg": "com.tcl.tv.tclhome_master",
+          "note": "TCL's alternate home (StartUpActivity, message receivers)"
+        },
+        {
+          "pkg": "com.tcl.tv.tclhome_passive",
+          "note": "pushes TCL content onto the home screen at boot"
+        },
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "\"TCL Channel\" web content feed"
+        },
+        {
+          "pkg": "com.tcl.messagebox",
+          "note": "pushed messages and promos"
+        },
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "retail demo energy-label sticker"
+        },
+        {
+          "pkg": "com.tcl.guard",
+          "note": "TGuard cleaner / device-use tracking (green shield tile)"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account"
+        },
+        {
+          "pkg": "com.tcl.copydatatotv",
+          "note": "phone-to-TV data migration"
+        },
+        {
+          "pkg": "com.tcl.useragreement",
+          "note": "end-user agreement screens"
+        },
+        {
+          "pkg": "com.tcl.ui_mediaCenter",
+          "note": "USB media centre (only an LED strip on USB)"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google Assistant / voice search"
+        },
+        {
+          "pkg": "com.google.android.tv.assistant",
+          "note": "Assistant LED service"
+        },
+        {
+          "pkg": "com.tcl.assistant",
+          "note": "TCL voice service"
+        },
+        {
+          "pkg": "com.tcl.micmanager",
+          "note": "TCL microphone manager"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music"
+        },
+        {
+          "pkg": "com.hbo.hbonow",
+          "note": "old HBO Max app (Max, com.wbd.stream, kept)"
+        },
+        {
+          "pkg": "cm.aptoidetv.pt",
+          "note": "Aptoide TV store"
+        },
+        {
+          "pkg": "com.tiktok.tv",
+          "note": "TikTok"
+        },
+        {
+          "pkg": "tunein.player",
+          "note": "TuneIn"
+        },
+        {
+          "pkg": "com.android.printspooler",
+          "note": "printing service"
+        },
+        {
+          "pkg": "com.android.dreams.basic",
+          "note": "stock \"colors\" screensaver"
+        }
+      ]
+    },
+    {
+      "title": "5. After the launcher is installed",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher",
+          "note": "stock launcher, replaced by launcher/"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-50p615/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

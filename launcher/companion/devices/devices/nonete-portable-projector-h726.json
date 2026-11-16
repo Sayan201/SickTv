@@ -1,0 +1,230 @@
+{
+  "schema": 1,
+  "id": "nonete-portable-projector-h726",
+  "name": "Nonete portable projector",
+  "tested": {
+    "os": "Android 14",
+    "sdk": 34,
+    "build": "Projector_20250902.123926"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Factory test, preloads and the HTC store",
+      "packages": [
+        {
+          "pkg": "com.htc.hyk_test",
+          "note": "factory test app"
+        },
+        {
+          "pkg": "com.mobisystems.office",
+          "note": "preloaded Office suite"
+        },
+        {
+          "pkg": "com.htc.storeos",
+          "note": "HTC app store; it only offers phone builds of the streaming apps"
+        }
+      ]
+    },
+    {
+      "title": "Screensavers (screensaver_enabled was also set to 0)",
+      "packages": [
+        {
+          "pkg": "com.htc.screensaver",
+          "note": "stock screensaver"
+        },
+        {
+          "pkg": "com.google.android.backdrop",
+          "note": "ambient screensaver"
+        }
+      ]
+    },
+    {
+      "title": "Cast receivers; re-enable the one you cast with",
+      "packages": [
+        {
+          "pkg": "com.mphotool.dlna",
+          "note": "DLNA receiver"
+        },
+        {
+          "pkg": "com.mphotool.airplay",
+          "note": "AirPlay receiver"
+        },
+        {
+          "pkg": "com.softwinner.miracastReceiver",
+          "note": "Miracast"
+        },
+        {
+          "pkg": "com.htc.samescreen",
+          "note": "htc_cast mirroring"
+        }
+      ]
+    },
+    {
+      "title": "Privacy Sandbox ad services",
+      "packages": [
+        {
+          "pkg": "com.android.adservices.api",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.federatedcompute.services",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Setup leftovers, Health Connect, nearby pop-ups",
+      "packages": [
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.healthconnect.controller",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.nearby.halfsheet",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "AOSP apps and services with no use on a projector",
+      "packages": [
+        {
+          "pkg": "com.android.dreams.basic",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.wallpaperbackup",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.wallpapercropper",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.bips",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.bluetoothmidiservice",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.hotspot2.osulogin",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.backupconfirm",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.sharedstoragebackup",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.localtransport",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.managedprovisioning",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.dynsystem",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.music",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.musicfx",
+          "optional": true
+        },
+        {
+          "pkg": "com.android.soundpicker",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Vendor leftovers",
+      "packages": [
+        {
+          "pkg": "com.softwinner.screenshot",
+          "optional": true,
+          "note": "Quick Settings screenshot tile"
+        },
+        {
+          "pkg": "com.android.nfx",
+          "optional": true,
+          "note": "vendor NfxAccessibilityService v1.0.82, not the NFC stack; not enabled as a service here"
+        },
+        {
+          "pkg": "com.google.android.apps.searchlite.overlay",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "Stock USB media apps; this unit plays nothing from USB",
+      "packages": [
+        {
+          "pkg": "com.softwinner.TvdVideo",
+          "optional": true,
+          "note": "USB video player"
+        },
+        {
+          "pkg": "com.softwinner.imageParser",
+          "optional": true,
+          "note": "image viewer"
+        },
+        {
+          "pkg": "com.hisilicon.explorer",
+          "optional": true,
+          "note": "file manager with its USB mount and Samba services"
+        }
+      ]
+    },
+    {
+      "title": "Voice search, off by the owner's choice",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "ports listening on the LAN (62110, 10012, 10013, 7889, 7890, 10008, 8890), all closed once it was",
+      "packages": [
+        {
+          "pkg": "com.android.toofifi",
+          "optional": true
+        },
+        {
+          "pkg": "com.htc.htclauncherhighenglishd08",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/nonete-portable-projector-h726/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

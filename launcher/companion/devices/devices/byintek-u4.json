@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "id": "byintek-u4",
+  "name": "BYINTEK Love U4 projector, 1080P",
+  "tested": {
+    "os": "Android 9",
+    "sdk": 28,
+    "build": "1.01.08"
+  },
+  "launcher": "com.zeasn.whale.saas",
+  "keep": [],
+  "groups": [
+    {
+      "title": "The ad service is a persistent system app with permission to install apps silently: Android starts it",
+      "packages": [
+        {
+          "pkg": "com.zeasn.deviceportal.asdprovider.skyworth_hisi352",
+          "note": "ad/portal service for the Whale launcher"
+        },
+        {
+          "pkg": "zeasn.open.technical.tv.store",
+          "note": "Zeasn app store; Google Play stays"
+        }
+      ]
+    },
+    {
+      "title": "Preloads",
+      "packages": [
+        {
+          "pkg": "cn.wps.moffice_i18n_TV",
+          "note": "WPS Office"
+        }
+      ]
+    },
+    {
+      "title": "every boot when it is missing (YouTube, Netflix and Chrome too). Disabled, it stays installed and the",
+      "packages": [
+        {
+          "pkg": "ru.vk.store.tv"
+        }
+      ]
+    },
+    {
+      "title": "Phone and setup leftovers",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.google.android.carriersetup"
+        },
+        {
+          "pkg": "com.android.simappdialog",
+          "note": "SIM toolkit"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.contacts"
+        },
+        {
+          "pkg": "com.google.android.apps.pixelmigrate"
+        },
+        {
+          "pkg": "com.android.wallpaperbackup"
+        },
+        {
+          "pkg": "com.android.sharedstoragebackup"
+        }
+      ]
+    },
+    {
+      "title": "Wired phone casting (USB); wireless AirPlay/Chromecast/Miracast stay",
+      "packages": [
+        {
+          "pkg": "com.toofifi.lineserver"
+        },
+        {
+          "pkg": "com.mphotool.usbcastserver"
+        }
+      ]
+    },
+    {
+      "title": "Google extras",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.bips",
+          "note": "default print service"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/byintek-u4/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "id": "xiaomi-mitv-moor0",
+  "name": "Xiaomi MiTV-MOOR0",
+  "tested": {
+    "os": "Google TV 11",
+    "sdk": 30,
+    "build": "RTM5.220609.003.1246"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "---- Xiaomi and Google telemetry ----",
+      "packages": [
+        {
+          "pkg": "com.miui.tv.analytics"
+        },
+        {
+          "pkg": "com.xiaomi.statistic"
+        },
+        {
+          "pkg": "com.xiaomi.tvqs.overseas",
+          "note": "Firebase analytics + DOWNLOAD_WITHOUT_NOTIFICATION"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "crash / feedback reporting"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "Google RLZ attribution pings"
+        }
+      ]
+    },
+    {
+      "title": "---- Ad rows, promos and content providers on the home screen ----",
+      "packages": [
+        {
+          "pkg": "com.mitv.tvhome.oemtab",
+          "note": "holds ACCESS_ADSERVICES_AD_ID/_ATTRIBUTION - the ad row"
+        },
+        {
+          "pkg": "com.mitv.tvhome.michannel",
+          "note": "Mi content rows"
+        },
+        {
+          "pkg": "com.mitv.tvhome.mitvplus",
+          "note": "Mi TV+ ad-funded channels"
+        },
+        {
+          "pkg": "com.mitv.tvhome.atv",
+          "note": "PatchWall home"
+        },
+        {
+          "pkg": "com.xm.webcontent",
+          "note": "Xiaomi web promo WebView"
+        },
+        {
+          "pkg": "android.autoinstalls.config.xiaomi.amelie",
+          "note": "silent preload installer config"
+        }
+      ]
+    },
+    {
+      "title": "---- Retail demo mode, Xiaomi nagware and factory apps ----",
+      "packages": [
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "in-store demo loop"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.tvmanager",
+          "note": "\"TV Manager\" cleaner"
+        },
+        {
+          "pkg": "com.mitv.toolhouse"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.manualhelp",
+          "note": "on-screen user manual"
+        },
+        {
+          "pkg": "com.xiaomo.tv.milegal",
+          "note": "legal notices app"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization",
+          "note": "legal screen of the first-run setup wizard"
+        },
+        {
+          "pkg": "com.mediatek.wwtv.webview",
+          "note": "vendor web view shell"
+        },
+        {
+          "pkg": "com.duokan.factorytest",
+          "note": "factory test app; claims HOME at priority 0"
+        },
+        {
+          "pkg": "mediatek.factorymenu.ui",
+          "note": "factory menu: disabled, never launched"
+        }
+      ]
+    },
+    {
+      "title": "---- Mi Cast / Miracast, voice assistant and Xiaomi media apps (off by choice; Chromecast kept) ----",
+      "packages": [
+        {
+          "pkg": "com.xiaomi.mitv.smartshare"
+        },
+        {
+          "pkg": "com.xiaomi.wfdsinkhelperservice",
+          "note": "Miracast sink"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google Assistant voice search"
+        },
+        {
+          "pkg": "com.google.android.tv.assistant",
+          "note": "Google TV Assistant bridge"
+        },
+        {
+          "pkg": "com.xiaomi.mitv.mediaexplorer",
+          "note": "Xiaomi USB media explorer (third-party file manager used instead)"
+        },
+        {
+          "pkg": "com.mitv.videoplayer",
+          "note": "Xiaomi USB video player"
+        },
+        {
+          "pkg": "com.mitv.gallery",
+          "note": "Xiaomi gallery"
+        }
+      ]
+    },
+    {
+      "title": "---- Preloaded apps, off by choice - comment out any you use ----",
+      "packages": [
+        {
+          "pkg": "com.xiaomi.mimusic2",
+          "note": "Mi Music"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV / Play Movies & TV"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music"
+        }
+      ]
+    },
+    {
+      "title": "Disabled on this unit (SmartTube is used instead); uncomment to disable the stock YouTube app:",
+      "packages": [
+        {
+          "pkg": "com.google.android.youtube.tv",
+          "optional": true,
+          "note": "stock YouTube app"
+        }
+      ]
+    },
+    {
+      "title": "belong to android.uid.system:1000 (`dumpsys wifi | grep -o 'cname=[^ ]*'`), so disabling setupwraith",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "note": "setup wizard; blocks a third-party launcher from Home"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/xiaomi-mitv-moor0/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "schema": 1,
+  "id": "philips-65oled807",
+  "name": "Philips 65OLED807/12",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTT2.211108.001"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "(com.google.android.apps.mediashell), the phone remote service, Ambilight, the Media app, and the owner's",
+      "packages": [
+        {
+          "pkg": "org.droidtv.candeebug",
+          "note": "\"DAC\" analytics uploader"
+        },
+        {
+          "pkg": "org.droidtv.gel",
+          "note": "metrics collector in candeebug's process"
+        },
+        {
+          "pkg": "org.droidtv.usagelogger",
+          "note": "boot stats and remote keypress counts feeding the above"
+        },
+        {
+          "pkg": "org.droidtv.tv.frameworklogger",
+          "note": "hands reboot reasons and firmware-install records to the Philips logger"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Market Feedback Agent"
+        }
+      ]
+    },
+    {
+      "title": "Philips promos, app gallery and preinstalled extras",
+      "packages": [
+        {
+          "pkg": "org.droidtv.nettvrecommender",
+          "note": "\"Top Picks\" content row"
+        },
+        {
+          "pkg": "org.droidtv.recommendation",
+          "note": "its backend; disable the row above first"
+        },
+        {
+          "pkg": "org.droidtv.nettv.market",
+          "note": "\"Smart TV Collection\" app storefront"
+        },
+        {
+          "pkg": "org.droidtv.nettvapps",
+          "note": "the gallery's preload installer"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp1814",
+          "note": "ARTE (gallery web app)"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp4546",
+          "note": "MEGOGO (gallery web app)"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp5512",
+          "note": "Fishing TV (gallery web app)"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp5245",
+          "note": "\"TV SpieleCenter\" games (gallery web app)"
+        },
+        {
+          "pkg": "org.droidtv.android.fitness",
+          "note": "Fitness Buddy"
+        },
+        {
+          "pkg": "com.boosteroidtv.streaming",
+          "note": "Boosteroid cloud gaming, preinstalled"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        }
+      ]
+    },
+    {
+      "title": "Google first-setup leftovers",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner referrer / attribution"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "runs once at first setup, nothing afterwards"
+        },
+        {
+          "pkg": "com.google.android.sss.authbridge",
+          "note": "set-up-from-phone helper"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "Google Calendar sync; no calendar app is installed"
+        },
+        {
+          "pkg": "org.droidtv.amazonalexa",
+          "optional": true,
+          "note": "Alexa bridge: untested here, no channels tuned so zapping and the guide were not checked"
+        },
+        {
+          "pkg": "com.phorus.playfi.softap",
+          "note": "Play-Fi soft access point helper; stayed disabled"
+        },
+        {
+          "pkg": "com.phorus.playfi.tv",
+          "optional": true,
+          "note": "Play-Fi app: off on this set, but it re-enables itself at every boot"
+        },
+        {
+          "pkg": "org.droidtv.dlna",
+          "note": "DLNA/UPnP server and renderer (on PH1M_WW_9972 Google TV sets the Media app binds it)"
+        },
+        {
+          "pkg": "org.droidtv.ipcontrol",
+          "note": "LAN control (volume, Ambilight). NOT the JointSpace API on 1925/1926, that is org.droidtv.xtv"
+        },
+        {
+          "pkg": "io.mimi.tvapp",
+          "note": "Mimi sound personalisation app"
+        },
+        {
+          "pkg": "io.mimi.sdk.service",
+          "note": "its service"
+        },
+        {
+          "pkg": "org.droidtv.astrahdplus",
+          "note": "HD+ German satellite operator app; keep it if you subscribe"
+        },
+        {
+          "pkg": "org.droidtv.m7opapp",
+          "note": "M7 satellite operator promo; keep it if you use one of those operators"
+        },
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix: off on this set (the remote's Netflix key then does nothing)"
+        },
+        {
+          "pkg": "com.apple.atve.androidtv.appletv",
+          "optional": true,
+          "note": "Apple TV: off on this set"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "YouTube Music: off on this set"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "optional": true,
+          "note": "Google TV / Play Movies: off on this set"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "Assistant and voice search: off on this set (the mic key does nothing)"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "optional": true,
+          "note": "TalkBack screen reader: off on this set; keep it if anyone needs it"
+        }
+      ]
+    },
+    {
+      "title": "android.uid.system (dumpsys wifi | grep -o 'cname=[^ ]*'), so disabling it was safe. If setupwraith owns",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "disabled com.google.android.tvlauncher: tvlauncher holds a provider reference into it. It is also the only",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/philips-65oled807/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

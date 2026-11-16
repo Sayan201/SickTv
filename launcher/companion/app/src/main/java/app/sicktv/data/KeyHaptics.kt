@@ -25,6 +25,11 @@ class KeyHaptics(private val file: File) {
         get() = props().getProperty("pad") == "touchpad"
         set(on) = store { if (on) setProperty("pad", "touchpad") else remove("pad") }
 
+    @get:Synchronized @set:Synchronized
+    var wallpaper: String
+        get() = props().getProperty("wallpaper") ?: "zangetsu"
+        set(w) = store { setProperty("wallpaper", w) }
+
     private fun store(change: Properties.() -> Unit) {
         val p = props().apply(change)
         runCatching {

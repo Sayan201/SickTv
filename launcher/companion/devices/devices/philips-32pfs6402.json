@@ -1,0 +1,227 @@
+{
+  "schema": 1,
+  "id": "philips-32pfs6402",
+  "name": "Philips 32PFS6402/12",
+  "tested": {
+    "os": "Android TV 7.1.2",
+    "sdk": 24,
+    "build": "N2G48H"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry and analytics",
+      "packages": [
+        {
+          "pkg": "org.droidtv.candeebug",
+          "note": "\"DAC\" analytics uploader"
+        },
+        {
+          "pkg": "org.droidtv.gel",
+          "note": "\"GEL\" metrics collector, same process as candeebug; disable both"
+        },
+        {
+          "pkg": "org.droidtv.usagelogger",
+          "note": "boot stats, keypress counts, panel telemetry (needs TVINPUT_ALLOW=1)"
+        },
+        {
+          "pkg": "org.droidtv.tv.frameworklogger",
+          "note": "reboot reasons and firmware-install records to the Philips logger"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Market Feedback Agent"
+        },
+        {
+          "pkg": "com.google.android.tv.bugreportsender",
+          "note": "bug report uploader"
+        }
+      ]
+    },
+    {
+      "title": "Advertising, promotion and recommendation rows",
+      "packages": [
+        {
+          "pkg": "org.droidtv.nettvadvert",
+          "note": "ad widget, ad data cache and an ad-impression accessibility service"
+        },
+        {
+          "pkg": "org.droidtv.demome",
+          "note": "retail demo mode (needs TVINPUT_ALLOW=1)"
+        },
+        {
+          "pkg": "org.droidtv.nettvrecommender",
+          "note": "\"Top Picks\" content row"
+        },
+        {
+          "pkg": "org.droidtv.sticker",
+          "note": "e-sticker and shop banners"
+        }
+      ]
+    },
+    {
+      "title": "Philips NetTV store, social and cloud extras, phone setup, remote support",
+      "packages": [
+        {
+          "pkg": "org.droidtv.nettv.market",
+          "note": "NetTV app gallery"
+        },
+        {
+          "pkg": "org.droidtv.nettvapps",
+          "note": "NetTvApps manager (only needed by the web apps below)"
+        },
+        {
+          "pkg": "org.droidtv.nettv_launcherapp",
+          "note": "NetTV app launcher entry"
+        },
+        {
+          "pkg": "org.droidtv.nettvregistration",
+          "note": "Philips account registration for NetTV"
+        },
+        {
+          "pkg": "org.droidtv.twittershare",
+          "note": "Twitter share sheet"
+        },
+        {
+          "pkg": "org.droidtv.dropboxprovider",
+          "note": "Dropbox source in Media"
+        },
+        {
+          "pkg": "com.google.android.sss",
+          "note": "Second Screen Setup (set up from phone)"
+        },
+        {
+          "pkg": "com.google.android.sss.authbridge",
+          "note": "Second Screen Setup auth bridge"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "Google partner setup"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "runs once at first setup, nothing afterwards"
+        },
+        {
+          "pkg": "org.droidtv.dms",
+          "note": "UPnP media server, started at boot; the DLNA renderer and USB player stay"
+        },
+        {
+          "pkg": "com.teamviewer.quicksupport.market",
+          "note": "TeamViewer QuickSupport remote access"
+        },
+        {
+          "pkg": "com.teamviewer.quicksupport.addon.tpvision2k16_v1",
+          "note": "its TP Vision add-on"
+        }
+      ]
+    },
+    {
+      "title": "Voice and casting, off by choice on this unit (comment out to keep)",
+      "packages": [
+        {
+          "pkg": "com.google.android.katniss",
+          "note": "Google Assistant / voice search"
+        },
+        {
+          "pkg": "com.media.playcast.PHILIPS.MTK",
+          "note": "Playcast screen mirroring; Chromecast (mediashell) is separate and kept"
+        }
+      ]
+    },
+    {
+      "title": "Preinstalled NetTV web apps (labels read from each APK's resources.arsc; comment out any you use)",
+      "packages": [
+        {
+          "pkg": "org.droidtv.nettvapp1815",
+          "note": "ARTE"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp1984",
+          "note": "Dailymotion"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp2000020",
+          "note": "FilmoTV"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp3076",
+          "note": "Cinetrailer"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp3814",
+          "note": "TV5Monde"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp3983",
+          "note": "Rakuten TV"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp4546",
+          "note": "MEGOGO"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp4768",
+          "note": "France24"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp4771",
+          "note": "Divan.TV"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp4836",
+          "note": "Social TV"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp5225",
+          "note": "Filmbox Live"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp5326",
+          "note": "Toon Goggles"
+        },
+        {
+          "pkg": "org.droidtv.nettvapp5512",
+          "note": "Fishing TV"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps. The streaming services the owner uses stay; Netflix, YouTube, Prime Video and Disney+ are",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google Play Movies & TV (its preview TvInputService is not a hardware input)"
+        },
+        {
+          "pkg": "com.google.android.music",
+          "note": "Google Play Music (service discontinued)"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Google Play Games"
+        },
+        {
+          "pkg": "com.gameloft.android.HEP.GloftANHP",
+          "note": "Gameloft game"
+        },
+        {
+          "pkg": "tv.molotov.app",
+          "optional": true,
+          "note": "Molotov; off on the owner's set, may not be a factory preload"
+        },
+        {
+          "pkg": "org.videolan.vlc",
+          "optional": true,
+          "note": "VLC; off on the owner's set, may not be a factory preload"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/philips-32pfs6402/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

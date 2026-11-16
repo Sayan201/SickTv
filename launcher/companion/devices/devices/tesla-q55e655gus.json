@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "id": "tesla-q55e655gus",
+  "name": "Tesla Smart TV Q55E655GUS",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKN6.260116.046"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Content recognition (reports what is on screen)",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin"
+        }
+      ]
+    },
+    {
+      "title": "Retail demo",
+      "packages": [
+        {
+          "pkg": "com.mediatek.tv.retaildemo"
+        }
+      ]
+    },
+    {
+      "title": "Karaoke microphone service",
+      "packages": [
+        {
+          "pkg": "com.audiocn.karaoke.global.micmanager"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.tcl.browser",
+          "note": "already disabled on the test set"
+        }
+      ]
+    },
+    {
+      "title": "Personal choice: Miracast screen mirroring, off on the tested set. Shared lists keep casting on: uncomment it",
+      "packages": [
+        {
+          "pkg": "com.mediatek.miracast",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher, replaced by launcher/. Left to launcher/build-and-install.sh,",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.launcherx",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tesla-q55e655gus/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

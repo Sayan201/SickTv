@@ -1,0 +1,184 @@
+{
+  "schema": 1,
+  "id": "indurama-google-tv-4k-ktc-hongkong",
+  "name": "Indurama Google TV 4K",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKNV.260626.001"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "--- A. Telemetry / analytics / ad services ---",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.google.android.partnersetup"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        },
+        {
+          "pkg": "com.android.adservices.api"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        }
+      ]
+    },
+    {
+      "title": "--- B. OEM factory / production-line tools (never launched, dumpsys-inspected only) ---",
+      "packages": [
+        {
+          "pkg": "com.ktc.serialport"
+        },
+        {
+          "pkg": "com.ktc.tv.factory"
+        },
+        {
+          "pkg": "ktc.factorymenu.ui"
+        },
+        {
+          "pkg": "mediatek.factorymenu.ui"
+        }
+      ]
+    },
+    {
+      "title": "--- C. OEM preloads not used ---",
+      "packages": [
+        {
+          "pkg": "com.electronic.manual"
+        },
+        {
+          "pkg": "fusion.android.tv.demo"
+        },
+        {
+          "pkg": "com.mstar.android.tv.disclaimercustomization"
+        },
+        {
+          "pkg": "com.mediatek.wwtv.setupwizard"
+        },
+        {
+          "pkg": "com.mediatek.wwtv.webview"
+        },
+        {
+          "pkg": "com.esaba.downloader"
+        },
+        {
+          "pkg": "com.eltelon.zapping",
+          "optional": true,
+          "note": "disabled on the tested set by owner choice (uncomment to do the same)"
+        }
+      ]
+    },
+    {
+      "title": "--- D. Google apps not used ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.videos"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic"
+        },
+        {
+          "pkg": "com.google.android.tts"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx"
+        },
+        {
+          "pkg": "com.android.dreams.basic"
+        }
+      ]
+    },
+    {
+      "title": "--- E. System packages not applicable on a TV ---",
+      "packages": [
+        {
+          "pkg": "com.android.healthconnect.controller"
+        },
+        {
+          "pkg": "com.android.health.connect.backuprestore"
+        },
+        {
+          "pkg": "com.android.cameraextensions"
+        },
+        {
+          "pkg": "com.android.cts.ctsshim"
+        },
+        {
+          "pkg": "com.android.cts.priv.ctsshim"
+        },
+        {
+          "pkg": "com.android.dynsystem"
+        },
+        {
+          "pkg": "com.android.se"
+        },
+        {
+          "pkg": "com.android.uwb.resources"
+        },
+        {
+          "pkg": "com.android.settings.intelligence"
+        },
+        {
+          "pkg": "com.android.nearby.halfsheet"
+        },
+        {
+          "pkg": "com.android.backupconfirm"
+        },
+        {
+          "pkg": "com.android.managedprovisioning"
+        },
+        {
+          "pkg": "com.android.hotspot2.osulogin"
+        },
+        {
+          "pkg": "com.android.htmlviewer"
+        },
+        {
+          "pkg": "com.android.wallpaperbackup"
+        }
+      ]
+    },
+    {
+      "title": "--- F. Streaming apps kept for a shared list (disabled on the tested set) ---",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "disabled on the tested set by owner choice (uncomment to do the same)"
+        },
+        {
+          "pkg": "com.wbd.stream",
+          "optional": true,
+          "note": "disabled on the tested set by owner choice (uncomment to do the same)"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/indurama-google-tv-4k-ktc-hongkong/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

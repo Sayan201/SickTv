@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "id": "tcl-g08-eu-android12",
+  "name": "TCL Smart TV Pro",
+  "tested": {
+    "os": "Android TV 12",
+    "sdk": 31,
+    "build": "STT2.221228.001"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "TCL promo, push messages, help/demo apps and log capture",
+      "packages": [
+        {
+          "pkg": "com.tcl.dashboard",
+          "note": "home-screen push messages"
+        },
+        {
+          "pkg": "com.tcl.messagebox"
+        },
+        {
+          "pkg": "com.tcl.exhibit",
+          "note": "store demo mode"
+        },
+        {
+          "pkg": "com.tcl.hearaid"
+        },
+        {
+          "pkg": "com.tcl.ocean.instructions",
+          "note": "onboarding/tips overlay"
+        },
+        {
+          "pkg": "com.tcl.repairguide"
+        },
+        {
+          "pkg": "com.tcl.logkit",
+          "note": "log collection"
+        },
+        {
+          "pkg": "com.tcl.browser",
+          "note": "TCL light browser (Google WebView stays)"
+        },
+        {
+          "pkg": "com.tcl.smartalexa"
+        },
+        {
+          "pkg": "com.tcl.t_solo"
+        },
+        {
+          "pkg": "com.tcl.eva",
+          "note": "TCL voice assistant layer (Katniss handles voice without it)"
+        },
+        {
+          "pkg": "com.tcl.magiconnectfree",
+          "note": "MagicConnect pairing promo"
+        },
+        {
+          "pkg": "com.tcl.gamebar"
+        },
+        {
+          "pkg": "com.tcl.UpdatePeripheral",
+          "note": "peripheral firmware helper"
+        }
+      ]
+    },
+    {
+      "title": "Duplicate webviews on this firmware (com.google.android.webview is the active one)",
+      "packages": [
+        {
+          "pkg": "com.tcl.android.webview"
+        },
+        {
+          "pkg": "com.iplayer.android.webview"
+        },
+        {
+          "pkg": "com.mediatek.support.webview"
+        }
+      ]
+    },
+    {
+      "title": "Mediatek casting/telemetry leftovers",
+      "packages": [
+        {
+          "pkg": "com.mediatek.airplaydaemon",
+          "note": "AirPlay daemon; keep it for AirPlay if com.mediatek.AirplayAPK is there"
+        },
+        {
+          "pkg": "com.mediatek.backgrounddetection"
+        },
+        {
+          "pkg": "com.mediatek.network"
+        }
+      ]
+    },
+    {
+      "title": "Google storefront and extras",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Play Movies storefront"
+        },
+        {
+          "pkg": "com.google.android.tts",
+          "note": "TTS (left on purpose if you use voice TTS screens)"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "photo screensaver"
+        },
+        {
+          "pkg": "com.android.printspooler"
+        }
+      ]
+    },
+    {
+      "title": "On the AS36 set and the French AS34 set, not on the first one. Disabled on both (one day on AS36, three on",
+      "packages": [
+        {
+          "pkg": "com.tcl.channelplus",
+          "note": "TCL Live FAST channels"
+        },
+        {
+          "pkg": "com.tcl.esticker",
+          "note": "retail-demo sticker"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account sign-in nags"
+        },
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "TCL movie/show recommendation browser"
+        },
+        {
+          "pkg": "com.tcl.guard",
+          "optional": true,
+          "note": "TCL \"cleaner\" / app manager. Disabled on the AS34 set, the system tried to"
+        }
+      ]
+    },
+    {
+      "title": "Google extras, disabled on the third unit (three days, reboots included)",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "bug-report / feedback sender"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "runs once at first setup, nothing afterwards"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        }
+      ]
+    },
+    {
+      "title": "Google TV's setup wizard claims Home (RecoveryActivity loop) once the stock launcher is disabled -",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-g08-eu-android12/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

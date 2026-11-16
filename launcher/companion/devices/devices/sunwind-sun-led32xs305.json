@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "id": "sunwind-sun-led32xs305",
+  "name": "SunWind SUN-LED32XS305 32\"",
+  "tested": {
+    "os": "Android 11",
+    "sdk": 30,
+    "build": "RP1A.200720.011"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Yandex telemetry and ads",
+      "packages": [
+        {
+          "pkg": "com.yandex.android.advid",
+          "note": "Yandex advertising ID"
+        },
+        {
+          "pkg": "com.yandex.tv.bugreportsender",
+          "note": "bug report sender"
+        },
+        {
+          "pkg": "com.yandex.tv.daydream",
+          "note": "Yandex video screensaver (ad slot); set the launcher's ClockDream instead"
+        },
+        {
+          "pkg": "com.yandex.prebuiltstub",
+          "note": "empty stub"
+        },
+        {
+          "pkg": "com.yandex.tv.webplayer",
+          "note": "Yandex web player; Kinopoisk, VK Video and Rutube play without it"
+        }
+      ]
+    },
+    {
+      "title": "Voice assistant (the remote's voice key stops working; all other keys keep working)",
+      "packages": [
+        {
+          "pkg": "com.yandex.tv.alice",
+          "note": "Alice"
+        }
+      ]
+    },
+    {
+      "title": "Disabled once, re-enabled by the owner's choice; uncomment if unused",
+      "packages": [
+        {
+          "pkg": "com.yandex.tv.input.efir",
+          "optional": true,
+          "note": "Yandex online channels (\"Efir\"), no antenna needed"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/sunwind-sun-led32xs305/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

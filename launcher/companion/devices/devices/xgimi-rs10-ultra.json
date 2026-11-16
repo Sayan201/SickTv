@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "id": "xgimi-rs10-ultra",
+  "name": "XGIMI RS10 Ultra projector",
+  "tested": {
+    "os": "Android 9",
+    "sdk": 28,
+    "build": "PPR2.180905.006.A1"
+  },
+  "launcher": "com.xgimi.home",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry, ads, help and the H5 page host",
+      "packages": [
+        {
+          "pkg": "com.xgimi.adservice",
+          "note": "XGIMI ad service"
+        },
+        {
+          "pkg": "com.xgimi.datareporter",
+          "note": "usage/telemetry reporter"
+        },
+        {
+          "pkg": "com.xgimi.bugreportsender",
+          "note": "bug report uploader"
+        },
+        {
+          "pkg": "com.xgimi.msgcenter",
+          "note": "push message/notification center"
+        },
+        {
+          "pkg": "com.xgimi.instruction30",
+          "note": "help/instruction content"
+        },
+        {
+          "pkg": "com.xgimi.activitypage",
+          "note": "H5 web page host used by help/account/store pages"
+        }
+      ]
+    },
+    {
+      "title": "Streaming apps the owner does not use (VidHub only)",
+      "packages": [
+        {
+          "pkg": "cn.com.wasu.main",
+          "note": "华数TV"
+        },
+        {
+          "pkg": "com.gitv.dvb.live",
+          "note": "宽带电视"
+        },
+        {
+          "pkg": "com.hunantv.license",
+          "note": "芒果TV"
+        },
+        {
+          "pkg": "com.ktcp.tvvideo",
+          "note": "云视听极光"
+        }
+      ]
+    },
+    {
+      "title": "Music, karaoke, XGIMI video content and the dynamic atmosphere screensaver",
+      "packages": [
+        {
+          "pkg": "com.xgimi.doubanfm",
+          "note": "酷狗音乐极米定制版"
+        },
+        {
+          "pkg": "com.netease.cloudmusic.tv",
+          "note": "网易云音乐"
+        },
+        {
+          "pkg": "com.tencent.qqmusicjimisdk",
+          "note": "QQ Music SDK used by the music apps"
+        },
+        {
+          "pkg": "com.xgimi.karaokesdk",
+          "note": "karaoke SDK (microphone/pay/MV)"
+        },
+        {
+          "pkg": "com.xgimi.stream.video",
+          "note": "XGIMI video/VIP content app"
+        },
+        {
+          "pkg": "com.xgimi.atmosphere",
+          "note": "dynamic/ambient screensaver; the owner uses a third-party aerial screensaver"
+        }
+      ]
+    },
+    {
+      "title": "XGIMI app store, account/VIP, payment and OTA (owner's aggressive scope)",
+      "packages": [
+        {
+          "pkg": "com.xgimi.newappmarket",
+          "note": "XGIMI app store; Dangbei Market stays installed"
+        },
+        {
+          "pkg": "com.xgimi.account",
+          "note": "account stub"
+        },
+        {
+          "pkg": "com.xgimi.user",
+          "note": "account/VIP/backup UI and provider"
+        },
+        {
+          "pkg": "com.xgimi.payview",
+          "note": "VIP/payment UI"
+        },
+        {
+          "pkg": "com.xgimi.upgrade",
+          "optional": true,
+          "note": "OTA updater; kept enabled by default, disabled on the author's TV by choice"
+        }
+      ]
+    },
+    {
+      "title": "Misc",
+      "packages": [
+        {
+          "pkg": "com.android.printspooler",
+          "note": "printing; nothing prints from a projector"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/xgimi-rs10-ultra/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "id": "xiaomi-mitv-mosr1",
+  "name": "Xiaomi MiTV-MOSR1",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTT8.210119.001.1453"
+  },
+  "launcher": "com.google.android.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Disabled on other CleanYourTV lists too",
+      "packages": [
+        {
+          "pkg": "com.android.cts.ctsshim",
+          "note": "Android test shim"
+        },
+        {
+          "pkg": "com.android.cts.priv.ctsshim",
+          "note": "Android test shim"
+        },
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "already disabled on the test set"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "TalkBack screen reader: keep it if anyone uses it"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "retail demo mode"
+        }
+      ]
+    },
+    {
+      "title": "Stock launcher, replaced by the CleanYourTV launcher",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvlauncher"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/xiaomi-mitv-mosr1/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

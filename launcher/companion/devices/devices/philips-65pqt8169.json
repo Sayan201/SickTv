@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "id": "philips-65pqt8169",
+  "name": "Philips 65PQT8169/56",
+  "tested": {
+    "os": "Google TV 11",
+    "sdk": 30,
+    "build": "RTM7.230903.168"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "--- Telemetry, partner auto-installs and rows ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "feedback/crash reports"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "silently installs partner apps"
+        },
+        {
+          "pkg": "com.google.android.partnersetup",
+          "note": "partner-app attribution"
+        },
+        {
+          "pkg": "com.mediatek.android.leanbacklauncher.partnercustomizer",
+          "note": "partner rows for the stock launcher"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer",
+          "note": "one-time setup leftovers"
+        }
+      ]
+    },
+    {
+      "title": "--- Background services ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.nbu.smartconnect.tv",
+          "note": "data-saver VPN"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar",
+          "note": "calendar sync"
+        },
+        {
+          "pkg": "com.android.printspooler",
+          "note": "printing"
+        }
+      ]
+    },
+    {
+      "title": "--- Factory and production-line tools: disabled only, never launched ---",
+      "packages": [
+        {
+          "pkg": "com.ktc.serialport",
+          "note": "KTCAutoTest serial console, runs from boot"
+        },
+        {
+          "pkg": "com.ktc.tv.factory",
+          "note": "KtcFactoryKeyService, runs from boot"
+        },
+        {
+          "pkg": "mediatek.factorymenu.ui",
+          "note": "MediaTek design/factory menu"
+        }
+      ]
+    },
+    {
+      "title": "--- Google ambient-mode screensaver ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "with its smarthome process, about 240 MB in memory"
+        }
+      ]
+    },
+    {
+      "title": "--- Google TV setup wizard: read the Wi-Fi warning above first; re-enable it before a factory reset ---",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "note": "claims HOME with .RecoveryActivity"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/philips-65pqt8169/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,425 @@
+{
+  "schema": 1,
+  "id": "amazon-fire-tv-stick-4k-max-2023",
+  "name": "Amazon Fire TV Stick 4K Max, 2nd gen 2023",
+  "tested": {
+    "os": "Fire OS 8.1.8.5 / Android 11",
+    "sdk": 30,
+    "build": "0033018557316"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Amazon telemetry, metrics, logs, usage and location reporting",
+      "packages": [
+        {
+          "pkg": "com.amazon.client.metrics.api"
+        },
+        {
+          "pkg": "com.amazon.device.telemetry.emitter",
+          "note": "new in Fire OS 8, no components of its own"
+        },
+        {
+          "pkg": "com.amazon.wirelessmetrics.service"
+        },
+        {
+          "pkg": "com.amazon.perfcollection"
+        },
+        {
+          "pkg": "com.amazon.perfc"
+        },
+        {
+          "pkg": "com.amazon.dp.logger"
+        },
+        {
+          "pkg": "com.amazon.ceviche",
+          "note": "data collection pipelines"
+        },
+        {
+          "pkg": "com.amazon.tv.developer.dataservice",
+          "note": "content personalization data for third-party apps"
+        },
+        {
+          "pkg": "com.amazon.livedeviceservice"
+        },
+        {
+          "pkg": "com.amazon.privacypassservice",
+          "note": "privacy pass token service"
+        },
+        {
+          "pkg": "com.amazon.wifilocker",
+          "note": "uploads Wi-Fi passwords to Amazon"
+        },
+        {
+          "pkg": "com.amazon.tv.acr",
+          "note": "Automatic Content Recognition"
+        },
+        {
+          "pkg": "com.amazon.ftvspatial",
+          "note": "presence and indoor-location sensing"
+        },
+        {
+          "pkg": "com.amazon.neo.minerva"
+        },
+        {
+          "pkg": "com.amazon.neo.minerva.logcat"
+        }
+      ]
+    },
+    {
+      "title": "Ads, sponsored rows, recommendations, promos, shopping",
+      "packages": [
+        {
+          "pkg": "com.amazon.kso.blackbird",
+          "note": "launcher ad sync / bidding"
+        },
+        {
+          "pkg": "com.amazon.sneakpeek",
+          "note": "sponsored \"Sneak Peek\" previews"
+        },
+        {
+          "pkg": "com.amazon.hybridadidservice",
+          "note": "advertising ID service"
+        },
+        {
+          "pkg": "com.amazon.media.recommendations"
+        },
+        {
+          "pkg": "com.amazon.providers.contentsupport"
+        },
+        {
+          "pkg": "com.amazon.tv.easyupgrade",
+          "note": "\"upgrade your Fire TV\" promos"
+        },
+        {
+          "pkg": "com.amazon.shoptv.client",
+          "note": "Amazon Shopping on TV"
+        },
+        {
+          "pkg": "com.amazon.shoptv.firetv.client"
+        },
+        {
+          "pkg": "com.amazon.hedwig",
+          "note": "Fire TV Channels"
+        },
+        {
+          "pkg": "com.amazon.tv.livetv",
+          "optional": true,
+          "note": "Live tab and guide; commented out for everyone, this set has it off (no tuner on a stick; needs HANDLERS_ALLOW=1)"
+        },
+        {
+          "pkg": "com.amazon.franktvinput",
+          "note": "live TV input feeding the Live tab"
+        },
+        {
+          "pkg": "com.amazon.tifobserver",
+          "note": "TV input framework observer"
+        },
+        {
+          "pkg": "com.amazon.systemnotices"
+        },
+        {
+          "pkg": "com.amazon.uxnotification",
+          "note": "UX notification popups"
+        },
+        {
+          "pkg": "com.amazon.tv.releasenotes",
+          "note": "\"what's new\" release notes"
+        },
+        {
+          "pkg": "com.amazon.tv.earlyaccess",
+          "note": "early-access / preview program stub"
+        },
+        {
+          "pkg": "com.amazon.gamehub",
+          "note": "Amazon Luna / Game Hub"
+        }
+      ]
+    },
+    {
+      "title": "Alexa services (voice engine com.amazon.vizzini itself is kept, see header)",
+      "packages": [
+        {
+          "pkg": "com.amazon.alexa.datastore.app"
+        },
+        {
+          "pkg": "com.amazon.alexadirectivebrokerservice"
+        },
+        {
+          "pkg": "com.amazon.tv.alexaalerts",
+          "note": "alarms, timers, reminders"
+        },
+        {
+          "pkg": "com.amazon.tv.alexanotifications"
+        },
+        {
+          "pkg": "com.amazon.alexa.externalmediaplayer.fireos",
+          "note": "Alexa music playback"
+        },
+        {
+          "pkg": "com.amazon.alexamediaplayer.runtime.ftv"
+        },
+        {
+          "pkg": "com.amazon.firetv.androidskillconnectioncapability",
+          "note": "Alexa skill connections / Alexa+ events"
+        },
+        {
+          "pkg": "com.amazon.aiondec",
+          "note": "Alexa skill connections"
+        },
+        {
+          "pkg": "com.amazon.aca",
+          "note": "Alexa hints/cues providers"
+        },
+        {
+          "pkg": "com.amazon.audiohome",
+          "note": "Alexa Home Theater"
+        },
+        {
+          "pkg": "com.amazon.whad",
+          "note": "whole-home audio (multi-room music)"
+        },
+        {
+          "pkg": "com.amazon.whasettings"
+        },
+        {
+          "pkg": "com.amazon.rtcsessioncontroller",
+          "note": "Alexa calling / Drop In sessions"
+        },
+        {
+          "pkg": "com.amazon.spotify.mediabrowserservice",
+          "note": "Spotify for Alexa (stub; the Spotify app is separate)"
+        },
+        {
+          "pkg": "com.amazon.tcomm.jackson",
+          "note": "tcomm support library"
+        }
+      ]
+    },
+    {
+      "title": "Casting (Amazon fling/DIAL/Whisper; mirroring via third-party apps still works)",
+      "packages": [
+        {
+          "pkg": "com.amazon.awvflingreceiver"
+        },
+        {
+          "pkg": "com.amazon.cast.sink"
+        },
+        {
+          "pkg": "com.amazon.dialservice"
+        },
+        {
+          "pkg": "com.amazon.whisperplay.service.install"
+        },
+        {
+          "pkg": "com.amazon.whisperjoin.middleware.v2.np",
+          "note": "frustration-free setup of other Amazon devices"
+        }
+      ]
+    },
+    {
+      "title": "Smart home / Matter",
+      "packages": [
+        {
+          "pkg": "com.amazon.tv.matter",
+          "note": "Matter casting"
+        },
+        {
+          "pkg": "com.amazon.tv.mattercohost",
+          "note": "Matter smart-home controller"
+        },
+        {
+          "pkg": "com.amazon.smarthomemapviewapp",
+          "note": "smart home dashboard (cameras, lights)"
+        }
+      ]
+    },
+    {
+      "title": "Support, sign-in, background services",
+      "packages": [
+        {
+          "pkg": "com.amazon.tv.support"
+        },
+        {
+          "pkg": "com.amazon.firetv.troubleshooting"
+        },
+        {
+          "pkg": "com.amazon.tv.ottssocompanionapp",
+          "note": "Amazon sign-in for apps"
+        },
+        {
+          "pkg": "com.amazon.device_remote_config_sync_service"
+        },
+        {
+          "pkg": "com.amazon.ods.kindleconnect",
+          "note": "\"show on Fire TV\" from Echo / Fire tablet"
+        },
+        {
+          "pkg": "com.amazon.prism.android.service",
+          "note": "background profiles service"
+        },
+        {
+          "pkg": "com.amazon.sharingservice.android.client.proxy"
+        },
+        {
+          "pkg": "com.amazon.tv.ffsprovisioneeclient",
+          "note": "frustration-free setup client"
+        },
+        {
+          "pkg": "com.amazon.minitv.android.app",
+          "note": "miniTV stub"
+        },
+        {
+          "pkg": "com.amazon.tv.website_launcher",
+          "note": "opens websites in Silk"
+        }
+      ]
+    },
+    {
+      "title": "Setup helpers, legal, tutorials, dummy apps",
+      "packages": [
+        {
+          "pkg": "com.amazon.tv.legal.notices"
+        },
+        {
+          "pkg": "com.amazon.tv.legalresources"
+        },
+        {
+          "pkg": "com.amazon.storm.lightning.tutorial",
+          "note": "remote app tutorial"
+        },
+        {
+          "pkg": "com.amazon.tmm.tutorial",
+          "note": "remote tutorial"
+        },
+        {
+          "pkg": "com.amazon.dummy.alarmclock"
+        },
+        {
+          "pkg": "com.amazon.dummy.calendar"
+        },
+        {
+          "pkg": "com.amazon.dummy.contacts"
+        },
+        {
+          "pkg": "com.amazon.dummy.gallery"
+        },
+        {
+          "pkg": "com.amazon.dummy.music"
+        },
+        {
+          "pkg": "com.amazon.dummy.settings"
+        },
+        {
+          "pkg": "com.amazon.dummy.soundpicker"
+        }
+      ]
+    },
+    {
+      "title": "Android cruft (none of it is in the core set the tools refuse)",
+      "packages": [
+        {
+          "pkg": "com.android.cts.ctsshim"
+        },
+        {
+          "pkg": "com.android.cts.priv.ctsshim"
+        },
+        {
+          "pkg": "com.android.protips"
+        },
+        {
+          "pkg": "com.android.dreams.basic"
+        },
+        {
+          "pkg": "com.android.printservice.recommendation"
+        },
+        {
+          "pkg": "com.android.bookmarkprovider"
+        },
+        {
+          "pkg": "com.android.calllogbackup"
+        },
+        {
+          "pkg": "com.android.smspush"
+        },
+        {
+          "pkg": "com.android.mms.service"
+        },
+        {
+          "pkg": "com.android.hotspot2.osulogin"
+        },
+        {
+          "pkg": "com.android.traceur"
+        },
+        {
+          "pkg": "com.android.onetimeinitializer"
+        },
+        {
+          "pkg": "com.android.carrierconfig"
+        },
+        {
+          "pkg": "com.android.safetyregulatoryinfo"
+        },
+        {
+          "pkg": "com.android.htmlviewer"
+        }
+      ]
+    },
+    {
+      "title": "Protected on this build, commented out (see header)",
+      "packages": [
+        {
+          "pkg": "com.amazon.device.metrics",
+          "optional": true,
+          "note": "protected by Fire OS"
+        },
+        {
+          "pkg": "com.amazon.device.logmanager",
+          "optional": true,
+          "note": "protected by Fire OS"
+        },
+        {
+          "pkg": "com.amazon.device.crashmanager",
+          "optional": true,
+          "note": "protected by Fire OS"
+        },
+        {
+          "pkg": "com.fireos.usagestats.proxy",
+          "optional": true,
+          "note": "protected by Fire OS"
+        },
+        {
+          "pkg": "com.amazon.ftvads.deeplinking",
+          "optional": true,
+          "note": "protected by Fire OS"
+        },
+        {
+          "pkg": "com.amazon.tv.oobe",
+          "optional": true,
+          "note": "protected by Fire OS (needed for a factory reset)"
+        },
+        {
+          "pkg": "com.amazon.whisperlink.core.android",
+          "optional": true,
+          "note": "protected by Fire OS"
+        },
+        {
+          "pkg": "com.amazon.tcomm",
+          "optional": true,
+          "note": "protected by Fire OS"
+        },
+        {
+          "pkg": "com.amazon.tcomm.client",
+          "optional": true,
+          "note": "protected by Fire OS"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/amazon-fire-tv-stick-4k-max-2023/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

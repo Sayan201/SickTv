@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "id": "vidda-c1s-mt9669",
+  "name": "Vidda C1S and C1 4K laser projectors",
+  "tested": {
+    "os": "Android 9",
+    "sdk": 28,
+    "build": "PPR2.180905.006.A1"
+  },
+  "launcher": "com.jamdeo.tv.vod",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Hisense telemetry, reporting and push",
+      "packages": [
+        {
+          "pkg": "com.hisense.hitv.das"
+        },
+        {
+          "pkg": "com.hisense.logupload"
+        },
+        {
+          "pkg": "com.hisense.service.hproxy",
+          "note": "LoopingService + network-change receiver, polls forever"
+        },
+        {
+          "pkg": "com.hisense.service.message",
+          "note": "the vendor push channel"
+        }
+      ]
+    },
+    {
+      "title": "Ads and operator content",
+      "packages": [
+        {
+          "pkg": "com.hisense.business.ad",
+          "note": "ships Alibaba Baichuan + CIBN shopping SDKs; installed as a user app"
+        },
+        {
+          "pkg": "com.hisense.service.ad",
+          "note": "its WatchingAccessibilityService was registered in enabled_accessibility_services"
+        },
+        {
+          "pkg": "com.hisense.tv.weather",
+          "note": "weather card, a content feed"
+        },
+        {
+          "pkg": "com.hisense.cloudfalcon",
+          "note": "C1: user app hosting com.hisense.service.ad's boot and network-change receivers"
+        }
+      ]
+    },
+    {
+      "title": "Retail, hotel, factory and leftovers",
+      "packages": [
+        {
+          "pkg": "com.hisense.demonstrate"
+        },
+        {
+          "pkg": "com.hisense.hotelmenu"
+        },
+        {
+          "pkg": "com.hisense.autotest"
+        },
+        {
+          "pkg": "com.hisense.electronictutorial",
+          "note": "e-manual"
+        },
+        {
+          "pkg": "com.hisense.ar.baike"
+        },
+        {
+          "pkg": "com.jamdeo.tv.fte",
+          "note": "first-run wizard, long done; shares android.uid.system, Wi-Fi survived"
+        },
+        {
+          "pkg": "fusion.android.tv.demo",
+          "note": "C1: RetailDisplay store demo in /system/product/priv-app"
+        },
+        {
+          "pkg": "com.hisense.usbupgrade",
+          "optional": true,
+          "note": "kept: the USB firmware upgrade and recovery path"
+        }
+      ]
+    },
+    {
+      "title": "Duplicate / unused lifestyle apps (casting stacks deliberately kept)",
+      "packages": [
+        {
+          "pkg": "com.hisense.tv.foodmanage"
+        },
+        {
+          "pkg": "com.jamdeo.calendar"
+        }
+      ]
+    },
+    {
+      "title": "screensaver_components by the time this list runs",
+      "packages": [
+        {
+          "pkg": "com.jamdeo.screensaver"
+        }
+      ]
+    },
+    {
+      "title": "AOSP leftovers on a TV",
+      "packages": [
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.keylab.speech.view.vidaa",
+          "optional": true,
+          "note": "voice UI; the remote's mic key stops working (the C1S owner keeps it)"
+        },
+        {
+          "pkg": "com.android.wechathci",
+          "optional": true,
+          "note": "WeChat photo push: an always-on WebService process and WechatAD pages"
+        },
+        {
+          "pkg": "com.audiocn.karaoke.micmanager",
+          "optional": true,
+          "note": "karaoke mic manager: boot, network, screen and USB receivers, a resident service"
+        },
+        {
+          "pkg": "com.hisense.smartimages",
+          "optional": true,
+          "note": "HiSmartImage screen recognition: ScreenCapService, SIWindowMonitorService accessibility"
+        },
+        {
+          "pkg": "com.hisense.familymessage",
+          "optional": true,
+          "note": "家庭留言 family message board"
+        },
+        {
+          "pkg": "com.vision.palette",
+          "optional": true,
+          "note": "AI 画板"
+        },
+        {
+          "pkg": "com.speech.enchatroom",
+          "optional": true,
+          "note": "AI 英语聊天室, pushed as a user app in 2025"
+        },
+        {
+          "pkg": "com.hisense.aiot",
+          "optional": true,
+          "note": "smart-home and IR appliance control"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/vidda-c1s-mt9669/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "schema": 1,
+  "id": "bell-fibe-tv-vip7802",
+  "name": "Bell Fibe TV",
+  "tested": {
+    "os": "Android TV 11",
+    "sdk": 30,
+    "build": "RTT4.240509.001"
+  },
+  "launcher": "com.custom.tvlauncher",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Bell / ARRIS / CommScope telemetry and reporting",
+      "packages": [
+        {
+          "pkg": "com.commscope.report.bell"
+        },
+        {
+          "pkg": "com.commscope.report.companion.bell"
+        },
+        {
+          "pkg": "com.commscope.notification.bell.merlin"
+        },
+        {
+          "pkg": "com.arris.notificationlistener.bell"
+        },
+        {
+          "pkg": "com.arris.bugreport"
+        }
+      ]
+    },
+    {
+      "title": "install app. com.arris.quickactions's name suggests a quick-actions menu, but it declares no",
+      "packages": [
+        {
+          "pkg": "com.arris.android.stb.fti"
+        },
+        {
+          "pkg": "com.arris.quickactions"
+        }
+      ]
+    },
+    {
+      "title": "re-running tools/check.py --fix (or this list) after a reboot puts it back, and with this box's",
+      "packages": [
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games: achievements/leaderboards/cloud saves for"
+        }
+      ]
+    },
+    {
+      "title": "Android games, rarely used on a TV box",
+      "packages": [
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google Play Movies & TV, Google's own movie storefront;"
+        }
+      ]
+    },
+    {
+      "title": "does not touch Netflix, Prime Video or any Bell app",
+      "packages": [
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "note": "YouTube Music; the regular YouTube app is a separate"
+        }
+      ]
+    },
+    {
+      "title": "package (com.google.android.youtube.tv) and is untouched",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Android TV's own crash/feedback reporter to Google,"
+        }
+      ]
+    },
+    {
+      "title": "separate from anything Bell/ARRIS collects",
+      "packages": [
+        {
+          "pkg": "com.google.android.tvrecommendations",
+          "note": "populates the stock Google TV home screen's \"recommended"
+        }
+      ]
+    },
+    {
+      "title": "Google's, so these rows likely aren't even shown. Comes",
+      "packages": [
+        {
+          "pkg": "com.arris.arus.updater",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "title": "--- receiver of their own, which can populate a row on a launcher that reads it - this launcher",
+      "packages": [
+        {
+          "pkg": "ca.bell.chiclet.fibehelper",
+          "optional": true,
+          "note": "the Fibe TV player itself - disables live TV entirely"
+        },
+        {
+          "pkg": "ca.bellmedia.cravetv",
+          "optional": true,
+          "note": "CraveTV, a paid Bell Media service (needs a subscription,"
+        }
+      ]
+    },
+    {
+      "title": "like Netflix, opt-in further down too)",
+      "packages": [
+        {
+          "pkg": "ca.ctv.ctvgo",
+          "optional": true,
+          "note": "CTV, Bell Media's free ad-supported network app"
+        },
+        {
+          "pkg": "ca.tsn.mobile.android",
+          "optional": true,
+          "note": "TSN: free scores/highlights, paid tier for live games"
+        },
+        {
+          "pkg": "com.vmediagroup.noovo",
+          "optional": true,
+          "note": "Noovo, Bell Media's free French-language network"
+        },
+        {
+          "pkg": "tv.toutv.androidtv",
+          "optional": true,
+          "note": "ICI TOU.TV, Radio-Canada's free streaming app"
+        },
+        {
+          "pkg": "com.clearchannel.iheartradio.tv",
+          "optional": true,
+          "note": "iHeartRadio: free radio, not Bell-specific"
+        },
+        {
+          "pkg": "com.pelmorex.WeatherEyeAndroid.tv",
+          "optional": true,
+          "note": "the Weather Network, Canada's most-used weather app"
+        },
+        {
+          "pkg": "com.tubitv",
+          "optional": true,
+          "note": "Tubi: free ad-supported movies and TV, not Bell-specific"
+        },
+        {
+          "pkg": "com.quickplay.android.bellmediaplayer",
+          "optional": true,
+          "note": "see the README for its permissions; also content"
+        },
+        {
+          "pkg": "com.arris.upnpapp",
+          "optional": true,
+          "note": "UPnP/DLNA discovery - lets other devices on your network"
+        }
+      ]
+    },
+    {
+      "title": "find this box, and it find UPnP media servers. Skip this",
+      "packages": [
+        {
+          "pkg": "com.arris.customizer.rro.merlin",
+          "optional": true,
+          "note": "Runtime Resource Overlay for com.arris.customizer, kept -"
+        }
+      ]
+    },
+    {
+      "title": "see below; disabling the overlay without its app leaves",
+      "packages": [
+        {
+          "pkg": "android.autoinstalls.config.arris.vip7802w",
+          "optional": true,
+          "note": "Play Auto Install config: on a fresh box or after a"
+        }
+      ]
+    },
+    {
+      "title": "--- examples/dexp-a651): some owners genuinely don't use one or the other. Uncomment only what you",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix. The remote's dedicated Netflix button needs"
+        }
+      ]
+    },
+    {
+      "title": "com.arris.globalkeyactions, a separate package, kept -",
+      "packages": [
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.google.android.youtube.tv",
+          "optional": true,
+          "note": "YouTube"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/bell-fibe-tv-vip7802/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

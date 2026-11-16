@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "id": "lyncast-x3aq",
+  "name": "LYNCAST X3AQ",
+  "tested": {
+    "os": "Android TV 14",
+    "sdk": 34,
+    "build": "actively"
+  },
+  "launcher": null,
+  "keep": [],
+  "groups": [
+    {
+      "title": "Telemetry, stock bloat and unneeded services:",
+      "packages": [
+        {
+          "pkg": "com.android.ytb"
+        },
+        {
+          "pkg": "com.android.nfx"
+        },
+        {
+          "pkg": "com.android.music"
+        },
+        {
+          "pkg": "com.softwinner.TvdVideo"
+        },
+        {
+          "pkg": "com.softwinner.awlogsettings"
+        },
+        {
+          "pkg": "com.htc.hyk_test"
+        },
+        {
+          "pkg": "com.htc.screensaver"
+        },
+        {
+          "pkg": "com.hotack.screensaversdk"
+        },
+        {
+          "pkg": "com.android.bips"
+        },
+        {
+          "pkg": "com.android.companiondevicemanager"
+        },
+        {
+          "pkg": "com.android.dreams.basic"
+        },
+        {
+          "pkg": "com.android.traceur"
+        },
+        {
+          "pkg": "com.android.htmlviewer"
+        },
+        {
+          "pkg": "com.toofifi.lineserver",
+          "optional": true,
+          "note": "cast receiver; casting stays on in shared lists (this set has it off)"
+        },
+        {
+          "pkg": "com.mphotool.usbcastserver",
+          "optional": true,
+          "note": "USB mirroring receiver; casting stays on in shared lists (this set has it off)"
+        }
+      ]
+    },
+    {
+      "title": "Off by choice (owner's choice; uncomment to disable)",
+      "packages": [
+        {
+          "pkg": "com.google.android.youtube.tv",
+          "optional": true
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/lyncast-x3aq/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "schema": 1,
+  "id": "tcl-55p7k",
+  "name": "TCL 55P7K, Middle East",
+  "tested": {
+    "os": "Google TV 12",
+    "sdk": 31,
+    "build": "STT2.230203.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "TCL tracking and analytics",
+      "packages": [
+        {
+          "pkg": "tv.samba.ssm.ui",
+          "note": "Samba TV ACR viewing tracking (enabled at the factory here)"
+        },
+        {
+          "pkg": "com.tcl.ttvs",
+          "optional": true,
+          "note": "kept: on G10_4K_GB it also holds SystemUpdateActivity (firmware updates); the 55P7K unit had it off"
+        },
+        {
+          "pkg": "com.tcl.logkit",
+          "note": "log capture and upload"
+        },
+        {
+          "pkg": "com.tcl.usercenter",
+          "note": "TCL account sign-in nags"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        }
+      ]
+    },
+    {
+      "title": "TCL content, ads and promos",
+      "packages": [
+        {
+          "pkg": "com.tcl.waterfall.overseas",
+          "note": "TCL Channel / content feed"
+        },
+        {
+          "pkg": "com.tcl.channelplus",
+          "note": "TCL Live FAST channels"
+        },
+        {
+          "pkg": "com.tcl.tv.tclhome_passive",
+          "note": "pushes TCL content to the home screen at boot"
+        },
+        {
+          "pkg": "com.tcl.partnercustomizer",
+          "note": "TCL tweaks to Google TV home rows"
+        },
+        {
+          "pkg": "com.tcl.interactive",
+          "note": "TCL TIAS background service"
+        },
+        {
+          "pkg": "com.tcl.messagebox",
+          "note": "TCL push messages and promos"
+        },
+        {
+          "pkg": "android.autoinstalls.config.google.gtvpai",
+          "note": "silently installs partner apps"
+        }
+      ]
+    },
+    {
+      "title": "Retail demo / hotel mode",
+      "packages": [
+        {
+          "pkg": "com.tcl.exhibit"
+        },
+        {
+          "pkg": "com.tcl.esticker"
+        },
+        {
+          "pkg": "com.tcl.hotelmenu"
+        }
+      ]
+    },
+    {
+      "title": "Preloaded apps and services",
+      "packages": [
+        {
+          "pkg": "com.tcl.guard",
+          "note": "TGuard memory \"cleaner\""
+        },
+        {
+          "pkg": "com.tcl.ocean.instructions",
+          "note": "e-manual"
+        },
+        {
+          "pkg": "com.tcl.repairguide"
+        },
+        {
+          "pkg": "com.tcl.smartalexa",
+          "note": "Alexa"
+        },
+        {
+          "pkg": "com.tcl.t_solo",
+          "note": "T-Solo \"listen alone\" (Bluetooth headphones while the speakers stay off)"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.launcherx"
+        },
+        {
+          "pkg": "com.google.android.tungsten.setupwraith"
+        }
+      ]
+    },
+    {
+      "title": "Disabled by choice on this TV (unused streaming apps): comment out the ones you watch",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.disneyplus.mea",
+          "note": "Disney+ (Middle East)"
+        },
+        {
+          "pkg": "com.osn.go",
+          "note": "OSN+"
+        },
+        {
+          "pkg": "com.iqiyi.i18n.tv",
+          "note": "iQIYI"
+        },
+        {
+          "pkg": "com.spotify.tv.android"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV / Play Movies"
+        }
+      ]
+    },
+    {
+      "title": "Extras, disabled on the 55C655 unit (Italy)",
+      "packages": [
+        {
+          "pkg": "com.tcl.UpdatePeripheral",
+          "optional": true,
+          "note": "TCL soundbar firmware updater, kept here as shared lists keep updaters;"
+        }
+      ]
+    },
+    {
+      "title": "# the 55C655 unit (no TCL soundbar) has it disabled",
+      "packages": [
+        {
+          "pkg": "com.android.printspooler"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.google.android.onetimeinitializer"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "YouTube Music; the 55C655 unit has it off"
+        },
+        {
+          "pkg": "com.google.android.play.games",
+          "note": "Play Games"
+        }
+      ]
+    },
+    {
+      "title": "Extras, disabled on the 55T7B unit (Turkey); left commented here, as they are features some households use",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup",
+          "optional": true,
+          "note": "partner setup helper"
+        },
+        {
+          "pkg": "com.netflix.tokenmanager",
+          "optional": true,
+          "note": "Netflix sign-in helper, with com.netflix.ninja off"
+        },
+        {
+          "pkg": "com.tcl.miracast",
+          "optional": true,
+          "note": "Miracast screen mirroring (Chromecast still casts)"
+        },
+        {
+          "pkg": "com.tcl.magiconnectfree",
+          "optional": true,
+          "note": "T-Cast phone app link"
+        },
+        {
+          "pkg": "com.tcl.gamebar",
+          "optional": true,
+          "note": "game bar overlay"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tcl-55p7k/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

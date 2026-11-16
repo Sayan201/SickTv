@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "id": "koryo-smart-tv-hi3751v553",
+  "name": "Koryo 55\" 4K Smart TV",
+  "tested": {
+    "os": "Android 7.0",
+    "sdk": 24,
+    "build": "NRD90M"
+  },
+  "launcher": "com.cvte.tv.launcher.fall",
+  "keep": [],
+  "groups": [
+    {
+      "title": "CVTE background services and ad telemetry",
+      "packages": [
+        {
+          "pkg": "com.cvte.tv.steward",
+          "note": "\"cleaner\" daemon with scheduled background tasks"
+        },
+        {
+          "pkg": "com.cvte.tv.pictorial",
+          "note": "screensaver with ad recommendation push"
+        },
+        {
+          "pkg": "com.cvte.ui.help.unit2k17",
+          "note": "user guide / help manual app"
+        }
+      ]
+    },
+    {
+      "title": "Firmware updater: off on the tested set (the firmware is end-of-life), kept on in this list so",
+      "packages": [
+        {
+          "pkg": "com.cvte.tv.systemupgrade",
+          "optional": true,
+          "note": "OTA updater"
+        }
+      ]
+    },
+    {
+      "title": "Zeasn ad service and recommendations",
+      "packages": [
+        {
+          "pkg": "cn.zeasn.cvte.HV553.vstoresubclient",
+          "note": "Zeasn store and recommendation client"
+        },
+        {
+          "pkg": "com.zeasn.services.general",
+          "note": "Zeasn background ad service"
+        }
+      ]
+    },
+    {
+      "title": "Casting and screen mirroring daemons (run continuously in background)",
+      "packages": [
+        {
+          "pkg": "com.ecloud.eshare.server",
+          "note": "EShare server"
+        },
+        {
+          "pkg": "com.ecloud.eairplay",
+          "note": "AirPlay receiver"
+        },
+        {
+          "pkg": "com.ecloud.emedia",
+          "note": "EShare media receiver"
+        },
+        {
+          "pkg": "com.hisilicon.miracast",
+          "note": "Miracast screen mirroring receiver"
+        },
+        {
+          "pkg": "com.hisilicon.dlna.dmp",
+          "note": "DLNA media player"
+        },
+        {
+          "pkg": "com.hisilicon.dlna.dmr",
+          "note": "DLNA media renderer"
+        },
+        {
+          "pkg": "com.hisilicon.dlna.dms",
+          "note": "DLNA media server"
+        }
+      ]
+    },
+    {
+      "title": "Google extras and telemetry",
+      "packages": [
+        {
+          "pkg": "com.google.android.feedback",
+          "note": "Crash and feedback uploader"
+        },
+        {
+          "pkg": "com.google.android.marvin.talkback",
+          "note": "TalkBack accessibility screen reader"
+        },
+        {
+          "pkg": "com.google.android.voicesearch",
+          "note": "Legacy voice search (not functional on this remote)"
+        }
+      ]
+    },
+    {
+      "title": "Outdated stock apps",
+      "packages": [
+        {
+          "pkg": "com.google.android.youtube.tv",
+          "note": "Outdated stock YouTube with unskippable ads"
+        },
+        {
+          "pkg": "com.netflix.mediaclient",
+          "note": "Incompatible legacy Netflix"
+        },
+        {
+          "pkg": "com.android.browser",
+          "note": "Stock AOSP browser"
+        },
+        {
+          "pkg": "com.android.egg",
+          "note": "Easter egg"
+        },
+        {
+          "pkg": "com.svox.pico",
+          "note": "Pico TTS engine"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/koryo-smart-tv-hi3751v553/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}

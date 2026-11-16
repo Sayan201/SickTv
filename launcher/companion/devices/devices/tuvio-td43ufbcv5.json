@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "id": "tuvio-td43ufbcv5",
+  "name": "Tuvio TD43UFBCV5 / TD50UFBCV5",
+  "tested": {
+    "os": "Google TV 14",
+    "sdk": 34,
+    "build": "UKNV.260506.001"
+  },
+  "launcher": "com.google.android.apps.tv.launcherx",
+  "keep": [],
+  "groups": [
+    {
+      "title": "Batch 1: telemetry and ad services",
+      "packages": [
+        {
+          "pkg": "tv.anoki.acr.anokiacroptin",
+          "note": "automatic content recognition (reports what is on screen)"
+        },
+        {
+          "pkg": "com.android.adservices.api",
+          "note": "Privacy Sandbox ads"
+        },
+        {
+          "pkg": "com.android.ondevicepersonalization.services"
+        },
+        {
+          "pkg": "com.android.federatedcompute.services"
+        },
+        {
+          "pkg": "com.google.android.feedback"
+        },
+        {
+          "pkg": "com.android.tv.feedbackconsent"
+        }
+      ]
+    },
+    {
+      "title": "TD50 unit disabled this too; not tested on the TD43, so uncomment only if wanted:",
+      "packages": [
+        {
+          "pkg": "com.google.android.partnersetup",
+          "optional": true,
+          "note": "partner setup / partner app auto-installs"
+        }
+      ]
+    },
+    {
+      "title": "Batch 2: vendor and Google extras",
+      "packages": [
+        {
+          "pkg": "com.homwee.store",
+          "note": "Changhong app store"
+        },
+        {
+          "pkg": "com.homwee.help"
+        },
+        {
+          "pkg": "com.google.android.play.games"
+        },
+        {
+          "pkg": "com.google.android.syncadapters.calendar"
+        },
+        {
+          "pkg": "com.google.android.videos",
+          "note": "Google TV recommendations; TD43 only, not installed on TD50"
+        }
+      ]
+    },
+    {
+      "title": "Both owners had Netflix, Prime Video and YouTube Music off; the TD50 owner also had casting,",
+      "packages": [
+        {
+          "pkg": "com.netflix.ninja",
+          "optional": true,
+          "note": "Netflix"
+        },
+        {
+          "pkg": "com.amazon.amazonvideo.livingroom",
+          "optional": true,
+          "note": "Prime Video"
+        },
+        {
+          "pkg": "com.google.android.youtube.tvmusic",
+          "optional": true,
+          "note": "YouTube Music"
+        },
+        {
+          "pkg": "com.homwee.mmp.screenshare",
+          "optional": true,
+          "note": "AirPlay receiver (iPhone casting)"
+        },
+        {
+          "pkg": "com.homwee.multiscreenshare",
+          "optional": true,
+          "note": "screen sharing"
+        },
+        {
+          "pkg": "com.mediatek.androidbox",
+          "optional": true,
+          "note": "WFDSinkTest_CH: the Miracast receiver on this set"
+        },
+        {
+          "pkg": "com.homwee.mmp.fileexplorer",
+          "optional": true,
+          "note": "USB file browser (\"Media Player\")"
+        },
+        {
+          "pkg": "com.homwee.mmp.imageplayer",
+          "optional": true,
+          "note": "USB photo viewer"
+        },
+        {
+          "pkg": "com.google.android.apps.mediashell",
+          "optional": true,
+          "note": "Chromecast"
+        },
+        {
+          "pkg": "com.google.android.katniss",
+          "optional": true,
+          "note": "voice search / microphone button"
+        }
+      ]
+    },
+    {
+      "title": "settings put secure screensaver_default_component com.gathin.tvhome/.ClockDream",
+      "packages": [
+        {
+          "pkg": "com.google.android.apps.tv.dreamx",
+          "note": "ambient mode, mixes recommendations into the screensaver"
+        }
+      ]
+    },
+    {
+      "title": "Before setupwraith: `dumpsys wifi | grep -o 'cname=[^ ]*'`; if the Wi-Fi network belongs to it,",
+      "packages": [
+        {
+          "pkg": "com.google.android.tungsten.setupwraith",
+          "note": "disable before launcherx; costs phone casting after a reboot (the Cast receiver reads its credentials from setupwraith)"
+        },
+        {
+          "pkg": "com.google.android.apps.tv.launcherx",
+          "note": "then: cmd package set-home-activity --user 0 com.gathin.tvhome/.MainActivity"
+        }
+      ]
+    },
+    {
+      "title": "every boot (see above), so there is no point listing it. The Google-named twin",
+      "packages": [
+        {
+          "pkg": "com.mediatek.android.leanbacklauncher.partnercustomizer",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "source": {
+    "repo": "Gathin23/cleanyourtv",
+    "path": "examples/tuvio-td43ufbcv5/debloat.txt",
+    "commit": "ddc3b2cdce299a5f30aa2da2437edc40f3cf6f2e"
+  }
+}
