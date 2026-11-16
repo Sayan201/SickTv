@@ -402,7 +402,7 @@ fun DeviceTabsScreen(
             LazyColumn(
                 Modifier
                     .fillMaxSize()
-                    .padding(pad)
+                    .padding(top = pad.calculateTopPadding())
                     .graphicsLayer {
                         alpha = tabTransitionProgress
                         translationY = (1f - tabTransitionProgress) * 16.dp.toPx()
@@ -410,8 +410,8 @@ fun DeviceTabsScreen(
                     // Sideways swipes step through Running, Installed and Built-in, as the buttons do.
                     .then(if (tab == TvTab.Apps && !searching) Modifier.swipeTabs(appsTab.ordinal, AppsTab.entries.size) { appsTab = AppsTab.entries[it] } else Modifier),
                 state = list,
-                // No top padding: the Apps tabs pin at the list's top edge, flush under the bar; the hero carries the 4dp.
-                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 109.dp),
+                // Content scrolls under the floating liquid glass dock, with bottom padding clearing the dock at rest
+                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = pad.calculateBottomPadding() + 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 val snap = ui.snapshot
@@ -858,7 +858,7 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
             Color(0xFFFF4D62),
             Color(0xFFE0001B),
             Color(0xFF88000E),
-            Color(0xFF420006),
+            Color(0xFF380006),
         ),
         radius = 95f,
     )
@@ -869,7 +869,7 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
         BorderStroke(
             0.75.dp,
             Brush.verticalGradient(
-                listOf(Color(0x99FFFFFF), Color(0x60FF4D57), Color(0x20FF4D57)),
+                listOf(Color(0xCCFFFFFF), Color(0x60FF4D57), Color(0x20FF4D57)),
             ),
         )
     } else {
@@ -882,10 +882,10 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
             .then(
                 if (enabled) {
                     Modifier.shadow(
-                        elevation = 12.dp,
+                        elevation = 14.dp,
                         shape = CircleShape,
-                        spotColor = Color(0xFFFF4D57),
-                        ambientColor = Color(0xFFFF4D57),
+                        spotColor = Color(0x66FF4D57),
+                        ambientColor = Color(0x33000000),
                     )
                 } else Modifier,
             )
@@ -900,15 +900,29 @@ private fun RemoteButton(enabled: Boolean, onClick: () -> Unit, modifier: Modifi
         contentAlignment = Alignment.Center,
     ) {
         if (enabled) {
+            // 3D Glass spherical highlight arc (top gloss gleam)
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(0.48f)
+                    .fillMaxHeight(0.52f)
                     .align(Alignment.TopCenter)
                     .clip(RoundedCornerShape(topStartPercent = 100, topEndPercent = 100))
                     .background(
                         Brush.verticalGradient(
-                            listOf(Color(0x44FFFFFF), Color(0x00FFFFFF)),
+                            listOf(Color(0x55FFFFFF), Color(0x10FFFFFF), Color.Transparent),
+                        ),
+                    ),
+            )
+            // Bottom shadow rim for 3D orb volume and refraction depth
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.40f)
+                    .align(Alignment.BottomCenter)
+                    .clip(RoundedCornerShape(bottomStartPercent = 100, bottomEndPercent = 100))
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(Color.Transparent, Color(0x44000000)),
                         ),
                     ),
             )

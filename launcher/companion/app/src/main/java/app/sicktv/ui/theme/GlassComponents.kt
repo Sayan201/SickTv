@@ -677,16 +677,26 @@ fun GlassDock(
             )
             .clip(shape)
             .background(LiquidGlass.DockBackgroundBrush, shape)
-            .border(
-                BorderStroke(
-                    0.75.dp,
+            .border(LiquidGlass.DockHairlineBorder, shape),
+    ) {
+        // Outer capsule top specular sheen: simulates light catching the top curve of the glass bar
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.48f)
+                .align(Alignment.TopCenter)
+                .clip(shape)
+                .background(
                     Brush.verticalGradient(
-                        listOf(Color(0x33FFFFFF), Color(0x10FFFFFF)),
+                        listOf(
+                            Color(0x1EFFFFFF),
+                            Color(0x05FFFFFF),
+                            Color.Transparent,
+                        ),
                     ),
                 ),
-                shape,
-            ),
-    ) {
+        )
+
         if (indicatorIndex != null && widthPx > 0 && itemCount > 0) {
             val slotWidth = widthPx.toFloat() / itemCount
             val diff = if (targetIndex != null) abs(targetIndex - indicatorIndex) else 0f
@@ -703,6 +713,8 @@ fun GlassDock(
             val scaleY = 1f - (stretchFactor * 0.15f)
             val indicatorShape = RoundedCornerShape(24.dp)
 
+            // 3D Liquid Glass Lens Indicator: translucent body with multi-layer specular rim,
+            // meniscus reflection arc, and subtle crimson edge dispersion (matching Zangetsu Photo 3)
             Box(
                 modifier = Modifier
                     .offset { IntOffset(dynamicOffset.toInt(), 0) }
@@ -711,41 +723,83 @@ fun GlassDock(
                     .graphicsLayer { this.scaleY = scaleY }
                     .padding(horizontal = 3.dp, vertical = 3.dp)
                     .shadow(
-                        elevation = (10 + (stretchFactor * 10)).dp,
+                        elevation = (8 + (stretchFactor * 8)).dp,
                         shape = indicatorShape,
-                        spotColor = Color(0xFFFF4D57),
-                        ambientColor = Color(0xFFFF4D57),
+                        spotColor = Color(0x35FF4D57),
+                        ambientColor = Color(0x20000000),
                     )
                     .clip(indicatorShape)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            listOf(
-                                Color(0xFFFF4D57),
-                                Color(0xFFE0001B),
-                                Color(0xFF9E0013),
-                            ),
-                        ),
-                    )
+                    .background(LiquidGlass.LiquidLensBodyBrush)
                     .border(
-                        BorderStroke(
-                            0.75.dp,
-                            Brush.verticalGradient(
-                                listOf(Color(0x80FFFFFF), Color(0x30FF4D57)),
-                            ),
-                        ),
+                        BorderStroke(1.2.dp, LiquidGlass.LiquidLensRimBrush),
                         indicatorShape,
                     ),
             ) {
-                // Specular gloss crescent reflection for true liquid glass surface
+                // 1. Top Meniscus Specular Gloss Arc (Upper 46% bright glass reflection)
                 Box(
                     Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.45f)
+                        .fillMaxHeight(0.46f)
                         .align(Alignment.TopCenter)
-                        .clip(RoundedCornerShape(topStartPercent = 100, topEndPercent = 100))
+                        .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
                         .background(
                             Brush.verticalGradient(
-                                listOf(Color(0x44FFFFFF), Color.Transparent),
+                                listOf(
+                                    Color(0x40FFFFFF),
+                                    Color(0x12FFFFFF),
+                                    Color.Transparent,
+                                ),
+                            ),
+                        ),
+                )
+                // 2. Inset Refraction Ring (Meniscus Bevel / Double-Rim refraction depth)
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(1.5.dp)
+                        .clip(RoundedCornerShape(22.dp))
+                        .border(
+                            BorderStroke(
+                                0.75.dp,
+                                Brush.verticalGradient(
+                                    listOf(
+                                        Color(0x55FFFFFF),
+                                        Color(0x15FFFFFF),
+                                        Color.Transparent,
+                                    ),
+                                ),
+                            ),
+                            RoundedCornerShape(22.dp),
+                        ),
+                )
+                // 3. Dark Bottom Meniscus Refractive Absorption Rim
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.42f)
+                        .align(Alignment.BottomCenter)
+                        .clip(RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp))
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(
+                                    Color.Transparent,
+                                    Color(0x20000000),
+                                    Color(0x48000000),
+                                ),
+                            ),
+                        ),
+                )
+                // 4. Subtle Radial Crimson Optical Edge Dispersion
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .background(
+                            Brush.radialGradient(
+                                colors = listOf(
+                                    Color(0x20FF4D57),
+                                    Color.Transparent,
+                                ),
+                                radius = 120f,
                             ),
                         ),
                 )

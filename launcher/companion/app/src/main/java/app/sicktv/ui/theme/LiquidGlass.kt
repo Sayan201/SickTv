@@ -99,13 +99,51 @@ object LiquidGlass {
     )
 
     /**
-     * Dock background brush: translucent smoked obsidian acrylic glass with specular top reflection.
+     * Dock background brush: authentic Zangetsu translucent smoked obsidian acrylic glass.
+     * Translucent so underlying wallpaper and scrolling items are visible through the glass capsule.
      */
     val DockBackgroundBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xDD181822),
-            Color(0xEE121217),
-            Color(0xF50B0B0F),
+            Color(0x521A1A26),
+            Color(0x6612121A),
+            Color(0x750A0A10),
+        ),
+    )
+
+    /**
+     * Hairline outer border for the floating dock capsule: specular white top arc fading to subtle glass edges.
+     */
+    val DockHairlineBorder = BorderStroke(
+        0.75.dp,
+        Brush.verticalGradient(
+            listOf(
+                Color(0x80FFFFFF),
+                Color(0x28FFFFFF),
+                Color(0x10FFFFFF),
+            ),
+        ),
+    )
+
+    /**
+     * Clear translucent 3D liquid lens body brush for the active tab indicator.
+     */
+    val LiquidLensBodyBrush = Brush.verticalGradient(
+        colors = listOf(
+            Color(0x20FFFFFF),
+            Color(0x0CFFFFFF),
+            Color(0x14000000),
+        ),
+    )
+
+    /**
+     * 3D refractive specular rim brush for the liquid lens indicator with top gleam and subtle crimson edge dispersion.
+     */
+    val LiquidLensRimBrush = Brush.verticalGradient(
+        colors = listOf(
+            Color(0xF5FFFFFF),
+            Color(0x90FFFFFF),
+            Color(0x35FF4D57),
+            Color(0x28000000),
         ),
     )
 
