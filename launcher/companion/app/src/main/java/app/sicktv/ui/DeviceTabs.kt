@@ -867,24 +867,23 @@ internal fun MenuBlock(items: @Composable () -> Unit) {
 @Composable
 private fun SearchPill(enabled: Boolean, onClick: () -> Unit) {
     val shape = CircleShape
-    Box(
+    Surface(
+        onClick = onClick,
+        enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
             .height(46.dp)
-            .shadow(
-                elevation = 6.dp,
-                shape = shape,
-                spotColor = Color(0x40000000),
-                ambientColor = Color(0x20000000),
-            )
-            .border(LiquidGlass.DockHairlineBorder, shape)
-            .clip(shape)
-            .background(LiquidGlass.DockBackgroundBrush)
-            .clickable(enabled = enabled, onClick = onClick)
-            .padding(horizontal = 16.dp),
-        contentAlignment = Alignment.CenterStart,
+            .background(LiquidGlass.DockBackgroundBrush, shape)
+            .border(LiquidGlass.DockHairlineBorder, shape),
+        shape = shape,
+        color = Color.Transparent,
+        contentColor = Color.White,
+        shadowElevation = 6.dp,
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(20.dp), tint = Color.White)
             Spacer(Modifier.width(12.dp))
             Text(stringResource(R.string.tabs_search_apps), style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp), color = Color(0xD0FFFFFF))

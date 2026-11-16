@@ -206,7 +206,7 @@ fun GlassSegmentedBar(
             )
             .border(LiquidGlass.DockHairlineBorder, shape)
             .clip(shape)
-            .background(LiquidGlass.DockBackgroundBrush),
+            .background(LiquidGlass.DockBackgroundBrush, shape),
     ) {
         // Sliding 3D Liquid Lens Pill Indicator
         if (options.isNotEmpty() && widthPx > 0) {
@@ -238,7 +238,7 @@ fun GlassSegmentedBar(
                         indicatorShape,
                     )
                     .clip(indicatorShape)
-                    .background(LiquidGlass.ActiveTileGlassBrush),
+                    .background(LiquidGlass.ActiveTileGlassBrush, indicatorShape),
             )
         }
 
@@ -626,22 +626,37 @@ fun GlassCard(
     onClick: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val clickableModifier = if (onClick != null) Modifier.clickable { onClick() } else Modifier
-    Box(
-        modifier = modifier
-            .shadow(
-                elevation = 10.dp,
-                shape = shape,
-                spotColor = Color(0x60000000),
-                ambientColor = Color(0x2A000000),
+    val cardModifier = modifier
+        .background(backgroundBrush, shape)
+        .then(if (border != null) Modifier.border(border, shape) else Modifier)
+
+    if (onClick != null) {
+        Surface(
+            onClick = onClick,
+            modifier = cardModifier,
+            shape = shape,
+            color = Color.Transparent,
+            contentColor = Color.White,
+            shadowElevation = 8.dp,
+        ) {
+            Column(
+                modifier = Modifier.padding(contentPadding),
+                content = content,
             )
-            .then(if (border != null) Modifier.border(border, shape) else Modifier)
-            .clip(shape)
-            .background(backgroundBrush)
-            .then(clickableModifier)
-            .padding(contentPadding),
-    ) {
-        Column(content = content)
+        }
+    } else {
+        Surface(
+            modifier = cardModifier,
+            shape = shape,
+            color = Color.Transparent,
+            contentColor = Color.White,
+            shadowElevation = 8.dp,
+        ) {
+            Column(
+                modifier = Modifier.padding(contentPadding),
+                content = content,
+            )
+        }
     }
 }
 
