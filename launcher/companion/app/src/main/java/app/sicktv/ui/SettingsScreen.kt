@@ -393,7 +393,7 @@ private fun WallpaperTile(
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
-            .background(Color(0x1F141416))
+            .background(LiquidGlass.CardGlassBrush, RoundedCornerShape(12.dp))
             .border(border, RoundedCornerShape(12.dp))
             .clickable(onClick = onClick)
             .padding(8.dp),

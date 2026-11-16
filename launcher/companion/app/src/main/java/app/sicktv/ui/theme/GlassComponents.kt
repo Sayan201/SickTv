@@ -185,14 +185,100 @@ fun GlassSegmentedBar(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
+    var widthPx by remember { mutableIntStateOf(0) }
+    val animIndex by animateFloatAsState(
+        targetValue = selectedIndex.toFloat(),
+        animationSpec = spring(dampingRatio = 0.82f, stiffness = Spring.StiffnessMediumLow),
+        label = "segmentIndex",
+    )
+    val shape = CircleShape
+
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(44.dp)
-            .clip(CircleShape)
-            .background(Color(0xFF121216), CircleShape)
-            .border(BorderStroke(1.dp, Color(0x24FFFFFF)), CircleShape),
+            .height(46.dp)
+            .onSizeChanged { widthPx = it.width }
+            .shadow(
+                elevation = 8.dp,
+                shape = shape,
+                spotColor = Color(0x50000000),
+                ambientColor = Color(0x25000000),
+            )
+            .clip(shape)
+            .background(LiquidGlass.DockBackgroundBrush, shape)
+            .border(LiquidGlass.DockHairlineBorder, shape),
     ) {
+        // Top specular reflection sheen
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.48f)
+                .align(Alignment.TopCenter)
+                .clip(shape)
+                .background(
+                    Brush.verticalGradient(
+                        listOf(
+                            Color(0x1CFFFFFF),
+                            Color(0x05FFFFFF),
+                            Color.Transparent,
+                        ),
+                    ),
+                ),
+        )
+
+        // Sliding 3D Liquid Lens Pill Indicator
+        if (options.isNotEmpty() && widthPx > 0) {
+            val slotWidth = widthPx.toFloat() / options.size
+            val indicatorShape = CircleShape
+            Box(
+                modifier = Modifier
+                    .offset { IntOffset((animIndex * slotWidth).toInt(), 0) }
+                    .width(with(LocalDensity.current) { slotWidth.toDp() })
+                    .fillMaxHeight()
+                    .padding(horizontal = 3.dp, vertical = 3.dp)
+                    .shadow(
+                        elevation = 6.dp,
+                        shape = indicatorShape,
+                        spotColor = Color(0x40FF4D57),
+                        ambientColor = Color(0x20000000),
+                    )
+                    .clip(indicatorShape)
+                    .background(LiquidGlass.ActiveTileGlassBrush, indicatorShape)
+                    .border(
+                        BorderStroke(
+                            1.2.dp,
+                            Brush.verticalGradient(
+                                listOf(
+                                    Color(0xF5FFFFFF),
+                                    Color(0x80FF4D57),
+                                    Color(0x40FF4D57),
+                                ),
+                            ),
+                        ),
+                        indicatorShape,
+                    ),
+            ) {
+                // Meniscus specular gloss arc on active indicator
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.48f)
+                        .align(Alignment.TopCenter)
+                        .clip(CircleShape)
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(
+                                    Color(0x35FFFFFF),
+                                    Color(0x0EFFFFFF),
+                                    Color.Transparent,
+                                ),
+                            ),
+                        ),
+                )
+            }
+        }
+
+        // Clickable Option Row
         Row(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
@@ -203,14 +289,6 @@ fun GlassSegmentedBar(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .then(
-                            if (selected) {
-                                Modifier
-                                    .clip(CircleShape)
-                                    .background(Color(0xFF380B12), CircleShape)
-                                    .border(BorderStroke(1.dp, Color(0x80FF2A42)), CircleShape)
-                            } else Modifier
-                        )
                         .clickable(enabled = enabled) { onSelect(index) },
                     contentAlignment = Alignment.Center,
                 ) {
@@ -223,25 +301,25 @@ fun GlassSegmentedBar(
                                 Icons.Default.Check,
                                 contentDescription = null,
                                 modifier = Modifier.size(15.dp),
-                                tint = LiquidGlass.NeonCrimson,
+                                tint = Color.White,
                             )
                         }
                         Text(
                             text = title,
                             style = MaterialTheme.typography.bodyMedium.copy(
-                                fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
+                                fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
                                 fontSize = 13.sp,
                             ),
-                            color = if (selected) Color.White else Color(0x8AFFFFFF),
+                            color = if (selected) Color.White else Color(0xB3FFFFFF),
                             maxLines = 1,
                         )
                     }
                 }
-                if (index < options.size - 1 && !selected && index + 1 != selectedIndex) {
+                if (index < options.size - 1 && abs(index - selectedIndex) > 1 && abs(index + 1 - selectedIndex) > 1) {
                     Box(
                         modifier = Modifier
                             .width(1.dp)
-                            .height(20.dp)
+                            .height(18.dp)
                             .background(Color(0x18FFFFFF)),
                     )
                 }
@@ -577,8 +655,8 @@ fun GlassChip(
 @Composable
 fun GlassCard(
     modifier: Modifier = Modifier,
-    shape: Shape = RoundedCornerShape(18.dp),
-    border: BorderStroke? = LiquidGlass.borderStroke(1.dp),
+    shape: Shape = RoundedCornerShape(20.dp),
+    border: BorderStroke? = LiquidGlass.CrystalRimBorder,
     backgroundBrush: Brush = LiquidGlass.CardGlassBrush,
     contentPadding: PaddingValues = PaddingValues(16.dp),
     onClick: (() -> Unit)? = null,
@@ -587,13 +665,38 @@ fun GlassCard(
     val clickableModifier = if (onClick != null) Modifier.clickable { onClick() } else Modifier
     Box(
         modifier = modifier
+            .shadow(
+                elevation = 12.dp,
+                shape = shape,
+                spotColor = Color(0x60000000),
+                ambientColor = Color(0x2A000000),
+            )
             .clip(shape)
             .background(backgroundBrush, shape)
             .then(if (border != null) Modifier.border(border, shape) else Modifier)
-            .then(clickableModifier)
-            .padding(contentPadding),
+            .then(clickableModifier),
     ) {
-        Column(content = content)
+        // Specular top light sheen: crystal reflection catching top curve
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.46f)
+                .align(Alignment.TopCenter)
+                .clip(shape)
+                .background(
+                    Brush.verticalGradient(
+                        listOf(
+                            Color(0x20FFFFFF),
+                            Color(0x05FFFFFF),
+                            Color.Transparent,
+                        ),
+                    ),
+                ),
+        )
+        Column(
+            modifier = Modifier.padding(contentPadding),
+            content = content,
+        )
     }
 }
 
@@ -689,9 +792,27 @@ fun GlassDock(
                 .background(
                     Brush.verticalGradient(
                         listOf(
-                            Color(0x1EFFFFFF),
-                            Color(0x05FFFFFF),
+                            Color(0x22FFFFFF),
+                            Color(0x08FFFFFF),
                             Color.Transparent,
+                        ),
+                    ),
+                ),
+        )
+
+        // Outer capsule bottom caustic sheen: simulates light bouncing off the bottom curve of thick glass
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.32f)
+                .align(Alignment.BottomCenter)
+                .clip(shape)
+                .background(
+                    Brush.verticalGradient(
+                        listOf(
+                            Color.Transparent,
+                            Color(0x04FFFFFF),
+                            Color(0x14FFFFFF),
                         ),
                     ),
                 ),
@@ -700,7 +821,7 @@ fun GlassDock(
         if (indicatorIndex != null && widthPx > 0 && itemCount > 0) {
             val slotWidth = widthPx.toFloat() / itemCount
             val diff = if (targetIndex != null) abs(targetIndex - indicatorIndex) else 0f
-            val stretchFactor = (diff * 0.28f).coerceIn(0f, 0.38f)
+            val stretchFactor = (diff * 0.32f).coerceIn(0f, 0.42f)
             val extraWidth = slotWidth * stretchFactor
             val movingRight = targetIndex != null && targetIndex >= indicatorIndex
             val dynamicOffset = if (stretchFactor > 0.01f) {
@@ -710,7 +831,8 @@ fun GlassDock(
                 indicatorIndex * slotWidth
             }
             val indicatorWidth = slotWidth + extraWidth
-            val scaleY = 1f - (stretchFactor * 0.15f)
+            val scaleX = 1f + (stretchFactor * 0.08f)
+            val scaleY = 1f - (stretchFactor * 0.18f)
             val indicatorShape = RoundedCornerShape(24.dp)
 
             // 3D Liquid Glass Lens Indicator: translucent body with multi-layer specular rim,
@@ -720,7 +842,10 @@ fun GlassDock(
                     .offset { IntOffset(dynamicOffset.toInt(), 0) }
                     .width(with(LocalDensity.current) { indicatorWidth.toDp() })
                     .fillMaxHeight()
-                    .graphicsLayer { this.scaleY = scaleY }
+                    .graphicsLayer {
+                        this.scaleX = scaleX
+                        this.scaleY = scaleY
+                    }
                     .padding(horizontal = 3.dp, vertical = 3.dp)
                     .shadow(
                         elevation = (8 + (stretchFactor * 8)).dp,

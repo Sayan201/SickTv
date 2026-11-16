@@ -64,8 +64,8 @@ object LiquidGlass {
      */
     fun borderStroke(
         width: Dp = 1.dp,
-        topColor: Color = Color(0x2EFFFFFF),
-        bottomColor: Color = Color(0x0EFFFFFF),
+        topColor: Color = Color(0x75FFFFFF),
+        bottomColor: Color = Color(0x12FFFFFF),
     ): BorderStroke = BorderStroke(
         width = width,
         brush = Brush.verticalGradient(
@@ -82,6 +82,20 @@ object LiquidGlass {
         width = width,
         brush = Brush.verticalGradient(
             colors = listOf(Color(0xE6FF4D57), Color(0x40FF4D57)),
+        ),
+    )
+
+    /**
+     * Crystal hairline border matching the physical glass reflections in GlassDock.
+     */
+    val CrystalRimBorder = BorderStroke(
+        1.dp,
+        Brush.verticalGradient(
+            listOf(
+                Color(0x80FFFFFF),
+                Color(0x25FFFFFF),
+                Color(0x0EFFFFFF),
+            ),
         ),
     )
 
@@ -148,32 +162,35 @@ object LiquidGlass {
     )
 
     /**
-     * Tile background brush for normal action tiles with translucent frosted glass.
+     * Tile background brush for normal action tiles with translucent frosted crystal glass.
      */
     val TileGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xB3181822),
-            Color(0xCC101016),
+            Color(0x551E1E2C),
+            Color(0x65141422),
+            Color(0x750A0A14),
         ),
     )
 
     /**
-     * Active tile brush: smoked acrylic with glowing crimson undertone.
+     * Active tile brush: smoked crystal acrylic with glowing crimson undertone.
      */
     val ActiveTileGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xDD3A0D16),
-            Color(0xEE1C060A),
+            Color(0x80FF4D57),
+            Color(0x65E0001B),
+            Color(0x7088000E),
         ),
     )
 
     /**
-     * Card background brush: smoked frosted glass with a light specular wash on top.
+     * Card background brush: crystal translucent smoked obsidian acrylic with physical refraction depth.
      */
     val CardGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xB3181822),
-            Color(0xCC101016),
+            Color(0x521A1A28),
+            Color(0x6012121E),
+            Color(0x700A0A12),
         ),
     )
 }

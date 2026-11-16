@@ -162,7 +162,7 @@ internal object TabIcons {
     val Folder = icon("Folder", "M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z")
     val Launcher = icon(
         "Launcher",
-        "M9.19 6.35c-2.04 2.29-3.44 5.58-3.57 5.89l4.14 4.14c.31-.13 3.6-1.53 5.89-3.57C17.5 11 19 8.27 19.34 4.66c-3.61.34-6.34 1.84-10.15 1.69zm5.95 2.12c-.78.78-2.05.78-2.83 0s-.78-2.05 0-2.83 2.05-.78 2.83 0 .78 2.05 0 2.83zM2.81 14.19l3 3-.71.71c-.78.78-2.05.78-2.83 0l.54-.71zm18.38-11.38c-.39-.39-1.02-.39-1.41 0l-1.41 1.41 2.83 2.83 1.41-1.41c.39-.39.39-1.02 0-1.41l-1.42-1.42z",
+        "M11 21H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h6v18zm2 0h6c1.1 0 2-.9 2-2v-7h-8v9zm8-11V5c0-1.1-.9-2-2-2h-6v7h8z",
     )
     val Tune = icon(
         "Tune",
@@ -292,8 +292,22 @@ fun DeviceTabsScreen(
         }
     }
 
+    val wallpaperParallaxX by androidx.compose.animation.core.animateFloatAsState(
+        targetValue = (tab.ordinal - 1.5f) * -26f,
+        animationSpec = androidx.compose.animation.core.spring(dampingRatio = 0.85f, stiffness = androidx.compose.animation.core.Spring.StiffnessMediumLow),
+        label = "wallpaperParallax",
+    )
+    val wallpaperScale by androidx.compose.animation.core.animateFloatAsState(
+        targetValue = 1.05f + (0.04f * (1f - tabTransitionProgress)),
+        animationSpec = androidx.compose.animation.core.spring(dampingRatio = 0.85f, stiffness = androidx.compose.animation.core.Spring.StiffnessMediumLow),
+        label = "wallpaperScale",
+    )
+    val scrollParallaxY = remember {
+        derivedStateOf { -(list.firstVisibleItemScrollOffset * 0.08f).coerceIn(-30f, 30f) }
+    }
+
     Box(Modifier.fillMaxSize()) {
-        // Dynamic companion wallpaper background
+        // Dynamic companion wallpaper background with thick optical glass morphing
         val wallpaperRes = when (state.wallpaper) {
             "nebula" -> R.drawable.bg_wallpaper_nebula
             "aurora" -> R.drawable.bg_wallpaper_aurora
@@ -302,19 +316,26 @@ fun DeviceTabsScreen(
         Image(
             painter = painterResource(wallpaperRes),
             contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer {
+                    translationX = wallpaperParallaxX
+                    translationY = scrollParallaxY.value
+                    scaleX = wallpaperScale
+                    scaleY = wallpaperScale
+                },
             contentScale = ContentScale.Crop,
         )
-        // Dark translucent overlay to give pure OLED contrast
+        // Luminous crystal glass scrim: gives deep OLED contrast while letting crystal surfaces refract underlying wallpaper
         Box(
             Modifier
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
                         listOf(
-                            Color(0xCC000000),
-                            Color(0x8A000000),
-                            Color(0xB3000000),
+                            Color(0x6606060C),
+                            Color(0x2806060C),
+                            Color(0x4806060C),
                         ),
                     ),
                 ),
@@ -855,21 +876,45 @@ internal fun MenuBlock(items: @Composable () -> Unit) {
 /** "Search apps" under the Apps buttons, pinned with them; a tap opens the search at the top. */
 @Composable
 private fun SearchPill(enabled: Boolean, onClick: () -> Unit) {
+    val shape = CircleShape
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(46.dp)
-            .clip(CircleShape)
-            .background(Color(0xFF141418), CircleShape)
-            .border(BorderStroke(1.dp, Color(0x1EFFFFFF)), CircleShape)
+            .shadow(
+                elevation = 6.dp,
+                shape = shape,
+                spotColor = Color(0x40000000),
+                ambientColor = Color(0x20000000),
+            )
+            .clip(shape)
+            .background(LiquidGlass.DockBackgroundBrush, shape)
+            .border(LiquidGlass.DockHairlineBorder, shape)
             .clickable(enabled = enabled, onClick = onClick)
             .padding(horizontal = 16.dp),
         contentAlignment = Alignment.CenterStart,
     ) {
+        // Specular reflection sheen
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.48f)
+                .align(Alignment.TopCenter)
+                .clip(shape)
+                .background(
+                    Brush.verticalGradient(
+                        listOf(
+                            Color(0x18FFFFFF),
+                            Color(0x04FFFFFF),
+                            Color.Transparent,
+                        ),
+                    ),
+                ),
+        )
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(20.dp), tint = Color(0x80FFFFFF))
+            Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(20.dp), tint = Color.White)
             Spacer(Modifier.width(12.dp))
-            Text(stringResource(R.string.tabs_search_apps), style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp), color = Color(0x80FFFFFF))
+            Text(stringResource(R.string.tabs_search_apps), style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp), color = Color(0xD0FFFFFF))
         }
     }
 }

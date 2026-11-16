@@ -137,15 +137,15 @@ internal fun Cookie(device: Device, size: Dp) {
             .clip(shape)
             .background(
                 brush = if (on) Brush.verticalGradient(
-                    listOf(Color(0xFF1E1214), Color(0xFF120A0C)),
+                    listOf(Color(0x70FF2A42), Color(0x55E0001B), Color(0x6088000E)),
                 ) else Brush.verticalGradient(
-                    listOf(Color(0xFF16161B), Color(0xFF0C0C0E)),
+                    listOf(Color(0x551E1E2C), Color(0x65141422), Color(0x750A0A14)),
                 ),
                 shape = shape,
             )
             .border(
-                if (on) BorderStroke(1.dp, Brush.verticalGradient(listOf(Color(0x80FF2A42), Color(0x33FF2A42))))
-                else LiquidGlass.borderStroke(1.dp),
+                if (on) BorderStroke(1.dp, Brush.verticalGradient(listOf(Color(0xF5FFFFFF), Color(0x80FF2A42), Color(0x33FF2A42))))
+                else LiquidGlass.CrystalRimBorder,
                 shape = shape,
             ),
         contentAlignment = Alignment.Center,
@@ -154,7 +154,7 @@ internal fun Cookie(device: Device, size: Dp) {
             DeviceIcons.of(kind),
             contentDescription = kind.word(),
             Modifier.size(size * 0.52f),
-            tint = if (on) LiquidGlass.NeonCrimson else Color(0x80FFFFFF),
+            tint = if (on) Color.White else Color(0x80FFFFFF),
         )
     }
 }
@@ -205,14 +205,19 @@ fun TvHero(state: UiState, live: Snapshot?, actions: DeviceActions, chips: Boole
                     // Status pill: ✔ Running fine
                     Box(
                         modifier = Modifier
+                            .shadow(elevation = 6.dp, shape = CircleShape, spotColor = Color(0x40000000))
                             .clip(CircleShape)
                             .background(
-                                color = if (isFine) Color(0xFF1F0B0E) else if (health?.ok == false) Color(0xFF38080E) else Color(0xFF141418),
+                                brush = if (isFine) Brush.verticalGradient(listOf(Color(0x65FF2A42), Color(0x50E0001B), Color(0x5538080E)))
+                                else if (health?.ok == false) Brush.verticalGradient(listOf(Color(0x80E0001B), Color(0x6088000E)))
+                                else LiquidGlass.DockBackgroundBrush,
                                 shape = CircleShape,
                             )
                             .border(
                                 width = 1.dp,
-                                color = if (isFine) Color(0x66FF2A42) else if (health?.ok == false) LiquidGlass.NeonCrimson else Color(0x28FFFFFF),
+                                brush = if (isFine) Brush.verticalGradient(listOf(Color(0xF0FFFFFF), Color(0x80FF2A42), Color(0x40FF2A42)))
+                                else if (health?.ok == false) Brush.verticalGradient(listOf(Color(0xFFFFFFFF), Color(0xE0001BFF)))
+                                else LiquidGlass.DockHairlineBorder.brush,
                                 shape = CircleShape,
                             )
                             .padding(horizontal = 14.dp, vertical = 6.dp),
@@ -223,7 +228,7 @@ fun TvHero(state: UiState, live: Snapshot?, actions: DeviceActions, chips: Boole
                                     if (health.ok) Icons.Default.CheckCircle else Icons.Default.Warning,
                                     null,
                                     Modifier.size(15.dp),
-                                    tint = if (health.ok) LiquidGlass.NeonCrimson else c.error,
+                                    tint = if (health.ok) Color.White else c.error,
                                 )
                             } else StateDot(device.state)
                             Spacer(Modifier.width(6.dp))
@@ -233,7 +238,7 @@ fun TvHero(state: UiState, live: Snapshot?, actions: DeviceActions, chips: Boole
                                     fontWeight = FontWeight.SemiBold,
                                     fontSize = 13.sp,
                                 ),
-                                color = if (isFine) LiquidGlass.NeonCrimson else Color.White,
+                                color = Color.White,
                             )
                         }
                     }
@@ -242,9 +247,10 @@ fun TvHero(state: UiState, live: Snapshot?, actions: DeviceActions, chips: Boole
                     if (chips && state.devices.size <= 1) {
                         Box(
                             modifier = Modifier
+                                .shadow(elevation = 6.dp, shape = CircleShape, spotColor = Color(0x40000000))
                                 .clip(CircleShape)
-                                .background(Color(0xFF141418), CircleShape)
-                                .border(BorderStroke(1.dp, Color(0x28FFFFFF)), CircleShape)
+                                .background(LiquidGlass.DockBackgroundBrush, CircleShape)
+                                .border(LiquidGlass.DockHairlineBorder, CircleShape)
                                 .clickable(onClick = actions.addDevice)
                                 .padding(horizontal = 14.dp, vertical = 6.dp),
                         ) {
@@ -404,16 +410,28 @@ private fun TvChips(state: UiState, actions: DeviceActions) {
  */
 @Composable
 internal fun PinnedSegments(labels: List<String>, selected: Int, color: Color, inset: Dp, below: @Composable () -> Unit = {}, onSelect: (Int) -> Unit) {
-    Box(
+    val hasInset = inset > 0.dp
+    val boxModifier = if (hasInset) {
         Modifier
             .layout { m, c ->
                 val side = inset.roundToPx()
                 val p = m.measure(c.copy(minWidth = c.maxWidth + 2 * side, maxWidth = c.maxWidth + 2 * side))
                 layout(c.maxWidth, p.height) { p.place(-side, 0) }
             }
-            .background(Color(0x99000000))
-            .padding(horizontal = inset, vertical = 8.dp),
-    ) {
+            .background(
+                Brush.verticalGradient(
+                    listOf(
+                        Color(0x400A0A10),
+                        Color(0x280A0A10),
+                        Color.Transparent,
+                    ),
+                ),
+            )
+            .padding(horizontal = inset, vertical = 6.dp)
+    } else {
+        Modifier.fillMaxWidth().padding(vertical = 4.dp)
+    }
+    Box(boxModifier) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             GlassSegmentedBar(
                 options = labels,
