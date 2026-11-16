@@ -204,28 +204,10 @@ fun GlassSegmentedBar(
                 spotColor = Color(0x50000000),
                 ambientColor = Color(0x25000000),
             )
+            .border(LiquidGlass.DockHairlineBorder, shape)
             .clip(shape)
-            .background(LiquidGlass.DockBackgroundBrush, shape)
-            .border(LiquidGlass.DockHairlineBorder, shape),
+            .background(LiquidGlass.DockBackgroundBrush),
     ) {
-        // Top specular reflection sheen
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.48f)
-                .align(Alignment.TopCenter)
-                .clip(shape)
-                .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            Color(0x1CFFFFFF),
-                            Color(0x05FFFFFF),
-                            Color.Transparent,
-                        ),
-                    ),
-                ),
-        )
-
         // Sliding 3D Liquid Lens Pill Indicator
         if (options.isNotEmpty() && widthPx > 0) {
             val slotWidth = widthPx.toFloat() / options.size
@@ -242,8 +224,6 @@ fun GlassSegmentedBar(
                         spotColor = Color(0x40FF4D57),
                         ambientColor = Color(0x20000000),
                     )
-                    .clip(indicatorShape)
-                    .background(LiquidGlass.ActiveTileGlassBrush, indicatorShape)
                     .border(
                         BorderStroke(
                             1.2.dp,
@@ -256,26 +236,10 @@ fun GlassSegmentedBar(
                             ),
                         ),
                         indicatorShape,
-                    ),
-            ) {
-                // Meniscus specular gloss arc on active indicator
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.48f)
-                        .align(Alignment.TopCenter)
-                        .clip(CircleShape)
-                        .background(
-                            Brush.verticalGradient(
-                                listOf(
-                                    Color(0x35FFFFFF),
-                                    Color(0x0EFFFFFF),
-                                    Color.Transparent,
-                                ),
-                            ),
-                        ),
-                )
-            }
+                    )
+                    .clip(indicatorShape)
+                    .background(LiquidGlass.ActiveTileGlassBrush),
+            )
         }
 
         // Clickable Option Row
@@ -666,37 +630,18 @@ fun GlassCard(
     Box(
         modifier = modifier
             .shadow(
-                elevation = 12.dp,
+                elevation = 10.dp,
                 shape = shape,
                 spotColor = Color(0x60000000),
                 ambientColor = Color(0x2A000000),
             )
-            .clip(shape)
-            .background(backgroundBrush, shape)
             .then(if (border != null) Modifier.border(border, shape) else Modifier)
-            .then(clickableModifier),
+            .clip(shape)
+            .background(backgroundBrush)
+            .then(clickableModifier)
+            .padding(contentPadding),
     ) {
-        // Specular top light sheen: crystal reflection catching top curve
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.46f)
-                .align(Alignment.TopCenter)
-                .clip(shape)
-                .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            Color(0x20FFFFFF),
-                            Color(0x05FFFFFF),
-                            Color.Transparent,
-                        ),
-                    ),
-                ),
-        )
-        Column(
-            modifier = Modifier.padding(contentPadding),
-            content = content,
-        )
+        Column(content = content)
     }
 }
 

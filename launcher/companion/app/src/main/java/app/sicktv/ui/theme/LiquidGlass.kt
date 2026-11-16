@@ -184,13 +184,15 @@ object LiquidGlass {
     )
 
     /**
-     * Card background brush: crystal translucent smoked obsidian acrylic with physical refraction depth.
+     * Card background brush: crystal translucent smoked obsidian acrylic with smooth optical depth.
+     * Incorporates luminous crystal reflection at top curve seamlessly into translucent smoked body.
      */
     val CardGlassBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0x521A1A28),
-            Color(0x6012121E),
-            Color(0x700A0A12),
+            Color(0x5A242436),
+            Color(0x461A1A28),
+            Color(0x5410101C),
+            Color(0x640A0A12),
         ),
     )
 }

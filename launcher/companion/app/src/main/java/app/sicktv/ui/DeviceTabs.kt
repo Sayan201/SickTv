@@ -292,19 +292,11 @@ fun DeviceTabsScreen(
         }
     }
 
-    val wallpaperParallaxX by androidx.compose.animation.core.animateFloatAsState(
-        targetValue = (tab.ordinal - 1.5f) * -26f,
-        animationSpec = androidx.compose.animation.core.spring(dampingRatio = 0.85f, stiffness = androidx.compose.animation.core.Spring.StiffnessMediumLow),
-        label = "wallpaperParallax",
-    )
     val wallpaperScale by androidx.compose.animation.core.animateFloatAsState(
         targetValue = 1.05f + (0.04f * (1f - tabTransitionProgress)),
         animationSpec = androidx.compose.animation.core.spring(dampingRatio = 0.85f, stiffness = androidx.compose.animation.core.Spring.StiffnessMediumLow),
         label = "wallpaperScale",
     )
-    val scrollParallaxY = remember {
-        derivedStateOf { -(list.firstVisibleItemScrollOffset * 0.08f).coerceIn(-30f, 30f) }
-    }
 
     Box(Modifier.fillMaxSize()) {
         // Dynamic companion wallpaper background with thick optical glass morphing
@@ -319,8 +311,6 @@ fun DeviceTabsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .graphicsLayer {
-                    translationX = wallpaperParallaxX
-                    translationY = scrollParallaxY.value
                     scaleX = wallpaperScale
                     scaleY = wallpaperScale
                 },
@@ -887,30 +877,13 @@ private fun SearchPill(enabled: Boolean, onClick: () -> Unit) {
                 spotColor = Color(0x40000000),
                 ambientColor = Color(0x20000000),
             )
-            .clip(shape)
-            .background(LiquidGlass.DockBackgroundBrush, shape)
             .border(LiquidGlass.DockHairlineBorder, shape)
+            .clip(shape)
+            .background(LiquidGlass.DockBackgroundBrush)
             .clickable(enabled = enabled, onClick = onClick)
             .padding(horizontal = 16.dp),
         contentAlignment = Alignment.CenterStart,
     ) {
-        // Specular reflection sheen
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.48f)
-                .align(Alignment.TopCenter)
-                .clip(shape)
-                .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            Color(0x18FFFFFF),
-                            Color(0x04FFFFFF),
-                            Color.Transparent,
-                        ),
-                    ),
-                ),
-        )
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(20.dp), tint = Color.White)
             Spacer(Modifier.width(12.dp))
